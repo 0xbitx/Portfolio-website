@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+
+    <meta charset="UTF-8" />
+    <meta name="author" content="0xbit" />
+    <meta
+      name="description"
+      content="dedsec"
+    />
+    <meta
+      name="keywords"
+      content="dedsec"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#ff3a5e" />
+    <meta name="copyright" content="dedsec" />
+    <meta http-equiv="content-language" content="pt-br" />
+    <meta property="og:title" content="dedsec" />
+    <meta property="og:description" content="dedsec" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="manifest" href="manifest.json" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link
+      rel="shortcut icon"
+      href="assets/icons/console.png"
+      type="image/x-icon"
+    />
+    
+    <link rel="icon" href="assets/icons/console.png" />
+    <link rel="apple-touch-icon" href="assets/image/logo-page.svg" />
+    <link rel="canonical" href="https://github.com/0xbitx" />
+    <script src="assets/js/svg-inject.min.js"></script>
+    <title>0xbit</title>
+  </head>
+
+  <body>
+    <style>
+
+      .black-card {
+          padding-top: 50%;
+          background-color: black;
+          color: rgb(118, 155, 155);
+          padding: 10px;
+          font-size: small;
+          z-index: 1000;
+          text-align: center;
+          background-color: rgb(0, 0, 0);
+      }
+
+  </style>
+    <div class="black-card">
+      <h1>‍</h1>
+      <h1>‍</h1>
+      <h2> ▼ </h2>
+      <h2>INFO ABOUT YOU </h2>
+      <p><strong>Don't worry, this will not be saved. I just want to inform you that all websites can access your information. To avoid this, turn off JavaScript in your browser.</strong></p>
+      <p><strong>IPv4 Address:</strong> <span id="ip_address"></span></p>
+      <p><strong>Device:</strong> <span id="deviceInfo"></span></p>
+      <p><strong>Screen Resolution:</strong> <span id="resolutionInfo"></span></p>
+      <p><strong>Country Name:</strong> <span id="country_name"></span></p>
+      <p><strong>ISP:</strong> <span id="isp"></span></p>
+      <p><strong>Latitude:</strong> <span id="latitude"></span></p>
+      <p><strong>Longitude:</strong> <span id="longitude"></span></p>
+      <h2> ▲ </h2>
+  </div>
+  
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  
+  <script>
+      function detectDevice() {
+          var userAgent = navigator.userAgent.toLowerCase();
+  
+          if (userAgent.includes("mobile")) {
+              return "Smartphone";
+          } else if (userAgent.includes("tablet")) {
+              return "Tablet";
+          } else {
+              return "Laptop or Desktop";
+          }
+      }
+  
+      $(document).ready(function () {
+          var deviceType = detectDevice();
+          document.getElementById("deviceInfo").textContent = deviceType;
+  
+          var screenWidth = window.screen.width;
+          var screenHeight = window.screen.height;
+          document.getElementById("resolutionInfo").textContent = screenWidth + "x" + screenHeight;
+  
+          $.getJSON("https://ipapi.co/json/", function (data) {
+              var ipAddress = data.ip;
+              var countryName = data.country_name;
+              var isp = data.org;
+              var latitude = data.latitude;
+              var longitude = data.longitude;
+
+              $("#ip_address").text(ipAddress);
+              $("#country_name").text(countryName);
+              $("#isp").text(isp);
+              $("#latitude").text(latitude);
+              $("#longitude").text(longitude);
+
+             
+                  });
+              });
+  </script>
+    <header>
+      <div class="grid-layout">
+        <nav>
+          <img
+            src="assets/icons/key.png"
+            alt="Logo dedsec"
+            width="90px"
+            height="90px"
+          />
+          <div class="mobile-menu">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+          </div>
+          <ul class="nav-list">
+            <li><a href="#s-home">01. HOME</a></li>
+            <li><a href="#s-about">02. ABOUT</a></li>
+            <li>
+              <a href="#s-projects">03. PROJECT</a>
+            </li>
+            <li>
+              <a href="#s-services">04. WHAT I DO</a>
+            </li>
+            <li>
+              <a href="#s-skills">05. SKILLS</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section id="s-home">
+        <div class="grid-layout">
+          <div id="home">
+            <div id="home-container-text">
+              <h1 class="delayMediumReveal">
+                0XBIT
+                <div class = "gg" title="404">I LOVE SOMEONE'S PRIVACY</div>
+              </h1>
+              <p class="typewriter">
+                I am a computer enthusiast from the Philippines. I create hacking tools and exploits. Check out some of my work in the Projects section.
+              </p>
+
+              <a
+                href="https://github.com/0xbitx"
+                rel="noopener"
+                target="_blank"
+                class="delayExtraBigReveal"
+              >
+                Github
+              </a>
+            </div>
+
+            <img
+              src="assets/image/ded5.png"
+              alt="dedsec"
+              onload="SVGInject(this)"
+              id="logo"
+              width="500px"
+              height="500px"
+            />
+          </div>
+        </div>
+      </section>
+
+      <section id="s-about">
+        <div class="grid-layout">
+          <div id="about">
+            <div id="about-photo">
+              <img
+                src="assets/image/ded6.png"
+                width="500px"
+                height="500px"
+                alt="dedsec"
+                class="delayMediumReveal"
+                id="dedsec"
+              />
+              <div class="about-figure figure-one icon-one delayExtraBigReveal">
+                <img
+                  src="assets/icons/web.png"
+                  width="45px"
+                  height="45px"
+                  alt="ícone html"
+                />
+              </div>
+              <div class="about-figure figure-two icon-two delayExtraBigReveal">
+                <img
+                  src="assets/icons/bitcoin.png"
+                  width="45px"
+                  height="45px"
+                  alt="ícone css"
+                />
+              </div>
+              <div
+                class="about-figure figure-three icon-three delayExtraBigReveal"
+              >
+                <img
+                  src="assets/icons/console1.png"
+                  width="45px"
+                  height="45px"
+                  alt="ícone javascript"
+                />
+              </div>
+            </div>
+            <article id="about-text">
+              <h2 class="delaySmallReveal"><span><</span>0xbit<span>></span></h2>
+              <p class="delayMediumReveal">
+                Im 20 yrs old computer enthusiast Focus in Hardware hacking and building hacking tools
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="s-experience">
+        <div class="grid-layout">
+          <h2 class="delaySmallReveal">Experience <span>></span></h2>
+          <div id="experience">
+            <div
+              class="option-experience intervalCardReveal"
+              id="experience-company"
+            >
+              <div class="company digitalhouse activeExperience">
+                <h3>IoT</h3>
+              </div>
+              <div class="company zuplae">
+                <h3>linux kernel </h3>
+              </div>
+              <div class="company contweb">
+                <h3>windows os</h3>
+              </div>
+              <div class="company codigofontetv">
+                <h3>bluetooth </h3>
+              </div>
+            </div>
+            <div class="text-experience intervalCardReveal">
+              <div>
+                <h4 class="titleExperience">
+                  IoT project
+                </h4>
+                <p class="dateExperience">Jan 2019 - Dec 2023 </p>
+              </div>
+              <h5 class="companyExperience">IoT hacking tool</h5>
+              <p class="changeExperience">
+                IoT devices are small computers, usually running Linux, that are performing a certain function. Like any other internet/ cloud connected device these can be hacked. What’s worse, is that most devices lack proper UI and come with default passwords that make it easy for people from remote to hack them.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="s-projects">
+        <div class="grid-layout">
+          <h2 class="delaySmallReveal"><span><</span> Project <span>></span></h2>
+          <div id="projects">
+            <article class="intervalCardReveal teslabank">
+              <h3>Dedsec wifi phishing</h3>
+              <p>
+                It can create fake access points and captive portal to redirect users to the fake login page.
+              </p>
+
+              <a
+                href="https://github.com/0xbitx/dedsec-wifiphish_v2"
+                rel="noopener"
+                target="_blank"
+                id="dedsec"
+                >open
+              </a>
+            </article>
+
+            <article class="intervalCardReveal naped">
+              <h3>Dedsec OTP bypass</h3>
+              <p>
+                Phishing tool that support OTP bypass method.
+              </p>
+
+              <a
+                href="https://github.com/0xbitx/dedsec-otp-bypass"
+                rel="noopener"
+                target="_blank"
+                id="dedsec"
+                >open 
+              </a>
+            </article>
+
+            <article class="intervalCardReveal efront">
+              <h3>Dedsec-Malware</h3>
+              <p>
+                This tool create fake wifi and captive portal to deploy malware, that can be download by the user to access fake free internet.
+              </p>
+              <a
+                href="https://github.com/0xbitx/dedsec-malware"
+                rel="noopener"
+                target="_blank"
+                id="dedsec"
+                >open
+              </a>
+            </article>
+          </div>
+          <a
+            href="https://github.com/0xbitx?tab=repositories"
+            rel="noopener"
+            target="_blank"
+            class="delayExtraBigReveal"
+            >Repositories on GitHub</a
+          >
+        </div>
+      </section>
+
+      <section id="s-services">
+        <div class="grid-layout">
+          <h2 class="delaySmallReveal">What I do<span>.</span></h2>
+          <div id="services">
+            <article class="intervalCardReveal">
+              <div>
+                <img
+                  src="assets/icons/hdd.png"
+                  width="100px"
+                  height="100px"
+                  alt="dedsec"
+                />
+              </div>
+              <h3>Building hacking tool</h3>
+              <p>
+                Esp32 deauther, Esp32 bluetooth killer
+                Esp32 Evil twin, Esp32 IR decryptor,
+                Arduino 3G jammer, Phishing tool.
+              </p>
+            </article>
+
+            <article class="intervalCardReveal">
+              <div>
+                <img
+                  src="assets/icons/usb.png"
+                  width="100px"
+                  height="100px"
+                  alt="dedsec"
+                />
+              </div>
+              <h3>Building Computer Virus </h3>
+              <p>
+                Linux based virus,malware,ransomeware.
+              </p>
+            </article>
+
+            <article class="intervalCardReveal">
+              <div>
+                <img
+                  src="assets/icons/server.png"
+                  width="100px"
+                  height="100px"
+                  alt="ícone imagem"
+                />
+              </div>
+              <h3>Trolling Corrupt People</h3>
+              <p>
+                trolling LGU (Local Government Unit),
+                Politicians, Government Employee in the philippines
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="s-skills">
+        <div class="grid-layout">
+          <div id="skills">
+            <article id="skills-text">
+              <h2 class="delaySmallReveal"><span><</span> language and tool | skills <span>></span></h2>
+              <p class="delayMediumReveal changeDescription">
+                languages / tools
+              </p>
+            </article>
+
+            <div id="skills-cards">
+              <article class="html intervalCardReveal">
+                <span class="skills-cards-name-high">Bash</span>
+                <img
+                  src="assets/icons/bash.png"
+                  width="60px"
+                  height="60px"
+                  alt="dedsec"
+                  class="skills-icons"
+                />
+              </article>
+              <article class="css intervalCardReveal">
+                <span class="skills-cards-name-high">Burpsuite</span>
+                <img
+                  src="assets/icons/burpsuite.png"
+                  width="60px"
+                  height="60px"
+                  alt="dedsec"
+                  class="skills-icons"
+                />
+              </article>
+              <article class="js intervalCardReveal">
+                <span class="skills-cards-name-high">Wireshark</span>
+                <img
+                  src="assets/icons/wireshark.png"
+                  width="60px"
+                  height="60px"
+                  alt="dedsec"
+                  class="skills-icons"
+                />
+              </article>
+              <article class="sass intervalCardReveal">
+                <span class="skills-cards-name-high">Maltego</span>
+                <img
+                  src="assets/icons/maltego.webp"
+                  width="60px"
+                  height="60px"
+                  alt="dedsec"
+                  class="skills-icons"
+                />
+              </article>
+              <article class="react intervalCardReveal">
+                <span class="skills-cards-name-low">Arduino</span>
+                <img
+                  src="assets/icons/arduino.png"
+                  width="60px"
+                  height="60px"
+                  alt="dedsec"
+                  class="skills-icons"
+                />
+              </article>
+              <article class="next intervalCardReveal">
+                <span class="skills-cards-name-low">C++</span>
+                <img
+                  src="assets/icons/C++.png"
+                  width="60px"
+                  height="60px"
+                  alt="dedsec"
+                  class="skills-icons"
+                />
+              </article>
+              <article class="styled intervalCardReveal">
+                <span class="skills-cards-name-low aumento-hover"
+                  >Ghidra</span
+                >
+                <img
+                  src="assets/icons/ghidra.png"
+                  width="60px"
+                  height="60px"
+                  alt="dedsec"
+                  class="skills-icons"
+                />
+              </article>
+              <article class="tailwind intervalCardReveal">
+                <span class="skills-cards-name-low">Python</span>
+                <img
+                  src="assets/icons/python.png"
+                  width="60px"
+                  height="60px"
+                  alt="dedsec"
+                  class="skills-icons"
+                />
+              </article>
+            </div>
+          </div>
+        </div>
+
+        <footer>
+          <div class="grid-layout">
+            <p id="direitos-autorais">© 2023 0xbit</p>
+            <div>
+              <p>Powered by</p>
+              <img
+                src="assets/icons/web.png"
+                alt="dedsec"
+                width="60px"
+                height="60px"
+              />
+            </div>
+          </div>
+        </footer>
+      </section>
+    </main>
+
+    <script src="https://unpkg.com/scrollreveal@4.0.9/dist/scrollreveal.min.js"></script>
+    <script type="module" src="assets/js/main.js"></script>
+    
+  </body>
+</html>

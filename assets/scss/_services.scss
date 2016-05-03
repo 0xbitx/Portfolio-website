@@ -1,0 +1,44 @@
+#s-services {
+  @include spacing-section;
+  background-color: $bg-main;
+  .grid-layout {
+    h2 {
+      text-align: center;
+      @include title-section();
+      span {
+        color: $color-main;
+      }
+    }
+    #services {
+      display: flex;
+      height: auto;
+      flex-wrap: wrap;
+      margin: $gap-3 0px;
+      article {
+        background-color: $bg-secondary;
+        @include block-article;
+        div {
+          height: 90px;
+          img {
+            width: 70px;
+          }
+        }
+        h3 {
+          padding: $gap-3 0px;
+          color: $color-white;
+          font: {
+            size: 2.4rem;
+            weight: 500;
+          }
+        }
+        p {
+          line-height: 3.2rem;
+          color: $color-gray;
+          font: {
+            size: 1.8rem;
+          }
+        }
+      }
+    }
+  }
+}
