@@ -54,62 +54,9 @@
       }
 
   </style>
-    <div class="black-card">
-      <h1>‍</h1>
-      <h1>‍</h1>
-      <h2> ▼ </h2>
-      <h2>INFO ABOUT YOU </h2>
-      <p><strong>Don't worry, this will not be saved. I just want to inform you that all websites can access your information. To avoid this, turn off JavaScript in your browser.</strong></p>
-      <p><strong>IPv4 Address:</strong> <span id="ip_address"></span></p>
-      <p><strong>Device:</strong> <span id="deviceInfo"></span></p>
-      <p><strong>Screen Resolution:</strong> <span id="resolutionInfo"></span></p>
-      <p><strong>Country Name:</strong> <span id="country_name"></span></p>
-      <p><strong>ISP:</strong> <span id="isp"></span></p>
-      <p><strong>Latitude:</strong> <span id="latitude"></span></p>
-      <p><strong>Longitude:</strong> <span id="longitude"></span></p>
-      <h2> ▲ </h2>
-  </div>
-  
+
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   
-  <script>
-      function detectDevice() {
-          var userAgent = navigator.userAgent.toLowerCase();
-  
-          if (userAgent.includes("mobile")) {
-              return "Smartphone";
-          } else if (userAgent.includes("tablet")) {
-              return "Tablet";
-          } else {
-              return "Laptop or Desktop";
-          }
-      }
-  
-      $(document).ready(function () {
-          var deviceType = detectDevice();
-          document.getElementById("deviceInfo").textContent = deviceType;
-  
-          var screenWidth = window.screen.width;
-          var screenHeight = window.screen.height;
-          document.getElementById("resolutionInfo").textContent = screenWidth + "x" + screenHeight;
-  
-          $.getJSON("https://ipapi.co/json/", function (data) {
-              var ipAddress = data.ip;
-              var countryName = data.country_name;
-              var isp = data.org;
-              var latitude = data.latitude;
-              var longitude = data.longitude;
-
-              $("#ip_address").text(ipAddress);
-              $("#country_name").text(countryName);
-              $("#isp").text(isp);
-              $("#latitude").text(latitude);
-              $("#longitude").text(longitude);
-
-             
-                  });
-              });
-  </script>
     <header>
       <div class="grid-layout">
         <nav>
