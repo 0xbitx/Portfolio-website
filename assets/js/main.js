@@ -10,33 +10,33 @@ typeWrite(document.querySelector(".typewriter"));
 
 hoverChangeExperience(
   ".digitalhouse",
-  `IoT devices are small computers, usually running Linux, that are performing a certain function. Like any other internet/ cloud connected device these can be hacked. What’s worse, is that most devices lack proper UI and come with default passwords that make it easy for people from remote to hack them.`,
+  `Steeped in the realm of IoT hacking, my experience revolves around crafting innovative solutions for interconnected devices. From devising security measures to navigating the intricacies of smart systems, my journey is marked by a passion for ethical hacking in the dynamic landscape of IoT technology.`,
   "IoT hacking",
-  "Weak authentication",
+  "Building hacking device",
   "Jan 2019 - Dec 2023"
 );
 
 hoverChangeExperience(
   ".zuplae",
-  `Kernel is a program, in short. It’s the root of all the operating systems all over the world. No matter what operating system you’re using, there’s always a kernel working from the root level to make everything function as it was meant to be. It’s the most fundamental part of any OS.`,
+  `In my Linux kernel experience, I've delved into the core of operating system functionality. From kernel customization to driver development, I've honed my skills in optimizing system performance and resolving intricate issues. This journey has equipped me with a deep understanding of the intricate workings of the Linux kernel, empowering me to navigate and contribute to the heart of open-source computing.`,
   "Kernel hacking",
-  "SCI exploit",
+  "Reverse engineering Linux kernel malware",
   "Jan 2019 - Dec 2023"
 );
 
 hoverChangeExperience(
   ".codigofontetv",
-  `Bluetooth hacking is a technique used to get information from another Bluetooth enabled device without any permissions from the host. This event takes place due to security flaws in Bluetooth technology. Bluetooth hacking is not limited to cell phones, but is also used to hack laptops, mobiles and desktop computers.`,
-  "Bluetooth hacking",
-  "Invalid Req",
+  `In the domain of network hacking, I've honed my skills in ethical hacking and penetration testing. From identifying vulnerabilities to implementing robust security measures, my experience revolves around ensuring the resilience of networks. I've navigated the intricacies of cybersecurity, employing advanced techniques to uncover and address potential threats, contributing to a fortified and secure network infrastructure.`,
+  "Network hacking",
+  "Exploiting network vulnerabilities",
   "Jan 2020 - Jan 2023"
 );
 
 hoverChangeExperience(
   ".contweb",
-  `System hacking is defined as the compromise between computer systems and software to access the target computer and steal or misuse their sensitive information. The malware and the attacker identify and exploit the vulnerability of the computer system to gain unauthorized access.`,
+  `Specializing in crafting Windows exploits and bypass techniques, I am immersed in the world of Windows operating systems. My expertise extends from enhancing system performance to implementing robust security measures, reflecting my passion for navigating the dynamic landscape of Windows OS technology.`,
   "System hacking",
-  "WinExP",
+  "Building windows exploit and bypass",
   "Jan 2019 - Nov 2023 "
 );
 
