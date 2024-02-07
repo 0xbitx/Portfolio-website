@@ -124,7 +124,7 @@ header .grid-layout nav .nav-list li a::after {
 	height: 1px;
 	bottom: -7px;
 	left: 0;
-	background: linear-gradient(270deg, #ffffff 0%, #000000 100%);
+	background: linear-gradient(270deg, #ff0000 0%, #000000 100%);
 	transform-origin: bottom right;
 	transition: transform .5s cubic-bezier(0.86, 0, 0.07, 1);
 }
