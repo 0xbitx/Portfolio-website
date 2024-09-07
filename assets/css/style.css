@@ -1005,10 +1005,12 @@ header .grid-layout nav .nav-list li a:hover {
 }
 
 #s-home {
-    /* background-image: url("/assets/image/bg1.jpeg"); */
+	
+    background-image: url("https://media0.giphy.com/media/WkGGynT0nZsn2I11vf/200w.webp");
 	padding: 0px 50px;
 	position: relative;
     background-color: #000000;
+	
     /* background-repeat: no-repeat;
     background-position: center; */
 }
@@ -1099,7 +1101,7 @@ header .grid-layout nav .nav-list li a:hover {
 
 #s-home .grid-layout #home #logo {
 	position: absolute;
-	right: -50px;
+	right: 30px;
 	top: 50%;
 	transform: translate(0%, -50%);
 }
