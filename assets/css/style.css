@@ -59,7 +59,7 @@ html {
 }
 
 ::-webkit-scrollbar-thumb {
-	background-color: #ff0000;
+	background-color: rgb(212, 64, 64);
 	border-radius: 8px;
 }
 
@@ -471,7 +471,7 @@ header .grid-layout nav .nav-list li a:hover {
 }
 
 #s-experience .grid-layout h2 span {
-	color: #ff0000;
+	color: rgb(212, 64, 64);
 }
 
 #s-experience .grid-layout #experience {
@@ -500,7 +500,7 @@ header .grid-layout nav .nav-list li a:hover {
 
 #s-experience .grid-layout #experience .option-experience .activeExperience {
 	border-left: 4px solid #f5e6e6;
-	color: #ff0000;
+	color: rgb(212, 64, 64);
 }
 
 #s-experience .grid-layout #experience .option-experience>div {
@@ -556,7 +556,7 @@ header .grid-layout nav .nav-list li a:hover {
 	font-size: 1.8rem;
 	margin: 32px 0px;
 	font-weight: 400;
-	color: #ff0000;
+	color: rgb(212, 64, 64);
 }
 
 #s-experience .grid-layout #experience .text-experience p {
@@ -585,7 +585,7 @@ header .grid-layout nav .nav-list li a:hover {
 }
 
 #s-projects .grid-layout h2 span {
-	color: #ff0000;
+	color: rgb(212, 64, 64);
 }
 
 #s-projects .grid-layout #projects {
@@ -665,7 +665,7 @@ header .grid-layout nav .nav-list li a:hover {
 }
 
 #s-projects .grid-layout #teslabank {
-	color: #ff0000;
+	color: rgb(212, 64, 64);
 }
 
 #s-projects .grid-layout #teslabank::after {
@@ -750,7 +750,7 @@ header .grid-layout nav .nav-list li a:hover {
 }
 
 #s-services .grid-layout h2 span {
-	color: #ff0000;
+	color: rgb(212, 64, 64);
 }
 
 #s-services .grid-layout #services {
@@ -772,7 +772,7 @@ header .grid-layout nav .nav-list li a:hover {
 }
 
 #s-services .grid-layout #services article:hover {
-	border: 1px solid #a80b0b;
+	border: 1px solid rgb(212, 64, 64);
 }
 
 @media screen and (max-width: 1200px) {
@@ -851,7 +851,7 @@ html {
 }
 
 ::-webkit-scrollbar-thumb {
-	background-color: #ff0000;
+	background-color: rgb(212, 64, 64);
 	border-radius: 8px;
 }
 
@@ -1265,7 +1265,7 @@ header .grid-layout nav .nav-list li a:hover {
 }
 
 #s-experience .grid-layout h2 span {
-	color: #ff0000;
+	color: rgb(212, 64, 64);
 }
 
 #s-experience .grid-layout #experience {
@@ -1294,7 +1294,7 @@ header .grid-layout nav .nav-list li a:hover {
 
 #s-experience .grid-layout #experience .option-experience .activeExperience {
 	border-left: 4px solid #f5e6e6;
-	color: #ff0000;
+	color: rgb(212, 64, 64);
 }
 
 #s-experience .grid-layout #experience .option-experience>div {
@@ -1350,7 +1350,7 @@ header .grid-layout nav .nav-list li a:hover {
 	font-size: 1.8rem;
 	margin: 32px 0px;
 	font-weight: 400;
-	color: #ff0000;
+	color: rgb(212, 64, 64);
 }
 
 #s-experience .grid-layout #experience .text-experience p {
@@ -1379,7 +1379,7 @@ header .grid-layout nav .nav-list li a:hover {
 }
 
 #s-projects .grid-layout h2 span {
-	color: #ff0000;
+	color: rgb(212, 64, 64);
 }
 
 #s-projects .grid-layout #projects {
@@ -1459,7 +1459,7 @@ header .grid-layout nav .nav-list li a:hover {
 }
 
 #s-projects .grid-layout #teslabank {
-	color: #ff0000;
+	color: rgb(212, 64, 64);
 }
 
 #s-projects .grid-layout #teslabank::after {
@@ -1544,7 +1544,7 @@ header .grid-layout nav .nav-list li a:hover {
 }
 
 #s-services .grid-layout h2 span {
-	color: #ff0000;
+	color: rgb(212, 64, 64);
 }
 
 #s-services .grid-layout #services {
@@ -1566,7 +1566,7 @@ header .grid-layout nav .nav-list li a:hover {
 }
 
 #s-services .grid-layout #services article:hover {
-	border: 1px solid #a80b0b;
+	border: 1px solid rgb(212, 64, 64);
 }
 
 @media screen and (max-width: 1200px) {
@@ -1645,7 +1645,7 @@ header .grid-layout nav .nav-list li a:hover {
 }
 
 #s-skills .grid-layout #skills #skills-text h2 span {
-	color: #ff0000;
+	color: rgb(212, 64, 64);
 }
 
 #s-skills .grid-layout #skills #skills-text .changeDescription {
@@ -1687,7 +1687,7 @@ header .grid-layout nav .nav-list li a:hover {
 }
 
 #s-skills .grid-layout #skills #skills-cards article:hover {
-	border: 1px solid #cc1616;
+	border: 1px solid rgb(212, 64, 64);
 }
 
 #s-skills .grid-layout #skills #skills-cards article:hover .skills-cards-name,#s-skills .grid-layout #skills #skills-cards article:hover .skills-cards-name-low,#s-skills .grid-layout #skills #skills-cards article:hover .skills-cards-name-high {
@@ -1867,7 +1867,7 @@ footer .grid-layout div img {
 }
 
 #s-skills .grid-layout #skills #skills-text h2 span {
-	color: #ff0000;
+	color: rgb(212, 64, 64);
 }
 
 #s-skills .grid-layout #skills #skills-text .changeDescription {
@@ -1909,7 +1909,7 @@ footer .grid-layout div img {
 }
 
 #s-skills .grid-layout #skills #skills-cards article:hover {
-	border: 1px solid #cc1616;
+	border: 1px solid rgb(212, 64, 64);
 }
 
 #s-skills .grid-layout #skills #skills-cards article:hover .skills-cards-name,#s-skills .grid-layout #skills #skills-cards article:hover .skills-cards-name-low,#s-skills .grid-layout #skills #skills-cards article:hover .skills-cards-name-high {
