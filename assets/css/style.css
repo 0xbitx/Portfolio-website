@@ -1006,7 +1006,7 @@ header .grid-layout nav .nav-list li a:hover {
 
 #s-home {
 	
-    background-image: url("https://media0.giphy.com/media/WkGGynT0nZsn2I11vf/200w.webp");
+    background-image: url("/assets/image/bkg.png");
 	padding: 0px 50px;
 	position: relative;
     background-color: #000000;
