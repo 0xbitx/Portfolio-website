@@ -213,7 +213,7 @@ header .grid-layout nav .nav-list li a:hover {
 }
 
 #s-home {
-    background-image: url("/assets/image/bkg.jpg");
+    background-image: url("https://github.com/0xbitx/Portfolio-website/blob/main/assets/image/bkg.jpg");
 	padding: 0px 50px;
 	position: relative;
     background-color: #000000;
