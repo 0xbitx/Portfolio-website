@@ -217,8 +217,8 @@ header .grid-layout nav .nav-list li a:hover {
 	padding: 0px 50px;
     	position: relative;
     	background-color: #000000;
-    /* background-repeat: no-repeat;
-    background-position: center; */
+    	background-repeat: no-repeat;
+    	background-position: center; */
 }
 
 @media screen and (max-width: 992px) {
