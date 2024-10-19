@@ -213,12 +213,12 @@ header .grid-layout nav .nav-list li a:hover {
 }
 
 #s-home {
-    background-image: url("https://github.com/0xbitx/Portfolio-website/blob/main/assets/image/bkg.jpg");
+	background-image: url("/Portfolio-website/blob/main/assets/image/bkg.jpg");
 	padding: 0px 50px;
 	position: relative;
-    background-color: #000000;
-    /* background-repeat: no-repeat;
-    background-position: center; */
+	background-color: #000000;
+    	/* background-repeat: no-repeat;
+    	background-position: center; */
 }
 
 @media screen and (max-width: 992px) {
