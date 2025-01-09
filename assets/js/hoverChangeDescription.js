@@ -6,6 +6,6 @@ export function hoverChangeDescription(nameCard, text) {
   });
 
   document.querySelector(nameCard).addEventListener("mouseout", () => {
-    changeDescription.innerHTML = `languages / tools `;
+    changeDescription.innerHTML = `<span>//</span>languages | tools<span>></span>`;
   });
 }
