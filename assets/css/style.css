@@ -207,10 +207,10 @@ header .grid-layout nav .nav-list li a:hover {
 }
 
 #s-home {
-    background-image: url("/assets/image/home-bg.png");
+    background-image: url("https://images.alphacoders.com/690/690851.png");
     padding: 0px 50px;
     position: relative;
-    background-color: #caffbf; 
+    background-color: #b5d6e1; 
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
