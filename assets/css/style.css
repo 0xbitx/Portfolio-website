@@ -1135,15 +1135,15 @@ header .grid-layout nav .nav-list li a:hover {
 #s-home .grid-layout #home #home-container-text a {
 	background: #caffbf; /* GitHub button color */
 	color: rgb(0, 0, 0); /* Text color */
-	backdrop-filter: blur(10px); /* Blur effect */
-	padding: 10px 10px; /* Padding inside the button */
-	max-width: 50px; /* Maximum width */
+	backdrop-filter: blur(10px); 
+	padding: 10px 10px; 
+	max-width: 50px; 
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	transition: all 0.5s ease; /* Smooth transition for hover effects */
-	margin-top: 30px; /* Margin at the top */
-	font-size: 20px; /* Font size */
+	transition: all 0.5s ease;
+	margin-top: 30px; 
+	font-size: 20px; 
 	font-weight: 500; 
 	border-radius: 50px; 
 	text-decoration: none; 
@@ -1166,10 +1166,11 @@ header .grid-layout nav .nav-list li a:hover {
 		display: none;
 	}
 }
-
+  
 #s-about {
 	padding: 96px 48px;
-	background-color: #050607;
+	background-color: #000000; /* Default background color */
+	transition: background-color 1s ease; /* Smooth transition for background color */
 }
 
 @media screen and (max-width: 992px) {
@@ -1192,7 +1193,7 @@ header .grid-layout nav .nav-list li a:hover {
 	justify-content: center;
 	align-items: center;
 	position: relative;
-	transition: 1s all ease;
+	transition: 1.6s all ease;
 }
 
 #s-about .grid-layout #about-photo #photo-iuricode {
@@ -1200,7 +1201,12 @@ header .grid-layout nav .nav-list li a:hover {
 }
 
 #s-about .grid-layout #about-photo:hover {
-	transform: scale(1.1);
+	transform: scale(1.6);
+}
+
+#s-about .grid-layout #about-photo:hover ~ #about-text #about-figure, 
+#s-about:hover {
+	background-color: #c17878; /* Pink background color */
 }
 
 #s-about .grid-layout #about-photo div {
@@ -1215,24 +1221,24 @@ header .grid-layout nav .nav-list li a:hover {
 
 #s-about .grid-layout #about-photo .about-figure {
 	position: absolute;
-	background-color: #040405;
+	background-color: #04040500;
 	border-radius: 4px;
 	width: 22px;
 	height: 22px;
 }
 
 #s-about .grid-layout #about-photo .figure-one {
-	top: 250px;
+	top: 270px;
 	right: 200px;
 }
 
 #s-about .grid-layout #about-photo .figure-two {
-	top: 250px;
+	top: 270px;
 	right: 320px;
 }
 
 #s-about .grid-layout #about-photo .figure-three {
-	top: 250px;
+	top: 270px;
 	right: 450px;
 }
 

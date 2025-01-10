@@ -23,6 +23,7 @@
       href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600&display=swap"
       rel="stylesheet"
     />
+    
     <link rel="manifest" href="manifest.json" />
     <link rel="stylesheet" href="assets/css/style.css" />
     <link
@@ -52,6 +53,12 @@
     <title>0xbit</title>
   </head>
   <body>
+
+  <script type="module">
+    import { bubbleCursor } from "https://unpkg.com/cursor-effects@latest/dist/esm.js";
+    new bubbleCursor();
+  </script>
+
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script>
         document.addEventListener('contextmenu', function (e) {
@@ -117,7 +124,7 @@
                 <span style="color: white; font-family: 'LiveOverfont', sans-serif;
                 ">root@</span><span style="color: rgb(212, 64, 64); font-family: 'LiveOverfont', sans-serif;"
                 >0xbit</span><span style="color: white; font-family: 'LiveOverfont', sans-serif;"
-                >> cat readme.txt</span><span style="color: red; animation: blink 1s infinite; font-family: 'LiveOverfont', sans-serif;"
+                >></span><span style="color: red; animation: blink 1s infinite; font-family: 'LiveOverfont', sans-serif;"
                 >_</span>
                 <div class="gg" title="404" style="color: white; font-family: 'LiveOverfont', sans-serif;">I create tools for Linux-based systems.</div>
               </h1>
@@ -129,7 +136,23 @@
           </div>
         </div>
       </section>
-      
+      <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
+      <script>
+        const lenis = new Lenis({
+          duration: 1.9,
+          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+          direction: 'vertical',
+          gestureDirection: 'vertical',
+          smooth: true,
+          smoothTouch: false,
+          touchMultiplier: 2,
+        });
+        function raf(time) {
+          lenis.raf(time);
+          requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+      </script>
       <script>
       document.addEventListener("DOMContentLoaded", function () {
         fetch('https://ipapi.co/json/')
@@ -152,11 +175,33 @@
       });
       </script>
       <section id="s-about">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
         <div class="grid-layout">
           <div id="about">
             <div id="about-photo">
+              <script>
+                const sound = new Howl({
+                  src: ['/assets/bgm.mp3'], 
+                  autoplay: false,
+                  loop: true,
+                  volume: 0, 
+                });
+            
+                const aboutPhoto = document.getElementById('about-photo');
+                if (aboutPhoto) {
+                  aboutPhoto.addEventListener('mouseenter', () => {
+                    sound.fade(0, 1, 500); 
+                    if (!sound.playing()) {
+                      sound.play(); 
+                    }
+                  });
+                  aboutPhoto.addEventListener('mouseleave', () => {
+                    sound.fade(1, 0, 1000); 
+                  });
+                }
+              </script>
               <img
-                src="https://media4.giphy.com/media/46yPfgO81ZalJSKu74/giphy.webp?cid=ecf05e475p6s7p4qsksw5g48qs4myciq9jrs901xyvliuug7&ep=v1_gifs_related&rid=giphy.webp&ct=s"
+                src="https://media3.giphy.com/media/PjNpxOcZzkZwjC6RsL/200.webp?cid=ecf05e47s57uau5llp66msfjczzsor072aaik6mg05nwoz6o&ep=v1_gifs_related&rid=200.webp&ct=s"
                 width="100px"
                 height="100px"
                 alt="dedsec"
@@ -179,9 +224,7 @@
                   alt="ícone css"
                 />
               </div>
-              <div
-                class="about-figure figure-three icon-three delayExtraBigReveal"
-              >
+              <div class="about-figure figure-three icon-three delayExtraBigReveal">
                 <img
                   src="assets/icons/discord.png"
                   width="45px"
@@ -191,7 +234,9 @@
               </div>
             </div>
             <article id="about-text">
-              <h2 class="delaySmallReveal" style="color: rgb(212, 64, 64); font-family: 'LiveOverfont', sans-serif; font-size: 40px;"> tibx0[::-1] </h2>
+              <h2 class="delaySmallReveal" style="color: rgb(212, 64, 64); font-family: 'LiveOverfont', sans-serif; font-size: 40px;">
+                tibx0[::-1]
+              </h2>
               <p class="delayMediumReveal" style="color: white; font-family: 'LiveOverfont', sans-serif; font-size: 27px;">
                 I’m a 21-year-old developer who loves building hacking tools, especially for Linux systems. My work involves creating and improving command-line tools, and I spend a lot of time exploring the details of cybersecurity. I’m really drawn to the challenge of developing advanced tools, particularly ones that test system weaknesses or use creative, off-the-beaten-path hacking methods. It’s a field that keeps me on my toes, always learning and trying to push boundaries.
               </p>
@@ -325,10 +370,9 @@
                   alt="ícone imagem"
                 />
               </div>
-              <h3 style="color: rgb(199, 199, 199); font-family: 'LiveOverfont', sans-serif; font-size: 30px;"><span>//</span>Trolling Corrupt People<span>//</span></h3>
+              <h3 style="color: rgb(199, 199, 199); font-family: 'LiveOverfont', sans-serif; font-size: 30px;"><span>//</span>Making Content<span>//</span></h3>
               <p>
-                trolling LGU (Local Government Unit),
-                Politicians, Government Employees
+                Creating cybersecurity-related videos, articles, blogs, etc..
               </p>
             </article>
           </div>
