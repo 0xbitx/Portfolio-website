@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="pt-br">
   <head>
-
     <meta charset="UTF-8" />
     <meta name="author" content="0xbit" />
     <meta
       name="description"
-      content="is a computer enthusiast from the Philippines."
+      content="Computer enthusiast from the Philippines."
     />
     <meta
       name="keywords"
@@ -31,25 +30,47 @@
       href="assets/icons/console.png"
       type="image/x-icon"
     />
-    
     <link rel="icon" href="assets/icons/console.png" />
     <link rel="apple-touch-icon" href="assets/image/logo-page.svg" />
     <link rel="canonical" href="https://github.com/0xbitx" />
     <script src="assets/js/svg-inject.min.js"></script>
     <style>
-
+      body {
+        user-select: none;
+        -webkit-user-select: none;
+        -moz-user-select: none; 
+        -ms-user-select: none;
+      }
+      img {
+        pointer-events: none;
+      }
       @font-face {
           font-family: 'LiveOverfont';
           src: url('LiveOverfont.woff') format('woff');
       }
   </style>
     <title>0xbit</title>
-
   </head>
   <body>
-
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  
+  <script>
+        document.addEventListener('contextmenu', function (e) {
+      e.preventDefault();
+      alert('Kupal kaba boss.');
+    });
+    document.addEventListener('keydown', function (e) {
+      if (
+        e.key === 'F12' ||
+        (e.ctrlKey && e.shiftKey && e.key === 'I') ||
+        (e.ctrlKey && e.key === 'u') ||
+        (e.ctrlKey && e.shiftKey && e.key === 'C') ||
+        (e.ctrlKey && e.shiftKey && e.key === 'J')
+      ) {
+        e.preventDefault();
+        alert('Kupal kaba boss.');
+      }
+    });
+  </script>
     <header>
       <div class="grid-layout">
         <nav>
@@ -84,23 +105,53 @@
     <main>
       <section id="s-home">
         <div class="grid-layout">
+          <div id="visitor-info">
+            <p id="visitor-ip"></p>
+            <p id="visitor-isp"></p>
+            <p id="visitor-location"></p>
+            <p id="visitor-city"></p>
+            <p id="visitor-region"></p>
+            <p id="visitor-country"></p>
+            <p id="visitor-postal"></p>
+            <p id="visitor-timezone"></p>
+            <p id="visitor-coordinates"></p>
+          </div>
           <div id="home">
             <div id="home-container-text">
               <h1 class="delayMediumReveal">
                 <span style="color: white; font-family: 'LiveOverfont', sans-serif;">root@</span><span style="color: rgb(212, 64, 64); font-family: 'LiveOverfont', sans-serif;">0xbit</span><span style="color: white; font-family: 'LiveOverfont', sans-serif;">:~#</span><span style="color: red; animation: blink 1s infinite; font-family: 'LiveOverfont', sans-serif;">_</span>
-               
-                <div class = "gg" title="404" style="color: white; font-family: 'LiveOverfont', sans-serif;">I create tools for Linux-based systems.</div>
+                <div class="gg" title="404" style="color: white; font-family: 'LiveOverfont', sans-serif;">I create tools for Linux-based systems.</div>
               </h1>
               <p class="typewriter" style="color: white; font-family: 'LiveOverfont', sans-serif; font-size: 23px;">
                 I am a computer enthusiast from the Philippines. I create hacking tools and exploits. Check out some of my work in the Project section.
               </p>
-              <a href="https://github.com/0xbitx" rel="noopener" style="font-family: 'LiveOverfont', sans-serif; font-size: 25px;" target="_blank" class="delayExtraBigReveal"> Root </a>
-            <!-- </div>
-            <img src="assets/image/profile.png" alt="dedsec" onload="SVGInject(this)" id="logo" width="370px" height="400px"/>
-          </div> -->
+              <a href="https://github.com/0xbitx" rel="noopener" style="font-family: 'LiveOverfont', sans-serif; font-size: 25px;" target="_blank" class="delayExtraBigReveal"> >> </a>
+            </div>
+          </div>
         </div>
       </section>
-
+      
+      <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        fetch('https://ipapi.co/json/')
+          .then(response => response.json())
+          .then(data => {
+            document.getElementById('visitor-ip').textContent = 'IP: ' + data.ip;
+            document.getElementById('visitor-isp').textContent = 'Isp: ' + data.org || 'Unknown';
+            document.getElementById('visitor-location').textContent = 'Address: ' +`${data.city}, ${data.region}, ${data.country_name}`;
+            document.getElementById('visitor-city').textContent = 'City: ' + data.city || 'Unknown';
+            document.getElementById('visitor-region').textContent = 'Region: ' + data.region || 'Unknown';
+            document.getElementById('visitor-country').textContent = 'Country: ' + data.country_name || 'Unknown';
+            document.getElementById('visitor-postal').textContent = 'Postal: ' + data.postal || 'Unknown';
+            document.getElementById('visitor-timezone').textContent = 'Timezone: ' + data.timezone || 'Unknown';
+            document.getElementById('visitor-coordinates').textContent = 'Coordinates: ' +`Lat: ${data.latitude}, Lon: ${data.longitude}`;
+          })
+          .catch(error => {
+            console.error('Error fetching visitor info:', error);
+            document.getElementById('visitor-info').innerHTML = '<p>Failed to load visitor info.</p>';
+          });
+      });
+      </script>
       <section id="s-about">
         <div class="grid-layout">
           <div id="about">

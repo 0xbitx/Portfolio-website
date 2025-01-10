@@ -5,11 +5,6 @@
 	font-family: "LiveOverfont";
 }
 
-::selection {
-	background-color: #282d2e;
-	color: #fff;
-}
-
 ul,ol {
 	list-style: none;
 	margin: 0;
@@ -211,24 +206,20 @@ header .grid-layout nav .nav-list li a:hover {
 	}
 }
 
-
-
-
-
 #s-home {
     background-image: url("/assets/image/home-bg.png");
     padding: 0px 50px;
     position: relative;
-    background-color: #637bd0; /* Default background color */
+    background-color: #caffbf; 
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     min-height: 100vh;
-    overflow: hidden; /* Ensures the effect doesn't overflow */
+    overflow: hidden; 
 }
 
 #s-home:hover {
-    animation: smoothColorChange 5s infinite;
+    animation: smoothColorChange 10s infinite;
 }
 
 #s-home:hover::before {
@@ -238,48 +229,44 @@ header .grid-layout nav .nav-list li a:hover {
     left: 0;
     width: 100%;
     height: 100%;
-    background: inherit; /* Inherit the background image */
-    animation: waveGlitch 2s infinite linear;
-    opacity: 0.8; /* Adjust opacity for visibility */
-    pointer-events: none; /* Ensures the overlay doesn't block interactions */
+    background: inherit; 
+    animation: heartbeat 1.2s infinite linear;
+    opacity: 0.8;
+    pointer-events: none; 
     z-index: 1;
-    mix-blend-mode: lighten; /* Keeps the background bright */
+    mix-blend-mode: lighten; 
 }
 
 @keyframes smoothColorChange {
-    0% { background-color: #637bd0; }
-    25% { background-color: #b8b7b6; }
-    50% { background-color: #4caf50; }
+    0% { background-color: a2d2ff; }
+    25% { background-color: #bde0fe; }
+    50% { background-color: #afffcf; }
+	75% { background-color: #d5c8ff; }
+	85% { background-color: #65ccb8; }
+	100% { background-color: #a2d2ff; }
+
 }
 
-@keyframes waveGlitch {
+@keyframes heartbeat {
     0% {
-        transform: scale(1) translate(0, 0);
-        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+        transform: scale(1); 
     }
-    25% {
-        transform: scale(1.02) translate(-2px, 2px); /* Slight scale and offset */
-        clip-path: polygon(0 10%, 100% 0, 100% 90%, 0 100%); /* Wave distortion */
+    14% {
+        transform: scale(1.01); 
     }
-    50% {
-        transform: scale(1) translate(0, 0);
-        clip-path: polygon(0 0, 100% 10%, 100% 100%, 0 90%); /* Wave distortion */
+    28% {
+        transform: scale(1); 
     }
-    75% {
-        transform: scale(1.02) translate(2px, -2px); /* Slight scale and offset */
-        clip-path: polygon(0 5%, 100% 0, 100% 95%, 0 100%); /* Wave distortion */
+    42% {
+        transform: scale(1.01);
+    }
+    70% {
+        transform: scale(1); 
     }
     100% {
-        transform: scale(1) translate(0, 0);
-        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+        transform: scale(1);
     }
 }
-
-
-
-
-
-
 
 @media screen and (max-width: 992px) {
 	#s-home {
@@ -295,6 +282,29 @@ header .grid-layout nav .nav-list li a:hover {
 	overflow: hidden;
 	width: 100%;
 }
+
+#s-home {
+	position: relative; 
+	padding-top: 60px; 
+  }
+  
+  #s-home #visitor-info {
+	position: absolute; 
+	top: 60px; 
+	left: 0; 
+	padding: 10px; 
+	background-color: rgba(0, 0, 0, 0.7); 
+	z-index: 10;
+  }
+  
+  #s-home #visitor-info p { /* visitor info */
+	color: #d4d4d4; 
+	font-family: 'Rajdhani', sans-serif; 
+	font-size: 1.0rem; 
+	margin: 0; 
+	line-height: 1.1;
+	padding: 1px 0; 
+  }
 
 @media screen and (max-width: 992px) {
 	#s-home .grid-layout #home {
@@ -321,10 +331,13 @@ header .grid-layout nav .nav-list li a:hover {
 #s-home .grid-layout #home #home-container-text h1 {
 	color: #fff;
 	max-width: 700px;
+	padding-bottom: 2%;
 	line-height: 140%;
 	font-size: 4rem;
 	font-weight: 500;
 }
+
+
 
 @media screen and (max-width: 992px) {
 	#s-home .grid-layout #home #home-container-text h1 {
@@ -511,7 +524,7 @@ header .grid-layout nav .nav-list li a:hover {
 }
 
 #s-experience {
-	background-color: #272742;
+	background-color: #0d0d0f;  /* background color for exerience */
 	color: #fff;
 	padding: 96px 48px;
 }
@@ -884,7 +897,7 @@ button:focus,input:focus {
 
 body {
 	font-family: "LiveOverfont";
-	background-color: #fff;
+	background-color: #000000;
 	overflow-x: hidden;
 }
 
@@ -1120,19 +1133,21 @@ header .grid-layout nav .nav-list li a:hover {
 }
 
 #s-home .grid-layout #home #home-container-text a {
-	background: #caeaf5;
-	color: rgb(0, 0, 0);
-	backdrop-filter: blur(10px);
-	padding: 10px 10px;
-	max-width: 120px;
+	background: #caffbf; /* GitHub button color */
+	color: rgb(0, 0, 0); /* Text color */
+	backdrop-filter: blur(10px); /* Blur effect */
+	padding: 10px 10px; /* Padding inside the button */
+	max-width: 50px; /* Maximum width */
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	transition: all .4s ease;
-	margin-top: 30px;
-	font-size: 18px;
-	font-weight: 500;
-}
+	transition: all 0.5s ease; /* Smooth transition for hover effects */
+	margin-top: 30px; /* Margin at the top */
+	font-size: 20px; /* Font size */
+	font-weight: 500; 
+	border-radius: 50px; 
+	text-decoration: none; 
+  }
 
 #s-home .grid-layout #home #home-container-text a:hover {
 	padding: 10px 10px;
@@ -1275,14 +1290,13 @@ header .grid-layout nav .nav-list li a:hover {
 }
 
 #s-about .grid-layout #about-text h2 span {
-	color: #00a1b2;
+	color: #e6e6e6;
 }
 
 #s-about .grid-layout #about-text p {
 	line-height: 3.2rem;
 	color: #d8d8d8;
 	font-size: 2rem;
-	font-line-height: 160%;
 }
 
 #s-experience {
@@ -1469,7 +1483,7 @@ header .grid-layout nav .nav-list li a:hover {
 }
 
 #s-projects .grid-layout #projects>article:hover {
-	border: 1px solid #637bd0;
+	border: 1px solid #d2d2d2;  /* border color for Projects */
 }
 
 @media screen and (max-width: 1200px) {
@@ -1573,7 +1587,7 @@ header .grid-layout nav .nav-list li a:hover {
 
 #s-services {
 	padding: 96px 48px;
-	background-color: #0e1010;
+	background-color: #0d0d0f; /* background color for WHAT I DO */
 }
 
 @media screen and (max-width: 992px) {
@@ -1605,7 +1619,7 @@ header .grid-layout nav .nav-list li a:hover {
 }
 
 #s-services .grid-layout #services article {
-	background-color: #25253d;
+	background-color: #000000;  /* box background color for WHAT I DO */
 	height: auto;
 	padding: 32px;
 	margin: 8px;
@@ -2040,7 +2054,7 @@ footer .grid-layout p {
 	color: #d8d8d8;
 	text-align: center;
 	font-family: Rajdhani;
-	font-size: 1.9rem;
+	font-size: 1.5rem;
 }
 
 footer .grid-layout div {
@@ -2082,4 +2096,4 @@ footer .grid-layout div img {
 .grid-layout {
 	max-width: 1140px;
 	margin: 0 auto;
-}/*# sourceMappingURL=style.css.map */
+}
