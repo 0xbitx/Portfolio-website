@@ -55,8 +55,8 @@
   <body>
 
   <script type="module">
-    import { bubbleCursor } from "https://unpkg.com/cursor-effects@latest/dist/esm.js";
-    new bubbleCursor();
+    import { followingDotCursor } from "https://unpkg.com/cursor-effects@latest/dist/esm.js";
+    new followingDotCursor();
   </script>
 
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -175,28 +175,55 @@
       });
       </script>
       <section id="s-about">
+        <script type="module">
+          import { characterCursor } from "https://unpkg.com/cursor-effects@latest/dist/esm.js";
+          let cursorEffect = null;
+          const aboutPhoto = document.getElementById('about-photo');
+          if (aboutPhoto) {
+            aboutPhoto.addEventListener('mouseenter', () => {
+              if (!cursorEffect) {
+                cursorEffect = new characterCursor({
+                  // characters: ["🤍", "🩷", "💜", "🌸"],
+                  // characters: ["🤍", "🩷", "🌸"],
+                  // characters: ["🩷", "🌸"],
+                  characters: ["♥️", "🌸"],
+                  // characters: ["🌸"],
+                  font: "25px serif",
+                  
+                });
+              }
+            });
+
+            aboutPhoto.addEventListener('mouseleave', () => {
+              if (cursorEffect) {
+                cursorEffect.destroy(); 
+                cursorEffect = null;
+              }
+            });
+          }
+        </script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
         <div class="grid-layout">
           <div id="about">
             <div id="about-photo">
               <script>
                 const sound = new Howl({
-                  src: ['/assets/bgm.mp3'], 
+                  src: ['https://0xbitx.github.io/Portfolio-website/assets/bgm.mp3'],
                   autoplay: false,
                   loop: true,
-                  volume: 0, 
+                  volume: 0,
                 });
-            
+
                 const aboutPhoto = document.getElementById('about-photo');
                 if (aboutPhoto) {
                   aboutPhoto.addEventListener('mouseenter', () => {
-                    sound.fade(0, 1, 500); 
+                    sound.fade(0, 1, 500);
                     if (!sound.playing()) {
-                      sound.play(); 
+                      sound.play();
                     }
                   });
                   aboutPhoto.addEventListener('mouseleave', () => {
-                    sound.fade(1, 0, 1000); 
+                    sound.fade(1, 0, 1000);
                   });
                 }
               </script>
