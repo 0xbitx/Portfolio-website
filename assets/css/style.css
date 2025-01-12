@@ -975,7 +975,8 @@ header .grid-layout nav .nav-list li a {
 header .grid-layout nav .nav-list li span {
 	color: #ee1313;
 	position: relative;
-	font-size: 1.5rem;
+	font-family: LiveOverfont;
+	font-size: 1.9rem;
 }
 header .grid-layout nav .nav-list li a::after {
 	content: "";
@@ -1329,6 +1330,7 @@ header .grid-layout nav .nav-list li a:hover {
 }
 
 #s-experience .grid-layout h2 span {
+	font-size: 4rem;
 	color: rgb(212, 64, 64);
 }
 

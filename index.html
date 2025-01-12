@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="author" content="0xbit" />
+    <meta name="viewport" content="width=device-width, initial-scale=0.9">
     <meta
       name="description"
       content="Computer enthusiast from the Philippines."
@@ -69,6 +70,9 @@
         e.key === 'F11' ||
         e.key === 'F12' ||
         e.key === 'TAB' ||
+        e.key === 'Print' ||
+        e.key === 'PrintScreen' ||
+        e.key === 'Escape' ||
         (e.ctrlKey && e.key === 'u') ||
         (e.ctrlKey && e.key === 'U') ||
         (e.ctrlKey && e.key === 's') ||
@@ -77,6 +81,8 @@
         (e.ctrlKey && e.key === 'F') ||
         (e.ctrlKey && e.key === 'g') ||
         (e.ctrlKey && e.key === 'G') ||
+        (e.ctrlKey && e.key === 'p') ||
+        (e.ctrlKey && e.key === 'P') || 
         (e.ctrlKey && e.shiftKey && e.key === 'I') ||
         (e.ctrlKey && e.shiftKey && e.key === 'i') ||
         (e.ctrlKey && e.shiftKey && e.key === 'C') ||
@@ -101,11 +107,11 @@
             <div class="line3"></div>
           </div>
           <ul class="nav-list">
-            <li><a href="#s-home" style="color: rgb(220, 220, 220); font-family: 'Rajdhani',  sans-serif;">HOME<span>$</span></a></li>
-            <li><a href="#s-about" style="color: rgb(220, 220, 220); font-family: 'Rajdhani', sans-serif;">ABOUT<span>$</span></a></li>
-            <li><a href="#s-projects" style="color: rgb(220, 220, 220); font-family: 'Rajdhani', sans-serif;">PROJECT<span>$</span></a></li>
-            <li><a href="#s-services" style="color: rgb(220, 220, 220); font-family: 'Rajdhani', sans-serif;">WHAT I DO<span>$</span></a></li>
-            <li><a href="#s-skills" style="color: rgb(220, 220, 220); font-family: 'Rajdhani', sans-serif;">SKILLS<span>$</span></a></li>
+            <li><a href="#s-home" style="color: rgb(220, 220, 220); font-family: 'Rajdhani',  sans-serif;">HOME<span>/</span></a></li>
+            <li><a href="#s-about" style="color: rgb(220, 220, 220); font-family: 'Rajdhani', sans-serif;">ABOUT<span>/</span></a></li>
+            <li><a href="#s-projects" style="color: rgb(220, 220, 220); font-family: 'Rajdhani', sans-serif;">PROJECT<span>/</span></a></li>
+            <li><a href="#s-services" style="color: rgb(220, 220, 220); font-family: 'Rajdhani', sans-serif;">WHAT I DO<span>/</span></a></li>
+            <li><a href="#s-skills" style="color: rgb(220, 220, 220); font-family: 'Rajdhani', sans-serif;">SKILLS<span>/</span></a></li>
           </ul>
         </nav>
       </div>
@@ -279,22 +285,22 @@
 
       <section id="s-experience">
         <div class="grid-layout">
-          <h2 class="delaySmallReveal" style="color: rgb(212, 64, 64) 'LiveOverfont', sans-serif; font-size: 40px;">Experience<span>$</span></h2>
+          <h2 class="delaySmallReveal" style="color: rgb(212, 64, 64) 'LiveOverfont', sans-serif;"><span>/</span>Experience<span>/</span></h2>
           <div id="experience">
             <div
               class="option-experience intervalCardReveal"
               id="experience-company">
               <div class="company iot activeExperience">
-                <h3>IoT</h3>
+                <h3><span>/</span>IoT</h3>
               </div>
               <div class="company kernel">
-                <h3>linux kernel </h3>
+                <h3><span>/</span>linux kernel </h3>
               </div>
               <div class="company os">
-                <h3>windows os</h3>
+                <h3><span>/</span>windows os</h3>
               </div>
               <div class="company network">
-                <h3>Network </h3>
+                <h3><span>/</span>Network </h3>
               </div>
             </div>
             <div class="text-experience intervalCardReveal">
@@ -316,7 +322,7 @@
           <h2 class="delaySmallReveal" style="color: rgb(212, 64, 64) 'LiveOverfont', sans-serif; font-size: 40px;">Project<span>$</span></h2>
           <div id="projects">
             <article class="layout">
-              <h3 style="color: rgb(199, 199, 199); font-family: 'LiveOverfont', sans-serif; font-size: 28px;"><span>//</span>DEDSEC_RANSOMWARE<span>></span></h3>
+              <h3 style="color: rgb(199, 199, 199); font-family: 'LiveOverfont', sans-serif; font-size: 28px;"><span>/root/</span>DEDSEC_RANSOMWARE<span>/</span></h3>
               <p>
                 Linux based ransomware tool that can create a ransomware code with discord integration.
               </p>
@@ -324,12 +330,12 @@
                 href="https://github.com/0xbitx/DEDSEC_RANSOMWARE"
                 rel="noopener"
                 target="_blank"
-                id="dedsec"><<span>></span>
+                id="dedsec">cd<span>_</span>
               </a>
             </article>
 
             <article class="layout">
-              <h3 style="color: rgb(199, 199, 199); font-family: 'LiveOverfont', sans-serif; font-size: 28px;"><span>//</span>DEDSEC_BLUEJACKER<span>></span></h3>
+              <h3 style="color: rgb(199, 199, 199); font-family: 'LiveOverfont', sans-serif; font-size: 28px;"><span>/root/</span>DEDSEC_BLUEJACKER<span>/</span></h3>
               <p>
                 Bluetooth jamming device/tool that uses an ESP32 NodeMCU and an nRF module.  
               </p>
@@ -338,12 +344,12 @@
                 href="https://github.com/0xbitx/DEDSEC_BLUEJACKER"
                 rel="noopener"
                 target="_blank"
-                id="dedsec"><<span>></span>
+                id="dedsec">cd<span>_</span>
               </a>
             </article>
 
             <article class="layout">
-              <h3 style="color: rgb(199, 199, 199); font-family: 'LiveOverfont', sans-serif; font-size: 28px;"><span>//</span>DEDSEC_PTZ_EXPLOIT<span>></span></h3>
+              <h3 style="color: rgb(199, 199, 199); font-family: 'LiveOverfont', sans-serif; font-size: 28px;"><span>/root/</span>DEDSEC_PTZ_EXPLOIT<span>/</span></h3>
               <p>
                 IP Camera exploit to control ip camera movement (PTZ) even without a username and password.
               </p>
@@ -351,7 +357,7 @@
                 href="https://github.com/0xbitx/DEDSEC_PTZ_EXPLOIT"
                 rel="noopener"
                 target="_blank"
-                id="dedsec"><<span>></span>
+                id="dedsec">cd<span>_</span>
               </a>
             </article>
           </div>
