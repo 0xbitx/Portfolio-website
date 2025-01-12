@@ -23,7 +23,6 @@
       href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600&display=swap"
       rel="stylesheet"
     />
-    
     <link rel="manifest" href="manifest.json" />
     <link rel="stylesheet" href="assets/css/style.css" />
     <link
@@ -67,10 +66,24 @@
     });
     document.addEventListener('keydown', function (e) {
       if (
+        e.key === 'F11' ||
         e.key === 'F12' ||
-        (e.ctrlKey && e.shiftKey && e.key === 'I') ||
+        e.key === 'TAB' ||
         (e.ctrlKey && e.key === 'u') ||
+        (e.ctrlKey && e.key === 'U') ||
+        (e.ctrlKey && e.key === 's') ||
+        (e.ctrlKey && e.key === 'S') ||
+        (e.ctrlKey && e.key === 'f') ||
+        (e.ctrlKey && e.key === 'F') ||
+        (e.ctrlKey && e.key === 'g') ||
+        (e.ctrlKey && e.key === 'G') ||
+        (e.ctrlKey && e.shiftKey && e.key === 'I') ||
+        (e.ctrlKey && e.shiftKey && e.key === 'i') ||
         (e.ctrlKey && e.shiftKey && e.key === 'C') ||
+        (e.ctrlKey && e.shiftKey && e.key === 'C') ||
+        (e.ctrlKey && e.shiftKey && e.key === 's') ||
+        (e.ctrlKey && e.shiftKey && e.key === 'S') ||
+        (e.ctrlKey && e.shiftKey && e.key === 'j') ||
         (e.ctrlKey && e.shiftKey && e.key === 'J')
       ) {
         e.preventDefault();
@@ -88,22 +101,15 @@
             <div class="line3"></div>
           </div>
           <ul class="nav-list">
-            <li><a href="#s-home" style="color: rgb(212, 64, 64); font-family: 'LiveOverfont', sans-serif;">HOME</a></li>
-            <li><a href="#s-about" style="color: rgb(212, 64, 64); font-family: 'LiveOverfont', sans-serif;">ABOUT</a></li>
-            <li>
-              <a href="#s-projects" style="color: rgb(212, 64, 64); font-family: 'LiveOverfont', sans-serif;">PROJECT</a>
-            </li>
-            <li>
-              <a href="#s-services" style="color: rgb(212, 64, 64); font-family: 'LiveOverfont', sans-serif;">WHAT I DO</a>
-            </li>
-            <li>
-              <a href="#s-skills" style="color: rgb(212, 64, 64); font-family: 'LiveOverfont', sans-serif;">SKILLS</a>
-            </li>
+            <li><a href="#s-home" style="color: rgb(220, 220, 220); font-family: 'Rajdhani',  sans-serif;">HOME<span>$</span></a></li>
+            <li><a href="#s-about" style="color: rgb(220, 220, 220); font-family: 'Rajdhani', sans-serif;">ABOUT<span>$</span></a></li>
+            <li><a href="#s-projects" style="color: rgb(220, 220, 220); font-family: 'Rajdhani', sans-serif;">PROJECT<span>$</span></a></li>
+            <li><a href="#s-services" style="color: rgb(220, 220, 220); font-family: 'Rajdhani', sans-serif;">WHAT I DO<span>$</span></a></li>
+            <li><a href="#s-skills" style="color: rgb(220, 220, 220); font-family: 'Rajdhani', sans-serif;">SKILLS<span>$</span></a></li>
           </ul>
         </nav>
       </div>
     </header>
-
     <main>
       <section id="s-home">
         <div class="grid-layout">
@@ -412,7 +418,6 @@
               <h2 class="delaySmallReveal" style="color: rgb(212, 64, 64) 'LiveOverfont', sans-serif; font-size: 38px;">language and tool | skill<span>$</span></h2>
               <p class="delayMediumReveal changeDescription"><span>//</span>languages | tools<span>></span></p>
             </article>
-
             <div id="skills-cards">
               <article class="icon1 intervalCardReveal">
                 <span class="skills-cards-name-high">Bash</span>
@@ -475,7 +480,7 @@
                 />
               </article>
               <article class="icon7 intervalCardReveal">
-                <span class="skills-cards-name-low aumento-hover"
+                <span class="skills-cards-name-low"
                   >Ghidra</span
                 >
                 <img

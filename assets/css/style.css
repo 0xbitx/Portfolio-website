@@ -972,6 +972,11 @@ header .grid-layout nav .nav-list li a {
 	font-size: 1.6rem;
 }
 
+header .grid-layout nav .nav-list li span {
+	color: #ee1313;
+	position: relative;
+	font-size: 1.5rem;
+}
 header .grid-layout nav .nav-list li a::after {
 	content: "";
 	position: absolute;
@@ -1990,7 +1995,7 @@ footer .grid-layout div img {
 	transform: translate(-50%, -50%); 
 	width: 0;
 	height: 0;
-	background-color: rgba(212, 64, 64, 0.3); 
+	background-color: rgba(231, 21, 21, 0.427); 
 	border-radius: 50%; 
 	transition: width 0.5s ease, height 0.5s ease; 
 	z-index: 0; 
@@ -2013,11 +2018,11 @@ footer .grid-layout div img {
 }
 
 #s-skills .grid-layout #skills #skills-cards article .skills-cards-name-high {
-	top: -50px;
+	top: -55px;
 }
 
 #s-skills .grid-layout #skills #skills-cards article .skills-cards-name-low {
-	bottom: -50px;
+	bottom: -55px;
 }
 
 #s-skills .grid-layout #skills #skills-cards article .aumento-hover {
