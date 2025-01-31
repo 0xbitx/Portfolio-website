@@ -165,11 +165,9 @@ header .grid-layout nav .nav-list li a:hover {
 .mobile-menu.active .line1 {
 	transform: rotate(-45deg) translate(-8px, 8px);
 }
-
 .mobile-menu.active .line2 {
 	opacity: 0;
 }
-
 .mobile-menu.active .line3 {
 	transform: rotate(45deg) translate(-5px, -5px);
 }
@@ -244,7 +242,6 @@ header .grid-layout nav .nav-list li a:hover {
 	75% { background-color: #d5c8ff; }
 	85% { background-color: #65ccb8; }
 	100% { background-color: #a2d2ff; }
-
 }
 
 @keyframes heartbeat {
@@ -300,8 +297,8 @@ header .grid-layout nav .nav-list li a:hover {
   #s-home #visitor-info p { /* visitor info */
 	color: #d4d4d4; 
 	font-family: 'Rajdhani', sans-serif; 
-	font-size: 1.0rem; 
-	margin: 0; 
+	font-size: 0.325rem; 
+	margin: 1.5px 0; 
 	line-height: 1.1;
 	padding: 1px 0; 
   }
@@ -336,8 +333,6 @@ header .grid-layout nav .nav-list li a:hover {
 	font-size: 4rem;
 	font-weight: 500;
 }
-
-
 
 @media screen and (max-width: 992px) {
 	#s-home .grid-layout #home #home-container-text h1 {
