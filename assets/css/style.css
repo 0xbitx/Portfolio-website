@@ -1794,6 +1794,11 @@ header .grid-layout nav .nav-list li a:hover {
 	font-size: 2.8rem;
 }
 
+.skills-icons {
+	filter: grayscale(100%) contrast(200%) brightness(80%);
+	transition: filter 0.3s ease-in-out;
+  }
+
 #s-skills .grid-layout #skills #skills-cards article .skills-cards-name-high {
 	top: -50px;
 }
@@ -2031,6 +2036,7 @@ footer .grid-layout div img {
 	z-index: 1; 
 	position: relative; 
 }
+
 
 footer {
 	text-align: center;
