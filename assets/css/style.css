@@ -54,7 +54,7 @@ html {
 }
 
 ::-webkit-scrollbar-thumb {
-	background-color: rgb(212, 64, 64);
+	background-color: #8778c1;
 	border-radius: 8px;
 }
 
@@ -519,7 +519,7 @@ header .grid-layout nav .nav-list li a:hover {
 }
 
 #s-experience {
-	background-color: #0d0d0f;  /* background color for exerience */
+	background-color: #0a0a0a;  /* background color for exerience */
 	color: #fff;
 	padding: 96px 48px;
 }
@@ -537,8 +537,8 @@ header .grid-layout nav .nav-list li a:hover {
 	font-weight: 500;
 }
 
-#s-experience .grid-layout h2 span {
-	color: rgb(212, 64, 64);
+#s-experience .grid-layout h3 span {
+	color: rgb(150, 52, 225); /* color for span in experience */
 }
 
 #s-experience .grid-layout #experience {
@@ -567,7 +567,7 @@ header .grid-layout nav .nav-list li a:hover {
 
 #s-experience .grid-layout #experience .option-experience .activeExperience {
 	border-left: 4px solid #f5e6e6;
-	color: rgb(200, 40, 40);
+	color: #8778c1;
 }
 
 #s-experience .grid-layout #experience .option-experience>div {
@@ -616,14 +616,14 @@ header .grid-layout nav .nav-list li a:hover {
 
 #s-experience .grid-layout #experience .text-experience>div p {
 	font-size: 1.8rem;
-	color: #ca0303;
+	color: #8778c1;
 }
 
 #s-experience .grid-layout #experience .text-experience h5 {
 	font-size: 1.8rem;
 	margin: 32px 0px;
 	font-weight: 400;
-	color: rgb(212, 64, 64);
+	color: #8778c1;
 }
 
 #s-experience .grid-layout #experience .text-experience p {
@@ -652,7 +652,7 @@ header .grid-layout nav .nav-list li a:hover {
 }
 
 #s-projects .grid-layout h2 span {
-	color: rgb(212, 64, 64);
+	color: #8778c1;
 }
 
 #s-projects .grid-layout #projects {
@@ -732,12 +732,12 @@ header .grid-layout nav .nav-list li a:hover {
 }
 
 #s-projects .grid-layout #projects>article span {
-	color: #b41e1e;
+	color: #8778c1;
 	font-size: 2.8rem;
 }
 
 #s-projects .grid-layout #teslabank {
-	color: rgb(212, 64, 64);
+	color: #8778c1;
 }
 
 #s-projects .grid-layout #teslabank::after {
@@ -745,7 +745,7 @@ header .grid-layout nav .nav-list li a:hover {
 }
 
 #s-projects .grid-layout #naped {
-	color: #e91818;
+	color: #8778c1;
 }
 
 #s-projects .grid-layout #naped::after {
@@ -809,7 +809,7 @@ header .grid-layout nav .nav-list li a:hover {
 }
 
 #s-services .grid-layout h2 span {
-	color: rgb(212, 64, 64);
+	color: #8778c1;
 }
 
 #s-services .grid-layout #services {
@@ -820,7 +820,7 @@ header .grid-layout nav .nav-list li a:hover {
 }
 
 #s-services .grid-layout #services article {
-	background-color: #030304;
+	background-color: #0a0a0a; 
 	height: auto;
 	padding: 32px;
 	margin: 8px;
@@ -831,7 +831,7 @@ header .grid-layout nav .nav-list li a:hover {
 }
 
 #s-services .grid-layout #services article:hover {
-	border: 1px solid rgb(212, 64, 64);
+	border: 1px solid #8778c1;
 }
 
 @media screen and (max-width: 1200px) {
@@ -910,7 +910,7 @@ html {
 }
 
 ::-webkit-scrollbar-thumb {
-	background-color: rgb(212, 64, 64);
+	background-color: #8778c1;
 	border-radius: 8px;
 }
 
@@ -968,7 +968,7 @@ header .grid-layout nav .nav-list li a {
 }
 
 header .grid-layout nav .nav-list li span {
-	color: #ee1313;
+	color: #8778c1;
 	position: relative;
 	font-family: LiveOverfont;
 	font-size: 1.9rem;
@@ -1207,7 +1207,7 @@ header .grid-layout nav .nav-list li a:hover {
 
 #s-about .grid-layout #about-photo:hover ~ #about-text #about-figure, 
 #s-about:hover {
-	background-color: #c17878; /* Pink background color */
+	background-color: #8778c1; /* Pink background color */
 }
 
 #s-about .grid-layout #about-photo div {
@@ -1326,7 +1326,7 @@ header .grid-layout nav .nav-list li a:hover {
 
 #s-experience .grid-layout h2 span {
 	font-size: 4rem;
-	color: rgb(212, 64, 64);
+	color: #8778c1; /* experience hashtag color */
 }
 
 #s-experience .grid-layout #experience {
@@ -1354,15 +1354,16 @@ header .grid-layout nav .nav-list li a:hover {
 }
 
 #s-experience .grid-layout #experience .option-experience .activeExperience {
-	border-left: 4px solid #d22e2e;
-	color: #ce3838;
+	border-left: 4px solid #8778c1; /* experience line color */
+	color: #8778c1 /* experience text highlight color */
 }
 
 #s-experience .grid-layout #experience .option-experience>div {
 	padding: 24px 32px;
 	text-align: left;
-	background-color: #000000;
-	border-left: 4px solid #040405;
+	background-color: #000000; /* experience box background color */
+	border-radius: 1px;
+	border-left: 4px solid #444465; /* experience line shadow color */
 }
 
 #s-experience .grid-layout #experience .option-experience>div:hover {
@@ -1412,7 +1413,7 @@ header .grid-layout nav .nav-list li a:hover {
 	font-size: 2.8rem;
 	margin: 32px 0px;
 	font-weight: 400;
-	color: rgb(212, 64, 64);
+	color: #8778c1; /* experience text bottom color */
 }
 
 #s-experience .grid-layout #experience .text-experience p {
@@ -1424,7 +1425,7 @@ header .grid-layout nav .nav-list li a:hover {
 #s-projects {
 	padding: 96px 48px;
 	text-align: center;
-	background-color: #030304;
+	background-color: #030304; /*Project background*/
 }
 
 @media screen and (max-width: 992px) {
@@ -1441,7 +1442,7 @@ header .grid-layout nav .nav-list li a:hover {
 }
 
 #s-projects .grid-layout h2 span {
-	color: rgb(212, 64, 64);
+	color: #8778c1;
 }
 
 #s-projects .grid-layout #projects {
@@ -1521,7 +1522,7 @@ header .grid-layout nav .nav-list li a:hover {
 }
 
 #s-projects .grid-layout #teslabank {
-	color: rgb(212, 64, 64);
+	color: #8778c1;
 }
 
 #s-projects .grid-layout #teslabank::after {
@@ -1552,7 +1553,7 @@ header .grid-layout nav .nav-list li a:hover {
 }
 
 #s-projects .grid-layout a span {
-	color: rgb(212, 64, 64);
+	color: #8778c1;
 	position: relative;
 	font-size: 3rem;
 	font-weight: 00;
@@ -1595,7 +1596,7 @@ header .grid-layout nav .nav-list li a:hover {
 
 #s-services {
 	padding: 96px 48px;
-	background-color: #0d0d0f; /* background color for WHAT I DO */
+	background-color: #0a0a0a; /* background color for WHAT I DO */
 }
 
 @media screen and (max-width: 992px) {
@@ -1613,7 +1614,7 @@ header .grid-layout nav .nav-list li a:hover {
 }
 
 #s-services .grid-layout h2 span {
-	color: rgb(212, 64, 64);
+	color: rgb(164, 243, 53);
 }
 
 #s-services .grid-layout #services {
@@ -1623,7 +1624,7 @@ header .grid-layout nav .nav-list li a:hover {
 	margin: 24px 0px;
 }
 #s-services .grid-layout #services span {
-	color: #c62525;
+	color: #8778c1;
 }
 
 #s-services .grid-layout #services article {
@@ -1634,11 +1635,12 @@ header .grid-layout nav .nav-list li a:hover {
 	flex-basis: calc(33% - 20px);
 	flex-grow: 1;
 	border: 1px solid #040405;
+	border-radius: 10px;
 	transition: 1s all ease;
 }
 
 #s-services .grid-layout #services article:hover {
-	border: 1px solid rgb(255, 55, 55);
+	border: 1px solid #8778c1; /* border color for WHAT I DO */
 }
 
 @media screen and (max-width: 1200px) {
@@ -1717,7 +1719,7 @@ header .grid-layout nav .nav-list li a:hover {
 }
 
 #s-skills .grid-layout #skills #skills-text h2 span {
-	color: rgb(212, 64, 64);
+	color: #8778c1;
 }
 
 #s-skills .grid-layout #skills #skills-text .changeDescription {
@@ -1732,7 +1734,7 @@ header .grid-layout nav .nav-list li a:hover {
 }
 
 #s-skills .grid-layout #skills #skills-text span {
-	color: #cc2424;
+	color: #8778c1; /* color for bottom text */
 }
 
 #s-skills .grid-layout #skills #skills-cards {
@@ -1763,7 +1765,7 @@ header .grid-layout nav .nav-list li a:hover {
 }
 
 #s-skills .grid-layout #skills #skills-cards article:hover {
-	border: 1px solid rgb(212, 64, 64);
+	border: 1px solid #8778c1;
 }
 
 #s-skills .grid-layout #skills #skills-cards article:hover .skills-cards-name,#s-skills .grid-layout #skills #skills-cards article:hover .skills-cards-name-low,#s-skills .grid-layout #skills #skills-cards article:hover .skills-cards-name-high {
@@ -1950,7 +1952,7 @@ footer .grid-layout div img {
 }
 
 #s-skills .grid-layout #skills #skills-text h2 span {
-	color: rgb(212, 64, 64);
+	color: #8778c1;
 }
 
 #s-skills .grid-layout #skills #skills-text .changeDescription {
@@ -1997,7 +1999,7 @@ footer .grid-layout div img {
 	transform: translate(-50%, -50%); 
 	width: 0;
 	height: 0;
-	background-color: rgba(231, 21, 21, 0.427); 
+	background-color: #8778c1be; /* circle color */
 	border-radius: 50%; 
 	transition: width 0.5s ease, height 0.5s ease; 
 	z-index: 0; 
@@ -2094,7 +2096,7 @@ footer .grid-layout div img {
 	margin-left: 8px;
 	opacity: 1;
 	animation: blink 1s infinite;
-	color: #00a1b2;
+	color: #8778c1;
 }
 
 @keyframes blink {

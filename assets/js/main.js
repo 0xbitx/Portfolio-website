@@ -10,31 +10,31 @@ typeWrite(document.querySelector(".typewriter"));
 
 hoverChangeExperience(
   ".iot",
-  `I’ve spent a lot of time working in IoT hacking, focusing on creating clever solutions for connected devices. Whether it’s figuring out how to secure these systems or exploring the complexities of smart technology, I’m passionate about ethical hacking and the ever-changing world of IoT.`,
-  "IoT hacking",
-  "Building hacking device",
+  `My focus is on offensive security hardware. I design and build devices based on microcontrollers (like the ESP32) for penetration testing and RF analysis. This includes developing WiFi deauthentication tools, RF jammers, and other custom gear for assessing the security of wireless and IoT systems. I'm passionate about creating tangible solutions that demonstrate real-world vulnerabilities.`,
+  "IoT Project",
+  "Building hacking devices",
   "Jan 2019 - Jan 2025"
 );
 
 hoverChangeExperience(
-  ".kernel",
-  `In my Linux kernel experience, I've delved into the core of operating system functionality. From kernel customization to driver development, I've honed my skills in optimizing system performance and resolving intricate issues. This journey has equipped me with a deep understanding of the intricate workings of the Linux kernel, empowering me to navigate and contribute to the heart of open-source computing.`,
-  "Kernel hacking",
-  "Reverse engineering Linux kernel malware",
+  ".linux",
+  `My journey with the Linux system has been about getting my hands dirty. I didn't just learn how it works; I learned how to make it work for me. That means I can build a HIDS to watch its every move and engineer the precise mitigations to counter an attack. For me, deep Linux knowledge isn't just about understanding the engine—it's about being able to build the security system that protects it.`,
+  "linux system hacking",
+  "Building linux based tools",
   "Jan 2012 - Jan 2025"
 );
 
 hoverChangeExperience(
   ".os",
-  `Specializing in crafting Windows exploits and bypass techniques, I am immersed in the world of Windows operating systems. My expertise extends from enhancing system performance to implementing robust security measures, reflecting my passion for navigating the dynamic landscape of Windows OS technology.`,
-  "System hacking",
+  `I'm passionate about truly understanding the Windows OS. I spend my time crafting exploits and designing bypass methods—not just to challenge the system, but to really learn how it works. This hands-on approach is focused on finding and understanding security weaknesses.`,
+  "Windows System hacking",
   "Building windows exploit and bypass",
   "Jul 2011 - Jan 2025 "
 );
 
 hoverChangeExperience(
   ".network",
-  `In the domain of network hacking, I've honed my skills in ethical hacking and penetration testing. From identifying vulnerabilities to implementing robust security measures, my experience revolves around ensuring the resilience of networks. I've navigated the intricacies of cybersecurity, employing advanced techniques to uncover and address potential threats, contributing to a fortified and secure network infrastructure.`,
+  `I build offensive security tools to test for vulnerabilities. My process involves diving deep into network systems to find hidden weaknesses and then building proof-of-concept exploits to bring those flaws to life. This approach demonstrates real-world attack scenarios, transforming theoretical risks into actionable insights for strengthening defenses.`,
   "Network hacking",
   "Exploiting network vulnerabilities",
   "Jan 2013 - Jan 2025"
