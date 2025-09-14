@@ -205,16 +205,17 @@ header .grid-layout nav .nav-list li a:hover {
 }
 
 #s-home {
-    background-image: url("https://images.alphacoders.com/690/690851.png");
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+                      url("https://w.wallhaven.cc/full/o3/wallhaven-o3jk1p.png");
     padding: 0px 50px;
     position: relative;
-    background-color: #b5d6e1; 
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     min-height: 100vh;
     overflow: hidden; 
 }
+
 
 #s-home:hover {
     animation: smoothColorChange 10s infinite;
