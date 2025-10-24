@@ -229,18 +229,19 @@ header .grid-layout nav .nav-list li a:hover {
   z-index: 2;
 }
 
-/* #s-home:hover {
+#s-home:hover {
     animation: smoothColorChange 35s infinite;
 }
 
 @keyframes smoothColorChange {
     0% { background-color: a2d2ff; }
-    25% { background-color: rgba(55, 151, 234, 0); }
-    50% { background-color: #afffcf00; }
-	75% { background-color: #d5c8ff00; }
-	85% { background-color: #65ccb700; }
-	100% { background-color: #a2d2ff00; }
-} */
+    25% { background-color: rgba(124, 169, 208, 0.796); }
+    50% { background-color: #69c68ed3; }
+	75% { background-color: #7961cab9; }
+	85% { background-color: #6dd5c0b5; }
+	100% { background-color: #a2d2ffce; }
+}
+
 
 @keyframes heartbeat {
     0% {
