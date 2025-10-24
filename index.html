@@ -119,124 +119,28 @@
     <main>
       <section id="s-home">
         <script>
-          const images = [
-            "assets/image/octocat-1.png",
-            "assets/image/octocat-2.png",
-            "assets/image/octocat-3.png",
-            "assets/image/octocat-4.png",
-            "assets/image/octocat-5.png",
-            "assets/image/octocat-6.png",
-            "assets/image/octocat-7.png",
-            "assets/image/octocat-8.png",
-            "assets/image/octocat-9.png",
-            "assets/image/octocat-10.png",
-            "assets/image/octocat-11.png",
-            "assets/image/octocat-12.png",
-            "assets/image/octocat-13.png",
-            "assets/image/octocat-14.png",
-            "assets/image/octocat-15.png",
-            "assets/image/octocat-16.png",
-            "assets/image/octocat-17.png",
-            "assets/image/octocat-18.png",
-            "assets/image/octocat-19.png",
-            "assets/image/octocat-20.png",
-            "assets/image/octocat-21.png",
-            "assets/image/octocat-22.png",
-            "assets/image/octocat-23.png",
-            "assets/image/octocat-24.png",
-            "assets/image/octocat-25.png",
-            "assets/image/octocat-26.png",
-            "assets/image/octocat-27.png",
-            "assets/image/octocat-28.png",
-            "assets/image/octocat-29.png",
-            "assets/image/octocat-30.png",
-            "assets/image/octocat-31.png",
-            "assets/image/octocat-32.png",
-            "assets/image/octocat-33.png",
-            "assets/image/octocat-34.png",
-            "assets/image/octocat-35.png",
-            "assets/image/octocat-36.png",
-            "assets/image/octocat-37.png",
-            "assets/image/octocat-38.png",
-            "assets/image/octocat-39.png",
-            "assets/image/octocat-40.png",
-            "assets/image/octocat-41.png",
-            "assets/image/octocat-42.png",
-            "assets/image/octocat-43.png",
-            "assets/image/octocat-44.png",
-            "assets/image/octocat-45.png",
-            "assets/image/octocat-46.png",
-            "assets/image/octocat-47.png",
-            "assets/image/octocat-48.png",
-            "assets/image/octocat-49.png",
-            "assets/image/octocat-50.png",
-            "assets/image/octocat-51.png",
-            "assets/image/octocat-52.png",
-            "assets/image/octocat-53.png",
-            "assets/image/octocat-54.png",
-            "assets/image/octocat-55.png",
-            "assets/image/octocat-56.png",
-            "assets/image/octocat-57.png",
-            "assets/image/octocat-58.png",
-            "assets/image/octocat-59.png",
-            "assets/image/octocat-60.png",
-            "assets/image/octocat-61.png",
-            "assets/image/octocat-62.png",
-            "assets/image/octocat-63.png",
-            "assets/image/octocat-64.png",
-            "assets/image/octocat-65.png",
-            "assets/image/octocat-66.png",
-            "assets/image/octocat-67.png",
-            "assets/image/octocat-68.png",
-            "assets/image/octocat-69.png",
-            "assets/image/octocat-70.png",
-            "assets/image/octocat-71.png",
-            "assets/image/octocat-72.png",
-            "assets/image/octocat-73.png",
-            "assets/image/octocat-74.png",
-            "assets/image/octocat-75.png",
-            "assets/image/octocat-76.png",
-            "assets/image/octocat-77.png",
-            "assets/image/octocat-78.png",
-            "assets/image/octocat-79.png",
-            "assets/image/octocat-80.png",
-            "assets/image/octocat-81.png",
-            "assets/image/octocat-82.png",
-            "assets/image/octocat-83.png",
-            "assets/image/octocat-84.png",
-            "assets/image/octocat-85.png",
-            "assets/image/octocat-86.png",
-            "assets/image/octocat-87.png",
-            "assets/image/octocat-88.png",
-            "assets/image/octocat-89.png",
-            "assets/image/octocat-90.png",
-            "assets/image/octocat-91.png",
-            "assets/image/octocat-92.png",
-            "assets/image/octocat-93.png",
-            "assets/image/octocat-94.png",
-            "assets/image/octocat-95.png",
-            "assets/image/octocat-96.png",
-            "assets/image/octocat-97.png",
-            "assets/image/octocat-98.png",
-            "assets/image/octocat-99.png"
-          ];
+            const images = [];
+            for (let i = 1; i <= 99; i++) {
+              images.push(`assets/image/octocat-${i}.png`);
+            }
 
-            let current = 0;
+            const preloaded = [];
+            images.forEach(src => {
+              const img = new Image();
+              img.src = src;
+              preloaded.push(img);
+            });
+
             const section = document.getElementById("s-home");
+            let current = 0;
 
-            // Set the first background
-            section.style.backgroundImage = `
-              linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-              url('${images[current]}')
-            `;
+            section.style.backgroundImage = `url("${images[0]}")`;
 
-            // Change background when clicked
             section.addEventListener("click", () => {
               current = (current + 1) % images.length;
-              section.style.backgroundImage = `
-                linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-                url('${images[current]}')
-              `;
+              requestAnimationFrame(() => {
+                section.style.backgroundImage = `url("${images[current]}")`;
+              });
             });
             </script>
         <div class="grid-layout">
