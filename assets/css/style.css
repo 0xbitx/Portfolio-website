@@ -206,30 +206,14 @@ header .grid-layout nav .nav-list li a:hover {
 
 #s-home {
   position: relative;
-  width: 100%;
+  width: 100vw;
   height: 100vh;
   overflow: hidden;
-}
-
-#s-home::before,
-#s-home::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-size: cover;
-  background-position: center;
+  background-image: url("assets/image/octocat-1.png");
+  background-size: contain;
   background-repeat: no-repeat;
-  transition: opacity 0.2s linear;
-}
-
-#s-home::before {
-  opacity: 1;
-  z-index: 1;
-}
-
-#s-home::after {
-  opacity: 0;
-  z-index: 2;
+  background-position: center center; 
+  background-color: #000;
 }
 
 #s-home:hover {
