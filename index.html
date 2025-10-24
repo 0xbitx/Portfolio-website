@@ -96,6 +96,7 @@
         alert('Kupal kaba boss.');
       }
     });
+    
   </script>
     <header>
       <div class="grid-layout">
@@ -118,31 +119,48 @@
     </header>
     <main>
       <section id="s-home">
-        <script>
-            const images = [];
-            for (let i = 1; i <= 99; i++) {
-              images.push(`assets/image/octocat-${i}.png`);
-            }
+      <script>
+        const images = [];
+        for (let i = 1; i <= 99; i++) {
+          images.push(`assets/image/octocat-${i}.png`);
+        }
 
-            const preloaded = [];
-            images.forEach(src => {
-              const img = new Image();
-              img.src = src;
-              preloaded.push(img);
-            });
+        const preloaded = [];
+        images.forEach(src => {
+          const img = new Image();
+          img.src = src;
+          preloaded.push(img);
+        });
 
-            const section = document.getElementById("s-home");
-            let current = 0;
+        const section = document.getElementById("s-home");
+        let current = 0;
 
-            section.style.backgroundImage = `url("${images[0]}")`;
+        section.style.backgroundImage = `url("${images[0]}")`;
 
-            section.addEventListener("click", () => {
-              current = (current + 1) % images.length;
-              requestAnimationFrame(() => {
-                section.style.backgroundImage = `url("${images[current]}")`;
-              });
-            });
-            </script>
+        section.addEventListener("mouseleave", () => {
+          current = (current + 1) % images.length;
+          requestAnimationFrame(() => {
+            section.style.backgroundImage = `url("${images[current]}")`;
+          });
+        });
+
+        section.addEventListener("mousemove", (e) => {
+          const x = (e.clientX / window.innerWidth) * 100;
+          const y = (e.clientY / window.innerHeight) * 100;
+          section.style.setProperty("--x", `${x}%`);
+          section.style.setProperty("--y", `${y}%`);
+          section.classList.add("flashlight-on");
+          clearTimeout(changeTimer);
+        });
+
+        section.addEventListener("mouseleave", () => {
+          section.classList.remove("flashlight-on");
+          changeTimer = setTimeout(() => {
+            current = (current + 1) % images.length;
+            section.style.backgroundImage = `url("${images[current]}")`;
+          }, 1000);
+        });
+      </script>
         <div class="grid-layout">
           <div id="visitor-info">
             <p id="visitor-ip"></p>
@@ -204,9 +222,9 @@
               if (!cursorEffect) {
                 cursorEffect = new characterCursor({
                   // characters: ["🤍", "🩷", "💜", "🌸"],
-                  // characters: ["🤍", "🩷", "🌸"],
+                  //characters: ["🤍", "🩷", "🌸"],
                   // characters: ["🩷", "🌸"],
-                  characters: ["♥️", "🌸"],
+                   characters: ["♥️", "🌸"],
                   // characters: ["🌸"],
                   font: "25px serif",
                   
