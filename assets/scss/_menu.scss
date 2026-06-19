@@ -41,6 +41,30 @@ header {
           }
         }
       }
+      .flashlight-toggle {
+        background: transparent;
+        border: 1px solid rgba(135, 120, 193, 0.3);
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        @include flexbox-center;
+        cursor: pointer;
+        margin-left: $gap-4;
+        transition: all 0.3s ease;
+        color: $color-gray;
+        flex-shrink: 0;
+        &:hover {
+          border-color: $color-main;
+          color: $color-main;
+          transform: rotate(15deg);
+        }
+        .light-on-icon {
+          display: block;
+        }
+        .light-off-icon {
+          display: none;
+        }
+      }
     }
   }
 }

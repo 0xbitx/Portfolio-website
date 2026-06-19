@@ -242,7 +242,6 @@ header .grid-layout nav .nav-list li a:hover {
 	100% { background-color: #a2d2ffce; }
 }
 
-
 @keyframes heartbeat {
     0% {
         transform: scale(1); 
@@ -657,8 +656,9 @@ header .grid-layout nav .nav-list li a:hover {
 #s-projects .grid-layout #projects {
 	margin: 24px 0px;
 	display: flex;
-	justify-content: space-between;
+	justify-content: flex-start;
 	align-items: center;
+	gap: 40px;
 	flex-wrap: wrap;
 	text-align: left;
 }
@@ -766,12 +766,12 @@ header .grid-layout nav .nav-list li a:hover {
 	font-weight: 400;
 }
 
-#s-projects .grid-layout a:hover::after {
+#s-projects .grid-layout a:not(.term-dir-row):hover::after {
 	transform: scaleX(1);
 	transform-origin: bottom left;
 }
 
-#s-projects .grid-layout a::after {
+#s-projects .grid-layout a:not(.term-dir-row)::after {
 	content: "";
 	position: absolute;
 	width: 100%;
@@ -783,7 +783,7 @@ header .grid-layout nav .nav-list li a:hover {
 	transition: transform .5s cubic-bezier(0.86, 0, 0.07, 1);
 }
 
-#s-projects .grid-layout a:hover::after {
+#s-projects .grid-layout a:not(.term-dir-row):hover::after {
 	transform: scaleX(1);
 	transform-origin: bottom left;
 }
@@ -1447,8 +1447,9 @@ header .grid-layout nav .nav-list li a:hover {
 #s-projects .grid-layout #projects {
 	margin: 24px 0px;
 	display: flex;
-	justify-content: space-between;
+	justify-content: flex-start;
 	align-items: center;
+	gap: 40px;
 	flex-wrap: wrap;
 	text-align: left;
 }
@@ -1558,7 +1559,7 @@ header .grid-layout nav .nav-list li a:hover {
 	font-weight: 00;
 }
 
-#s-projects .grid-layout a::after {
+#s-projects .grid-layout a:not(.term-dir-row)::after {
 	content: "";
 	position: absolute;
 	width: 100%;
@@ -1571,12 +1572,12 @@ header .grid-layout nav .nav-list li a:hover {
 	transition: transform .5s cubic-bezier(0.86, 0, 0.07, 1);
 }
 
-#s-projects .grid-layout a:hover::after {
+#s-projects .grid-layout a:not(.term-dir-row):hover::after {
 	transform: scaleX(1);
 	transform-origin: bottom left;
 }
 
-#s-projects .grid-layout a::after {
+#s-projects .grid-layout a:not(.term-dir-row)::after {
 	content: "";
 	position: absolute;
 	width: 100%;
@@ -1588,7 +1589,7 @@ header .grid-layout nav .nav-list li a:hover {
 	transition: transform .5s cubic-bezier(0.86, 0, 0.07, 1);
 }
 
-#s-projects .grid-layout a:hover::after {
+#s-projects .grid-layout a:not(.term-dir-row):hover::after {
 	transform: scaleX(1);
 	transform-origin: bottom left;
 }
@@ -1689,15 +1690,25 @@ header .grid-layout nav .nav-list li a:hover {
 
 #s-skills .grid-layout #skills {
 	display: flex;
-	justify-content: space-between;
+	justify-content: flex-start;
 	align-items: center;
+	gap: 40px;
 	flex-wrap: wrap;
 	height: auto;
 	padding: 8px;
 }
 
-#s-skills .grid-layout #skills div,#s-skills .grid-layout #skills article {
-	width: 50%;
+#s-skills .grid-layout #skills #skills-text {
+	width: 55%;
+	flex-shrink: 0;
+	min-height: 200px;
+}
+#s-skills .grid-layout #skills #skills-cards {
+	position: absolute;
+	right: 16px;
+	top: 55%;
+	transform: translateY(-50%);
+	width: 440px;
 }
 
 @media screen and (max-width: 1200px) {
@@ -1707,7 +1718,7 @@ header .grid-layout nav .nav-list li a:hover {
 }
 
 #s-skills .grid-layout #skills #skills-text {
-	min-height: 300px;
+	min-height: auto;
 }
 
 #s-skills .grid-layout #skills #skills-text h2 {
@@ -1737,9 +1748,11 @@ header .grid-layout nav .nav-list li a:hover {
 }
 
 #s-skills .grid-layout #skills #skills-cards {
-	display: flex;
-	flex-wrap: wrap;
-	gap: 24px;
+	display: grid;
+	grid-template-columns: repeat(5, 80px);
+	gap: 8px;
+	justify-content: center;
+	align-content: center;
 }
 
 @media screen and (max-width: 1200px) {
@@ -1750,21 +1763,36 @@ header .grid-layout nav .nav-list li a:hover {
 
 #s-skills .grid-layout #skills #skills-cards article {
 	display: flex;
-	justify-content: space-between;
 	align-items: center;
-	flex-wrap: wrap;
 	justify-content: center;
-	width: 20%;
-	flex-grow: 1;
-	height: 130px;
-	background-color: #040405;
+	width: 80px;
+	height: 80px;
+	flex-grow: 0;
+	flex-shrink: 0;
+	background: transparent;
 	position: relative;
-	border: 1px solid #040405;
-	transition: 1s all ease;
+	border-radius: 12px;
+	transition: all 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+	cursor: pointer;
+}
+
+#s-skills .grid-layout #skills #skills-cards article::before {
+	content: '';
+	position: absolute;
+	inset: 0;
+	border-radius: 12px;
+	background: radial-gradient(circle at center, rgba(135,120,193,0.25) 0%, transparent 65%);
+	opacity: 0;
+	transition: opacity 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
 #s-skills .grid-layout #skills #skills-cards article:hover {
-	border: 1px solid #8778c1;
+	background: rgba(135,120,193,0.12);
+	transform: translateY(-4px);
+}
+
+#s-skills .grid-layout #skills #skills-cards article:hover::before {
+	opacity: 1;
 }
 
 #s-skills .grid-layout #skills #skills-cards article:hover .skills-cards-name,#s-skills .grid-layout #skills #skills-cards article:hover .skills-cards-name-low,#s-skills .grid-layout #skills #skills-cards article:hover .skills-cards-name-high {
@@ -1781,31 +1809,37 @@ header .grid-layout nav .nav-list li a:hover {
 
 #s-skills .grid-layout #skills #skills-cards article .skills-cards-name,#s-skills .grid-layout #skills #skills-cards article .skills-cards-name-low,#s-skills .grid-layout #skills #skills-cards article .skills-cards-name-high {
 	left: 50%;
-	height: auto;
 	position: absolute;
-	padding: 5px;
+	padding: 4px 12px;
 	transform: translate(-50%, 0%);
-	background-color: #000000;
-	width: 125px;
-	color: #fff;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+	background: #13132a;
+	border: 1px solid rgba(135,120,193,0.2);
+	border-radius: 4px;
+	color: #aaaacc;
+	font-family: 'Courier New', monospace;
+	font-size: 1.1rem;
+	white-space: nowrap;
 	display: none;
-	font-size: 2.8rem;
+	pointer-events: none;
 }
 
 .skills-icons {
-	filter: grayscale(100%) contrast(200%) brightness(80%);
-	transition: filter 0.3s ease-in-out;
-  }
+	filter: grayscale(100%) brightness(60%);
+	transition: all 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+	position: relative;
+	z-index: 1;
+}
+
+#s-skills .grid-layout #skills #skills-cards article:hover .skills-icons {
+	filter: grayscale(0%) brightness(110%);
+}
 
 #s-skills .grid-layout #skills #skills-cards article .skills-cards-name-high {
-	top: -50px;
+	top: -28px;
 }
 
 #s-skills .grid-layout #skills #skills-cards article .skills-cards-name-low {
-	bottom: -50px;
+	bottom: -28px;
 }
 
 #s-skills .grid-layout #skills #skills-cards article .aumento-hover {
@@ -1813,7 +1847,8 @@ header .grid-layout nav .nav-list li a:hover {
 }
 
 #s-skills .grid-layout #skills #skills-cards article .skills-icons {
-	width: 60px;
+	width: 44px;
+	height: 44px;
 }
 
 footer {
@@ -1889,226 +1924,345 @@ footer .grid-layout div img {
 	margin: 0 auto;
 }
 
-#s-services .grid-layout #services article div img {
-	width: 70px;
+/* ============================================
+   Flashlight Toggle Button
+   ============================================ */
+.flashlight-toggle {
+	position: absolute;
+	top: 80px;
+	right: 20px;
+	z-index: 11;
+	background: rgba(0, 0, 0, 0.6);
+	border: 1px solid rgba(135, 120, 193, 0.3);
+	border-radius: 50%;
+	width: 40px;
+	height: 40px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	color: #d8d8d8;
 }
 
-#s-services .grid-layout #services article h3 {
-	padding: 24px 0px;
-	color: #ffffff;
-	font-size: 2.4rem;
-	font-weight: 500;
+.flashlight-toggle:hover {
+	border-color: #8778c1;
+	color: #8778c1;
+	transform: rotate(15deg);
 }
 
-#s-services .grid-layout #services article p {
-	line-height: 3.2rem;
-	color: #e8e8e8;
-	font-size: 2.8rem;
+.flashlight-toggle .light-on-icon {
+	display: block;
 }
 
-#s-skills {
-	padding: 96px 48px;
-	background-color: #000000;
-	padding-bottom: 32px;
+.flashlight-toggle .light-off-icon {
+	display: none;
 }
 
-@media screen and (max-width: 992px) {
-	#s-skills {
-		padding: 48px 24px;
-	}
+/* When flashlight is off, show the off icon */
+.flashlight-off .flashlight-toggle .light-on-icon {
+	display: none;
+}
+
+.flashlight-off .flashlight-toggle .light-off-icon {
+	display: block;
+}
+
+/* ============================================
+   Disable flashlight effect on home section
+   ============================================ */
+.flashlight-off #s-home::after {
+	display: none;
+}
+
+.flashlight-off #s-home:hover {
+	animation: none !important;
+}
+
+/* ============================================
+   Terminal Window Chrome (draggable)
+   ============================================ */
+#s-about .grid-layout #about {
+  position: relative;
+  background: rgba(3, 3, 18, 0.55);
+  border: 1px solid rgba(135, 120, 193, 0.12);
+  border-radius: 8px;
+  padding-top: 42px !important;
+  padding-bottom: 24px !important;
+  overflow: visible;
+  transition: box-shadow 0.3s ease, z-index 0s;
+}
+
+#s-experience .grid-layout #experience {
+  position: relative;
+  background: rgba(3, 3, 18, 0.55);
+  border: 1px solid rgba(135, 120, 193, 0.12);
+  border-radius: 8px;
+  padding-top: 42px !important;
+  padding-bottom: 24px !important;
+  padding-left: 24px !important;
+  padding-right: 24px !important;
+  max-width: 1300px;
+  width: calc(100% + 160px);
+  margin-left: -80px;
+  overflow: visible;
+  transition: box-shadow 0.3s ease, z-index 0s;
+}
+
+#s-projects .grid-layout #projects {
+  position: relative;
+  background: rgba(3, 3, 18, 0.55);
+  border: 1px solid rgba(135, 120, 193, 0.12);
+  border-radius: 8px;
+  padding: 42px 24px 24px 24px !important;
+  margin: 0 auto;
+  overflow: visible;
+  transition: box-shadow 0.3s ease, z-index 0s;
+}
+
+#s-services .grid-layout #services {
+  position: relative;
+  background: rgba(3, 3, 18, 0.55);
+  border: 1px solid rgba(135, 120, 193, 0.12);
+  border-radius: 8px;
+  padding-top: 42px !important;
+  padding-bottom: 24px !important;
+  overflow: hidden;
+  transition: box-shadow 0.3s ease, z-index 0s;
 }
 
 #s-skills .grid-layout #skills {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	flex-wrap: wrap;
-	height: auto;
-	padding: 8px;
+  position: relative;
+  background: rgba(3, 3, 18, 0.55);
+  border: 1px solid rgba(135, 120, 193, 0.12);
+  border-radius: 8px;
+  padding-top: 42px !important;
+  padding-bottom: 32px !important;
+  min-height: 280px;
+  overflow: visible;
+  transition: box-shadow 0.3s ease, z-index 0s;
 }
 
-#s-skills .grid-layout #skills div,
-#s-skills .grid-layout #skills article {
-	width: 50%;
+/* Title bar - injected by JS */
+.term-titlebar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 34px;
+  z-index: 100;
+  cursor: grab;
+  user-select: none;
+  background: linear-gradient(180deg, #13132a 0%, #0d0d1f 100%);
+  border-bottom: 1px solid rgba(135, 120, 193, 0.08);
+  border-radius: 8px 8px 0 0;
+  display: flex;
+  align-items: center;
+  padding-left: 12px;
 }
 
-@media screen and (max-width: 1200px) {
-	#s-skills .grid-layout #skills div,
-	#s-skills .grid-layout #skills article {
-		width: 100%;
-	}
+/* Dot buttons */
+.term-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-right: 8px;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: filter 0.15s ease;
+}
+.term-dot:hover { filter: brightness(1.4); }
+.term-dot-close  { background: #ff5f57; }
+.term-dot-min    { background: #febc2e; }
+.term-dot-max    { background: #28c840; }
+
+.term-titlebar:active {
+  cursor: grabbing;
 }
 
-#s-skills .grid-layout #skills #skills-text {
-	min-height: 300px;
+.term-titlebar .term-title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #7777aa;
+  font-family: 'Courier New', 'Consolas', monospace;
+  font-size: 1.1rem;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+  line-height: 34px;
+  pointer-events: none;
 }
 
-#s-skills .grid-layout #skills #skills-text h2 {
-	margin-bottom: 32px;
-	color: #fff;
-	font-size: 3.2rem;
-	font-weight: 500;
+/* Minimized state */
+.term-minimized {
+  transform: scale(0.05) !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  transition: transform 0.35s ease, opacity 0.25s ease !important;
+  overflow: hidden !important;
 }
 
-#s-skills .grid-layout #skills #skills-text h2 span {
-	color: #8778c1;
+/* Maximized state */
+.term-maximized {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  background: rgba(3, 3, 18, 0.65) !important;
+  box-shadow: 0 0 80px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(135, 120, 193, 0.2);
+  overflow: auto !important;
 }
 
-#s-skills .grid-layout #skills #skills-text .changeDescription {
-	transition: 2s all ease;
+/* Active / dragging state */
+#s-about .term-maximized .about-figure {
+  display: none !important;
 }
 
-#s-skills .grid-layout #skills #skills-text p {
-	max-width: 500px;
-	line-height: 3.2rem;
-	color: #d8d8d8;
-	font-size: 2.8rem;
+.term-dragging {
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(135, 120, 193, 0.2);
+  z-index: 100 !important;
+  transition: box-shadow 0.3s ease;
 }
 
-#s-skills .grid-layout #skills #skills-cards {
-	display: flex;
-	flex-wrap: wrap;
-	gap: 24px;
+/* Mobile: no drag */
+@media screen and (max-width: 600px) {
+  .term-titlebar {
+    cursor: default;
+  }
+  .term-titlebar .term-title {
+    display: none;
+  }
 }
 
-@media screen and (max-width: 1200px) {
-	#s-skills .grid-layout #skills #skills-cards {
-		margin-top: 48px;
-	}
+/* ============================================
+   Terminal Dock (minimized windows)
+   ============================================ */
+.term-dock {
+  position: fixed;
+  bottom: 16px;
+  left: 16px;
+  z-index: 1000;
+  display: flex;
+  gap: 8px;
+  pointer-events: none;
 }
 
-#s-skills .grid-layout #skills #skills-cards article {
-	position: relative;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	width: 20%;
-	flex-grow: 1;
-	height: 128px;
-	background-color: transparent;
-	border: 1px solid transparent; 
-	transition: border-color 0.3s ease; 
+.term-dock-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background: rgba(19, 19, 42, 0.9);
+  border: 1px solid rgba(135, 120, 193, 0.25);
+  color: #7777aa;
+  font-family: 'Courier New', monospace;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  pointer-events: auto;
+  transition: all 0.2s ease;
+  display: none;
 }
 
-#s-skills .grid-layout #skills #skills-cards article::before {
-	content: '';
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%); 
-	width: 0;
-	height: 0;
-	background-color: #8778c1be; /* circle color */
-	border-radius: 50%; 
-	transition: width 0.5s ease, height 0.5s ease; 
-	z-index: 0; 
+.term-dock-icon:hover {
+  border-color: #8778c1;
+  color: #8778c1;
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(135, 120, 193, 0.2);
 }
 
-#s-skills .grid-layout #skills #skills-cards article:hover::before {
-	width: 150px; 
-	height: 150px; 
+/* GitHub button hover effect */
+.github-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  background: #333;
+  width: 96px;
+  height: 50px;
+  border-radius: 100%;
+  text-decoration: none;
+  transition: background 0.4s ease, width 0.4s ease, border-radius 0.4s ease, gap 0.4s ease;
 }
 
-#s-skills .grid-layout #skills #skills-cards article:hover {
-	border-color: transparent; 
+.github-btn .gh-icon {
+  width: 59px !important;
+  height: 59px !important;
+  max-width: none !important;
+  max-height: none !important;
+  transition: background 0.4s ease, width 0.4s ease, border-radius 0.4s ease, gap 0.4s ease;
 }
 
-@media screen and (max-width: 768px) {
-	#s-skills .grid-layout #skills #skills-cards article {
-		width: 40%;
-		margin: 20px 0px;
-	}
+.github-btn .gh-text {
+  max-width: 0;
+  overflow: hidden;
+  opacity: 0;
+  color: #000;
+  font-family: 'Courier New', Consolas, monospace;
+  font-size: 15px;
+  font-weight: bold;
+  white-space: nowrap;
+  transition: background 0.4s ease, width 0.4s ease, border-radius 0.4s ease, gap 0.4s ease;
 }
 
-#s-skills .grid-layout #skills #skills-cards article .skills-cards-name-high {
-	top: -55px;
+.github-btn:hover {
+  background: #8778c1 !important;
+  width: auto;
+  padding: 0 16px;
+  gap: 10px;
+  border-radius: 50px;
 }
 
-#s-skills .grid-layout #skills #skills-cards article .skills-cards-name-low {
-	bottom: -55px;
+.github-btn:hover .gh-text {
+  max-width: 100px;
+  opacity: 1;
 }
 
-#s-skills .grid-layout #skills #skills-cards article .aumento-hover {
-	bottom: -75px;
+/* Project card links */
+.project-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
 }
 
-#s-skills .grid-layout #skills #skills-cards article .skills-icons {
-	width: 60px;
-	z-index: 1; 
-	position: relative; 
+/* Terminal directory listing */
+.term-dir {
+  font-family: 'Courier New', Consolas, monospace;
+  font-size: 1.4rem;
+  color: #666;
+  width: 100%;
 }
 
-
-footer {
-	text-align: center;
-	margin-top: 72px;
+.term-dir-header {
+  display: flex;
+  gap: 15px;
+  padding: 2px 0;
+  border-bottom: 1px solid rgba(135,120,193,0.15);
+  color: #666;
+  font-size: 2.2rem;
+  margin-bottom: 4px;
 }
 
-footer .grid-layout {
-	border-top: 1px solid rgba(0, 0, 0, 0.2);
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	flex-wrap: wrap;
-	text-align: center;
-	width: 100%;
-	padding: 8px;
+.term-dir-row {
+  display: flex;
+  gap: 10px;
+  padding: 1px 0;
+  text-decoration: none;
+  color: #d8d8d8;
+  transition: all 0.2s ease;
+  border-radius: 4px;
+  position: relative;
 }
 
-@media screen and (max-width: 768px) {
-	footer .grid-layout {
-		justify-content: center;
-	}
-}
+.td-name { color: #fff !important; font-weight: bold; width: 200px; flex-shrink: 0; }
 
-footer .grid-layout #direitos-autorais {
-	margin-top: 24px;
-}
 
-footer .grid-layout p {
-	color: #d8d8d8;
-	text-align: center;
-	font-family: Rajdhani;
-	font-size: 1.5rem;
-}
+.term-dir-header .td-name,
+.term-dir-header .td-desc { color: #555 !important; font-weight: normal; }
 
-footer .grid-layout div {
-	margin-top: 24px;
-	display: flex;
-	align-items: center;
-}
-
-footer .grid-layout div img {
-	width: 24px;
-	margin-left: 8px;
-}
-
-@media screen and (max-width: 768px) {
-	footer .grid-layout div {
-		width: 100%;
-		justify-content: center;
-	}
-}
-
-.typewriter:after {
-	content: "|";
-	margin-left: 8px;
-	opacity: 1;
-	animation: blink 1s infinite;
-	color: #8778c1;
-}
-
-@keyframes blink {
-	0%,100% {
-		opacity: 1;
-	}
-
-	50% {
-		opacity: 0;
-	}
-}
-
-.grid-layout {
-	max-width: 1140px;
-	margin: 0 auto;
+.td-desc {
+  font-size: 1rem;
+  color: #666;
+  flex: 1;
+  min-width: 0;
+  line-height: 1.4;
 }

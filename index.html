@@ -3,7 +3,6 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="author" content="0xbit" />
-    <meta name="viewport" content="width=device-width, initial-scale=0.9">
     <meta
       name="description"
       content="Computer enthusiast from the Philippines."
@@ -24,7 +23,6 @@
       href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600&display=swap"
       rel="stylesheet"
     />
-    <link rel="manifest" href="manifest.json" />
     <link rel="stylesheet" href="assets/css/style.css" />
     <link
       rel="shortcut icon"
@@ -34,7 +32,6 @@
     <link rel="icon" href="assets/icons/key.png" />
     <link rel="apple-touch-icon" href="assets/image/logo-page.svg" />
     <link rel="canonical" href="https://github.com/0xbitx" />
-    <script src="assets/js/svg-inject.min.js"></script>
     <style>
       body {
         user-select: none;
@@ -59,44 +56,55 @@
     new followingDotCursor();
   </script>
 
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script>
-        document.addEventListener('contextmenu', function (e) {
+    document.addEventListener('contextmenu', function (e) {
       e.preventDefault();
       alert('Kupal kaba boss.');
     });
     document.addEventListener('keydown', function (e) {
       if (
-        e.key === 'F11' ||
         e.key === 'F12' ||
-        e.key === 'TAB' ||
-        e.key === 'Print' ||
-        e.key === 'PrintScreen' ||
-        e.key === 'Escape' ||
-        (e.ctrlKey && e.key === 'u') ||
-        (e.ctrlKey && e.key === 'U') ||
-        (e.ctrlKey && e.key === 's') ||
-        (e.ctrlKey && e.key === 'S') ||
-        (e.ctrlKey && e.key === 'f') ||
-        (e.ctrlKey && e.key === 'F') ||
-        (e.ctrlKey && e.key === 'g') ||
-        (e.ctrlKey && e.key === 'G') ||
-        (e.ctrlKey && e.key === 'p') ||
-        (e.ctrlKey && e.key === 'P') || 
-        (e.ctrlKey && e.shiftKey && e.key === 'I') ||
-        (e.ctrlKey && e.shiftKey && e.key === 'i') ||
-        (e.ctrlKey && e.shiftKey && e.key === 'C') ||
-        (e.ctrlKey && e.shiftKey && e.key === 'C') ||
-        (e.ctrlKey && e.shiftKey && e.key === 's') ||
-        (e.ctrlKey && e.shiftKey && e.key === 'S') ||
-        (e.ctrlKey && e.shiftKey && e.key === 'j') ||
-        (e.ctrlKey && e.shiftKey && e.key === 'J')
+        (e.ctrlKey && (e.key === 'u' || e.key === 'U')) ||
+        (e.ctrlKey && (e.key === 's' || e.key === 'S')) ||
+        (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i' || e.key === 'J' || e.key === 'j' || e.key === 'C' || e.key === 'c'))
       ) {
         e.preventDefault();
         alert('Kupal kaba boss.');
       }
     });
-    
+
+    (function () {
+      var devtoolsOpen = false;
+      var threshold = 160;
+
+      function detect() {
+        var start = performance.now();
+        debugger;
+        var end = performance.now();
+
+        if (end - start > threshold) {
+          if (!devtoolsOpen) {
+            devtoolsOpen = true;
+            console.clear();
+            console.log('%cStop!', 'font-size:60px;color:red;');
+            console.log('%cThis is a restricted area.', 'font-size:20px;');
+            document.body.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100vh;background:#000;color:#8778c1;font-family:LiveOverfont,sans-serif;font-size:3rem;text-align:center;">DevTools detected.<br>Please close it and reload.</div>';
+          }
+        } else {
+          devtoolsOpen = false;
+        }
+      }
+
+      setInterval(function () {
+        var start = performance.now();
+        debugger;
+        if (performance.now() - start > threshold) {
+          (function spam() { debugger; setTimeout(spam, 50); })();
+        }
+      }, 500);
+
+      setInterval(detect, 1000);
+    })();
   </script>
     <header>
       <div class="grid-layout">
@@ -119,6 +127,19 @@
     </header>
     <main>
       <section id="s-home">
+        <button id="flashlight-toggle" class="flashlight-toggle" aria-label="Toggle flashlight effect" title="Toggle flashlight effect">
+          <svg class="light-on-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="4" y="8" width="7" height="8" rx="1.5" />
+            <path d="M11 6 L16 4 L16 20 L11 18 Z" />
+            <line x1="16" y1="7" x2="21" y2="4" />
+            <line x1="16" y1="12" x2="22" y2="12" />
+            <line x1="16" y1="17" x2="21" y2="20" />
+          </svg>
+          <svg class="light-off-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="4" y="8" width="7" height="8" rx="1.5" />
+            <path d="M11 6 L16 4 L16 20 L11 18 Z" />
+          </svg>
+        </button>
       <script>
         const images = [];
         for (let i = 1; i <= 99; i++) {
@@ -138,6 +159,7 @@
         section.style.backgroundImage = `url("${images[0]}")`;
 
         section.addEventListener("mouseleave", () => {
+          if (document.body.classList.contains('flashlight-off')) return;
           current = (current + 1) % images.length;
           requestAnimationFrame(() => {
             section.style.backgroundImage = `url("${images[current]}")`;
@@ -155,6 +177,7 @@
 
         section.addEventListener("mouseleave", () => {
           section.classList.remove("flashlight-on");
+          if (document.body.classList.contains('flashlight-off')) return;
           changeTimer = setTimeout(() => {
             current = (current + 1) % images.length;
             section.style.backgroundImage = `url("${images[current]}")`;
@@ -181,12 +204,12 @@
                 >0xbit</span><span style="color: white; font-family: 'LiveOverfont', sans-serif;"
                 >></span><span style="color: #8778c1; animation: blink 1s infinite; font-family: 'LiveOverfont', sans-serif;"
                 >_</span>
-                <div class="gg" title="404" style="color: white; font-family: 'LiveOverfont', sans-serif;">I create tools for Linux-based systems.</div>
+                <div class="gg" title="404" style="color: white; font-family: 'LiveOverfont', sans-serif;">I develop offensive security tools targeting Linux environments.</div>
               </h1>
               <p class="typewriter" style="color: white; font-family: 'LiveOverfont', sans-serif; font-size: 23px;">
                 I am a computer enthusiast from the Philippines. I create hacking tools and exploits. Check out some of my work in the Project section.
               </p>
-              <a href="https://github.com/0xbitx" rel="noopener" style="font-family: 'LiveOverfont', sans-serif; font-size: 25px;" target="_blank" class="delayExtraBigReveal"> ➤ </a>
+              <a href="https://github.com/0xbitx" rel="noopener" target="_blank" class="github-btn delayExtraBigReveal"><img class="gh-icon" src="assets/icons/github_button.png" alt="GitHub" /><span class="gh-text">GitHub</span></a>
             </div>
           </div>
         </div>
@@ -221,12 +244,12 @@
             aboutPhoto.addEventListener('mouseenter', () => {
               if (!cursorEffect) {
                 cursorEffect = new characterCursor({
-                  // characters: ["🤍", "🩷", "💜", "🌸"],
+                   characters: ["🤍", "🩷", "💜", "🌸"],
                   //characters: ["🤍", "🩷", "🌸"],
                   // characters: ["🩷", "🌸"],
-                   characters: ["♥️", "🌸"],
+                  // characters: ["♥️", "🌸"],
                   // characters: ["🌸"],
-                  font: "25px serif",
+                  font: "30px serif",
                   
                 });
               }
@@ -289,7 +312,7 @@
               </div>
               <div class="about-figure figure-three icon-three delayExtraBigReveal">
                 <img
-                  src="assets/icons/discord.png"
+                  src="assets/icons/zed.png"
                   width="45px"
                   height="45px"
                   alt="ícone javascript"
@@ -298,10 +321,10 @@
             </div>
             <article id="about-text">
               <h2 class="delaySmallReveal" style="color: #8778c1; font-family: 'LiveOverfont', sans-serif; font-size: 40px;">
-                tibx0[::-1]
+                0xbit
               </h2>
               <p class="delayMediumReveal" style="color: white; font-family: 'LiveOverfont', sans-serif; font-size: 27px;">
-              Passionate Linux tool developer with a focus on offensive security and creative penetration testing utilities. I build CLI-based hacking tools to challenge conventional security assumptions and explore unconventional attack vectors. Constantly evolving in the dynamic world of cybersecurity.
+                  Offensive security developer building Linux-based red team tools. Malware, remote access trojans, rootkits, phishing — I create the arsenal that mimics real adversaries. Constantly evolving, never settling for the obvious.
               </p>
             </article>
           </div>
@@ -344,80 +367,75 @@
         <div class="grid-layout">
           <h2 class="delaySmallReveal" style="color: rgb(97, 53, 243) 'LiveOverfont', sans-serif; font-size: 40px;">Project<span>$</span></h2>
           <div id="projects">
-            <article class="layout">
-              <h3 style="color: rgb(199, 199, 199); font-family: 'LiveOverfont', sans-serif; font-size: 28px;"><span>/root/</span>dedsec_zer0cal<span>/</span></h3>
-              <p>
-                A Linux backdoor uses Google Calendar as (C2) server to manage compromised Linux machines.
-              </p>
-              <a
-                href="https://github.com/0xbitx/DEDSEC_ZER0CAL"
-                rel="noopener"
-                target="_blank"
-                id="dedsec">cd<span>_</span>
+            <div class="term-dir">
+              <div class="term-dir-header">
+                <span class="td-name">Name</span>
+                <span class="td-desc-header">Description</span>
+              </div>
+              <a href="https://github.com/0xbitx/DEDSEC_ZER0CAL" rel="noopener" target="_blank" class="term-dir-row">
+                <span class="td-name">dedsec_zer0cal</span>
+                <span class="td-desc">A Linux backdoor uses Google Calendar as (C2) to manage compromised machines.</span>
               </a>
-            </article>
-            <article class="layout">
-              <h3 style="color: rgb(199, 199, 199); font-family: 'LiveOverfont', sans-serif; font-size: 28px;"><span>/root/</span>dedsec_bluejacker<span>/</span></h3>
-              <p>
-                Bluetooth jamming device/tool that uses an ESP32 NodeMCU and an nRF module.  
-              </p>
-              <a
-                href="https://github.com/0xbitx/DEDSEC_BLUEJACKER"
-                rel="noopener"c
-                target="_blank"
-                id="dedsec">cd<span>_</span>
+              <a href="https://github.com/0xbitx/DEDSEC_XUAN" rel="noopener" target="_blank" class="term-dir-row">
+                <span class="td-name">dedsec_xuan</span>
+                <span class="td-desc">Kernel-level rootkit for modern Linux — Google Calendar as (C2).</span>
               </a>
-            </article>
-            <article class="layout">
-              <h3 style="color: rgb(199, 199, 199); font-family: 'LiveOverfont', sans-serif; font-size: 28px;"><span>/root/</span>dedsec_ptz_exploit<span>/</span></h3>
-              <p>
-                IP Camera exploit to control ip camera movement (PTZ) even without a username and password.
-              </p>
-              <a
-                href="https://github.com/0xbitx/DEDSEC_PTZ_EXPLOIT"
-                rel="noopener"
-                target="_blank"
-                id="dedsec">cd<span>_</span>
+              <a href="https://github.com/0xbitx/DEDSEC_NEPHILM" rel="noopener" target="_blank" class="term-dir-row">
+                <span class="td-name">dedsec_nephilm</span>
+                <span class="td-desc">Kernel-level rootkit for modern Linux — DNS-based C2 over DoH (DNS-over-HTTPS)</span>
               </a>
-            </article>
-              <article class="layout">
-              <h3 style="color: rgb(199, 199, 199); font-family: 'LiveOverfont', sans-serif; font-size: 28px;"><span>/root/</span>dedsec_botnet<span>/</span></h3>
-              <p>
-                Linux-based botnet builder designed for creating advanced botnet payloads.
-              </p>
-              <a
-                href="https://github.com/0xbitx/DEDSEC_BOTNET"
-                rel="noopener"
-                target="_blank"
-                id="dedsec">cd<span>_</span>
+              <a href="https://github.com/0xbitx/DEDSEC_BLACKHAT" rel="noopener" target="_blank" class="term-dir-row">
+                <span class="td-name">dedsec_blackhat</span>
+                <span class="td-desc">privacy-hardened browser that launches browser through an obfs4 Tor proxy</span>
               </a>
-            </article>
-            <article class="layout">
-              <h3 style="color: rgb(199, 199, 199); font-family: 'LiveOverfont', sans-serif; font-size: 28px;"><span>/root/</span>dedsec_nullsig<span>/</span></h3>
-              <p>
-                Transforms metasploit linux payloads into undetectable binaries using signature removal, encryption, and AV evasion tactics.  
-              </p>
-              <a
-                href="https://github.com/0xbitx/DEDSEC_NULLSIG"
-                rel="noopener"
-                target="_blank"
-                id="dedsec">cd<span>_</span>
+              <a href="https://github.com/0xbitx/DEDSEC_WEEPING_ANGLE" rel="noopener" target="_blank" class="term-dir-row">
+                <span class="td-name">weeping_angle</span>
+                <span class="td-desc">Initial Access & Post-Exploitation Framework for Linux Systems</span>
               </a>
-            </article>
-            <article class="layout">
-              <h3 style="color: rgb(199, 199, 199); font-family: 'LiveOverfont', sans-serif; font-size: 28px;"><span>/root/</span>dedsec_webtrace<span>/</span></h3>
-              <p>
-                All-in-one website tracking toolkit designed to help expose and track scammers. 
-              </p>
-              <a
-                href="https://github.com/0xbitx/DEDSEC_WEBTRACE"
-                rel="noopener"
-                target="_blank"
-                id="dedsec">cd<span>_</span>
+              <a href="https://github.com/0xbitx/DEDSEC_GSTRIKE" rel="noopener" target="_blank" class="term-dir-row">
+                <span class="td-name">dedsec_gstrike</span>
+                <span class="td-desc">Spear Phishing Toolkit Designed to Simulate Real-Life Attacks</span>
               </a>
-            </article>
+              <a href="https://github.com/0xbitx/DEDSEC_GEOHEX" rel="noopener" target="_blank" class="term-dir-row">
+                <span class="td-name">dedsec_geohex</span>
+                <span class="td-desc">Geolocation intelligence for tracking, fingerprinting, and forensics.</span>
+              </a>
+              <a href="https://github.com/0xbitx/DEDSEC_DAK" rel="noopener" target="_blank" class="term-dir-row">
+                <span class="td-name">dedsec_dak</span>
+                <span class="td-desc">Linux-based polymorphic keylogger builder with Google Calendar C2 infrastructure.</span>
+              </a>
+              <a href="https://github.com/0xbitx/DEDSEC_PROC-HACKER" rel="noopener" target="_blank" class="term-dir-row">
+                <span class="td-name">dedsec_prochacker</span>
+                <span class="td-desc">Linux based process analyzer for hackers.</span>
+              </a>
+              <a href="https://github.com/0xbitx/DEDSEC_K0RA" rel="noopener" target="_blank" class="term-dir-row">
+                <span class="td-name">dedsec_k0ra</span>
+                <span class="td-desc">Linux-based botnet builder designed for creating advanced botnet payloads.</span>
+              </a>
+              <a href="https://github.com/0xbitx/DEDSEC_WIREMON" rel="noopener" target="_blank" class="term-dir-row">
+                <span class="td-name">dedsec_wiremon</span>
+                <span class="td-desc">Linux-based Wi-Fi attack tool for networks you don't have access to.</span>
+              </a>
+              <a href="https://github.com/0xbitx/DEDSEC_PTZ_EXPLOIT" rel="noopener" target="_blank" class="term-dir-row">
+                <span class="td-name">dedsec_ptz_exploit</span>
+                <span class="td-desc">IP Camera exploit to control camera movement (PTZ) without credentials.</span>
+              </a>
+              <a href="https://github.com/0xbitx/DEDSEC_BOTNET" rel="noopener" target="_blank" class="term-dir-row">
+                <span class="td-name">dedsec_botnet</span>
+                <span class="td-desc">Linux-based botnet builder for creating advanced botnet payloads.</span>
+              </a>
+              <a href="https://github.com/0xbitx/DEDSEC_NULLSIG" rel="noopener" target="_blank" class="term-dir-row">
+                <span class="td-name">dedsec_nephilm</span>
+                <span class="td-desc">Kernel-level rootkit — DNS-based C2 over DoH (DNS-over-HTTPS).</span>
+              </a>
+              <a href="https://github.com/0xbitx/DEDSEC_WEBTRACE" rel="noopener" target="_blank" class="term-dir-row">
+                <span class="td-name">dedsec_webtrace</span>
+                <span class="td-desc">All-in-one website tracking toolkit to help expose and track scammers.</span>
+              </a>
+            </div>
           </div>
-          <a href="https://github.com/0xbitx?tab=repositories" rel="noopener" target="_blank" class="delaySmallReveal" style="color: rgb(97, 53, 243) 'Rajdhani'; font-size: 25px;"><span><</span> Repositories on GitHub <span>></span></a>      </div>
+          <a href="https://github.com/0xbitx?tab=repositories" rel="noopener" target="_blank" class="delaySmallReveal" style="color: rgb(97, 53, 243) 'Rajdhani'; font-size: 25px;"><span><</span> Repositories on GitHub <span>></span></a>
+        </div>
       </section>
       <section id="s-services">
         <div class="grid-layout">
@@ -436,7 +454,7 @@
               <h3 style="color: rgb(199, 199, 199); font-family: 'LiveOverfont', sans-serif; font-size: 30px;"><span>//</span>Building hacking tool<span>//</span></h3>
               <p>
                 Esp32 deauther, Esp32 bluetooth killer
-                geo-tracker, ddos tool, 3G jammer, info-stealer, Phishing tool, camera exploit, rat.
+                , ddos tool, 3G jammer, info-stealer, Phishing tool, camera exploit, rat.
               </p>
             </article>
             <article class="intervalCardReveal">
@@ -533,7 +551,7 @@
               <article class="icon6 intervalCardReveal">
                 <span class="skills-cards-name-low">C++</span>
                 <img
-                  src="assets/icons/C++.png"
+                  src="assets/icons/c++.png"
                   width="60px"
                   height="60px"
                   alt="dedsec"
@@ -562,12 +580,33 @@
                   class="skills-icons"
                 />
               </article>
+              <article class="icon9 intervalCardReveal">
+                <span class="skills-cards-name-low">Zed</span>
+                <img
+                  src="assets/icons/zed.png"
+                  width="60px"
+                  height="60px"
+                  alt="dedsec"
+                  class="skills-icons"
+                />
+              </article>
+              <article class="icon10 intervalCardReveal">
+                <span class="skills-cards-name-low">PowerShell</span>
+                <img
+                  src="assets/icons/powershell.png"
+                  width="60px"
+                  height="60px"
+                  alt="dedsec"
+                  class="skills-icons"
+                />
+              </article>
             </div>
           </div>
         </div>
+      </section>
         <footer>
           <div class="grid-layout">
-            <p id="direitos-autorais">© 2025 0xbit</p>
+            <p id="direitos-autorais">© 2026 0xbit</p>
             <div>
               <p>Powered by</p>
               <img
@@ -579,9 +618,197 @@
             </div>
           </div>
         </footer>
-      </section>
     </main>
     <script src="https://unpkg.com/scrollreveal@4.0.9/dist/scrollreveal.min.js"></script>
     <script type="module" src="assets/js/main.js"></script>
+    <script>
+      (function () {
+        const toggle = document.getElementById('flashlight-toggle');
+        const body = document.body;
+
+        const savedFlashlight = localStorage.getItem('flashlight');
+        if (savedFlashlight === 'off') {
+          body.classList.add('flashlight-off');
+        }
+
+        toggle.addEventListener('click', function () {
+          const isOff = body.classList.contains('flashlight-off');
+          if (isOff) {
+            body.classList.remove('flashlight-off');
+            localStorage.setItem('flashlight', 'on');
+          } else {
+            body.classList.add('flashlight-off');
+            localStorage.setItem('flashlight', 'off');
+          }
+        });
+      })();
+    </script>
+    <script>
+      (function () {
+        var titles = {
+          about:     'root@0xbit:~ — cat about.md',
+          experience:'root@0xbit:~ — cat experience.log',
+          projects:  'root@0xbit:~ — ls -la projects/',
+          services:  'root@0xbit:~ — ps aux | grep skills',
+          skills:    'root@0xbit:~ — cat /proc/skills'
+        };
+        var labels = { about: 'abt', experience: 'exp', projects: 'prj', services: 'svc', skills: 'skl' };
+
+        var dock = document.createElement('div');
+        dock.className = 'term-dock';
+        document.body.appendChild(dock);
+
+        var activeDrag = null, startX, startY, offsetX, offsetY;
+
+        document.addEventListener('mousemove', function (e) {
+          if (!activeDrag) return;
+          offsetX = e.clientX - startX;
+          offsetY = e.clientY - startY;
+          activeDrag.el.style.transform = 'translate(' + offsetX + 'px, ' + offsetY + 'px)';
+        });
+
+        document.addEventListener('mouseup', function () {
+          if (!activeDrag) return;
+          activeDrag.el.classList.remove('term-dragging');
+          activeDrag.el.style.transition = '';
+          activeDrag = null;
+        });
+
+        Object.keys(titles).forEach(function (id) {
+          var container = document.getElementById(id);
+          if (!container) return;
+
+          var bar = document.createElement('div');
+          bar.className = 'term-titlebar';
+          bar.innerHTML =
+            '<span class="term-dot term-dot-close" data-action="close"></span>' +
+            '<span class="term-dot term-dot-min" data-action="minimize"></span>' +
+            '<span class="term-dot term-dot-max" data-action="maximize"></span>' +
+            '<span class="term-title">' + titles[id] + '</span>';
+          container.appendChild(bar);
+
+          var saved = {};
+          var dockIcon = null;
+
+          bar.addEventListener('mousedown', function (e) {
+            if (e.target.closest('.term-dot')) return;
+            if (container.classList.contains('term-maximized')) return;
+            if (container.classList.contains('term-minimized')) return;
+            var rect = container.getBoundingClientRect();
+            offsetX = rect.left;
+            offsetY = rect.top;
+            startX = e.clientX;
+            startY = e.clientY;
+            activeDrag = { el: container };
+            container.classList.add('term-dragging');
+            container.style.transition = 'none';
+            e.preventDefault();
+          });
+
+          bar.addEventListener('click', function (e) {
+            var dot = e.target.closest('.term-dot');
+            if (!dot) return;
+            e.stopPropagation();
+            var action = dot.getAttribute('data-action');
+
+            if (action === 'close') {
+              container.style.display = 'none';
+              if (dockIcon) dockIcon.style.display = 'none';
+            }
+
+            if (action === 'minimize') {
+              if (container.classList.contains('term-maximized')) return;
+              var isMin = !container.classList.contains('term-minimized');
+              if (isMin) {
+                saved.display = container.style.display;
+                saved.height = container.style.height || container.offsetHeight + 'px';
+                saved.width = container.style.width || container.offsetWidth + 'px';
+                saved.overflow = container.style.overflow;
+                saved.transform = container.style.transform;
+                container.style.transition = '';
+                container.style.opacity = '';
+                container.style.transform = '';
+                container.offsetHeight;
+                container.classList.add('term-minimized');
+                var c = container;
+                clearTimeout(c._minTimer);
+                c._minTimer = setTimeout(function () {
+                  c.style.display = 'none';
+                }, 420);
+                if (!dockIcon) {
+                  dockIcon = document.createElement('div');
+                  dockIcon.className = 'term-dock-icon';
+                  dockIcon.textContent = labels[id];
+                  dockIcon.title = titles[id];
+                  dockIcon.addEventListener('click', function () {
+                    container.style.display = '';
+                    container.offsetHeight;
+                    requestAnimationFrame(function () {
+                      requestAnimationFrame(function () {
+                        container.classList.remove('term-minimized');
+                        container.style.transform = saved.transform || '';
+                        container.style.height = saved.height || '';
+                        container.style.width = saved.width || '';
+                        container.style.overflow = saved.overflow || '';
+                        dockIcon.style.display = 'none';
+                      });
+                    });
+                  });
+                  dock.appendChild(dockIcon);
+                }
+                dockIcon.style.display = 'flex';
+              } else {
+                container.style.display = '';
+                container.offsetHeight;
+                requestAnimationFrame(function () {
+                  requestAnimationFrame(function () {
+                    container.classList.remove('term-minimized');
+                    container.style.transform = saved.transform || '';
+                    container.style.height = saved.height || '';
+                    container.style.width = saved.width || '';
+                    container.style.overflow = saved.overflow || '';
+                    if (dockIcon) dockIcon.style.display = 'none';
+                  });
+                });
+              }
+            }
+
+            if (action === 'maximize') {
+              if (container.classList.contains('term-minimized')) return;
+              var isMax = !container.classList.contains('term-maximized');
+              if (isMax) {
+                saved.height = container.style.height || '';
+                saved.width = container.style.width || '';
+                saved.transform = container.style.transform || '';
+                saved.position = container.style.position || '';
+                saved.top = container.style.top || '';
+                saved.left = container.style.left || '';
+                saved.zIndex = container.style.zIndex || '';
+                saved.margin = container.style.margin || '';
+                container.style.height = '90vh';
+                container.style.width = '95vw';
+                container.style.transform = 'translate(-50%, -50%)';
+                container.style.position = 'fixed';
+                container.style.top = '50%';
+                container.style.left = '50%';
+                container.style.zIndex = '999';
+                container.style.margin = '0';
+                container.classList.add('term-maximized');
+              } else {
+                container.style.height = saved.height;
+                container.style.width = saved.width;
+                container.style.transform = saved.transform;
+                container.style.position = saved.position;
+                container.style.top = saved.top;
+                container.style.left = saved.left;
+                container.style.zIndex = saved.zIndex;
+                container.style.margin = saved.margin;
+                container.classList.remove('term-maximized');
+              }
+            }
+          });
+        });
+      })();
+    </script>
   </body>
 </html>
