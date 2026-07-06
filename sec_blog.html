@@ -373,6 +373,24 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
     "repo": "DEDSEC_GOEX"
   },
   {
+    "title": "Use Nmap Like a Ghost",
+    "description": "A default Nmap scan announces itself. The SYN packet timing is predictable, the TCP options are fingerprinted, the user-agent is hardcoded, and the port sequence is linear. Every mature SIEM has signatures for this. \nOperating covertly means treating every packet as a forensic event. The goal is not to be invisible — nothing on a wire is invisible — but to be indistinguishable from noise. Slow, fragmented, sourced from unexpected ports, routed through disposable \ninfrastructure, and timed to match baseline traffic patterns. If blue team reviews the logs, they should see nothing worth escalating. \nThe techniques below are organized by capability, not difficulty. Some are trivial to execute but devastating against poorly tuned defenses. Others require infrastructure setup but provide near-total attribution masking. The operator's skill is \nknowing which combination fits the target's posture.",
+    "rawDescription": "A default Nmap scan announces itself. The SYN packet timing is predictable, the TCP options are fingerprinted, the user-agent is hardcoded, and the port sequence is linear. Every mature SIEM has signatures for this. \nOperating covertly means treating every packet as a forensic event. The goal is not to be invisible — nothing on a wire is invisible — but to be indistinguishable from noise. Slow, fragmented, sourced from unexpected ports, routed through disposable \ninfrastructure, and timed to match baseline traffic patterns. If blue team reviews the logs, they should see nothing worth escalating. \nThe techniques below are organized by capability, not difficulty. Some are trivial to execute but devastating against poorly tuned defenses. Others require infrastructure setup but provide near-total attribution masking. The operator's skill is \nknowing which combination fits the target's posture.",
+    "rawDescription": "Google Drive metadata extractor exposing owner details, permissions, and timestamps from public links, demonstrating cloud forensic analysis for penetration testers.",
+    "category": "OSINT & Recon",
+    "technologies": [
+      "Bash",
+      "Linux",
+      "GitHub",
+      "Nmap",
+      "GitHub"
+    ],
+    "threatActors": [],
+    "githubUrl": "https://github.com/0xbitx/NMAP",
+    "owner": "0xbitx",
+    "repo": "NMAP"
+  },
+  {
     "title": "DEDSEC_DNSStrike",
     "description": "Every enterprise firewall inspects HTTP. Almost none inspect DNS — and even fewer examine MX records, the resource records that route email. That architectural blind spot, baked into decades of network design, is where DEDSEC_DNSStrike operates.\n\nDNS MX queries are among the most trusted packets on any network. Block them and email stops — so nobody blocks them. DEDSEC_DNSStrike exploits this by encoding payload data into crafted MX queries, turning the DNS protocol itself into a covert channel. A compromised host initiates what looks like an ordinary MX lookup, but the query's label fields carry exfiltrated data in a custom encoding scheme. The authoritative nameserver responds with an MX record whose fields contain the next command. But DNS labels have strict constraints: maximum 63 octets per label, only alphanumeric plus hyphen characters, and case-insensitive comparison at intermediate resolvers. The encoding scheme had to pack binary data into this constrained alphabet while maximizing bits per label. I settled on a modified base32 variant that uses the full legal character set efficiently, achieving 5 bits per character with a padding scheme that never produces ambiguous label boundaries. Getting padding right was surprisingly subtle — DNS resolvers drop trailing dots and normalize label separators, so the decoder needed to be robust against label truncation and re-concatenation by intermediate infrastructure.\n\nBuilding this required working at the raw packet level — understanding the wire format of DNS messages, compression pointers, question and answer sections — and implementing a complete DNS protocol stack in Python. The client side uses raw sockets with manual header construction to avoid OS-level DNS caching that would interfere with command polling. Each query carries a 16-bit transaction ID that doubles as a sequence number, letting the client detect dropped or reordered responses. The server side runs a custom authoritative nameserver that decodes inbound queries and encodes operator commands into syntactically valid MX responses. The hardest edge case was resolver chains that rewrite or normalize queries: some enterprise resolvers lowercase all labels (breaking case-sensitive encodings), truncate long names, or append search domains. The encoding includes a CRC-16 checksum header per chunk and supports forward error correction via Reed-Solomon codes so a single corrupted label doesn't require retransmission — critical on networks where DNS queries traverse four or five intermediate resolvers.\n\nPerformance testing revealed that DNS tunneling throughput is inherently limited by query-response latency and the 512-byte UDP payload ceiling. At 200ms RTT with 40 bytes of payload per query, throughput caps around 200 bytes per second — adequate for command-and-control but unsuitable for bulk exfiltration. The design acknowledges this by prioritizing C2 reliability over bandwidth, implementing an adaptive transmission rate that backs off when packet loss exceeds 5% and includes a Nagle-like algorithm that batches small commands into single queries. Testing against enterprise DNS infrastructure — BIND, Unbound, Windows DNS Server, and cloud resolvers from Google and Cloudflare — verified that no resolver rejected or mangled the crafted MX queries, and that throughput remained stable under 10% packet-loss conditions. For a hiring manager, DNSStrike demonstrates the ability to identify protocol-level architectural gaps that most security engineers overlook, and to build robust communication systems within tight technical constraints — skills that transfer directly to network protocol engineering, security architecture review, and adversarial resilience testing.",
     "rawDescription": "Every enterprise firewall inspects HTTP. Almost none inspect DNS — and even fewer examine MX records, the resource records that route email. That architectural blind spot, baked into decades of network design, is where DEDSEC_DNSStrike operates.\n\nDNS MX queries are among the most trusted packets on any network. Block them and email stops — so nobody blocks them. DEDSEC_DNSStrike exploits this by encoding payload data into crafted MX queries, turning the DNS protocol itself into a covert channel. A compromised host initiates what looks like an ordinary MX lookup, but the query's label fields carry exfiltrated data in a custom encoding scheme. The authoritative nameserver responds with an MX record whose fields contain the next command. But DNS labels have strict constraints: maximum 63 octets per label, only alphanumeric plus hyphen characters, and case-insensitive comparison at intermediate resolvers. The encoding scheme had to pack binary data into this constrained alphabet while maximizing bits per label. I settled on a modified base32 variant that uses the full legal character set efficiently, achieving 5 bits per character with a padding scheme that never produces ambiguous label boundaries. Getting padding right was surprisingly subtle — DNS resolvers drop trailing dots and normalize label separators, so the decoder needed to be robust against label truncation and re-concatenation by intermediate infrastructure.\n\nBuilding this required working at the raw packet level — understanding the wire format of DNS messages, compression pointers, question and answer sections — and implementing a complete DNS protocol stack in Python. The client side uses raw sockets with manual header construction to avoid OS-level DNS caching that would interfere with command polling. Each query carries a 16-bit transaction ID that doubles as a sequence number, letting the client detect dropped or reordered responses. The server side runs a custom authoritative nameserver that decodes inbound queries and encodes operator commands into syntactically valid MX responses. The hardest edge case was resolver chains that rewrite or normalize queries: some enterprise resolvers lowercase all labels (breaking case-sensitive encodings), truncate long names, or append search domains. The encoding includes a CRC-16 checksum header per chunk and supports forward error correction via Reed-Solomon codes so a single corrupted label doesn't require retransmission — critical on networks where DNS queries traverse four or five intermediate resolvers.\n\nPerformance testing revealed that DNS tunneling throughput is inherently limited by query-response latency and the 512-byte UDP payload ceiling. At 200ms RTT with 40 bytes of payload per query, throughput caps around 200 bytes per second — adequate for command-and-control but unsuitable for bulk exfiltration. The design acknowledges this by prioritizing C2 reliability over bandwidth, implementing an adaptive transmission rate that backs off when packet loss exceeds 5% and includes a Nagle-like algorithm that batches small commands into single queries. Testing against enterprise DNS infrastructure — BIND, Unbound, Windows DNS Server, and cloud resolvers from Google and Cloudflare — verified that no resolver rejected or mangled the crafted MX queries, and that throughput remained stable under 10% packet-loss conditions. For a hiring manager, DNSStrike demonstrates the ability to identify protocol-level architectural gaps that most security engineers overlook, and to build robust communication systems within tight technical constraints — skills that transfer directly to network protocol engineering, security architecture review, and adversarial resilience testing.",
@@ -1393,7 +1411,7 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
     "title": "DEDSEC_SHRED",
     "description": "Simply deleting a file doesn't erase its contents—it only removes the filesystem's pointer to those blocks, leaving the raw data sitting on disk until the sectors happen to be overwritten by new writes. This is security folklore by now, but the gap between knowing it and implementing proper secure deletion on a modern Linux system with journaling filesystems, wear-leveling SSDs, and copy-on-write storage backends is wider than most practitioners appreciate. DEDSEC_SHRED bridges this gap for terminal-centric workflows by wrapping cryptographic-grade data sanitization in a user-friendly interactive interface. At its core, the tool implements the Gutmann-inspired multi-pass overwrite strategy: for each target file, it opens a writable file descriptor and overwrites the entire byte range with pseudorandom data derived from SHA-256 hashing of cryptographic nonces, repeating the process for a configurable number of passes (defaulting to three). The use of cryptographic hashing as the randomness source is an interesting architectural choice—properly seeded `/dev/urandom` would be faster and equally secure, but the SHA-256 approach guarantees reproducibility for verification purposes and avoids blocking on entropy-starved systems. Directory shredding works recursively: the tool traverses the directory tree, securely erases each file individually, then removes the now-empty subdirectories. Throughout the process, a terminal progress bar renders real-time feedback showing per-file status, pass count, and completion percentage. The elephant in the room is modern storage hardware. On SSDs, the flash translation layer (FTL) means that logical block overwrites don't necessarily hit the same physical NAND cells, making multi-pass overwrite strategies largely ceremonial for solid-state storage. On copy-on-write filesystems like ZFS or Btrfs, overwriting a file's blocks creates new blocks rather than destroying old ones. SHRED doesn't address these caveats in its interface, which is worth noting if you're relying on it as your sole data destruction mechanism. The takeaway: filesystem-level shredding is necessary but increasingly insufficient; pairing it with full-disk encryption from day one is the only defensible posture.",
     "rawDescription": "Simply deleting a file doesn't erase its contents—it only removes the filesystem's pointer to those blocks, leaving the raw data sitting on disk until the sectors happen to be overwritten by new writes. This is security folklore by now, but the gap between knowing it and implementing proper secure deletion on a modern Linux system with journaling filesystems, wear-leveling SSDs, and copy-on-write storage backends is wider than most practitioners appreciate. DEDSEC_SHRED bridges this gap for terminal-centric workflows by wrapping cryptographic-grade data sanitization in a user-friendly interactive interface. At its core, the tool implements the Gutmann-inspired multi-pass overwrite strategy: for each target file, it opens a writable file descriptor and overwrites the entire byte range with pseudorandom data derived from SHA-256 hashing of cryptographic nonces, repeating the process for a configurable number of passes (defaulting to three). The use of cryptographic hashing as the randomness source is an interesting architectural choice—properly seeded `/dev/urandom` would be faster and equally secure, but the SHA-256 approach guarantees reproducibility for verification purposes and avoids blocking on entropy-starved systems. Directory shredding works recursively: the tool traverses the directory tree, securely erases each file individually, then removes the now-empty subdirectories. Throughout the process, a terminal progress bar renders real-time feedback showing per-file status, pass count, and completion percentage. The elephant in the room is modern storage hardware. On SSDs, the flash translation layer (FTL) means that logical block overwrites don't necessarily hit the same physical NAND cells, making multi-pass overwrite strategies largely ceremonial for solid-state storage. On copy-on-write filesystems like ZFS or Btrfs, overwriting a file's blocks creates new blocks rather than destroying old ones. SHRED doesn't address these caveats in its interface, which is worth noting if you're relying on it as your sole data destruction mechanism. The takeaway: filesystem-level shredding is necessary but increasingly insufficient; pairing it with full-disk encryption from day one is the only defensible posture.",
-    "category": "Utility & Miscellaneous",
+    "category": "OSINT & Recon",
     "technologies": [
       "C",
       "Linux",
@@ -1821,7 +1839,7 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
     "repo": "OSINT"
   },
   {
-    "title": "Protecting Your Data from OSINT (Open Source Intelligence)",
+    "title": "Protecting Your Data from OSINT",
     "description": "Operational security field guide cataloging common digital footprint mistakes and countermeasures for protecting identity during sensitive online operations.",
     "rawDescription": "Operational security field guide cataloging common digital footprint mistakes and countermeasures for protecting identity during sensitive online operations.",
     "category": "OSINT & Recon",
@@ -1941,7 +1959,7 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
     "repo": "how_to_contribute"
   },
   {
-    "title": "LINK: [sim_search](https://0xbitx.github.io/PH_Mobile_Number_Prefixes/)",
+    "title": "Sim Carrier Search",
     "description": "Reference dataset mapping Philippine mobile prefixes to carrier networks — useful for telecom-aware OSINT targeting and number validation automation.",
     "rawDescription": "Reference dataset mapping Philippine mobile prefixes to carrier networks — useful for telecom-aware OSINT targeting and number validation automation.",
     "category": "OSINT & Recon",
@@ -2077,7 +2095,8 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
     "rawDescription": "Demystifies multi-factor authentication by cataloging 10 bypass techniques across social engineering, technical exploits, and hybrid vectors — demonstrating deep red-team assessment methodology.",
     "category": "Utility & Miscellaneous",
     "technologies": [
-      "C"
+      "C",
+      "Github"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/2FA-MFA",
@@ -2131,7 +2150,7 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
     "repo": "PCPWN"
   },
   {
-    "title": "[(CLICK HERE TO ACCESS DEDSEC NGL TOOL)](https://0xbitx.github.io/DEDSEC_NGL_TOOL/)",
+    "title": "DEDSEC_NGL_TOOL WEB",
     "description": "Multi-function NGL testing toolkit for customized spam campaigns and bulk message deletion, demonstrating platform API security evaluation capabilities.",
     "rawDescription": "Multi-function NGL testing toolkit for customized spam campaigns and bulk message deletion, demonstrating platform API security evaluation capabilities.",
     "category": "Utility & Miscellaneous",
@@ -2216,7 +2235,7 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
     "title": "Dedsec-Proxychain",
     "description": "Streamlines ProxyChain configuration management by automating proxy entry insertion and rotation for anonymous, multi-hop traffic routing.",
     "rawDescription": "Streamlines ProxyChain configuration management by automating proxy entry insertion and rotation for anonymous, multi-hop traffic routing.",
-    "category": "Utility & Miscellaneous",
+    "category": "OSINT & Recon",
     "technologies": [
       "C",
       "Linux",
@@ -2991,17 +3010,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
     "githubUrl": "https://github.com/0xbitx/reverse_shell",
     "owner": "0xbitx",
     "repo": "reverse_shell"
-  },
-  {
-    "title": "jobert",
-    "description": "No description available.",
-    "rawDescription": "",
-    "category": "Utility & Miscellaneous",
-    "technologies": [],
-    "threatActors": [],
-    "githubUrl": "https://github.com/0xbitx/JOBERT",
-    "owner": "0xbitx",
-    "repo": "JOBERT"
   }
 ];
 window.__DEDSEC_EMBEDDED_TS__ = 1782743596438;
