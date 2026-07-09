@@ -321,6 +321,22 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
     "repo": "DEDSEC_XUAN"
   },
   {
+      "title": "DEDSEC_FLUX",
+      "description": "FLUX is a comprehensive, advanced Host-based Intrusion Detection System (HIDS) built specifically for Linux environments. It operates in real time, continuously monitoring system activity through 13 parallel threads to detect malicious behavior, unauthorized changes, and signs of compromise — from initial reconnaissance all the way to post-exploitation persistence. Unlike traditional log scanners or single-purpose security scripts, FLUX employs a dual-engine architecture that combines psutil-based process polling with kernel-level auditd execve hooking. Both engines share a unified deduplication layer ensuring no command generates duplicate alerts regardless of which engine captures it first. This ensures no command escapes detection: psutil catches long-running processes every second, while auditd captures every execve syscall at the kernel level — including commands that complete in milliseconds (sudo -l, id, groups, uname -r, find / -perm -4000). The auditd integration automatically configures 15 kernel-level syscall rules and file watches, covering SUID execution, UID change syscalls, root processes from writable directories, /proc/self/mem writes, copy_file_range abuse, and real-time modification detection on sudoers and cron directories. FLUX integrates 1,259 GTFOBins exploitation patterns covering 200+ Linux binaries with a sophisticated pattern generalization engine that adapts literal GTFOBins examples to match real-world command variations. The engine automatically handles seven common discrepancies between GTFOBins documentation and actual execve cmdlines: literal placeholder paths replaced with filesystem wildcards, quoted DATA strings generalized to arbitrary content, single quotes around -c and -e arguments made optional (shells strip them before execve), dollar-sign variables preserved as literals rather than regex anchors, /bin/sh expanded to match /bin/bash, /bin/dash, and /bin/zsh, comma-space separators made flexible in function calls, and semicolon separators matched with or without whitespace. Versioned binary aliases (python3, python3.11, php8.1, ruby3.0, node20, lua5.4, gcc-12, java17, and more) are automatically mapped to their base GTFOBins rules. On top of the GTFOBins engine, 22 behavioral alert types derived from the HiveSecurity Linux Privilege Escalation guide provide complete coverage of all six attack phases: reconnaissance (SUID enumeration, world-writable file discovery, sudo -l, cron inspection, kernel version checking), SUID/SGID abuse (euid mismatch detection via auditd with whitelisted system binaries, -p flag shell spawning, chmod +s backdoors), sudo misconfiguration (shell spawning detection that distinguishes malicious os.system/os.execl calls from benign -c usage, LD_PRELOAD injection with shared library compilation detection), cron job hijacking (file modification watches plus content-aware diff alerts showing exactly what was added), PATH injection (both cmdline-based detection and /proc/*/environ polling that catches shell builtin export commands invisible to execve monitoring), Linux capabilities abuse (getcap/setcap detection plus setuid syscall monitoring), and kernel exploits including DirtyFrag (CVE-2026-46331 — page cache corruption via pagemap), DirtyClone (CVE-2026-43503 — memory mapping file manipulation), DirtyPipe (CVE-2022-0847 — /proc/self/mem overwrite), PwnKit (CVE-2021-4034 — suspicious pkexec execution), and CopyFail (copy.fail URL access, splice/copy_file_range abuse, curl-pipe-to-interpreter-su pattern). Beyond command-level detection, FLUX provides comprehensive system-wide monitoring across eight additional layers. File integrity monitoring via SHA-256 hashing with 3-second polling covers both system files (/etc/passwd, /etc/shadow, /etc/sudoers, /etc/group, /etc/crontab) and HIDS configuration files, supplemented by kernel-level auditd file watches for real-time sudoers and cron modification alerts independent of the polling cycle. User and group account monitoring polls /etc/passwd and /etc/group every 5 seconds using set-difference comparison, detecting new user creation, sudo group membership changes, wheel group modifications, and /etc/sudoers hash changes with automatic corrupted-baseline recovery. Persistence detection monitors all common autostart locations — system-wide paths (/etc/rc.local, /etc/init.d/, /etc/systemd/system/, all cron directories) plus every user's shell RC files under /home/* and /root — with content-aware diffing that shows the exact lines added or removed, not just which file changed. Kernel and rootkit monitoring provides three detection vectors: loaded module tracking with hash verification and whitelist comparison, hidden process detection by cross-referencing /proc PIDs against psutil's process list, and hidden file discovery by comparing os.listdir() output against ls -A results. USB device enumeration captures vendor ID, product ID, manufacturer, serial number, speed class, and max power draw for BadUSB and malicious HID detection. Network surveillance runs across three threads: new process tracking, sustained upload/download detection with 50KB/s threshold and spike analysis, and internet connectivity monitoring via ICMP probes. System resource monitoring detects CPU spikes above 80% and memory usage over 500MB with automatic browser process whitelisting (Firefox, Chrome, Chromium, Brave). Environment scanning polls /proc/*/environ every 2 seconds for PATH hijacking, catching shell builtin export commands that never appear in execve logs. All alerts are delivered in real time to Discord via structured webhooks with per-alert-type icons and descriptions, enabling rapid incident response before damage occurs. The entire system runs as a single Python process with graceful Ctrl+C shutdown, automatic auditd rule cleanup on exit, and resilient JSON handling with automatic corrupted-baseline recovery.",
+      "rawDescription": "FLUX is a comprehensive, advanced Host-based Intrusion Detection System (HIDS) built specifically for Linux environments. It operates in real time, continuously monitoring system activity through 13 parallel threads to detect malicious behavior, unauthorized changes, and signs of compromise — from initial reconnaissance all the way to post-exploitation persistence. Unlike traditional log scanners or single-purpose security scripts, FLUX employs a dual-engine architecture that combines psutil-based process polling with kernel-level auditd execve hooking. Both engines share a unified deduplication layer ensuring no command generates duplicate alerts regardless of which engine captures it first. This ensures no command escapes detection: psutil catches long-running processes every second, while auditd captures every execve syscall at the kernel level — including commands that complete in milliseconds (sudo -l, id, groups, uname -r, find / -perm -4000). The auditd integration automatically configures 15 kernel-level syscall rules and file watches, covering SUID execution, UID change syscalls, root processes from writable directories, /proc/self/mem writes, copy_file_range abuse, and real-time modification detection on sudoers and cron directories. FLUX integrates 1,259 GTFOBins exploitation patterns covering 200+ Linux binaries with a sophisticated pattern generalization engine that adapts literal GTFOBins examples to match real-world command variations. The engine automatically handles seven common discrepancies between GTFOBins documentation and actual execve cmdlines: literal placeholder paths replaced with filesystem wildcards, quoted DATA strings generalized to arbitrary content, single quotes around -c and -e arguments made optional (shells strip them before execve), dollar-sign variables preserved as literals rather than regex anchors, /bin/sh expanded to match /bin/bash, /bin/dash, and /bin/zsh, comma-space separators made flexible in function calls, and semicolon separators matched with or without whitespace. Versioned binary aliases (python3, python3.11, php8.1, ruby3.0, node20, lua5.4, gcc-12, java17, and more) are automatically mapped to their base GTFOBins rules. On top of the GTFOBins engine, 22 behavioral alert types derived from the HiveSecurity Linux Privilege Escalation guide provide complete coverage of all six attack phases: reconnaissance (SUID enumeration, world-writable file discovery, sudo -l, cron inspection, kernel version checking), SUID/SGID abuse (euid mismatch detection via auditd with whitelisted system binaries, -p flag shell spawning, chmod +s backdoors), sudo misconfiguration (shell spawning detection that distinguishes malicious os.system/os.execl calls from benign -c usage, LD_PRELOAD injection with shared library compilation detection), cron job hijacking (file modification watches plus content-aware diff alerts showing exactly what was added), PATH injection (both cmdline-based detection and /proc/*/environ polling that catches shell builtin export commands invisible to execve monitoring), Linux capabilities abuse (getcap/setcap detection plus setuid syscall monitoring), and kernel exploits including DirtyFrag (CVE-2026-46331 — page cache corruption via pagemap), DirtyClone (CVE-2026-43503 — memory mapping file manipulation), DirtyPipe (CVE-2022-0847 — /proc/self/mem overwrite), PwnKit (CVE-2021-4034 — suspicious pkexec execution), and CopyFail (copy.fail URL access, splice/copy_file_range abuse, curl-pipe-to-interpreter-su pattern). Beyond command-level detection, FLUX provides comprehensive system-wide monitoring across eight additional layers. File integrity monitoring via SHA-256 hashing with 3-second polling covers both system files (/etc/passwd, /etc/shadow, /etc/sudoers, /etc/group, /etc/crontab) and HIDS configuration files, supplemented by kernel-level auditd file watches for real-time sudoers and cron modification alerts independent of the polling cycle. User and group account monitoring polls /etc/passwd and /etc/group every 5 seconds using set-difference comparison, detecting new user creation, sudo group membership changes, wheel group modifications, and /etc/sudoers hash changes with automatic corrupted-baseline recovery. Persistence detection monitors all common autostart locations — system-wide paths (/etc/rc.local, /etc/init.d/, /etc/systemd/system/, all cron directories) plus every user's shell RC files under /home/* and /root — with content-aware diffing that shows the exact lines added or removed, not just which file changed. Kernel and rootkit monitoring provides three detection vectors: loaded module tracking with hash verification and whitelist comparison, hidden process detection by cross-referencing /proc PIDs against psutil's process list, and hidden file discovery by comparing os.listdir() output against ls -A results. USB device enumeration captures vendor ID, product ID, manufacturer, serial number, speed class, and max power draw for BadUSB and malicious HID detection. Network surveillance runs across three threads: new process tracking, sustained upload/download detection with 50KB/s threshold and spike analysis, and internet connectivity monitoring via ICMP probes. System resource monitoring detects CPU spikes above 80% and memory usage over 500MB with automatic browser process whitelisting (Firefox, Chrome, Chromium, Brave). Environment scanning polls /proc/*/environ every 2 seconds for PATH hijacking, catching shell builtin export commands that never appear in execve logs. All alerts are delivered in real time to Discord via structured webhooks with per-alert-type icons and descriptions, enabling rapid incident response before damage occurs. The entire system runs as a single Python process with graceful Ctrl+C shutdown, automatic auditd rule cleanup on exit, and resilient JSON handling with automatic corrupted-baseline recovery.",
+      "category": "Detection & Blue Team",
+      "technologies": [
+          "Python",
+          "Linux",
+          "Auditd",
+          "GTFOBins",
+      ],
+      "threatActors": [],
+      "githubUrl": "https://github.com/0xbitx/DEDSEC_FLUX",
+      "owner": "0xbitx",
+      "repo": "DEDSEC_FLUX"
+  },
+  {
     "title": "DEDSEC_SIGBIN",
     "description": "The GTFOBins project is one of the most useful resources in offensive security—a living catalog of every Unix binary that can be abused for file reads, shell escapes, privilege escalation, and lateral movement. But its value to defenders has always been latent. The data exists as hand-curated YAML; converting that into actionable detection rules that fire in a real SIEM requires manual translation work that few security teams ever prioritize. DEDSEC_SIGBIN automates this translation end-to-end, turning GTFOBins' knowledge base into deployable Sigma and Wazuh rules with a single command and zero external dependencies. The engineering challenge SIGBIN solves is non-trivial: GTFOBins structures each binary's abuse techniques under nested context keys (`sudo`, `suid`, `unprivileged`, `shell`, `command`, etc.), each containing platform-specific command strings with documentation placeholders. SIGBIN's built-in YAML parser—implemented from scratch rather than relying on PyYAML to maintain zero-dependency portability—flattens this hierarchy and maps each technique to ATT&CK technique IDs, severity levels, and appropriate detection patterns. The intelligence is in the regex generation: documentation placeholders like `attacker.com`, `/path/to/input-file`, and `12345` are automatically replaced with pattern wildcards (`\\S+`, `\\d+`), transforming reference examples into rules that match real attacker infrastructure. A `--literal` flag preserves the raw strings for documentation purposes. The output is twofold: individual Sigma YAML rules with embedded Wazuh field mappings, and a combined `gtfobins_wazuh_rules.xml` file that's drop-in ready for any Wazuh Manager deployment. Rules leverage `<if_sid>530</if_sid>` to hook into the command execution decoder pipeline, with severity levels stratified from 10 (file-read, file-write) to 15 (reverse-shell, bind-shell). The tool's clone-parse-generate-cleanup lifecycle means it always works against the latest upstream GTFOBins data, never ships stale rules, and leaves no cloned repos behind. The lesson is about automation leverage: GTFOBins has existed for years, but the gap between \"knowing about LOLBins abuse\" and \"detecting LOLBins abuse in production\" has been a manual bridge that SIGBIN finally automates away.",
     "rawDescription": "The GTFOBins project is one of the most useful resources in offensive security—a living catalog of every Unix binary that can be abused for file reads, shell escapes, privilege escalation, and lateral movement. But its value to defenders has always been latent. The data exists as hand-curated YAML; converting that into actionable detection rules that fire in a real SIEM requires manual translation work that few security teams ever prioritize. DEDSEC_SIGBIN automates this translation end-to-end, turning GTFOBins' knowledge base into deployable Sigma and Wazuh rules with a single command and zero external dependencies. The engineering challenge SIGBIN solves is non-trivial: GTFOBins structures each binary's abuse techniques under nested context keys (`sudo`, `suid`, `unprivileged`, `shell`, `command`, etc.), each containing platform-specific command strings with documentation placeholders. SIGBIN's built-in YAML parser—implemented from scratch rather than relying on PyYAML to maintain zero-dependency portability—flattens this hierarchy and maps each technique to ATT&CK technique IDs, severity levels, and appropriate detection patterns. The intelligence is in the regex generation: documentation placeholders like `attacker.com`, `/path/to/input-file`, and `12345` are automatically replaced with pattern wildcards (`\\S+`, `\\d+`), transforming reference examples into rules that match real attacker infrastructure. A `--literal` flag preserves the raw strings for documentation purposes. The output is twofold: individual Sigma YAML rules with embedded Wazuh field mappings, and a combined `gtfobins_wazuh_rules.xml` file that's drop-in ready for any Wazuh Manager deployment. Rules leverage `<if_sid>530</if_sid>` to hook into the command execution decoder pipeline, with severity levels stratified from 10 (file-read, file-write) to 15 (reverse-shell, bind-shell). The tool's clone-parse-generate-cleanup lifecycle means it always works against the latest upstream GTFOBins data, never ships stale rules, and leaves no cloned repos behind. The lesson is about automation leverage: GTFOBins has existed for years, but the gap between \"knowing about LOLBins abuse\" and \"detecting LOLBins abuse in production\" has been a manual bridge that SIGBIN finally automates away.",
@@ -401,7 +417,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "Bash",
       "Linux",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/DEDSEC_DNSStrike",
@@ -455,7 +470,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "C",
       "Linux",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/DEDSEC_ETA",
@@ -471,7 +485,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "C",
       "Linux",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/DEDSEC_GSTRIKE",
@@ -505,7 +518,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "Linux",
       "Windows",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/DEDSEC_RANSOMWARE_BUILDER",
@@ -522,7 +534,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "C",
       "Linux",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/DEDSEC_SNAKELINE",
@@ -557,7 +568,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "C",
       "Linux",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/DEDSEC_REDIRMASK",
@@ -591,7 +601,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "C",
       "Linux",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/Dedsec-VPN",
@@ -608,7 +617,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "C",
       "Linux",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/DEDSEC_PROC-HACKER",
@@ -624,7 +632,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "C",
       "Linux",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/DEDSEC_OPENGATE",
@@ -641,7 +648,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "C",
       "Linux",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/DEDSEC_MARBLE",
@@ -657,7 +663,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "C",
       "Linux",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/DEDSEC_BKIF",
@@ -685,7 +690,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
     "technologies": [
       "C",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/Hacking-guide",
@@ -741,7 +745,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "Windows",
       "Metasploit",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/DEDSEC_VSDOOR",
@@ -757,7 +760,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "C",
       "Linux",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/DEDSEC_STOR",
@@ -792,7 +794,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "Bash",
       "Linux",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/DEDSEC_ZIPHITE",
@@ -809,7 +810,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "Linux",
       "Windows",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/DEDSEC_MOTW",
@@ -844,7 +844,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "C",
       "Linux",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/dedsec_cli_utils",
@@ -879,7 +878,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "C",
       "Linux",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/DEDSEC_BOTNET",
@@ -931,7 +929,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "C",
       "Linux",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/DEDSEC_GHOSTMAILER",
@@ -948,7 +945,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "C",
       "Linux",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/DEDSEC_PHONERENSIC",
@@ -964,7 +960,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "C",
       "Linux",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/DEDSEC_TIKTOKVB",
@@ -980,7 +975,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "C",
       "Linux",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/DEDSEC_PHISH",
@@ -1013,7 +1007,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "C",
       "Linux",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/DEDSEC_DEB",
@@ -1029,7 +1022,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "C",
       "Linux",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/DEDSEC_WVEA",
@@ -1045,7 +1037,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "C",
       "Linux",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/DEDSEC_GTERM",
@@ -1080,7 +1071,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "Linux",
       "Windows",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/DEDSEC_IMGWARE",
@@ -1097,7 +1087,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "C",
       "Linux",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/DEDSEC_RTLO",
@@ -1115,7 +1104,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "Linux",
       "Windows",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/DEDSEC_M2PDF",
@@ -1132,7 +1120,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "Linux",
       "Metasploit",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/DEDSEC_NULLSIG",
@@ -1148,7 +1135,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "C",
       "Linux",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/DEDSEC_PIRATA",
@@ -1165,7 +1151,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "C",
       "Linux",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/DEDSEC_ROOTRAP",
@@ -1181,7 +1166,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "C",
       "Linux",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/DEDSEC_0-LOGS",
@@ -1198,7 +1182,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "C",
       "Linux",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/DEDSEC_PEOPLE_SEARCH",
@@ -1215,7 +1198,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "C",
       "Linux",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/DEDSEC_DATALEAKED",
@@ -1232,7 +1214,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "Bash",
       "Linux",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/dedsec-wifiphish_v2",
@@ -1250,7 +1231,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "Linux",
       "Windows",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/DEDSEC_LINX2WIN",
@@ -1267,7 +1247,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "Linux",
       "Windows",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/DEDSEC_WINVIR_BUILDER",
@@ -1284,7 +1263,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "C",
       "Linux",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/DEDSEC_PALAMAN",
@@ -1300,7 +1278,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "C",
       "Linux",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/dedsec-tempmail",
@@ -1316,7 +1293,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "C",
       "Linux",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/DEDSEC_GCLI",
@@ -1333,7 +1309,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "C",
       "Linux",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/DEDSEC_NGL_FACEREVEAL",
@@ -1351,7 +1326,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "JavaScript",
       "Linux",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/DEDSEC_NGL_USERREVEAL",
@@ -1367,7 +1341,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "C",
       "Linux",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/DEDSEC_HTML_OBF",
@@ -1383,7 +1356,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "C",
       "Linux",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/DEDSEC_PTZ_STRM_EXPLOIT",
@@ -1400,7 +1372,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "C",
       "Linux",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/DEDSEC_MALWARE_DROPPER",
@@ -1416,7 +1387,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "C",
       "Linux",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/DEDSEC_SHRED",
@@ -1432,7 +1402,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "C",
       "Linux",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/DEDSEC_STARSYNC",
@@ -1465,7 +1434,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "C",
       "Linux",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/Dedsec_file-time-manipulator",
@@ -1481,7 +1449,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "C",
       "Linux",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/DEDSEC_ESP32_TOOLKIT",
@@ -1514,7 +1481,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "C",
       "Linux",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/DEDSEC_COMMIT_PROBE",
@@ -1530,7 +1496,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "C",
       "Linux",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/DEDSEC_WIREMON",
@@ -1546,7 +1511,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "C",
       "Linux",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/DEDSEC_WI-FIDAR",
@@ -1563,7 +1527,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "C",
       "Linux",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/DEDSEC-AVSCAN",
@@ -1579,7 +1542,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "C",
       "Linux",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/DEDSEC_PAGE_STALKER",
@@ -1595,7 +1557,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "C",
       "Linux",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/DEDSEC_RANSOMWARE",
@@ -1624,7 +1585,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "C",
       "Linux",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/DEDSEC_CODE-CSV",
@@ -1657,7 +1617,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "C",
       "Linux",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/DEDSEC_PASTEBIN-CLI",
@@ -1673,7 +1632,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "C",
       "Linux",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/DEDSEC_MikroTik-Bruter",
@@ -1706,7 +1664,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "C",
       "Linux",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/DEDSEC_GUILDJACKER",
@@ -1740,7 +1697,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "C",
       "Linux",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/DEDSEC-XICOMAP",
@@ -1757,7 +1713,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "C",
       "Linux",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/DEDSEC_SERPENTbytes",
@@ -1790,7 +1745,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
     "technologies": [
       "C",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/DEDSEC_VENDO_GHOST",
@@ -1806,7 +1760,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "C",
       "Linux",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/DEEPSEEK",
@@ -1862,7 +1815,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
     "technologies": [
       "C",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/DEDSEC_BLUEJACKER",
@@ -1893,7 +1845,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "Linux",
       "Windows",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/DEDSEC_RAT",
@@ -1940,7 +1891,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "C",
       "Bash",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/how_to_contribute",
@@ -1955,7 +1905,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
     "technologies": [
       "C",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/PH_Mobile_Number_Prefixes",
@@ -1972,7 +1921,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "C",
       "Linux",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/DEDSEC_PPI",
@@ -2006,7 +1954,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "C",
       "Linux",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/Dedsec-Wifi-Killer",
@@ -2022,7 +1969,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "C",
       "Linux",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/Dedsec-WifiV2",
@@ -2038,7 +1984,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "Python",
       "C",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/DEDSEC-Bluetooth-exploit",
@@ -2054,7 +1999,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "C",
       "Linux",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/DEDSEC_DELHOOK",
@@ -2071,7 +2015,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "C",
       "Linux",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/DEDSEC_DISCORD_TKN",
@@ -2101,7 +2044,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "C",
       "Linux",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/DEDSEC_SKID_REVEAL",
@@ -2146,7 +2088,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
     "technologies": [
       "C",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/DEDSEC_NGL_TOOL",
@@ -2162,7 +2103,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "C",
       "Linux",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/DEDSEC_NGL_DELETER",
@@ -2178,7 +2118,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "C",
       "Linux",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/DEDSEC_VENDO_ADMIN_BRUTER",
@@ -2213,7 +2152,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "Windows",
       "Metasploit",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/Dedsec-usb",
@@ -2229,7 +2167,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "C",
       "Linux",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/Dedsec-Proxychain",
@@ -2246,7 +2183,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "Bash",
       "Linux",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/dedsec-wifiphish",
@@ -2261,7 +2197,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
     "technologies": [
       "C",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/Dedsec-Troll",
@@ -2278,7 +2213,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "Bash",
       "Linux",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/dedsec-wifi-reverseshell",
@@ -2296,7 +2230,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "Linux",
       "Metasploit",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/Dedsec-Android-Fud",
@@ -2313,7 +2246,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "C",
       "Linux",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/Dedsec-Notion-Ai",
@@ -2330,7 +2262,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "C",
       "Linux",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/DEDSEC_GFS",
@@ -2347,7 +2278,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "Linux",
       "Windows",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/linux_based_dual_monitor_setup",
@@ -2364,7 +2294,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "C",
       "Linux",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/DEDSEC-ADB",
@@ -2381,7 +2310,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "C",
       "Linux",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/Dedsec-layer7",
@@ -2397,7 +2325,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "C",
       "Linux",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/Dedsec-Wifi-Troll",
@@ -2414,7 +2341,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "C",
       "Linux",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/DEDSEC_VOUCHER_BRUTER",
@@ -2430,7 +2356,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "C",
       "Linux",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/DEDSEC_INSTADUMP",
@@ -2446,9 +2371,7 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "Python",
       "C",
       "Linux",
-      "Docker",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/DEDSEC_TROJANIZE",
@@ -2465,7 +2388,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "C",
       "Linux",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/DEDSEC_BABY_GHOST",
@@ -2482,7 +2404,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "Linux",
       "Windows",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/DEDSEC-WINSHELL",
@@ -2510,7 +2431,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "C",
       "Linux",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/DEDSEC_PYTHON_BEAUTIFIER",
@@ -2527,7 +2447,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "C",
       "Linux",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/DEDSEC_PYTRIM",
@@ -2544,7 +2463,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "C",
       "Linux",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/DEDSEC_DIRTYPY",
@@ -2561,7 +2479,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "C",
       "Linux",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/DEDSEC_IPGRABBER",
@@ -2578,7 +2495,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "C",
       "Linux",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/DEDSEC_ASHLEY_LOOK_AT_ME",
@@ -2595,7 +2511,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "C",
       "Linux",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/DEDSEC_SKID_TRACKER",
@@ -2612,7 +2527,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "C",
       "Linux",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/DEDSEC_WIFI_VENDO_TIME",
@@ -2629,7 +2543,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "C",
       "Linux",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/DEDSEC_MSG_ENC",
@@ -2664,7 +2577,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "C",
       "Linux",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/DEDSEC_VOUCHER",
@@ -2681,7 +2593,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "C",
       "Linux",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/DEDSEC_ADMIN_PASS_STEALER",
@@ -2698,7 +2609,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "C",
       "Linux",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/DEDSEC_NGL_SPAMMER",
@@ -2715,7 +2625,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "Bash",
       "Linux",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/Dedsec-Presidential-Survey",
@@ -2732,7 +2641,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "C",
       "Linux",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/DEDSEC-SMS",
@@ -2749,7 +2657,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "C",
       "Linux",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/Dedsec-Python-OBF",
@@ -2808,7 +2715,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "C",
       "Linux",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/DEDSEC_HUKBALAHACK",
@@ -2825,7 +2731,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "C",
       "Linux",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/Dedsec-linux-virus",
@@ -2840,7 +2745,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
     "technologies": [
       "C",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/DEDSEC_IPGRABBER_WEBHOOK",
@@ -2855,7 +2759,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
     "technologies": [
       "C",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/DARKNET-OPSEC",
@@ -2870,7 +2773,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
     "technologies": [
       "C",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/DEDSEC_ESP32_TOOL",
@@ -2887,7 +2789,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "C",
       "Linux",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/DEDSEC_DISCORD_DARK_THEME",
@@ -2920,7 +2821,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
       "C",
       "Linux",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/dedsec-payload-generator",
@@ -2949,7 +2849,6 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
     "technologies": [
       "C",
       "GitHub",
-      "GitHub"
     ],
     "threatActors": [],
     "githubUrl": "https://github.com/0xbitx/Dedsec-track-webhook",
