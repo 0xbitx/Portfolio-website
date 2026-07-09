@@ -517,7 +517,7 @@ header .grid-layout nav .nav-list li a:hover {
 }
 
 #s-experience {
-	background-color: #0a0a0a;  /* background color for exerience */
+	background-color: black;  /* background color for exerience */
 	color: #fff;
 	padding: 96px 48px;
 }
@@ -530,13 +530,8 @@ header .grid-layout nav .nav-list li a:hover {
 
 #s-experience .grid-layout h2 {
 	padding-bottom: 24px;
-	color: #fff;
 	font-size: 4rem;
 	font-weight: 500;
-}
-
-#s-experience .grid-layout h3 span {
-	color: rgb(150, 52, 225); /* color for span in experience */
 }
 
 #s-experience .grid-layout #experience {
@@ -565,14 +560,11 @@ header .grid-layout nav .nav-list li a:hover {
 
 #s-experience .grid-layout #experience .option-experience .activeExperience {
 	border-left: 4px solid #f5e6e6;
-	color: #8778c1;
 }
 
 #s-experience .grid-layout #experience .option-experience>div {
 	padding: 24px 32px;
 	text-align: left;
-	background-color: #000000;
-	border-left: 4px solid #040405;
 }
 
 #s-experience .grid-layout #experience .option-experience>div:hover {
@@ -614,14 +606,12 @@ header .grid-layout nav .nav-list li a:hover {
 
 #s-experience .grid-layout #experience .text-experience>div p {
 	font-size: 1.8rem;
-	color: #8778c1;
 }
 
 #s-experience .grid-layout #experience .text-experience h5 {
 	font-size: 1.8rem;
 	margin: 32px 0px;
 	font-weight: 400;
-	color: #8778c1;
 }
 
 #s-experience .grid-layout #experience .text-experience p {
@@ -825,12 +815,14 @@ header .grid-layout nav .nav-list li a:hover {
 	margin: 8px;
 	flex-basis: calc(33% - 20px);
 	flex-grow: 1;
-	border: 1px solid #040405;
+	border: 4px dotted #555;
+	border-radius: 14px;
 	transition: 1s all ease;
 }
 
 #s-services .grid-layout #services article:hover {
-	border: 1px solid #8778c1;
+    border: 4px dotted #8778c1;
+	box-shadow: 0 0 12px rgba(135, 120, 193, 0.25);
 }
 
 @media screen and (max-width: 1200px) {
@@ -1150,6 +1142,7 @@ header .grid-layout nav .nav-list li a:hover {
   }
 
 #s-home .grid-layout #home #home-container-text a:hover {
+    position: relative;
 	padding: 10px 10px;
 	max-width: 150px;
 }
@@ -1634,13 +1627,14 @@ header .grid-layout nav .nav-list li a:hover {
 	margin: 8px;
 	flex-basis: calc(33% - 20px);
 	flex-grow: 1;
-	border: 1px solid #040405;
-	border-radius: 10px;
+	border: 3px dashed #555;
+	border-radius: 14px;
 	transition: 1s all ease;
 }
 
 #s-services .grid-layout #services article:hover {
-	border: 1px solid #8778c1; /* border color for WHAT I DO */
+    border: 3px dashed #8778c1;
+	box-shadow: 0 0 12px rgba(135, 120, 193, 0.25);
 }
 
 @media screen and (max-width: 1200px) {
@@ -2172,6 +2166,7 @@ footer .grid-layout div img {
 
 /* GitHub button hover effect */
 .github-btn {
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -2184,6 +2179,37 @@ footer .grid-layout div img {
   transition: background 0.4s ease, width 0.4s ease, border-radius 0.4s ease, gap 0.4s ease;
 }
 
+#home-container-text {
+  position: relative; 
+}
+
+#home-container-text::before {
+  content: '';
+  position: absolute;
+  right: 50%; 
+  left: -13%;
+  bottom: 10px;
+  transform: translateX(50%);
+  width: 200px;
+  height: 200px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 90 65'%3E%3Cpath d='M5 5 Q35 5 45 20 Q55 35 45 60' stroke='%238778c1' stroke-width='2' stroke-dasharray='3 5' stroke-linecap='round' fill='none'/%3E%3Cpath d='M39 52 L45 62 L51 52' fill='none' stroke='%238778c1' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-size: contain;
+  background-repeat: no-repeat;
+  pointer-events: none;
+  z-index: 3;
+  opacity: 1;
+  transition: opacity 0.2s ease;
+}
+
+#home-container-text:has(.github-btn:hover)::before {
+  opacity: 0;
+}
+
+@keyframes arrowSlide {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(-5px); }
+}
+
 .github-btn .gh-icon {
   width: 59px !important;
   height: 59px !important;
@@ -2194,7 +2220,7 @@ footer .grid-layout div img {
 
 .github-btn .gh-text {
   max-width: 0;
-  overflow: hidden;
+  overflow: visible;
   opacity: 0;
   color: #000;
   font-family: 'Courier New', Consolas, monospace;
