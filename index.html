@@ -616,7 +616,7 @@
         const body = document.body;
 
         const savedFlashlight = localStorage.getItem('flashlight');
-        if (savedFlashlight === 'on') {
+        if (savedFlashlight !== 'on') {
           body.classList.add('flashlight-off');
         }
 
