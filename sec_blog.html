@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>0xbit – Security Blog</title>
 <link rel="icon" href="https://github.com/0xbitx.png" type="image/png">
-<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800&family=Inconsolata:wght@700&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -23,7 +23,6 @@ body{
 body::before{
   content:'';
   position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;
-  background:url('/assets/image/background.png') center/cover no-repeat;
   filter:blur(5px) brightness(0.20);
 }
 
@@ -31,7 +30,7 @@ body::before{
   position:fixed;top:0;left:0;right:0;z-index:1000;
   background:rgba(0,0,0,0.92);backdrop-filter:blur(20px);
   -webkit-backdrop-filter:blur(20px);
-  border-bottom:1px solid rgba(135,120,193,0.1);gap:2px
+  border-bottom:1px solid rgba(255,255,255,0.1);gap:2px
     height:56px;display:flex;align-items:center;padding:0 20px;gap:14px;
 }
 .nav-logo{font-family:var(--font-mono);font-size:1.3rem;font-weight:700;color:#fff;white-space:nowrap;letter-spacing:-1px}
@@ -49,19 +48,31 @@ body::before{
   border-radius:4px;width:170px;transition:.25s;outline:none;
 }
 .search-wrap input::placeholder{color:#444}
-.search-wrap input:focus{border-color:var(--accent);width:210px}
+.search-wrap input:focus{border-color:rgba(255,255,255,0.35);width:210px}
 .search-wrap .sicon{position:absolute;left:10px;top:50%;transform:translateY(-50%);color:#555;font-size:.75rem;pointer-events:none}
 
-.hero{padding:100px 20px 20px;text-align:center}
-.hero h1{font-family:var(--font-mono);font-size:clamp(1.8rem,5vw,2.8rem);font-weight:700;color:var(--accent);margin-bottom:4px;letter-spacing:-1px}
-.hero p{font-size:.9rem;color:var(--muted);max-width:500px;margin:0 auto}
+.hero{
+  position:relative;overflow:hidden;
+  min-height:10vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:50px 20px 56px;text-align:center;
+}
+.hero-bg{position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.9}
+.hero-bg canvas{width:100%;height:100%;display:block}
+.hero::after{content:'';position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:radial-gradient(ellipse at center,rgba(0,0,0,0.12) 0%,rgba(0,0,0,0.74) 100%)}
+.hero-content{position:relative;z-index:10;max-width:840px;margin:0 auto}
+.hero h1{font-family:var(--font-mono);font-size:clamp(1.8rem,5vw,3.2rem);font-weight:700;color:#f3f3f3;margin-bottom:10px;letter-spacing:-1px}
+.hero p{font-family:var(--font-mono);font-size:.82rem;color:#a3a3a3;max-width:660px;margin:0 auto;line-height:1.8}
 .stats-row{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin-top:14px}
 .stat{text-align:center;padding:3px 10px;background:#0d0d0d;border:1px solid rgba(255,255,255,0.05);border-radius:20px}
 .stat .num{font-family:var(--font-mono);font-size:.95rem;font-weight:700;color:var(--accent)}
 .stat .label{font-size:.55rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px}
 
 .ctrl{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:12px;padding:0 20px 10px}
-.btn{font-family:var(--font-mono);font-size:.7rem;font-weight:600;padding:7px 14px;border:1px solid var(--accent);border-radius:4px;cursor:pointer;transition:.2s;text-transform:uppercase;letter-spacing:.5px;display:inline-flex;align-items:center;gap:4px}
+.btn{font-family:var(--font-mono);font-size:.7rem;font-weight:600;padding:7px 14px;border:1px solid rgba(255,255,255,0.28);border-radius:4px;cursor:pointer;transition:.2s;text-transform:uppercase;letter-spacing:.5px;display:inline-flex;align-items:center;gap:4px}
 .btn-fill{background:var(--accent);color:#000}
 .btn-fill:hover{background:var(--accent2)}
 .btn-out{background:transparent;color:var(--accent)}
@@ -73,7 +84,7 @@ body::before{
 .tree{max-width:1100px;margin:0 auto;padding:0 20px 80px}
 
 .branch{margin-bottom:6px;border:1px solid transparent;transition:.3s}
-.branch.open{border-color:rgba(135,120,193,0.06);background:rgba(135,120,193,0.008);border-radius:6px;margin-bottom:14px}
+.branch.open{border-color:rgba(255,255,255,0.08);background:rgba(135,120,193,0.008);border-radius:6px;margin-bottom:14px}
 
 .branch-header{
   display:flex;align-items:center;gap:12px;padding:12px 14px;
@@ -184,7 +195,7 @@ body::before{
   .hamburger{display:flex}
   .search-wrap input{width:110px}.search-wrap input:focus{width:140px}
   .tools-wrap{grid-template-columns:1fr;padding:2px 8px 10px 16px}
-  .hero{padding:90px 16px 16px}
+  .hero{padding:100px 16px 40px;min-height:70vh}
 }
 @media(max-width:480px){
   .navbar{padding:0 10px;gap:8px}.nav-logo{font-size:1.1rem}
@@ -211,14 +222,17 @@ body::before{
 </nav>
 
 <section class="hero">
-  <img src="https://github.com/0xbitx.png" alt="Profile" style="width:180px;height:180px;border-radius:50%;border:2px solid rgba(255,255,255,0.15);margin-bottom:12px;object-fit:cover">
-  <h1 style="color:#fff">0<span style="font-weight:400">xbit</span></h1>
-  <p style="max-width:620px;font-size:.88rem;line-height:1.7;margin-top:10px">
-    Every tool in this blog was built through years of hands-on cybersecurity exploration — from phishing simulations to kernel-level rootkits, from detection engineering to exploit development. I don't just study security; I <em style="color:var(--accent);font-style:normal">build</em> it. Red team, blue team — I operate across the full spectrum, understanding both how to break systems and how to defend them.
-  </p>
-  <div class="stats-row">
-    <div class="stat"><div class="num" id="totalProjects">--</div><div class="label">Tools</div></div>
-    <div class="stat"><div class="num" id="totalCategories">--</div><div class="label">Categories</div></div>
+  <div class="hero-bg"><canvas id="ascii-bg"></canvas></div>
+  <div class="hero-content">
+    <img src="https://github.com/0xbitx.png" alt="Profile" style="width:180px;height:180px;border-radius:50%;border:2px solid rgba(255,255,255,0.18);margin-bottom:16px;object-fit:cover;box-shadow:0 0 40px rgba(0,0,0,0.6)">
+    <h1>0<span style="font-weight:400;color:#a3a3a3">xbit</span></h1>
+    <p>
+      Every tool in this blog was built through years of hands-on cybersecurity exploration — from phishing simulations to kernel-level rootkits, from detection engineering to exploit development. I don't just study security; I <em style="color:var(--accent);font-style:normal">build</em> it. Red team, blue team — I operate across the full spectrum, understanding both how to break systems and how to defend them.
+    </p>
+    <div class="stats-row">
+      <div class="stat"><div class="num" id="totalProjects">--</div><div class="label">Tools</div></div>
+      <div class="stat"><div class="num" id="totalCategories">--</div><div class="label">Categories</div></div>
+    </div>
   </div>
 </section>
 
@@ -3053,6 +3067,203 @@ if(window.__DEDSEC_EMBEDDED_DATA__&&window.__DEDSEC_EMBEDDED_DATA__.length>0){
   renderAll();
   updateLastUpdated();
 }
+</script>
+
+<script>
+(function () {
+  'use strict';
+
+  var canvas = document.getElementById('ascii-bg');
+  if (!canvas) return;
+
+  var VERTEX_SHADER = [
+    'attribute vec2 a_position;',
+    'void main() { gl_Position = vec4(a_position, 0.0, 1.0); }'
+  ].join('\n');
+
+  var FRAGMENT_SHADER = [
+    'precision mediump float;',
+    'uniform vec2  u_resolution;',
+    'uniform float u_time;',
+    'float hash(vec2 p) {',
+    '  p = fract(p * vec2(123.34, 456.21));',
+    '  p += dot(p, p + 45.32);',
+    '  return fract(p.x * p.y);',
+    '}',
+    'float noise(vec2 p) {',
+    '  vec2 i = floor(p), f = fract(p);',
+    '  vec2 u = f * f * (3.0 - 2.0 * f);',
+    '  return mix(mix(hash(i), hash(i+vec2(1,0)), u.x),',
+    '             mix(hash(i+vec2(0,1)), hash(i+vec2(1,1)), u.x), u.y);',
+    '}',
+    'float fbm(vec2 p) {',
+    '  float v = 0.0, a = 0.5;',
+    '  for (int i = 0; i < 5; i++) { v += a*noise(p); p *= 2.0; a *= 0.5; }',
+    '  return v;',
+    '}',
+    'float warp(vec2 p, float t) {',
+    '  vec2 q = vec2(fbm(p + t*0.4), fbm(p + vec2(5.2,1.3) + t*0.35));',
+    '  vec2 r = vec2(fbm(p + 1.5*q + vec2(1.7,9.2) + t*0.3),',
+    '                fbm(p + 1.5*q + vec2(8.3,2.8) + t*0.25));',
+    '  return fbm(p + 1.5*r);',
+    '}',
+    'void main() {',
+    '  vec2 uv = gl_FragCoord.xy / u_resolution.y * 1.0;',
+    '  uv.x += u_time * 0.08;',
+    '  uv.y += sin(u_time * 0.15 + uv.x * 2.0) * 0.05;',
+    '  float n = warp(uv, u_time * 1.0);',
+    '  gl_FragColor = vec4(n, n, n, 1.0);',
+    '}'
+  ].join('\n');
+
+  var CHAR_SET = ' ._-·~:,;=|/!?+*^<>(){}[]0xbit#$%&@';
+  var COLOR = [77, 77, 77];
+  var FRAME_INTERVAL = 1000 / 30;
+  var SPEED = 0.5;
+  var MOBILE_BREAKPOINT = 768;
+  var CELL_MOBILE = 16;
+  var CELL_DESKTOP = 10;
+
+  var offscreen = document.createElement('canvas');
+  var gl = offscreen.getContext('webgl', { preserveDrawingBuffer: true });
+  if (!gl) return;
+
+  function compileShader(type, source) {
+    var shader = gl.createShader(type);
+    gl.shaderSource(shader, source);
+    gl.compileShader(shader);
+    return shader;
+  }
+
+  var program = gl.createProgram();
+  gl.attachShader(program, compileShader(gl.VERTEX_SHADER, VERTEX_SHADER));
+  gl.attachShader(program, compileShader(gl.FRAGMENT_SHADER, FRAGMENT_SHADER));
+  gl.linkProgram(program);
+  gl.useProgram(program);
+
+  var buffer = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([
+    -1, -1, 1, -1, -1, 1,
+    -1, 1, 1, -1, 1, 1
+  ]), gl.STATIC_DRAW);
+
+  var aPosition = gl.getAttribLocation(program, 'a_position');
+  gl.enableVertexAttribArray(aPosition);
+  gl.vertexAttribPointer(aPosition, 2, gl.FLOAT, false, 0, 0);
+
+  var uResolution = gl.getUniformLocation(program, 'u_resolution');
+  var uTime = gl.getUniformLocation(program, 'u_time');
+
+  var ctx = canvas.getContext('2d');
+  if (!ctx) return;
+
+  var startTime = Date.now();
+  var lastFrame = 0;
+  var rafId = null;
+  var isVisible = true;
+  var isIntersecting = true;
+  var state = { w: 400, h: 400, dpr: 1 };
+
+  function resize() {
+    var rect = canvas.getBoundingClientRect();
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    canvas.width = rect.width * dpr;
+    canvas.height = rect.height * dpr;
+    state.w = rect.width;
+    state.h = rect.height;
+    state.dpr = dpr;
+  }
+  var ro = new ResizeObserver(resize);
+  ro.observe(canvas);
+  resize();
+
+  function render() {
+    var dpr = state.dpr || 1;
+    var w = state.w || 400;
+    var h = state.h || 400;
+    var cell = window.innerWidth < MOBILE_BREAKPOINT ? CELL_MOBILE : CELL_DESKTOP;
+    var cols = Math.ceil(w / cell);
+    var rows = Math.ceil(h / cell);
+
+    offscreen.width = cols;
+    offscreen.height = rows;
+    gl.viewport(0, 0, cols, rows);
+    gl.useProgram(program);
+    gl.uniform2f(uResolution, cols, rows);
+    gl.uniform1f(uTime, (Date.now() - startTime) / 1000 * SPEED);
+    gl.drawArrays(gl.TRIANGLES, 0, 6);
+
+    var pixels = new Uint8Array(cols * rows * 4);
+    gl.readPixels(0, 0, cols, rows, gl.RGBA, gl.UNSIGNED_BYTE, pixels);
+
+    var min = 255, max = 0;
+    for (var i = 0; i < pixels.length; i += 4) {
+      if (pixels[i] < min) min = pixels[i];
+      if (pixels[i] > max) max = pixels[i];
+    }
+    var range = (max - min) || 1;
+    var cellPx = cell * dpr;
+    var lastIndex = CHAR_SET.length - 1;
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.font = '700 ' + (1.05 * cellPx * 0.99) + "px 'Inconsolata', monospace";
+    ctx.textBaseline = 'middle';
+    ctx.textAlign = 'center';
+
+    for (var y = 0; y < rows; y++) {
+      for (var x = 0; x < cols; x++) {
+        var value = pixels[4 * ((rows - 1 - y) * cols + x)];
+        var r = (value - min) / range;
+        r = Math.pow(r, 1.7);
+        r = (r - 0.15) / 0.85;
+        r = Math.max(0, r);
+        var index = Math.round(r * lastIndex);
+        if (index !== 0) {
+          var alpha = (0.2 + 0.8 * r).toFixed(2);
+          ctx.fillStyle = 'rgba(' + COLOR[0] + ',' + COLOR[1] + ',' + COLOR[2] + ',' + alpha + ')';
+          ctx.fillText(CHAR_SET[index], x * cellPx + cellPx / 2, y * cellPx + cellPx / 2);
+        }
+      }
+    }
+  }
+
+  function loop(timestamp) {
+    rafId = requestAnimationFrame(loop);
+    if (!isVisible || !isIntersecting || timestamp - lastFrame < FRAME_INTERVAL) return;
+    lastFrame = timestamp;
+    render();
+  }
+
+  var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  if (reducedMotion.matches) {
+    render();
+  } else {
+    rafId = requestAnimationFrame(loop);
+  }
+
+  var onMotionChange = function () {
+    if (reducedMotion.matches) {
+      if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
+      render();
+    } else if (rafId === null) {
+      rafId = requestAnimationFrame(loop);
+    }
+  };
+  reducedMotion.addEventListener('change', onMotionChange);
+
+  var onVisibility = function () {
+    isVisible = document.visibilityState === 'visible';
+  };
+  document.addEventListener('visibilitychange', onVisibility);
+
+  var io = new IntersectionObserver(function (entries) {
+    for (var i = 0; i < entries.length; i++) {
+      isIntersecting = entries[i].isIntersecting;
+    }
+  }, { threshold: 0.01 });
+  io.observe(canvas);
+})();
 </script>
 </body>
 </html>

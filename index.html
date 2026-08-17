@@ -21,6 +21,7 @@
       href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600&display=swap"
       rel="stylesheet"
     />
+    <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="assets/css/style.css" />
     <link
       rel="shortcut icon"
@@ -42,6 +43,20 @@
       @font-face {
           font-family: 'LiveOverfont';
           src: url('LiveOverfont.woff') format('woff');
+      }
+      #s-home, #s-experience, #s-services {
+        position: relative;
+        isolation: isolate;
+      }
+      .ascii-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        background: #000;
+        pointer-events: none;
       }
   </style>
     <title>0xbit</title>
@@ -123,6 +138,7 @@
     </header>
     <main>
       <section id="s-home">
+        <canvas class="ascii-bg"></canvas>
         <button id="flashlight-toggle" class="flashlight-toggle" aria-label="Toggle flashlight effect" title="Toggle flashlight effect">
           <svg class="light-on-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <rect x="4" y="8" width="7" height="8" rx="1.5" />
@@ -327,6 +343,7 @@
         </div>
       </section>
       <section id="s-experience">
+              <canvas class="ascii-bg"></canvas>
         <div class="grid-layout">
           <h2 class="delaySmallReveal" style="color: #8778c1 'LiveOverfont', sans-serif;"><span>#</span>Experience</h2>
           <div id="experience">
@@ -430,6 +447,7 @@
         </div>
       </section>
       <section id="s-services">
+              <canvas class="ascii-bg"></canvas>
         <div class="grid-layout">
           <h2 class="delaySmallReveal" style="color: rgb(97, 53, 243) 'LiveOverfont', sans-serif; font-size: 40px;">What I do<span>.</span></h2>
           <div id="services">
@@ -799,5 +817,208 @@
         });
       })();
     </script>
-  </body>
+  <script>
+/* Animated ASCII background — domain-warped fbm noise rendered as ASCII chars
+   (ported from the ezaascii.com-style implementation). */
+(function () {
+  'use strict';
+
+  var VERTEX_SHADER = [
+    'attribute vec2 a_position;',
+    'void main() { gl_Position = vec4(a_position, 0.0, 1.0); }'
+  ].join('\n');
+
+  var FRAGMENT_SHADER = [
+    'precision mediump float;',
+    'uniform vec2  u_resolution;',
+    'uniform float u_time;',
+    'float hash(vec2 p) {',
+    '  p = fract(p * vec2(123.34, 456.21));',
+    '  p += dot(p, p + 45.32);',
+    '  return fract(p.x * p.y);',
+    '}',
+    'float noise(vec2 p) {',
+    '  vec2 i = floor(p), f = fract(p);',
+    '  vec2 u = f * f * (3.0 - 2.0 * f);',
+    '  return mix(mix(hash(i), hash(i+vec2(1,0)), u.x),',
+    '             mix(hash(i+vec2(0,1)), hash(i+vec2(1,1)), u.x), u.y);',
+    '}',
+    'float fbm(vec2 p) {',
+    '  float v = 0.0, a = 0.5;',
+    '  for (int i = 0; i < 5; i++) { v += a*noise(p); p *= 2.0; a *= 0.5; }',
+    '  return v;',
+    '}',
+    'float warp(vec2 p, float t) {',
+    '  vec2 q = vec2(fbm(p + t*0.4), fbm(p + vec2(5.2,1.3) + t*0.35));',
+    '  vec2 r = vec2(fbm(p + 1.5*q + vec2(1.7,9.2) + t*0.3),',
+    '                fbm(p + 1.5*q + vec2(8.3,2.8) + t*0.25));',
+    '  return fbm(p + 1.5*r);',
+    '}',
+    'void main() {',
+    '  vec2 uv = gl_FragCoord.xy / u_resolution.y * 1.0;',
+    '  uv.x += u_time * 0.08;',
+    '  uv.y += sin(u_time * 0.15 + uv.x * 2.0) * 0.05;',
+    '  float n = warp(uv, u_time * 1.0);',
+    '  gl_FragColor = vec4(n, n, n, 1.0);',
+    '}'
+  ].join('\n');
+
+  var CHAR_SET = ' ._-·~:,;=|/!?+*^<>(){}[]0xbit#$%&@';
+  var COLOR = [77, 77, 77];
+  var FRAME_INTERVAL = 1000 / 30;
+  var SPEED = 0.5;
+  var MOBILE_BREAKPOINT = 768;
+  var CELL_MOBILE = 16;
+  var CELL_DESKTOP = 10;
+
+  function createAsciiBackground(canvas) {
+    var offscreen = document.createElement('canvas');
+    var gl = offscreen.getContext('webgl', { preserveDrawingBuffer: true });
+    if (!gl) return;
+
+    function compileShader(type, source) {
+      var shader = gl.createShader(type);
+      gl.shaderSource(shader, source);
+      gl.compileShader(shader);
+      return shader;
+    }
+
+    var program = gl.createProgram();
+    gl.attachShader(program, compileShader(gl.VERTEX_SHADER, VERTEX_SHADER));
+    gl.attachShader(program, compileShader(gl.FRAGMENT_SHADER, FRAGMENT_SHADER));
+    gl.linkProgram(program);
+    gl.useProgram(program);
+
+    var buffer = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([
+      -1, -1, 1, -1, -1, 1,
+      -1, 1, 1, -1, 1, 1
+    ]), gl.STATIC_DRAW);
+
+    var aPosition = gl.getAttribLocation(program, 'a_position');
+    gl.enableVertexAttribArray(aPosition);
+    gl.vertexAttribPointer(aPosition, 2, gl.FLOAT, false, 0, 0);
+
+    var uResolution = gl.getUniformLocation(program, 'u_resolution');
+    var uTime = gl.getUniformLocation(program, 'u_time');
+
+    var ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    var startTime = Date.now();
+    var lastFrame = 0;
+    var rafId = null;
+    var isVisible = true;
+    var isIntersecting = true;
+    var state = { w: 400, h: 400, dpr: 1 };
+
+    function resize() {
+      var rect = canvas.getBoundingClientRect();
+      var dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = rect.width * dpr;
+      canvas.height = rect.height * dpr;
+      state.w = rect.width;
+      state.h = rect.height;
+      state.dpr = dpr;
+    }
+    var ro = new ResizeObserver(resize);
+    ro.observe(canvas);
+    resize();
+
+    function render() {
+      var dpr = state.dpr || 1;
+      var w = state.w || 400;
+      var h = state.h || 400;
+      var cell = window.innerWidth < MOBILE_BREAKPOINT ? CELL_MOBILE : CELL_DESKTOP;
+      var cols = Math.ceil(w / cell);
+      var rows = Math.ceil(h / cell);
+
+      offscreen.width = cols;
+      offscreen.height = rows;
+      gl.viewport(0, 0, cols, rows);
+      gl.useProgram(program);
+      gl.uniform2f(uResolution, cols, rows);
+      gl.uniform1f(uTime, (Date.now() - startTime) / 1000 * SPEED);
+      gl.drawArrays(gl.TRIANGLES, 0, 6);
+
+      var pixels = new Uint8Array(cols * rows * 4);
+      gl.readPixels(0, 0, cols, rows, gl.RGBA, gl.UNSIGNED_BYTE, pixels);
+
+      var min = 255, max = 0;
+      for (var i = 0; i < pixels.length; i += 4) {
+        if (pixels[i] < min) min = pixels[i];
+        if (pixels[i] > max) max = pixels[i];
+      }
+      var range = (max - min) || 1;
+      var cellPx = cell * dpr;
+      var lastIndex = CHAR_SET.length - 1;
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.font = '700 ' + (1.05 * cellPx * 0.99) + "px 'Inconsolata', monospace";
+      ctx.textBaseline = 'middle';
+      ctx.textAlign = 'center';
+
+      for (var y = 0; y < rows; y++) {
+        for (var x = 0; x < cols; x++) {
+          var value = pixels[4 * ((rows - 1 - y) * cols + x)];
+          var r = (value - min) / range;
+          r = Math.pow(r, 1.7);
+          r = (r - 0.15) / 0.85;
+          r = Math.max(0, r);
+          var index = Math.round(r * lastIndex);
+          if (index !== 0) {
+            var alpha = (0.2 + 0.8 * r).toFixed(2);
+            ctx.fillStyle = 'rgba(' + COLOR[0] + ',' + COLOR[1] + ',' + COLOR[2] + ',' + alpha + ')';
+            ctx.fillText(CHAR_SET[index], x * cellPx + cellPx / 2, y * cellPx + cellPx / 2);
+          }
+        }
+      }
+    }
+
+    function loop(timestamp) {
+      rafId = requestAnimationFrame(loop);
+      if (!isVisible || !isIntersecting || timestamp - lastFrame < FRAME_INTERVAL) return;
+      lastFrame = timestamp;
+      render();
+    }
+
+    var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    if (reducedMotion.matches) {
+      render();
+    } else {
+      rafId = requestAnimationFrame(loop);
+    }
+
+    var onMotionChange = function () {
+      if (reducedMotion.matches) {
+        if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
+        render();
+      } else if (rafId === null) {
+        rafId = requestAnimationFrame(loop);
+      }
+    };
+    reducedMotion.addEventListener('change', onMotionChange);
+
+    var onVisibility = function () {
+      isVisible = document.visibilityState === 'visible';
+    };
+    document.addEventListener('visibilitychange', onVisibility);
+
+    var io = new IntersectionObserver(function (entries) {
+      for (var i = 0; i < entries.length; i++) {
+        isIntersecting = entries[i].isIntersecting;
+      }
+    }, { threshold: 0.01 });
+    io.observe(canvas);
+  }
+
+  var canvases = document.querySelectorAll('.ascii-bg');
+  for (var i = 0; i < canvases.length; i++) {
+    createAsciiBackground(canvases[i]);
+  }
+})();
+</script>
+
+</body>
 </html>

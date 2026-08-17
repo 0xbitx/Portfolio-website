@@ -809,7 +809,7 @@ header .grid-layout nav .nav-list li a:hover {
 }
 
 #s-services .grid-layout #services article {
-	background-color: #0a0a0a; 
+	background-color: #000000; 
 	height: auto;
 	padding: 32px;
 	margin: 8px;
@@ -1589,7 +1589,7 @@ header .grid-layout nav .nav-list li a:hover {
 
 #s-services {
 	padding: 96px 48px;
-	background-color: #0a0a0a; /* background color for WHAT I DO */
+	background-color: #000000; /* background color for WHAT I DO */
 }
 
 @media screen and (max-width: 992px) {
@@ -1978,8 +1978,8 @@ footer .grid-layout div img {
    ============================================ */
 #s-about .grid-layout #about {
   position: relative;
-  background: rgba(3, 3, 18, 0.55);
-  border: 1px solid rgba(135, 120, 193, 0.12);
+  background: rgba(10, 10, 10, 0.5);
+  border: 1px solid #0a0a0a;
   border-radius: 8px;
   padding-top: 42px !important;
   padding-bottom: 24px !important;
@@ -1989,8 +1989,8 @@ footer .grid-layout div img {
 
 #s-experience .grid-layout #experience {
   position: relative;
-  background: rgba(3, 3, 18, 0.55);
-  border: 1px solid rgba(135, 120, 193, 0.12);
+  background: rgba(10, 10, 10, 0.5);
+  border: 1px solid #0a0a0a;
   border-radius: 8px;
   padding-top: 42px !important;
   padding-bottom: 24px !important;
@@ -2005,8 +2005,8 @@ footer .grid-layout div img {
 
 #s-projects .grid-layout #projects {
   position: relative;
-  background: rgba(3, 3, 18, 0.55);
-  border: 1px solid rgba(135, 120, 193, 0.12);
+  background: rgba(10, 10, 10, 0.5);
+  border: 1px solid #0a0a0a;
   border-radius: 8px;
   padding: 42px 24px 24px 24px !important;
   margin: 0 auto;
@@ -2016,8 +2016,8 @@ footer .grid-layout div img {
 
 #s-services .grid-layout #services {
   position: relative;
-  background: rgba(3, 3, 18, 0.55);
-  border: 1px solid rgba(135, 120, 193, 0.12);
+  background: rgba(10, 10, 10, 0.5);
+  border: 1px solid #0a0a0a;
   border-radius: 8px;
   padding-top: 42px !important;
   padding-bottom: 24px !important;
@@ -2027,8 +2027,8 @@ footer .grid-layout div img {
 
 #s-skills .grid-layout #skills {
   position: relative;
-  background: rgba(3, 3, 18, 0.55);
-  border: 1px solid rgba(135, 120, 193, 0.12);
+  background: rgba(10, 10, 10, 0.5);
+  border: 1px solid #0a0a0a;
   border-radius: 8px;
   padding-top: 42px !important;
   padding-bottom: 32px !important;
@@ -2037,7 +2037,6 @@ footer .grid-layout div img {
   transition: box-shadow 0.3s ease, z-index 0s;
 }
 
-/* Title bar - injected by JS */
 .term-titlebar {
   position: absolute;
   top: 0;
@@ -2047,8 +2046,8 @@ footer .grid-layout div img {
   z-index: 100;
   cursor: grab;
   user-select: none;
-  background: linear-gradient(180deg, #13132a 0%, #0d0d1f 100%);
-  border-bottom: 1px solid rgba(135, 120, 193, 0.08);
+  background: #0a0a0a;
+  border-bottom: 1px solid #0a0a0a;
   border-radius: 8px 8px 0 0;
   display: flex;
   align-items: center;
@@ -2078,7 +2077,7 @@ footer .grid-layout div img {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  color: #7777aa;
+  color: lightgray !important;
   font-family: 'Courier New', 'Consolas', monospace;
   font-size: 1.1rem;
   letter-spacing: 0.3px;
@@ -2100,8 +2099,8 @@ footer .grid-layout div img {
 .term-maximized {
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  background: rgba(3, 3, 18, 0.65) !important;
-  box-shadow: 0 0 80px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(135, 120, 193, 0.2);
+  background: rgba(10, 10, 10, 0.5) !important;
+  box-shadow: 0 0 80px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.06);
   overflow: auto !important;
 }
 
@@ -2145,7 +2144,7 @@ footer .grid-layout div img {
   border-radius: 8px;
   background: rgba(19, 19, 42, 0.9);
   border: 1px solid rgba(135, 120, 193, 0.25);
-  color: #7777aa;
+  color: lightgray;
   font-family: 'Courier New', monospace;
   font-size: 0.9rem;
   display: flex;
@@ -2164,7 +2163,6 @@ footer .grid-layout div img {
   box-shadow: 0 6px 16px rgba(135, 120, 193, 0.2);
 }
 
-/* GitHub button hover effect */
 .github-btn {
   position: relative;
   display: inline-flex;
@@ -2243,14 +2241,12 @@ footer .grid-layout div img {
   opacity: 1;
 }
 
-/* Project card links */
 .project-link {
   text-decoration: none;
   color: inherit;
   display: block;
 }
 
-/* Terminal directory listing */
 .term-dir {
   font-family: 'Courier New', Consolas, monospace;
   font-size: 1.4rem;
