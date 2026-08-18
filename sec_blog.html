@@ -11,10 +11,10 @@
 :root{
   --bg:#000;--text:#e0e0e0;--muted:#777;
   --accent:#8778c1;--accent2:#6a5a9e;--accent-dim:rgba(135,120,193,0.15);
-  --card-bg:#0d0d0d;--card-border:rgba(135,120,193,0.12);
+  --card-bg:#0d0d0d;--card-border:rgba(60,60,60,0.5);
   --radius:6px;--font-mono:'Fira Code',monospace;--font-sans:'Inter',sans-serif;
 }
-html{scroll-behavior:smooth;font-size:115%;background:#000}
+html{scroll-behavior:smooth;font-size:115%;background:#0a0a0a}
 body{
   font-family:var(--font-sans);color:var(--text);
   min-height:100vh;line-height:1.5;overflow-x:hidden;
@@ -28,9 +28,9 @@ body::before{
 
 .navbar{
   position:fixed;top:0;left:0;right:0;z-index:1000;
-  background:rgba(0,0,0,0.92);backdrop-filter:blur(20px);
+  background:#0a0a0a;backdrop-filter:blur(20px);
   -webkit-backdrop-filter:blur(20px);
-  border-bottom:1px solid rgba(255,255,255,0.1);gap:2px
+  border-bottom:1px solid rgba(255,255,255,0.04);gap:2px
     height:56px;display:flex;align-items:center;padding:0 20px;gap:14px;
 }
 .nav-logo{font-family:var(--font-mono);font-size:1.3rem;font-weight:700;color:#fff;white-space:nowrap;letter-spacing:-1px}
@@ -45,10 +45,10 @@ body::before{
 .search-wrap input{
   background:#111;border:1px solid rgba(255,255,255,0.08);color:var(--text);
   font-family:var(--font-sans);font-size:.78rem;padding:7px 12px 7px 32px;
-  border-radius:4px;width:170px;transition:.25s;outline:none;
+  border-radius:4px;width:120px;transition:.25s;outline:none;
 }
 .search-wrap input::placeholder{color:#444}
-.search-wrap input:focus{border-color:rgba(255,255,255,0.35);width:210px}
+.search-wrap input:focus{border-color:rgba(255,255,255,0.15);width:150px}
 .search-wrap .sicon{position:absolute;left:10px;top:50%;transform:translateY(-50%);color:#555;font-size:.75rem;pointer-events:none}
 
 .hero{
@@ -84,7 +84,7 @@ body::before{
 .tree{max-width:1100px;margin:0 auto;padding:0 20px 80px}
 
 .branch{margin-bottom:6px;border:1px solid transparent;transition:.3s}
-.branch.open{border-color:rgba(255,255,255,0.08);background:rgba(135,120,193,0.008);border-radius:6px;margin-bottom:14px}
+.branch.open{border-color:rgba(255,255,255,0.03);background:rgba(135,120,193,0.008);border-radius:6px;margin-bottom:14px}
 
 .branch-header{
   display:flex;align-items:center;gap:12px;padding:12px 14px;
@@ -92,7 +92,7 @@ body::before{
   border-left:2px solid transparent;
 }
 .branch-header:hover{background:rgba(255,255,255,0.015)}
-.branch.open .branch-header{border-left-color:var(--accent)}
+.branch.open .branch-header{border-left-color:#555}
 
 .branch-icon{
   width:28px;height:28px;display:flex;align-items:center;justify-content:center;
@@ -100,9 +100,8 @@ body::before{
   transition:transform .3s;
 }
 .branch.open .branch-icon{transform:rotate(90deg)}
-.branch-name{font-family:var(--font-mono);font-size:.85rem;font-weight:600;color:var(--text);flex:1}
+.branch-name{font-family:var(--font-mono);font-size:.85rem;font-weight:600;color:#777;flex:1}
 .branch-count{font-size:.7rem;color:var(--muted);font-family:var(--font-mono)}
-.branch-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
 
 .tools-wrap{
   display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
@@ -113,7 +112,7 @@ body::before{
 .branch.open .tools-wrap{max-height:8000px;opacity:1}
 
 .tool-card{
-  background:#050505;border:1px solid rgba(255,255,255,0.03);
+  background:#050505;border:1px solid rgba(255,255,255,0.02);
   border-radius:var(--radius);padding:16px;cursor:pointer;
   transition:all .25s;position:relative;overflow:hidden;
   animation:fadeUp .35s ease both;
@@ -124,8 +123,8 @@ body::before{
   box-shadow:0 6px 20px rgba(0,0,0,0.4),0 0 0 0.5px rgba(135,120,193,0.06);
 }
 .tool-card.active{
-  border-color:var(--accent);background:#0a0a0a;
-  box-shadow:0 0 0 0.5px var(--accent),0 0 16px rgba(135,120,193,0.08);
+  border-color:#555;background:#0a0a0a;
+  box-shadow:0 0 0 0.5px #555,0 0 16px rgba(60,60,60,0.12);
   grid-column:1/-1;
 }
 .tool-card::before{
@@ -137,10 +136,9 @@ body::before{
 .tool-name{
   font-family:var(--font-mono);font-size:.85rem;font-weight:600;
   color:var(--text);margin-bottom:4px;line-height:1.3;
-  display:flex;align-items:center;gap:8px;
+  display:flex;align-items:center;
 }
 .tool-card.active .tool-name{font-size:1rem;color:var(--accent)}
-.tool-name .dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
 .tool-desc{
   font-size:.82rem;color:var(--muted);line-height:1.7;
   max-height:0;overflow:hidden;opacity:0;white-space:pre-wrap;
@@ -149,7 +147,7 @@ body::before{
 .tool-card.active .tool-desc{max-height:4000px;opacity:1;margin-top:10px;overflow-y:auto}
 .tool-meta{display:flex;gap:4px;flex-wrap:wrap;margin-top:8px}
 .tag{font-family:var(--font-mono);font-size:.58rem;padding:2px 7px;border-radius:3px;text-transform:uppercase;letter-spacing:.3px}
-.tag-cat{background:rgba(135,120,193,0.1);color:var(--accent);border:1px solid rgba(135,120,193,0.2)}
+.tag-cat{background:rgba(120,120,120,0.1);color:#555;border:1px solid rgba(60,60,60,0.5)}
 .tag-tech{background:rgba(255,255,255,0.03);color:#666;border:1px solid rgba(255,255,255,0.05)}
 
 .tool-actions{display:flex;gap:6px;margin-top:10px;opacity:0;max-height:0;overflow:hidden;transition:all .3s}
@@ -175,9 +173,9 @@ body::before{
 .skills-section{max-width:1100px;margin:0 auto;padding:30px 20px 10px}
 .skills-section h2{font-family:var(--font-mono);font-size:1rem;color:var(--accent);margin-bottom:14px}
 .skills-grid{display:flex;flex-wrap:wrap;gap:8px}
-.skill-tag{font-family:var(--font-mono);font-size:.65rem;padding:5px 12px;border-radius:4px;background:rgba(135,120,193,0.08);color:var(--accent);border:1px solid rgba(135,120,193,0.15);display:flex;align-items:center;gap:6px;cursor:pointer;transition:.2s}
-.skill-tag:hover{background:rgba(135,120,193,0.18);border-color:var(--accent)}
-.skill-tag.active{background:var(--accent);color:#000;border-color:var(--accent)}
+.skill-tag{font-family:var(--font-mono);font-size:.65rem;padding:5px 12px;border-radius:4px;background:rgba(120,120,120,0.08);color:var(--accent);border:1px solid rgba(60,60,60,0.5);display:flex;align-items:center;gap:6px;cursor:pointer;transition:.2s}
+.skill-tag:hover{background:rgba(60,60,60,0.18);border-color:#555}
+.skill-tag.active{background:var(--accent);color:#000;border-color:#555}
 .skill-tag.active .n{color:rgba(0,0,0,0.6)}
 .skill-tag .n{color:var(--muted);font-size:.6rem}
 
@@ -191,7 +189,7 @@ body::before{
 .footer a:hover{text-decoration:underline}
 @media(max-width:768px){
   .nav-links{display:none}
-  .nav-links.open{display:flex;flex-direction:column;position:absolute;top:56px;left:0;right:0;background:#000;padding:10px 20px;border-bottom:1px solid rgba(135,120,193,0.1);gap:2px;z-index:999}
+  .nav-links.open{display:flex;flex-direction:column;position:absolute;top:56px;left:0;right:0;background:#000;padding:10px 20px;border-bottom:1px solid rgba(60,60,60,0.5);gap:2px;z-index:999}
   .hamburger{display:flex}
   .search-wrap input{width:110px}.search-wrap input:focus{width:140px}
   .tools-wrap{grid-template-columns:1fr;padding:2px 8px 10px 16px}
@@ -215,17 +213,13 @@ body::before{
   <ul class="nav-links" id="navLinks">
     <li><a href="https://github.com/0xbitx" target="_blank" rel="noopener" title="GitHub Profile" style="padding:4px 8px"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.385-1.335-1.755-1.335-1.755-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.605-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12z"/></svg></a></li>
   </ul>
-  <div class="search-wrap">
-    <span class="sicon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="2.5" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>
-    <input type="text" id="searchInput" placeholder="Search..." aria-label="Search">
-  </div>
 </nav>
 
 <section class="hero">
   <div class="hero-bg"><canvas id="ascii-bg"></canvas></div>
   <div class="hero-content">
     <img src="https://github.com/0xbitx.png" alt="Profile" style="width:180px;height:180px;border-radius:50%;border:2px solid rgba(255,255,255,0.18);margin-bottom:16px;object-fit:cover;box-shadow:0 0 40px rgba(0,0,0,0.6)">
-    <h1>0<span style="font-weight:400;color:#a3a3a3">xbit</span></h1>
+    <h1>0x<span style="font-weight:400;color:#a3a3a3">bit</span></h1>
     <p>
       Every tool in this blog was built through years of hands-on cybersecurity exploration — from phishing simulations to kernel-level rootkits, from detection engineering to exploit development. I don't just study security; I <em style="color:var(--accent);font-style:normal">build</em> it. Red team, blue team — I operate across the full spectrum, understanding both how to break systems and how to defend them.
     </p>
@@ -238,6 +232,10 @@ body::before{
 
 <div class="ctrl">
   <span class="last-updated" id="lastUpdated"></span>
+  <div class="search-wrap">
+    <span class="sicon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="2.5" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>
+    <input type="text" id="searchInput" placeholder="Search..." aria-label="Search">
+  </div>
   <button class="btn btn-out" id="expandAllBtn" style="font-size:.65rem;padding:5px 10px">&#8628; Expand All</button>
   <button class="btn btn-out" id="collapseAllCtrl" style="font-size:.65rem;padding:5px 10px">&#8743; Collapse All</button>
 </div>
@@ -2918,9 +2916,119 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
     "githubUrl": "https://github.com/0xbitx/reverse_shell",
     "owner": "0xbitx",
     "repo": "reverse_shell"
+  },
+  {
+    "title": "DEDSEC_CHARINA",
+    "description": "No VPS, no open ports, no DNS wrangling. I start the server on whatever machine I have behind NAT, and Cloudflare's Argo tunnel hands me a public HTTPS endpoint in seconds. The implant reaches back over port 443 the same way every browser does, so there's nothing exotic about the connection to trip anyone up. Deploy the binary and I'm in.\n\nThe implant is a single fully static binary around two megabytes that runs on any Linux distribution without pulling in libraries or interpreters. Ubuntu, Kali, Alpine, a stripped down container, it doesn't matter. Drop it and it works.\n\nTraffic rides over standard HTTPS through the tunnel, which hides my real IP behind Cloudflare. The implant polls on configurable randomized intervals so its beacons blend into ordinary web traffic, and every command is encrypted with a SHA256-CTR stream cipher before it leaves the wire.\n\nWhat I like most is the dead-drop relay. The implant doesn't hardcode a server address. The current tunnel URL sits inside a harmless looking web page and changes every time the server restarts, and the implant just follows it by polling the relay. If the relay is idle with no tunnel up, the implant sits quietly and waits for me to come online. No recompiling, no redeploying.\n\nBuilds happen on demand. The server runs g++ with full static linking, runs UPX over the result, strips the packer strings that tend to get flagged, and corrupts a few non-critical ELF header bytes. The output is quiet enough that basic AV heuristics don't blink.\n\nThere are two beacon styles. A fixed one second interval when I want speed, and a randomized mode that spaces polls across a configurable range so the timing pattern isn't predictable.\n\nThe recon modules cover WiFi passwords, Discord tokens from both desktop and browser leveldb, SSH keys across users, a pile of crypto wallets, cloud credential discovery for AWS, GCP, Azure, Docker, GitHub and Kubernetes, shell history, running processes, network connections, environment variables, screenshots, webcam and microphone. Everything saves into organized folders sorted by hostname and machine ID, and it skips empty results instead of dumping noise.\n\nThe dashboard shows every connected target in a live table with online or offline status and last-seen timestamps, plus a one-click shell. I can upload and download files, run scripts, and walk the target filesystem with working cd and pwd tracking.",
+    "rawDescription": "No VPS, no open ports, no DNS wrangling. I start the server on whatever machine I have behind NAT, and Cloudflare's Argo tunnel hands me a public HTTPS endpoint in seconds. The implant reaches back over port 443 the same way every browser does, so there's nothing exotic about the connection to trip anyone up. Deploy the binary and I'm in.\n\nThe implant is a single fully static binary around two megabytes that runs on any Linux distribution without pulling in libraries or interpreters. Ubuntu, Kali, Alpine, a stripped down container, it doesn't matter. Drop it and it works.\n\nTraffic rides over standard HTTPS through the tunnel, which hides my real IP behind Cloudflare. The implant polls on configurable randomized intervals so its beacons blend into ordinary web traffic, and every command is encrypted with a SHA256-CTR stream cipher before it leaves the wire.\n\nWhat I like most is the dead-drop relay. The implant doesn't hardcode a server address. The current tunnel URL sits inside a harmless looking web page and changes every time the server restarts, and the implant just follows it by polling the relay. If the relay is idle with no tunnel up, the implant sits quietly and waits for me to come online. No recompiling, no redeploying.\n\nBuilds happen on demand. The server runs g++ with full static linking, runs UPX over the result, strips the packer strings that tend to get flagged, and corrupts a few non-critical ELF header bytes. The output is quiet enough that basic AV heuristics don't blink.\n\nThere are two beacon styles. A fixed one second interval when I want speed, and a randomized mode that spaces polls across a configurable range so the timing pattern isn't predictable.\n\nThe recon modules cover WiFi passwords, Discord tokens from both desktop and browser leveldb, SSH keys across users, a pile of crypto wallets, cloud credential discovery for AWS, GCP, Azure, Docker, GitHub and Kubernetes, shell history, running processes, network connections, environment variables, screenshots, webcam and microphone. Everything saves into organized folders sorted by hostname and machine ID, and it skips empty results instead of dumping noise.\n\nThe dashboard shows every connected target in a live table with online or offline status and last-seen timestamps, plus a one-click shell. I can upload and download files, run scripts, and walk the target filesystem with working cd and pwd tracking.",
+    "category": "Malware Development",
+    "technologies": ["Python", "C", "C++", "Bash", "Linux"],
+    "threatActors": [],
+    "githubUrl": "https://github.com/0xbitx/DEDSEC_CHARINA",
+    "owner": "0xbitx",
+    "repo": "DEDSEC_CHARINA"
+  },
+  {
+    "title": "WEBSITE_SEC",
+    "description": "You ship on Vercel, your database lives on Supabase or Neon, auth runs through Clerk or Auth.js. Server actions in Next.js, API routes in Hono, background jobs on Inngest or Trigger.dev. The stack is fast and pleasant to build on.\n\nIt is also a brand new attack surface that most security guides never bother with. The usual advice to use HTTPS and sanitize inputs doesn't help much when you're dealing with RSC payload streaming, Supabase row-level security policies, Edge Function injection, or missing CSRF protection on server actions.\n\nI wrote this for developers rather than CISOs or compliance people. Every section has copy-ready code, specific configuration you can apply, and the attack vectors you need to understand before someone uses them against your own app.",
+    "rawDescription": "You ship on Vercel, your database lives on Supabase or Neon, auth runs through Clerk or Auth.js. Server actions in Next.js, API routes in Hono, background jobs on Inngest or Trigger.dev. The stack is fast and pleasant to build on.\n\nIt is also a brand new attack surface that most security guides never bother with. The usual advice to use HTTPS and sanitize inputs doesn't help much when you're dealing with RSC payload streaming, Supabase row-level security policies, Edge Function injection, or missing CSRF protection on server actions.\n\nI wrote this for developers rather than CISOs or compliance people. Every section has copy-ready code, specific configuration you can apply, and the attack vectors you need to understand before someone uses them against your own app.",
+    "category": "Detection & Blue Team",
+    "technologies": ["Linux", "Bash", "Windows"],
+    "threatActors": [],
+    "githubUrl": "https://github.com/0xbitx/WEBSITE_SEC",
+    "owner": "0xbitx",
+    "repo": "WEBSITE_SEC"
+  },
+  {
+    "title": "APT KILLCHAIN",
+    "description": "Advanced persistent threats aren't really malware. They're intelligence operations that happen to run through computers. The people on the other side aren't after a quick ransom, they're military operators and state-affiliated hackers with specific collection goals, careful operational security, and objectives that line up with their government's interests.\n\nThat shift in framing changes how I approach the work. I treat the intrusion as a human-driven campaign with a mission, not just a payload sample to reverse. Every phase of the operation maps to a detection opportunity, and understanding who is behind it tells you a lot about where they'll go next and what they came for.",
+    "rawDescription": "Advanced persistent threats aren't really malware. They're intelligence operations that happen to run through computers. The people on the other side aren't after a quick ransom, they're military operators and state-affiliated hackers with specific collection goals, careful operational security, and objectives that line up with their government's interests.\n\nThat shift in framing changes how I approach the work. I treat the intrusion as a human-driven campaign with a mission, not just a payload sample to reverse. Every phase of the operation maps to a detection opportunity, and understanding who is behind it tells you a lot about where they'll go next and what they came for.",
+    "category": "Red Team & Initial Access",
+    "technologies": ["Linux", "Bash", "Windows"],
+    "threatActors": [],
+    "githubUrl": "https://github.com/0xbitx/apt_killchain",
+    "owner": "0xbitx",
+    "repo": "apt_killchain"
+  },
+  {
+    "title": "RANSOMWARE_KILLCHAIN",
+    "description": "Ransomware stopped being spray-and-pray a long time ago. It's a multi-phase, human-operated business now. The gangs run like companies, with affiliate programs, negotiators, quarterly bonuses, and PR teams maintaining leak sites.\n\nThe average dwell time between first access and encryption sits around five and a half days, and experienced affiliates move even faster. That leaves a very thin window to notice something's wrong and respond before files are gone.\n\nUnderstanding the kill chain isn't academic for me. Each phase is a detection chance, every tool transfer is a network signature, and every bit of lateral movement is a moment I could isolate the threat before the payload fires. Nobody prevents every attack against a determined adversary, but detecting it early enough to react before encryption is what actually matters. I wrote this to cover the concrete tools and techniques operators use at each stage, for defenders who need to know what to look for and red teamers who want to simulate it realistically.",
+    "rawDescription": "Ransomware stopped being spray-and-pray a long time ago. It's a multi-phase, human-operated business now. The gangs run like companies, with affiliate programs, negotiators, quarterly bonuses, and PR teams maintaining leak sites.\n\nThe average dwell time between first access and encryption sits around five and a half days, and experienced affiliates move even faster. That leaves a very thin window to notice something's wrong and respond before files are gone.\n\nUnderstanding the kill chain isn't academic for me. Each phase is a detection chance, every tool transfer is a network signature, and every bit of lateral movement is a moment I could isolate the threat before the payload fires. Nobody prevents every attack against a determined adversary, but detecting it early enough to react before encryption is what actually matters. I wrote this to cover the concrete tools and techniques operators use at each stage, for defenders who need to know what to look for and red teamers who want to simulate it realistically.",
+    "category": "Red Team & Initial Access",
+    "technologies": ["Linux", "Bash", "Windows"],
+    "threatActors": [],
+    "githubUrl": "https://github.com/0xbitx/ransomware_killchain",
+    "owner": "0xbitx",
+    "repo": "ransomware_killchain"
+  },
+  {
+    "title": "Linux Enterprise Compromise",
+    "description": "Linux isn't Windows with a different shell. The attack surface is completely different. Windows work revolves around Active Directory trust, Kerberos tickets and LSASS memory. Linux work is about file permissions, process capabilities, kernel bugs, and the idea that everything is a file.\n\nThe Linux surface comes down to a handful of things. SSH is the universal remote access path, and stolen keys, weak passwords and careless agent forwarding are the usual doors. Misconfigurations like SUID binaries, writable cron jobs, loose sudo rules, exposed Docker sockets and world-writable files are everywhere. Linux runs the web, so PHP, Python, Node, Java and Ruby apps are the most common entry points. Containers add Docker, Kubernetes and LXC escapes. The kernel contributes a steady supply of DirtyCow, DirtyPipe, PwnKit and OverlayFS style bugs that stay unpatched on real servers. And cloud metadata services hand out credentials over magic IP addresses.\n\nOnce I had file permissions, capabilities and /proc figured out, Linux systems stopped feeling like a mystery. That's what this is about.",
+    "rawDescription": "Linux isn't Windows with a different shell. The attack surface is completely different. Windows work revolves around Active Directory trust, Kerberos tickets and LSASS memory. Linux work is about file permissions, process capabilities, kernel bugs, and the idea that everything is a file.\n\nThe Linux surface comes down to a handful of things. SSH is the universal remote access path, and stolen keys, weak passwords and careless agent forwarding are the usual doors. Misconfigurations like SUID binaries, writable cron jobs, loose sudo rules, exposed Docker sockets and world-writable files are everywhere. Linux runs the web, so PHP, Python, Node, Java and Ruby apps are the most common entry points. Containers add Docker, Kubernetes and LXC escapes. The kernel contributes a steady supply of DirtyCow, DirtyPipe, PwnKit and OverlayFS style bugs that stay unpatched on real servers. And cloud metadata services hand out credentials over magic IP addresses.\n\nOnce I had file permissions, capabilities and /proc figured out, Linux systems stopped feeling like a mystery. That's what this is about.",
+    "category": "Red Team & Initial Access",
+    "technologies": ["Linux", "Bash", "Windows"],
+    "threatActors": [],
+    "githubUrl": "https://github.com/0xbitx/Linux-Enterprise-Compromise",
+    "owner": "0xbitx",
+    "repo": "Linux-Enterprise-Compromise"
+  },
+  {
+    "title": "Windows Enterprise Compromise",
+    "description": "Compromising a Windows enterprise usually isn't about exploits. It's about abusing trust. Active Directory is one giant trust graph, users trust services, computers trust domain controllers, admins trust their workstations. Every step walks along one of those trusted edges. The operator who reads the graph wins, and the one who fires exploits blindly gets caught.\n\nI structured this as a linear kill chain, but real work never goes in a straight line. You fail, pivot, find a path you couldn't see from outside, and sometimes that impossible path works because of a misconfiguration nobody knew about.\n\nThe rules I keep in mind are simple. Every action leaves a trace, so minimize it. Every dropped tool is a signature, so use what's already installed. Speed is the enemy and patience is the disguise. If PowerShell can do it, don't drop an EXE. If I can steal a token, I don't crack a hash. If a legitimate admin tool works, I don't need malware. And I always keep a way back in.",
+    "rawDescription": "Compromising a Windows enterprise usually isn't about exploits. It's about abusing trust. Active Directory is one giant trust graph, users trust services, computers trust domain controllers, admins trust their workstations. Every step walks along one of those trusted edges. The operator who reads the graph wins, and the one who fires exploits blindly gets caught.\n\nI structured this as a linear kill chain, but real work never goes in a straight line. You fail, pivot, find a path you couldn't see from outside, and sometimes that impossible path works because of a misconfiguration nobody knew about.\n\nThe rules I keep in mind are simple. Every action leaves a trace, so minimize it. Every dropped tool is a signature, so use what's already installed. Speed is the enemy and patience is the disguise. If PowerShell can do it, don't drop an EXE. If I can steal a token, I don't crack a hash. If a legitimate admin tool works, I don't need malware. And I always keep a way back in.",
+    "category": "Red Team & Initial Access",
+    "technologies": ["Linux", "Bash", "Windows"],
+    "threatActors": [],
+    "githubUrl": "https://github.com/0xbitx/Windows-Enterprise-Compromise",
+    "owner": "0xbitx",
+    "repo": "Windows-Enterprise-Compromise"
+  },
+  {
+    "title": "Wireless Attack Operations",
+    "description": "Wireless is the soft spot in most enterprise security. Companies spend on firewalls, EDR and SIEM, then broadcast their internal credentials through the air for anyone in the parking lot with a thirty dollar adapter and a directional antenna.\n\nThe attack surface is invisible, omnidirectional and mostly unmonitored. A wired intrusion has to breach a perimeter, but a wireless one skips it entirely. Electromagnetically speaking I'm already inside before I step through the door.\n\nThe appeal cuts three ways. Most recon and PMKID capture is entirely passive, so the target never sees a single packet from me. Directional antennas and amplifiers let me work from hundreds of meters away. And the protocols themselves help. WPA2 PSK is fine cryptographically, but the key is a password someone chose, and WPA3 enterprise setups still crack open with a rogue RADIUS server.\n\nThis covers the modern Wi-Fi attack paths for operators who need to capture credentials and pivot inward, and for anyone who wants to know exactly which protections exist and how they fall.",
+    "rawDescription": "Wireless is the soft spot in most enterprise security. Companies spend on firewalls, EDR and SIEM, then broadcast their internal credentials through the air for anyone in the parking lot with a thirty dollar adapter and a directional antenna.\n\nThe attack surface is invisible, omnidirectional and mostly unmonitored. A wired intrusion has to breach a perimeter, but a wireless one skips it entirely. Electromagnetically speaking I'm already inside before I step through the door.\n\nThe appeal cuts three ways. Most recon and PMKID capture is entirely passive, so the target never sees a single packet from me. Directional antennas and amplifiers let me work from hundreds of meters away. And the protocols themselves help. WPA2 PSK is fine cryptographically, but the key is a password someone chose, and WPA3 enterprise setups still crack open with a rogue RADIUS server.\n\nThis covers the modern Wi-Fi attack paths for operators who need to capture credentials and pivot inward, and for anyone who wants to know exactly which protections exist and how they fall.",
+    "category": "Utility & Miscellaneous",
+    "technologies": ["Linux", "Bash", "Windows"],
+    "threatActors": [],
+    "githubUrl": "https://github.com/0xbitx/Wireless-Attack-Operations",
+    "owner": "0xbitx",
+    "repo": "Wireless-Attack-Operations"
+  },
+  {
+    "title": "rust_doc_hidden_poc",
+    "description": "Rust's doc hidden attribute is a legitimate language feature. It keeps an item out of the rustdoc pages while leaving it fully public and callable from any crate.\n\nThe gap here is the interesting part: reviewers read docs.rs, but the compiler honors any pub item. That mismatch is what this proof of concept plays with.",
+    "rawDescription": "Rust's doc hidden attribute is a legitimate language feature. It keeps an item out of the rustdoc pages while leaving it fully public and callable from any crate.\n\nThe gap here is the interesting part: reviewers read docs.rs, but the compiler honors any pub item. That mismatch is what this proof of concept plays with.",
+    "category": "Exploitation & PoC",
+    "technologies": ["Linux", "Bash", "Windows", "Python"],
+    "threatActors": [],
+    "githubUrl": "https://github.com/0xbitx/rust_doc_hidden_poc",
+    "owner": "0xbitx",
+    "repo": "rust_doc_hidden_poc"
+  },
+  {
+    "title": "ClickFix Browser Cache Attack PoC",
+    "description": "This proof of concept hides shell code inside a PNG served on a fake Linux troubleshooting page. When someone visits the page, the browser caches the image silently. Then the page tells them to run a terminal command to fix their internet, and that command pulls the payload out of the browser's local cache and runs it.\n\nNo file downloads, no suspicious binary gets executed. The payload lives entirely inside a cached image and gets extracted with everyday Unix tools like grep, strings, awk, sed and sh.",
+    "rawDescription": "This proof of concept hides shell code inside a PNG served on a fake Linux troubleshooting page. When someone visits the page, the browser caches the image silently. Then the page tells them to run a terminal command to fix their internet, and that command pulls the payload out of the browser's local cache and runs it.\n\nNo file downloads, no suspicious binary gets executed. The payload lives entirely inside a cached image and gets extracted with everyday Unix tools like grep, strings, awk, sed and sh.",
+    "category": "Exploitation & PoC",
+    "technologies": ["Linux", "Bash", "Python"],
+    "threatActors": [],
+    "githubUrl": "https://github.com/0xbitx/ClickFix_Browser_Cache_Attack_PoC",
+    "owner": "0xbitx",
+    "repo": "ClickFix_Browser_Cache_Attack_PoC"
+  },
+  {
+    "title": "DEDSEC_BLACKBOX",
+    "description": "BLACKBOX is a C2 framework built for keeping a shell on routers and embedded devices after I've already got in. The focus is stealth, zero dependency deployment, and pushing traffic through Cloudflare tunnels so the operator's real infrastructure stays hidden.\n\nThe implant is a single fully static C++ binary around five hundred kilobytes that runs anywhere Linux does with nothing else installed. OpenWRT, DD-WRT, ARM boards, stripped BusyBox environments, it drops in and runs. ldd reports not a dynamic executable, which is exactly what I want when I'm placing it on a device I can't install anything on.\n\nComms ride over standard HTTPS through a Cloudflare Argo tunnel and poll on configurable intervals, so the beacons look like ordinary web traffic. Everything is encrypted end to end with TLS through the embedded BearSSL library, nothing travels as plaintext.\n\nThe dead-drop relay is the part that makes it feel robust. I don't tie the implant to a hardcoded server. The current tunnel URL sits inside a paste between markers and the implant parses it directly. When the server restarts and the URL changes, the implant follows the new address on its own instead of needing a reflash.",
+    "rawDescription": "BLACKBOX is a C2 framework built for keeping a shell on routers and embedded devices after I've already got in. The focus is stealth, zero dependency deployment, and pushing traffic through Cloudflare tunnels so the operator's real infrastructure stays hidden.\n\nThe implant is a single fully static C++ binary around five hundred kilobytes that runs anywhere Linux does with nothing else installed. OpenWRT, DD-WRT, ARM boards, stripped BusyBox environments, it drops in and runs. ldd reports not a dynamic executable, which is exactly what I want when I'm placing it on a device I can't install anything on.\n\nComms ride over standard HTTPS through a Cloudflare Argo tunnel and poll on configurable intervals, so the beacons look like ordinary web traffic. Everything is encrypted end to end with TLS through the embedded BearSSL library, nothing travels as plaintext.\n\nThe dead-drop relay is the part that makes it feel robust. I don't tie the implant to a hardcoded server. The current tunnel URL sits inside a paste between markers and the implant parses it directly. When the server restarts and the URL changes, the implant follows the new address on its own instead of needing a reflash.",
+    "category": "Exploitation & PoC",
+    "technologies": ["Linux", "Bash", "C++", "Python"],
+    "threatActors": [],
+    "githubUrl": "https://github.com/0xbitx/DEDSEC_BLACKBOX",
+    "owner": "0xbitx",
+    "repo": "DEDSEC_BLACKBOX"
   }
 ];
-window.__DEDSEC_EMBEDDED_TS__ = 1782743596438;
+window.__DEDSEC_EMBEDDED_TS__ = 1787038823212;
 </script>
 
 
@@ -2982,7 +3090,6 @@ function renderTree(){
     const color=COLORS[cat]||'#666';
     html+=`<div class="branch" data-cat="${esc(cat)}">
       <div class="branch-header" onclick="toggleBranch(this.parentElement)">
-        <span class="branch-dot" style="background:${color}"></span>
         <span class="branch-icon">&#9654;</span>
         <span class="branch-name">${esc(cat)}</span>
         <span class="branch-count">${tools.length} tool${tools.length>1?'s':''}</span>
@@ -2991,7 +3098,7 @@ function renderTree(){
     tools.forEach((tool,j)=>{
       const techTags=(tool.technologies||[]).slice(0,3).map(t=>`<span class="tag tag-tech">${esc(t)}</span>`).join('');
       html+=`<div class="tool-card" style="animation-delay:${j*0.02}s;--color:${color}" data-url="${esc(tool.githubUrl)}" onclick="toggleCard(this,event)">
-        <div class="tool-name"><span class="dot" style="background:${color};box-shadow:0 0 6px ${color}"></span>${esc(tool.title)}</div>
+        <div class="tool-name">${esc(tool.title)}</div>
         <div class="tool-desc">${esc(tool.description||'No description.')}</div>
         <div class="tool-meta"><span class="tag tag-cat">${esc(tool.category)}</span>${techTags}</div>
         <div class="tool-actions">
