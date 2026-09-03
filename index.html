@@ -10,6 +10,11 @@
       name="keywords"
       content="dedsec"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      if ('scrollRestoration' in history) {
+        history.scrollRestoration = 'manual';
+      }
+    </script>
     <meta name="theme-color" content="#ff3a5e" />
     <meta name="copyright" content="dedsec" />
     <meta http-equiv="content-language" content="pt-br" />
@@ -216,10 +221,10 @@
                 >0xbit</span><span style="color: white; font-family: 'LiveOverfont', sans-serif;"
                 >></span><span style="color: #8778c1; animation: blink 1s infinite; font-family: 'LiveOverfont', sans-serif;"
                 >_</span>
-                <div class="gg" title="404" style="color: white; font-family: 'LiveOverfont', sans-serif;">I develop offensive security tools targeting Linux environments.</div>
+                <div class="gg" title="404" style="color: white; font-family: 'LiveOverfont', sans-serif;">I build offensive security tools for Linux.</div>
               </h1>
               <p class="typewriter" style="color: white; font-family: 'LiveOverfont', sans-serif; font-size: 23px;">
-                I am a computer enthusiast from the Philippines. I create hacking tools and exploits. Check out some of my work in the Project section.
+                I'm a cybersecurity enthusiast from the Philippines. I make hacking tools and exploits. Check out the Project section to see what I've built.
               </p>
               <a href="/sec_blog.html" rel="noopener" target="_blank" class="github-btn delayExtraBigReveal"><img class="gh-icon" src="assets/icons/github_button.png" alt="GitHub" /><span class="gh-text">Blog</span></a>
             </div>
@@ -336,7 +341,7 @@
                 0xbit
               </h2>
               <p class="delayMediumReveal" style="color: white; font-family: 'LiveOverfont', sans-serif; font-size: 27px;">
-                  Offensive security developer building Linux-based red team tools. Malware, remote access trojans, rootkits, phishing — I create the arsenal that mimics real adversaries. Constantly evolving, never settling for the obvious.
+                  Offensive security dev building red team tools for Linux. Malware, RATs, rootkits, phishing. I build the stuff real attackers use so you know what to defend against. Always tinkering, never done.
               </p>
             </article>
           </div>
@@ -370,7 +375,7 @@
               </div>
               <h5 class="companyExperience">Building hacking devices</h5>
               <p class="changeExperience">
-                My focus is on offensive security hardware. I design and build devices based on microcontrollers (like the ESP32) for penetration testing and RF analysis. This includes developing WiFi deauthentication tools, RF jammers, and other custom gear for assessing the security of wireless and IoT systems. I'm passionate about creating tangible solutions that demonstrate real-world vulnerabilities.
+                I build offensive security hardware. Mostly ESP32-based stuff for pentesting and RF. WiFi deauthers, jammers, and custom gear for testing wireless and IoT gear. I like making actual physical things that show how real vulns work.
               </p>
             </div>
           </div>
@@ -391,11 +396,11 @@
               </a>
               <a href="https://github.com/0xbitx/DEDSEC_XUAN" rel="noopener" target="_blank" class="term-dir-row">
                 <span class="td-name">dedsec_xuan</span>
-                <span class="td-desc">Kernel-level rootkit for modern Linux — Google Calendar as (C2).</span>
+                <span class="td-desc">Kernel-level rootkit for modern Linux. Uses Google Calendar as the C2.</span>
               </a>
               <a href="https://github.com/0xbitx/DEDSEC_NEPHILM" rel="noopener" target="_blank" class="term-dir-row">
                 <span class="td-name">dedsec_nephilm</span>
-                <span class="td-desc">Kernel-level rootkit for modern Linux — DNS-based C2 over DoH (DNS-over-HTTPS)</span>
+                <span class="td-desc">Kernel-level rootkit for modern Linux. DNS-based C2 over DoH (DNS-over-HTTPS).</span>
               </a>
               <a href="https://github.com/0xbitx/DEDSEC_BLACKHAT" rel="noopener" target="_blank" class="term-dir-row">
                 <span class="td-name">dedsec_blackhat</span>
@@ -451,51 +456,57 @@
         <div class="grid-layout">
           <h2 class="delaySmallReveal" style="color: rgb(97, 53, 243) 'LiveOverfont', sans-serif; font-size: 40px;">What I do<span>.</span></h2>
           <div id="services">
-            <article class="intervalCardReveal">
-              <div>
-                <img
-                  src="assets/icons/hdd.png"
-                  width="100px"
-                  height="100px"
-                  alt="dedsec"
-                  class="skills-icons"
-                />
-              </div>
-              <h3 style="color: rgb(199, 199, 199); font-family: 'LiveOverfont', sans-serif; font-size: 30px;"><span><</span>Building hacking tool<span>></span></h3>
-              <p>
-                Esp32 deauther, Esp32 Jammer, Botnet, DDoS tool, Info-stealer, Phishing tool, IPCamera Exploit, Rat.
-              </p>
-            </article>
-            <article class="intervalCardReveal">
-              <div>
-                <img
-                  src="assets/icons/usb.png"
-                  width="100px"
-                  height="100px"
-                  alt="dedsec"
-                  class="skills-icons"
-                />
-              </div>
-              <h3 style="color: rgb(199, 199, 199); font-family: 'LiveOverfont', sans-serif; font-size: 30px;"><span><</span>Building Malware<span>></span> </h3>
-              <p>
-                Building all types of malware, Ransomware, Backdoor, Keylogger, Rat, Rootkit, etc.
-              </p>
-            </article>
-            <article class="intervalCardReveal">
-              <div>
-                <img
-                  src="assets/icons/server.png"
-                  width="100px"
-                  height="100px"
-                  alt="ícone imagem"
-                  class="skills-icons"
-                />
-              </div>
-              <h3 style="color: rgb(199, 199, 199); font-family: 'LiveOverfont', sans-serif; font-size: 30px;"><span><</span>Making Content<span>></span></h3>
-              <p>
-                Creating cybersecurity-related videos, blogs, etc..
-              </p>
-            </article>
+            <a href="https://github.com/0xbitx" rel="noopener" target="_blank" class="service-link">
+              <article class="intervalCardReveal">
+                <div>
+                  <img
+                    src="assets/icons/hdd.png"
+                    width="100px"
+                    height="100px"
+                    alt="dedsec"
+                    class="skills-icons"
+                  />
+                </div>
+                <h3 style="color: rgb(199, 199, 199); font-family: 'LiveOverfont', sans-serif; font-size: 30px;"><span><</span>Building hacking tool<span>></span></h3>
+                <p>
+                  Esp32 deauther, Esp32 Jammer, Botnet, DDoS tool, Info-stealer, Phishing tool, IPCamera Exploit, Rat.
+                </p>
+              </article>
+            </a>
+            <a href="https://github.com/0xbitx" rel="noopener" target="_blank" class="service-link">
+              <article class="intervalCardReveal">
+                <div>
+                  <img
+                    src="assets/icons/usb.png"
+                    width="100px"
+                    height="100px"
+                    alt="dedsec"
+                    class="skills-icons"
+                  />
+                </div>
+                <h3 style="color: rgb(199, 199, 199); font-family: 'LiveOverfont', sans-serif; font-size: 30px;"><span><</span>Building Malware<span>></span> </h3>
+                <p>
+                  Building all types of malware, Ransomware, Backdoor, Keylogger, Rat, Rootkit, etc.
+                </p>
+              </article>
+            </a>
+            <a href="/sec_blog.html" rel="noopener" target="_blank" class="service-link">
+              <article class="intervalCardReveal">
+                <div>
+                  <img
+                    src="assets/icons/server.png"
+                    width="100px"
+                    height="100px"
+                    alt="ícone imagem"
+                    class="skills-icons"
+                  />
+                </div>
+                <h3 style="color: rgb(199, 199, 199); font-family: 'LiveOverfont', sans-serif; font-size: 30px;"><span><</span>Making Content<span>></span></h3>
+                <p>
+                  Creating cybersecurity-related videos, blogs, etc..
+                </p>
+              </article>
+            </a>
           </div>
         </div>
       </section>
@@ -653,11 +664,11 @@
     <script>
       (function () {
         var titles = {
-          about:     'root@0xbit:~ — cat about.md',
-          experience:'root@0xbit:~ — cat experience.log',
-          projects:  'root@0xbit:~ — ls -la projects/',
-          services:  'root@0xbit:~ — ps aux | grep skills',
-          skills:    'root@0xbit:~ — cat /proc/skills'
+          about:     'root@0xbit:~$ cat about.md',
+          experience:'root@0xbit:~$ cat experience.log',
+          projects:  'root@0xbit:~$ ls -la projects/',
+          services:  'root@0xbit:~$ ps aux | grep skills',
+          skills:    'root@0xbit:~$ cat /proc/skills'
         };
         var labels = { about: 'abt', experience: 'exp', projects: 'prj', services: 'svc', skills: 'skl' };
 
@@ -688,9 +699,15 @@
           var bar = document.createElement('div');
           bar.className = 'term-titlebar';
           bar.innerHTML =
-            '<span class="term-dot term-dot-close" data-action="close"></span>' +
-            '<span class="term-dot term-dot-min" data-action="minimize"></span>' +
-            '<span class="term-dot term-dot-max" data-action="maximize"></span>' +
+            '<span class="term-dot term-dot-min" data-action="minimize">' +
+              '<svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="square"><path d="M2 5h6"/></svg>' +
+            '</span>' +
+            '<span class="term-dot term-dot-max" data-action="maximize">' +
+              '<svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="1" y="1" width="8" height="8"/></svg>' +
+            '</span>' +
+            '<span class="term-dot term-dot-close" data-action="close">' +
+              '<svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"><path d="M1.5 1.5l7 7M8.5 1.5l-7 7"/></svg>' +
+            '</span>' +
             '<span class="term-title">' + titles[id] + '</span>';
           container.appendChild(bar);
 
@@ -783,6 +800,8 @@
             if (action === 'maximize') {
               if (container.classList.contains('term-minimized')) return;
               var isMax = !container.classList.contains('term-maximized');
+              var sectionEl = container.closest('section');
+              var others = document.querySelectorAll('main > *');
               if (isMax) {
                 saved.height = container.style.height || '';
                 saved.width = container.style.width || '';
@@ -792,15 +811,22 @@
                 saved.left = container.style.left || '';
                 saved.zIndex = container.style.zIndex || '';
                 saved.margin = container.style.margin || '';
+                Array.prototype.forEach.call(others, function (node) {
+                  if (node !== sectionEl) {
+                    node.style.display = 'none';
+                  }
+                });
                 container.style.height = '90vh';
                 container.style.width = '95vw';
                 container.style.transform = 'translate(-50%, -50%)';
                 container.style.position = 'fixed';
                 container.style.top = '50%';
                 container.style.left = '50%';
-                container.style.zIndex = '999';
+                container.style.zIndex = '9999';
                 container.style.margin = '0';
                 container.classList.add('term-maximized');
+                document.body.style.overflow = 'hidden';
+                document.documentElement.style.overflow = 'hidden';
               } else {
                 container.style.height = saved.height;
                 container.style.width = saved.width;
@@ -811,6 +837,11 @@
                 container.style.zIndex = saved.zIndex;
                 container.style.margin = saved.margin;
                 container.classList.remove('term-maximized');
+                document.body.style.overflow = '';
+                document.documentElement.style.overflow = '';
+                Array.prototype.forEach.call(others, function (node) {
+                  node.style.display = '';
+                });
               }
             }
           });
@@ -818,8 +849,7 @@
       })();
     </script>
   <script>
-/* Animated ASCII background — domain-warped fbm noise rendered as ASCII chars
-   (ported from the ezaascii.com-style implementation). */
+
 (function () {
   'use strict';
 
@@ -832,6 +862,9 @@
     'precision mediump float;',
     'uniform vec2  u_resolution;',
     'uniform float u_time;',
+    'uniform int   u_style;',
+    'uniform vec2  u_mouse;',
+    'uniform int   u_interact;',
     'float hash(vec2 p) {',
     '  p = fract(p * vec2(123.34, 456.21));',
     '  p += dot(p, p + 45.32);',
@@ -855,26 +888,154 @@
     '  return fbm(p + 1.5*r);',
     '}',
     'void main() {',
-    '  vec2 uv = gl_FragCoord.xy / u_resolution.y * 1.0;',
-    '  uv.x += u_time * 0.08;',
-    '  uv.y += sin(u_time * 0.15 + uv.x * 2.0) * 0.05;',
-    '  float n = warp(uv, u_time * 1.0);',
+    '  vec2 uv = gl_FragCoord.xy / u_resolution;',
+    '  float aspect = u_resolution.x / u_resolution.y;',
+    '  vec2 p = vec2(uv.x * aspect * 1.6, uv.y);',
+    // ---- cursor interaction ----
+    '  vec2 m = vec2(u_mouse.x * aspect * 1.6, u_mouse.y);',
+    '  vec2 dm = p - m;',
+    '  float md = length(dm);',
+    '  vec2 dir = (md > 0.0001) ? dm / md : vec2(0.0, 1.0);',
+    '  if (u_interact == 1) {',
+    '    p += dir * exp(-md * 3.0) * 0.35;',
+    '  } else if (u_interact == 2) {',
+    '    p += dir * exp(-md * 2.0) * 0.12;',
+    '  } else if (u_interact == 4) {',
+    // alien: swirling vortex around the cursor (tractor-beam style)
+    '    vec2 perp = vec2(-dir.y, dir.x);',
+    '    float spin = exp(-md * 2.5);',
+    '    p += perp * spin * 0.8;',
+    '    p += dir * sin(md * 12.0 - u_time * 6.0) * exp(-md * 3.0) * 0.15;',
+    '  } else if (u_interact == 5) {',
+    // gravity: pull the field toward the cursor
+    '    p -= dir * exp(-md * 2.5) * 0.5;',
+    '  } else if (u_interact == 6) {',
+    // suck: whirlpool that spirals inward toward the cursor
+    '    vec2 perp = vec2(-dir.y, dir.x);',
+    '    float vortex = exp(-md * 3.0);',
+    '    p += perp * vortex * 0.6;',
+    '    p -= dir * vortex * 0.3;',
+    '  } else if (u_interact == 7) {',
+    // electric: jagged glitch displacement with high-frequency shimmer
+    '    float glitch = sin(uv.y * 80.0 + u_time * 20.0) * exp(-md * 3.0);',
+    '    p.x += glitch * 0.6;',
+    '    p.y += cos(uv.x * 60.0 - u_time * 18.0) * exp(-md * 3.0) * 0.4;',
+    '  } else if (u_interact == 8) {',
+    // magnet: strong attraction and clamp the core
+    '    p -= dir * exp(-md * 3.5) * 0.75;',
+    '  }',
+    '  float n;',
+    '  if (u_style == 0) {',
+    '    p.y += u_time * 0.6;',
+    '    float h = uv.y;',
+    '    n = warp(p, u_time * 1.0) * (1.0 - h);',
+    '    n = pow(n, 1.6);',
+    '  } else if (u_style == 1) {',
+    '    p.x += u_time * 0.15;',
+    '    p.y -= u_time * 0.03;',
+    '    n = warp(p, u_time * 0.4);',
+    '    n = n * n;',
+    '  } else {',
+    '    n = warp(p, u_time * 1.0);',
+    '  }',
+    // post-style interaction modifiers (brighten / clear)
+    '  if (u_interact == 2) {',
+    '    n = clamp(n + exp(-md * 4.0) * 0.8, 0.0, 1.0);',
+    '  } else if (u_interact == 3) {',
+    '    n *= 1.0 - exp(-md * 4.0);',
+    '  } else if (u_interact == 4) {',
+    '    n = clamp(n + exp(-md * 3.0) * 0.5, 0.0, 1.0);',
+    '  } else if (u_interact == 5) {',
+    // gravity: deepen the core (denser toward cursor)
+    '    n = clamp(n * (1.0 + exp(-md * 5.0) * 1.2), 0.0, 1.0);',
+    '  } else if (u_interact == 6) {',
+    // suck: darken the rim slightly for a hollow whirlpool look
+    '    n = clamp(n - exp(-md * 6.0) * 0.4, 0.0, 1.0);',
+    '  } else if (u_interact == 7) {',
+    // electric: sparkle/flicker boost
+    '    n = clamp(n + exp(-md * 5.0) * abs(sin(u_time * 30.0)) * 0.7, 0.0, 1.0);',
+    '  } else if (u_interact == 8) {',
+    // magnet: bright hot core
+    '    n = clamp(n + exp(-md * 6.0) * 1.0, 0.0, 1.0);',
+    '  }',
     '  gl_FragColor = vec4(n, n, n, 1.0);',
     '}'
   ].join('\n');
 
   var CHAR_SET = ' ._-·~:,;=|/!?+*^<>(){}[]0xbit#$%&@';
-  var COLOR = [77, 77, 77];
   var FRAME_INTERVAL = 1000 / 30;
+
+  // 'none' | 'ripple' | 'glow' | 'reveal' | 'alien' | 'gravity' | 'suck' | 'electric' | 'magnet'.
+  var ACTIVE_INTERACTION = 'ripple';
+
+  // 'fire' | 'cloud' | 'gray'.
+  var ACTIVE_STYLE = 'cloud';
   var SPEED = 0.5;
   var MOBILE_BREAKPOINT = 768;
   var CELL_MOBILE = 16;
   var CELL_DESKTOP = 10;
 
+  var FIRE_STOPS = [
+    [0.00,   8,   2,   2],
+    [0.25,  96,  10,  10],
+    [0.50, 208,  48,  12],
+    [0.75, 240, 132,  24],
+    [1.00, 255, 214, 120]
+  ];
+
+  var CLOUD_STOPS = [
+    [0.00,   6,   6,   8],
+    [0.35,  60,  66,  84],
+    [0.70, 150, 158, 178],
+    [1.00, 235, 240, 250]
+  ];
+
+  function gradientColor(t, stops) {
+    if (t <= 0) return [0, 0, 0];
+    if (t >= 1) return stops[stops.length - 1].slice(1);
+    var i = 0;
+    while (i < stops.length - 2 && t > stops[i + 1][0]) i++;
+    var a = stops[i], b = stops[i + 1];
+    var f = (t - a[0]) / (b[0] - a[0]);
+    return [
+      Math.round(a[1] + (b[1] - a[1]) * f),
+      Math.round(a[2] + (b[2] - a[2]) * f),
+      Math.round(a[3] + (b[3] - a[3]) * f)
+    ];
+  }
+
+  function fireColor(t) { return gradientColor(t, FIRE_STOPS); }
+  function cloudColor(t) { return gradientColor(t, CLOUD_STOPS); }
+
   function createAsciiBackground(canvas) {
     var offscreen = document.createElement('canvas');
     var gl = offscreen.getContext('webgl', { preserveDrawingBuffer: true });
     if (!gl) return;
+
+    // Style: fire(0), cloud(1), gray(2).
+    // Interaction: none(0), ripple(1), glow(2), reveal(3), alien(4).
+    var style = ACTIVE_STYLE;
+    var styleIndex = 0;
+    var colorFn = fireColor;
+    var charSet = CHAR_SET;
+    switch (style) {
+      case 'cloud': styleIndex = 1; colorFn = cloudColor; break;
+      case 'gray':  styleIndex = 2; colorFn = null;       break;
+      default:      styleIndex = 0; colorFn = fireColor;  break;
+    }
+    var interact = ACTIVE_INTERACTION;
+    var interactIndex = 0;
+    switch (interact) {
+      case 'ripple':   interactIndex = 1; break;
+      case 'glow':     interactIndex = 2; break;
+      case 'reveal':   interactIndex = 3; break;
+      case 'alien':    interactIndex = 4; break;
+      case 'gravity':  interactIndex = 5; break;
+      case 'suck':     interactIndex = 6; break;
+      case 'electric': interactIndex = 7; break;
+      case 'magnet':   interactIndex = 8; break;
+      default:         interactIndex = 0; break;
+    }
 
     function compileShader(type, source) {
       var shader = gl.createShader(type);
@@ -902,6 +1063,9 @@
 
     var uResolution = gl.getUniformLocation(program, 'u_resolution');
     var uTime = gl.getUniformLocation(program, 'u_time');
+    var uStyle = gl.getUniformLocation(program, 'u_style');
+    var uMouse = gl.getUniformLocation(program, 'u_mouse');
+    var uInteract = gl.getUniformLocation(program, 'u_interact');
 
     var ctx = canvas.getContext('2d');
     if (!ctx) return;
@@ -912,6 +1076,20 @@
     var isVisible = true;
     var isIntersecting = true;
     var state = { w: 400, h: 400, dpr: 1 };
+
+    var mouse = { x: 0.5, y: 0.5, tx: 0.5, ty: 0.5 };
+
+    window.addEventListener('mousemove', function (e) {
+      var rect = canvas.getBoundingClientRect();
+      if (e.clientX < rect.left || e.clientX > rect.right ||
+          e.clientY < rect.top || e.clientY > rect.bottom) {
+        mouse.tx = 0.5;
+        mouse.ty = 0.5;
+        return;
+      }
+      mouse.tx = (e.clientX - rect.left) / rect.width;
+      mouse.ty = 1.0 - (e.clientY - rect.top) / rect.height;
+    });
 
     function resize() {
       var rect = canvas.getBoundingClientRect();
@@ -940,6 +1118,11 @@
       gl.useProgram(program);
       gl.uniform2f(uResolution, cols, rows);
       gl.uniform1f(uTime, (Date.now() - startTime) / 1000 * SPEED);
+      gl.uniform1i(uStyle, styleIndex);
+      gl.uniform1i(uInteract, interactIndex);
+      mouse.x += (mouse.tx - mouse.x) * 0.35;
+      mouse.y += (mouse.ty - mouse.y) * 0.35;
+      gl.uniform2f(uMouse, mouse.x, mouse.y);
       gl.drawArrays(gl.TRIANGLES, 0, 6);
 
       var pixels = new Uint8Array(cols * rows * 4);
@@ -952,7 +1135,7 @@
       }
       var range = (max - min) || 1;
       var cellPx = cell * dpr;
-      var lastIndex = CHAR_SET.length - 1;
+      var lastIndex = charSet.length - 1;
 
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.font = '700 ' + (1.05 * cellPx * 0.99) + "px 'Inconsolata', monospace";
@@ -968,9 +1151,10 @@
           r = Math.max(0, r);
           var index = Math.round(r * lastIndex);
           if (index !== 0) {
-            var alpha = (0.2 + 0.8 * r).toFixed(2);
-            ctx.fillStyle = 'rgba(' + COLOR[0] + ',' + COLOR[1] + ',' + COLOR[2] + ',' + alpha + ')';
-            ctx.fillText(CHAR_SET[index], x * cellPx + cellPx / 2, y * cellPx + cellPx / 2);
+            var alpha = (0.15 + 0.85 * r).toFixed(2);
+            var rgb = colorFn ? colorFn(r) : [77, 77, 77];
+            ctx.fillStyle = 'rgba(' + rgb[0] + ',' + rgb[1] + ',' + rgb[2] + ',' + alpha + ')';
+            ctx.fillText(charSet[index], x * cellPx + cellPx / 2, y * cellPx + cellPx / 2);
           }
         }
       }

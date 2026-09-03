@@ -565,15 +565,22 @@ header .grid-layout nav .nav-list li a:hover {
 #s-experience .grid-layout #experience .option-experience>div {
 	padding: 24px 32px;
 	text-align: left;
+	transition: all 0.2s ease;
 }
 
 #s-experience .grid-layout #experience .option-experience>div:hover {
 	cursor: pointer;
+	background: rgba(255, 255, 255, 0.04);
+}
+
+#s-experience .grid-layout #experience .option-experience>div:hover h3 {
+	color: blueviolet;
 }
 
 #s-experience .grid-layout #experience .option-experience>div h3 {
 	font-size: 1.8rem;
 	font-weight: 400;
+	transition: color 0.2s ease;
 }
 
 #s-experience .grid-layout #experience .text-experience {
@@ -808,31 +815,37 @@ header .grid-layout nav .nav-list li a:hover {
 	margin: 24px 0px;
 }
 
-#s-services .grid-layout #services article {
-	background-color: #000000; 
-	height: auto;
-	padding: 32px;
-	margin: 8px;
+#s-services .grid-layout #services a.service-link {
 	flex-basis: calc(33% - 20px);
 	flex-grow: 1;
+	display: block;
+	margin: 8px;
+	text-decoration: none;
+	color: inherit;
+}
+
+#s-services .grid-layout #services article {
+	background-color: #000000; 
+	height: 100%;
+	padding: 32px;
 	border: 4px dotted #555;
 	border-radius: 14px;
 	transition: 1s all ease;
 }
 
-#s-services .grid-layout #services article:hover {
+#s-services .grid-layout #services a.service-link:hover article {
     border: 4px dotted #8778c1;
 	box-shadow: 0 0 12px rgba(135, 120, 193, 0.25);
 }
 
 @media screen and (max-width: 1200px) {
-	#s-services .grid-layout #services article {
+	#s-services .grid-layout #services a.service-link {
 		flex-basis: calc(50% - 20px);
 	}
 }
 
 @media screen and (max-width: 768px) {
-	#s-services .grid-layout #services article {
+	#s-services .grid-layout #services a.service-link {
 		flex-basis: calc(100% - 20px);
 	}
 }
@@ -1616,35 +1629,39 @@ header .grid-layout nav .nav-list li a:hover {
 	flex-wrap: wrap;
 	margin: 24px 0px;
 }
-#s-services .grid-layout #services span {
-	color: #8778c1;
+
+#s-services .grid-layout #services a.service-link {
+	background-color: #000000;  /* box background color for WHAT I DO */
+	flex-basis: calc(33% - 20px);
+	flex-grow: 1;
+	display: block;
+	margin: 8px;
+	text-decoration: none;
+	color: inherit;
 }
 
 #s-services .grid-layout #services article {
 	background-color: #000000;  /* box background color for WHAT I DO */
-	height: auto;
+	height: 100%;
 	padding: 32px;
-	margin: 8px;
-	flex-basis: calc(33% - 20px);
-	flex-grow: 1;
 	border: 3px dashed #555;
 	border-radius: 14px;
 	transition: 1s all ease;
 }
 
-#s-services .grid-layout #services article:hover {
+#s-services .grid-layout #services a.service-link:hover article {
     border: 3px dashed #8778c1;
 	box-shadow: 0 0 12px rgba(135, 120, 193, 0.25);
 }
 
 @media screen and (max-width: 1200px) {
-	#s-services .grid-layout #services article {
+	#s-services .grid-layout #services a.service-link {
 		flex-basis: calc(50% - 20px);
 	}
 }
 
 @media screen and (max-width: 768px) {
-	#s-services .grid-layout #services article {
+	#s-services .grid-layout #services a.service-link {
 		flex-basis: calc(100% - 20px);
 	}
 }
@@ -2051,23 +2068,30 @@ footer .grid-layout div img {
   border-radius: 8px 8px 0 0;
   display: flex;
   align-items: center;
-  padding-left: 12px;
+  justify-content: flex-end;
+  padding-right: 12px;
 }
 
-/* Dot buttons */
+/* Window control buttons (minimalist Linux style) */
 .term-dot {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  margin-right: 8px;
+  width: 20px;
+  height: 20px;
+  margin-left: 6px;
   cursor: pointer;
   flex-shrink: 0;
-  transition: filter 0.15s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  background: #262626;
+  color: #a8a8a8;
+  transition: background 0.15s ease, color 0.15s ease;
 }
-.term-dot:hover { filter: brightness(1.4); }
-.term-dot-close  { background: #ff5f57; }
-.term-dot-min    { background: #febc2e; }
-.term-dot-max    { background: #28c840; }
+.term-dot svg {
+  display: block;
+}
+.term-dot:hover { background: #3a3a3a; color: #fff; }
+.term-dot-close:hover { background: #e81123; color: #fff; }
 
 .term-titlebar:active {
   cursor: grabbing;
@@ -2097,11 +2121,12 @@ footer .grid-layout div img {
 
 /* Maximized state */
 .term-maximized {
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  background: rgba(10, 10, 10, 0.5) !important;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  background: #0a0a0a !important;
   box-shadow: 0 0 80px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.06);
-  overflow: auto !important;
+  overflow: hidden !important;
+  z-index: 9999 !important;
 }
 
 /* Active / dragging state */
@@ -2141,10 +2166,10 @@ footer .grid-layout div img {
 .term-dock-icon {
   width: 40px;
   height: 40px;
-  border-radius: 8px;
-  background: rgba(19, 19, 42, 0.9);
-  border: 1px solid rgba(135, 120, 193, 0.25);
-  color: lightgray;
+  border-radius: 6px;
+  background: #0a0a0a;
+  border: 1px solid #2a2a2a;
+  color: #a8a8a8;
   font-family: 'Courier New', monospace;
   font-size: 0.9rem;
   display: flex;
@@ -2157,10 +2182,11 @@ footer .grid-layout div img {
 }
 
 .term-dock-icon:hover {
-  border-color: #8778c1;
-  color: #8778c1;
+  background: #1a1a1a;
+  border-color: #4a4a4a;
+  color: #fff;
   transform: translateY(-4px);
-  box-shadow: 0 6px 16px rgba(135, 120, 193, 0.2);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5);
 }
 
 .github-btn {
@@ -2275,7 +2301,15 @@ footer .grid-layout div img {
   position: relative;
 }
 
-.td-name { color: #fff !important; font-weight: bold; width: 200px; flex-shrink: 0; }
+.td-name { color: #8778c1 !important; font-weight: bold; width: 200px; flex-shrink: 0; transition: color 0.2s ease; }
+
+.term-dir-row:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.term-dir-row:hover .td-name {
+  color: #bba7f0 !important;
+}
 
 
 .term-dir-header .td-name,
@@ -2283,7 +2317,7 @@ footer .grid-layout div img {
 
 .td-desc {
   font-size: 1rem;
-  color: #666;
+  color: #d8d8d8 !important;
   flex: 1;
   min-width: 0;
   line-height: 1.4;

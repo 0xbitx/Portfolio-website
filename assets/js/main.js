@@ -4,6 +4,26 @@ import { typeWrite } from "./typeWrite.js";
 import { hoverChangeDescription } from "./hoverChangeDescription.js";
 import { menu } from "./menu.js";
 
+// Force the page to the very top before first paint, with no animation, so a
+// refresh always shows the home page instantly (no smooth auto-scroll).
+function resetScroll() {
+  var root = document.documentElement;
+  var prev = root.style.scrollBehavior;
+  root.style.scrollBehavior = 'auto';   // override smooth so the jump is instant
+  window.scrollTo(0, 0);
+  root.scrollTop = 0;
+  document.body.scrollTop = 0;
+  root.style.scrollBehavior = prev;
+}
+resetScroll();
+window.addEventListener('DOMContentLoaded', resetScroll);
+window.addEventListener('load', resetScroll);
+window.addEventListener('pageshow', function (e) {
+  if (e.persisted) {
+    resetScroll();
+  }
+});
+
 menu();
 initScrollReveal();
 typeWrite(document.querySelector(".typewriter"));
@@ -18,7 +38,7 @@ hoverChangeExperience(
 
 hoverChangeExperience(
   ".linux",
-  `My journey with the Linux system has been about getting my hands dirty. I didn't just learn how it works; I learned how to make it work for me. That means I can build a HIDS to watch its every move and engineer the precise mitigations to counter an attack. For me, deep Linux knowledge isn't just about understanding the engine—it's about being able to build the security system that protects it.`,
+  `My journey with Linux has been about getting my hands dirty. I didn't just learn how it works, I learned how to make it work for me. That means building a HIDS to watch its every move and figuring out the right mitigations to stop an attack. For me, knowing Linux deep isn't just understanding the engine. It's about building the security system that protects it.`,
   "linux system hacking",
   "Building linux based tools",
   "Jan 2012 - Jan 2025"
@@ -26,7 +46,7 @@ hoverChangeExperience(
 
 hoverChangeExperience(
   ".os",
-  `I'm passionate about truly understanding the Windows OS. I spend my time crafting exploits and designing bypass methods—not just to challenge the system, but to really learn how it works. This hands-on approach is focused on finding and understanding security weaknesses.`,
+  `I'm really into understanding Windows. I spend my time writing exploits and figuring out bypass methods, not just to break things but to actually learn how the OS works. This hands-on approach is all about finding and understanding security holes.`,
   "Windows System hacking",
   "Building windows exploit and bypass",
   "Jul 2011 - Jan 2025 "
