@@ -215,20 +215,6 @@ header .grid-layout nav .nav-list li a:hover {
   overflow: hidden;
 }
 
-#s-home::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: radial-gradient(
-    circle at var(--x, 50%) var(--y, 50%),
-    rgba(255, 255, 255, 0) 10px,     /* bright center */
-    rgba(0, 0, 0, 0.99) 300px         /* dark edges */
-  );
-  transition: background 0.1s ease-out;
-  z-index: 2;
-}
-
 #s-home:hover {
     animation: smoothColorChange 35s infinite;
 }
@@ -1913,11 +1899,7 @@ footer .grid-layout div img {
 }
 
 .typewriter:after {
-	content: "|";
-	margin-left: 8px;
-	opacity: 1;
-	animation: blink 1s infinite;
-	color: #000000;
+	display: none;
 }
 
 @keyframes blink {
@@ -1933,61 +1915,6 @@ footer .grid-layout div img {
 .grid-layout {
 	max-width: 1140px;
 	margin: 0 auto;
-}
-
-/* ============================================
-   Flashlight Toggle Button
-   ============================================ */
-.flashlight-toggle {
-	position: absolute;
-	top: 80px;
-	right: 20px;
-	z-index: 11;
-	background: rgba(0, 0, 0, 0.6);
-	border: 1px solid rgba(135, 120, 193, 0.3);
-	border-radius: 50%;
-	width: 40px;
-	height: 40px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	cursor: pointer;
-	transition: all 0.3s ease;
-	color: #d8d8d8;
-}
-
-.flashlight-toggle:hover {
-	border-color: #8778c1;
-	color: #8778c1;
-	transform: rotate(15deg);
-}
-
-.flashlight-toggle .light-on-icon {
-	display: block;
-}
-
-.flashlight-toggle .light-off-icon {
-	display: none;
-}
-
-/* When flashlight is off, show the off icon */
-.flashlight-off .flashlight-toggle .light-on-icon {
-	display: none;
-}
-
-.flashlight-off .flashlight-toggle .light-off-icon {
-	display: block;
-}
-
-/* ============================================
-   Disable flashlight effect on home section
-   ============================================ */
-.flashlight-off #s-home::after {
-	display: none;
-}
-
-.flashlight-off #s-home:hover {
-	animation: none !important;
 }
 
 /* ============================================
@@ -2195,12 +2122,18 @@ footer .grid-layout div img {
   align-items: center;
   justify-content: center;
   gap: 0;
-  background: #333;
-  width: 96px;
-  height: 50px;
-  border-radius: 100%;
+  background: rgba(18, 18, 24, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  box-shadow:
+    0 6px 20px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  backdrop-filter: blur(18px) saturate(140%);
+  width: 10px;
+  height: 10px;
+  border-radius: 10%;
   text-decoration: none;
-  transition: background 0.4s ease, width 0.4s ease, border-radius 0.4s ease, gap 0.4s ease;
+  transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 #home-container-text {
@@ -2239,32 +2172,67 @@ footer .grid-layout div img {
   height: 59px !important;
   max-width: none !important;
   max-height: none !important;
-  transition: background 0.4s ease, width 0.4s ease, border-radius 0.4s ease, gap 0.4s ease;
+  transform: none !important;
+  position: static;
 }
 
+/* Text is positioned to the RIGHT of the icon and slides in on hover,
+   without moving the icon or growing the button leftward. */
 .github-btn .gh-text {
-  max-width: 0;
-  overflow: visible;
+  position: absolute;
+  left: 100%;
+  top: 50%;
+  transform: translateY(-50%) translateX(-8px);
   opacity: 0;
-  color: #000;
+  color: #fff;
   font-family: 'Courier New', Consolas, monospace;
   font-size: 15px;
   font-weight: bold;
   white-space: nowrap;
-  transition: background 0.4s ease, width 0.4s ease, border-radius 0.4s ease, gap 0.4s ease;
+  padding-left: 12px;
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
 }
 
 .github-btn:hover {
-  background: #8778c1 !important;
-  width: auto;
-  padding: 0 16px;
-  gap: 10px;
-  border-radius: 50px;
+  background: rgba(135, 120, 193, 0.55) !important;
+  border-color: rgba(255, 255, 255, 0.18);
+  box-shadow:
+    0 0 18px rgba(135, 120, 193, 0.45),
+    0 6px 20px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
 }
 
 .github-btn:hover .gh-text {
-  max-width: 100px;
   opacity: 1;
+  transform: translateY(-50%) translateX(0);
+}
+
+/* Prevent the generic home-container link rule from expanding this button
+   on hover (which shifts the icon). Keep it a fixed frosted circle and dark. */
+#s-home .grid-layout #home #home-container-text a.github-btn,
+#s-home .grid-layout #home #home-container-text a.github-btn:hover {
+  max-width: 72px !important;
+  padding: 0 !important;
+  width: 72px !important;
+  height: 72px !important;
+  border-radius: 50% !important;
+  background: rgba(18, 18, 24, 0.55) !important;
+  border: 1px solid rgba(255, 255, 255, 0.10) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(140%) !important;
+  backdrop-filter: blur(18px) saturate(140%) !important;
+  box-shadow:
+    0 6px 20px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06) !important;
+}
+
+#s-home .grid-layout #home #home-container-text a.github-btn:hover {
+  background: rgba(135, 120, 193, 0.55) !important;
+  border-color: rgba(255, 255, 255, 0.18) !important;
+  box-shadow:
+    0 0 18px rgba(135, 120, 193, 0.45),
+    0 6px 20px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12) !important;
 }
 
 .project-link {
@@ -2321,4 +2289,75 @@ footer .grid-layout div img {
   flex: 1;
   min-width: 0;
   line-height: 1.4;
+}
+
+/* ============================================
+   Floating Apple-glass header (dark, frosted, centered)
+   ============================================ */
+header {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  width: fit-content !important;
+  max-width: calc(100vw - 32px) !important;
+  margin: 16px auto 0 !important;
+  padding: 0 !important;
+  border: 1px solid rgba(255, 255, 255, 0.10) !important;
+  border-radius: 999px !important;
+  background: rgba(18, 18, 24, 0.55) !important;
+  backdrop-filter: blur(18px) saturate(140%) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(140%) !important;
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06) !important;
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+header .grid-layout {
+  max-width: none;
+}
+
+header .grid-layout nav {
+  justify-content: center !important;
+  flex-wrap: nowrap !important;
+  gap: 28px;
+  height: 52px;
+  padding: 0 20px;
+}
+
+header .grid-layout nav .nav-list {
+  gap: 0;
+}
+
+header .grid-layout nav .nav-list li {
+  margin-left: 28px;
+}
+
+/* Apple-style glass link hover: frosted pill highlight, no underline */
+header .grid-layout nav .nav-list li a {
+  padding: 6px 14px;
+  border-radius: 999px;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+header .grid-layout nav .nav-list li a::after {
+  display: none;
+}
+
+header .grid-layout nav .nav-list li a:hover {
+  color: #ffffff !important;
+  background: rgba(255, 255, 255, 0.08);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+}
+
+@media screen and (max-width: 992px) {
+  header {
+    max-width: calc(100vw - 24px);
+    margin: 12px auto 0;
+  }
+  header .grid-layout nav {
+    gap: 0;
+  }
 }
