@@ -68,10 +68,44 @@
   </head>
   <body>
 
-  <script type="module">
-    import { followingDotCursor } from "https://unpkg.com/cursor-effects@latest/dist/esm.js";
-    new followingDotCursor();
-  </script>
+  <canvas id="cursor-circle" aria-hidden="true"></canvas>
+
+  <div id="cursor-ship" aria-hidden="true">
+    <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+      <!-- tractor beam cone (under the saucer) -->
+      <path class="ship-beam" d="M40 78 L80 78 L104 116 Q60 122 16 116 Z" fill="url(#beamGrad)"/>
+      <defs>
+        <linearGradient id="beamGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#3aff51" stop-opacity="0.55"/>
+          <stop offset="100%" stop-color="#3aff51" stop-opacity="0"/>
+        </linearGradient>
+      </defs>
+      <!-- domed glass canopy -->
+      <path d="M38 52 Q38 28 60 28 Q82 28 82 52 Z" fill="rgba(180,230,255,0.55)" stroke="rgba(255,255,255,0.8)" stroke-width="2"/>
+      <!-- alien inside dome -->
+      <ellipse cx="60" cy="48" rx="11" ry="13" fill="#a8e07a"/>
+      <circle cx="57" cy="45" r="3" fill="#14141c"/>
+      <circle cx="63" cy="45" r="3" fill="#14141c"/>
+      <path d="M58 52 Q60 55 62 52" fill="none" stroke="#14141c" stroke-width="1.5" stroke-linecap="round"/>
+      <!-- antenna -->
+      <line x1="60" y1="28" x2="60" y2="16" stroke="#e8e8ee" stroke-width="2"/>
+      <circle class="ship-beacon" cx="60" cy="14" r="4" fill="#3aff51"/>
+      <!-- saucer upper dome body (metallic) -->
+      <ellipse cx="60" cy="54" rx="42" ry="20" fill="#c9ccd6"/>
+      <!-- saucer lower rim -->
+      <ellipse cx="60" cy="60" rx="42" ry="14" fill="#a7abb8"/>
+      <!-- shadow/under belly -->
+      <ellipse cx="60" cy="66" rx="32" ry="9" fill="#7c8190"/>
+      <!-- rim lights -->
+      <circle class="ship-light" style="animation-delay:0s" cx="26" cy="58" r="3.5" fill="#3aff51"/>
+      <circle class="ship-light" style="animation-delay:0.15s" cx="42" cy="63" r="3.5" fill="#3aff51"/>
+      <circle class="ship-light" style="animation-delay:0.3s" cx="60" cy="66" r="3.5" fill="#3aff51"/>
+      <circle class="ship-light" style="animation-delay:0.45s" cx="78" cy="63" r="3.5" fill="#3aff51"/>
+      <circle class="ship-light" style="animation-delay:0.6s" cx="94" cy="58" r="3.5" fill="#3aff51"/>
+      <!-- highlight shine -->
+      <ellipse cx="44" cy="44" rx="16" ry="7" fill="rgba(255,255,255,0.28)"/>
+    </svg>
+  </div>
 
   <script>
     document.addEventListener('contextmenu', function (e) {
@@ -199,6 +233,74 @@
           </div>
         </div>
       </section>
+
+      <div class="astronaut" aria-hidden="true">
+          <svg viewBox="0 0 120 140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Floating astronaut">
+            <!-- left leg (pivot at hip ~52,84) -->
+            <g class="limb leg left-leg">
+              <rect x="47" y="82" width="10" height="22" rx="5" fill="#e8e8ee"/>
+              <ellipse cx="52" cy="107" rx="7" ry="4" fill="#434356"/>
+            </g>
+
+            <!-- right leg (pivot at hip ~68,84) -->
+            <g class="limb leg right-leg">
+              <rect x="63" y="82" width="10" height="22" rx="5" fill="#e8e8ee"/>
+              <ellipse cx="68" cy="107" rx="7" ry="4" fill="#434356"/>
+            </g>
+
+            <!-- body / backpack -->
+            <rect x="44" y="46" width="32" height="40" rx="10" fill="#e8e8ee"/>
+            <rect x="40" y="44" width="12" height="36" rx="6" fill="#c6c6d4"/>
+
+            <!-- backpack details -->
+            <line x1="46" y1="52" x2="46" y2="72" stroke="#9a9ab0" stroke-width="2"/>
+            <circle cx="46" cy="58" r="2" fill="#8778c1"/>
+
+            <!-- left arm (pivot at shoulder ~33,52) -->
+            <g class="limb arm left-arm">
+              <rect x="32" y="50" width="12" height="24" rx="5" fill="#e8e8ee"/>
+              <circle id="left-hand" cx="34" cy="77" r="5" fill="#434356"/>
+            </g>
+
+            <!-- right arm (pivot at shoulder ~87,52) -->
+            <g class="limb arm right-arm">
+              <rect x="76" y="50" width="12" height="24" rx="5" fill="#e8e8ee"/>
+              <circle id="right-hand" cx="86" cy="77" r="5" fill="#434356"/>
+            </g>
+
+            <!-- helmet -->
+            <circle cx="60" cy="32" r="20" fill="#f4f4f7"/>
+            <circle cx="60" cy="32" r="20" fill="url(#visorGrad)"/>
+            <circle cx="60" cy="32" r="14" fill="#1b1b28"/>
+            <circle cx="60" cy="32" r="14" fill="url(#visorShine)"/>
+
+            <!-- face reflection -->
+            <ellipse cx="55" cy="27" rx="4" ry="3" fill="#ffffff" opacity="0.35"/>
+
+            <!-- antenna -->
+            <line x1="60" y1="12" x2="60" y2="4" stroke="#8778c1" stroke-width="2"/>
+            <circle cx="60" cy="3" r="3" fill="#3aff51"/>
+
+            <defs>
+              <radialGradient id="visorGrad" cx="45%" cy="40%" r="70%">
+                <stop offset="0%" stop-color="#434356"/>
+                <stop offset="100%" stop-color="#f4f4f7"/>
+              </radialGradient>
+              <radialGradient id="visorShine" cx="40%" cy="35%" r="70%">
+                <stop offset="0%" stop-color="#8778c1" stop-opacity="0.7"/>
+                <stop offset="100%" stop-color="#1b1b28"/>
+              </radialGradient>
+            </defs>
+          </svg>
+        </div>
+
+        <div class="astro-bubble" aria-hidden="true">
+          <svg class="astro-bubble-svg" viewBox="0 0 220 60" xmlns="http://www.w3.org/2000/svg">
+            <rect class="astro-bubble-body" x="14" y="2" width="192" height="52" rx="21" ry="21" fill="#8778c1"/>
+            <path class="astro-bubble-tail" d="M34 52 L22 68 L51 54 Z" fill="#8778c1"/>
+            <text class="astro-bubble-text" x="110" y="29" text-anchor="middle" dominant-baseline="central" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', 'Archivo', sans-serif" font-size="20" font-weight="600">Lost in space...</text>
+          </svg>
+        </div>
       <script>
       document.addEventListener("DOMContentLoaded", function () {
         fetch('https://ipapi.co/json/')
@@ -1075,12 +1177,33 @@
       gl.readPixels(0, 0, cols, rows, gl.RGBA, gl.UNSIGNED_BYTE, pixels);
 
       var min = 255, max = 0;
+      var sumX = 0, sumY = 0, sumW = 0;
       for (var i = 0; i < pixels.length; i += 4) {
         if (pixels[i] < min) min = pixels[i];
         if (pixels[i] > max) max = pixels[i];
       }
       var range = (max - min) || 1;
       var cellPx = cell * dpr;
+
+      // Compute brightness-weighted centroid of the ASCII field so external
+      // elements (the astronaut) can be attracted to its changing structure.
+      for (var c = 0; c < cols; c++) {
+        for (var r = 0; r < rows; r++) {
+          var v = pixels[4 * ((rows - 1 - r) * cols + c)];
+          var wgt = v > min ? (v - min) / range : 0;
+          if (wgt > 0.05) {
+            sumX += (c / cols) * wgt;
+            sumY += (r / rows) * wgt;
+            sumW += wgt;
+          }
+        }
+      }
+      if (sumW > 0) {
+        window.__asciiField = window.__asciiField || {};
+        window.__asciiField.cx = sumX / sumW;
+        window.__asciiField.cy = 1 - (sumY / sumW); // y-down -> y-up
+        window.__asciiField.intensity = Math.min(1, sumW / (cols * rows * 0.25));
+      }
       var lastIndex = charSet.length - 1;
 
       ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -1147,6 +1270,1145 @@
   for (var i = 0; i < canvases.length; i++) {
     createAsciiBackground(canvases[i]);
   }
+})();
+</script>
+
+<script>
+(function () {
+  var el = document.querySelector('.astronaut');
+  if (!el) return;
+
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  var size = el.getBoundingClientRect().width || 90;
+  var prev = performance.now();
+
+  // viewport space (fixed element roams the whole screen)
+  var w = window.innerWidth;
+  var h = window.innerHeight;
+
+  function measure() {
+    w = window.innerWidth;
+    h = window.innerHeight;
+  }
+  window.addEventListener('resize', measure, { passive: true });
+
+  var state = {
+    x: w * 0.72,
+    y: h * 0.38,
+    vx: 0,
+    vy: 0,
+    angle: (Math.random() - 0.5) * 12,
+    va: 0
+  };
+
+  var leftArm = el.querySelector('.left-arm');
+  var rightArm = el.querySelector('.right-arm');
+  var leftLeg = el.querySelector('.left-leg');
+  var rightLeg = el.querySelector('.right-leg');
+
+  // ---- cursor circle (replaces cursor-effects followingDotCursor) ----
+  var canvas = document.getElementById('cursor-circle');
+  var ctx = canvas ? canvas.getContext('2d') : null;
+  var ship = document.getElementById('cursor-ship');
+  var dpr = 1;
+
+  function resizeCanvas() {
+    if (!canvas) return;
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    canvas.width = window.innerWidth * dpr;
+    canvas.height = window.innerHeight * dpr;
+    canvas.style.width = window.innerWidth + 'px';
+    canvas.style.height = window.innerHeight + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  if (canvas) {
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas, { passive: true });
+  }
+
+  // The cursor circle position+velocity, in *viewport* coords (trails the mouse)
+  var ring = {
+    x: window.innerWidth / 2,
+    y: window.innerHeight / 2,
+    vx: 0,
+    vy: 0,
+    fx: window.innerWidth / 2,
+    fy: window.innerHeight / 2
+  };
+
+  // raw mouse position (viewport coords) + speed
+  var mouse = { x: ring.x, y: ring.y, lastT: performance.now() };
+  var cursorSpeed = 0;
+
+  window.addEventListener('mousemove', function (e) {
+    var nowMs = performance.now();
+    var dms = nowMs - mouse.lastT;
+    if (dms > 0) {
+      var dx = e.clientX - mouse.x;
+      var dy = e.clientY - mouse.y;
+      var instSpeed = Math.sqrt(dx * dx + dy * dy) / (dms / 1000);
+      cursorSpeed += (instSpeed - cursorSpeed) * 0.3;
+      mouse.lastT = nowMs;
+    }
+    mouse.x = e.clientX;
+    mouse.y = e.clientY;
+  });
+
+  // wander phases (per axis) make each astronaut's path feel unique
+  var phases = {
+    x: Math.random() * Math.PI * 2,
+    y: Math.random() * Math.PI * 2,
+    a: Math.random() * Math.PI * 2
+  };
+
+  // per-limb phase offsets (initialized lazily on first frame) so each limb
+  // drifts on its own timing and never looks coordinated
+  var limbPhase = {};
+
+  var hover = false;
+  var hoverT = 0;
+
+  el.addEventListener('mouseenter', function () { hover = true; });
+  el.addEventListener('mouseleave', function () { hover = false; });
+
+  function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
+
+  function setLimbTransform(node, angleDeg, pivotX, pivotY) {
+    if (!node) return;
+    node.setAttribute(
+      'transform',
+      'rotate(' + angleDeg.toFixed(2) + ' ' + pivotX + ' ' + pivotY + ')'
+    );
+  }
+
+  var SLOW_SPEED = 220;
+  var FAST_SPEED = 900;
+  var TOUCH_RADIUS = 28; // how close the circle must be to the hand to grab (tight)
+  var grip = 0; // 0 released .. 1 holding tight
+  var holdSide = 'right'; // which hand holds the string
+  var STRING_LEN = size * 0.55; // short string: astronaut holds the circle close
+
+  var rightHand = document.getElementById('right-hand');
+  var leftHand = document.getElementById('left-hand');
+
+  // ---- speech bubble above the astronaut's head ----
+  var bubble = document.querySelector('.astro-bubble');
+  var bubbleText = bubble ? bubble.querySelector('.astro-bubble-svg text') : null;
+  var sections = [
+    { id: 's-home',       msg: 'Welcome aboard!' },
+    { id: 's-about',      msg: 'Hey, I\'m 0xbit — nice to meet you!' },
+    { id: 's-experience', msg: 'Been tinkering with Linux for years...' },
+    { id: 's-projects',   msg: 'Check out my offensive security tools!' },
+    { id: 's-services',   msg: 'Here\'s what I can build for you.' },
+    { id: 's-skills',     msg: 'These are my favourite toys.' }
+  ];
+  var currentMessage = '';
+  var bubbleTimer = null;
+
+  // ---- nav-button dwell tracking (header) ----
+  var navDwellEl = null;      // the nav <a> currently being hovered/dwelled
+  var navDwellStart = 0;      // timestamp when dwelling started
+  var navDwellMsgShown = false;
+  var navClicked = false;     // once we trigger navigation, stop re-triggering
+  var navHandAnim = 0;        // 0..1 animation progress for hand reach
+  var wasHolding = false;     // track grip transitions to detect "let go"
+  var welcomeShown = false;   // ensure the welcome (home) message shows only once
+  var infoDwellStart = 0;     // timestamp when the astronaut entered the info panel
+  var currentSectionId = '';  // section the astronaut is currently in
+  var sectionEnterTime = 0;   // when the astronaut entered that section
+  var sectionMsgShown = false;// whether the current section message already fired
+  var minDwellBtn = null;     // minimize button being dwelled
+  var minDwellStart = 0;      // when the minimize dwell started
+  var minDone = false;        // latch to prevent re-triggering minimize
+  var nextYapTime = 0;        // timestamp for the next idle "yap" message
+  var wasPulled = false;      // whether the string is currently being pulled hard
+  var nextPullHappyTime = 0;  // timestamp for the next pull-happy message
+  var wasPullHappy = false;   // whether the pull-happy mode is active
+
+  function hideBubble() {
+    bubble.classList.remove('show');
+  }
+
+  function showBubble(msg) {
+    bubbleText.textContent = msg;
+
+    // auto-size the bubble to fit the text
+    try {
+      var svg = bubble.querySelector('.astro-bubble-svg');
+      var body = svg.querySelector('.astro-bubble-body');
+      var text = bubbleText;
+      // measure text width (SVG user units; fallback ~10px/char for 20px font)
+      var textW, tlen;
+      try { textW = text.getComputedTextLength(); } catch (e) { textW = 0; }
+      if (!textW || textW <= 0) textW = msg.length * 10;
+
+      var pad = 38;              // total horizontal padding
+      var bodyW = Math.max(135, textW + pad);
+      var svgW = bodyW + 28;     // room for tail on the left + right edge
+      body.setAttribute('width', bodyW);
+      svg.setAttribute('viewBox', '0 0 ' + svgW + ' 70');
+      svg.style.width = svgW + 'px';
+      bubble.style.width = svgW + 'px';
+      text.setAttribute('x', 14 + bodyW / 2);
+      text.setAttribute('y', 29);
+    } catch (e) {}
+
+    bubble.classList.add('show');
+    // auto-hide after a short delay
+    if (bubbleTimer) clearTimeout(bubbleTimer);
+    bubbleTimer = setTimeout(hideBubble, 2600);
+  }
+
+  // random messages shown when the astronaut lets go of the string
+  var letGoMessages = [
+    'Whoa, I slipped!',
+    'I lost my grip!',
+    'Come back here!',
+    'Weeeeee!',
+    'Ano ba yan!',
+    'Sige na nga',
+    'Haysss.',
+    'Wait, I still need you!',
+    'Ugh, not again...',
+    'Hanep na yan!',
+    'Ayoko na!',
+    'Ow, my string!',
+    'Come baaack!',
+    'Taray mo naman!',
+    'Bakit mo ko binitawan?',
+    'Aray ko!',
+    'Di ako makahinga dito!',
+    'Sige na nga mauna kana!',
+    'Nagmamadali???'
+  ];
+  var lastLetGoMsg = '';
+  var letGoMessageTime = 0;   // when the last "let go" message was shown
+
+  function showLetGoMessage() {
+    var pick = letGoMessages[Math.floor(Math.random() * letGoMessages.length)];
+    // avoid repeating the same message twice in a row
+    while (pick === lastLetGoMsg && letGoMessages.length > 1) {
+      pick = letGoMessages[Math.floor(Math.random() * letGoMessages.length)];
+    }
+    lastLetGoMsg = pick;
+    currentMessage = pick;
+    letGoMessageTime = performance.now();
+    showBubble(pick);
+  }
+
+  // random messages shown when the astronaut grabs the string
+  var grabMessages = [
+    'Gotcha!',
+    'Holding on tight!',
+    'This is my ride!',
+    'Nice, I caught it!',
+    'Now we\'re connected.',
+    'Alright, let\'s go!',
+    'Got it!',
+    'Beam me up!',
+    'Here we go!',
+    'Secured!',
+    'I\'m not letting go.',
+    'Yey!',
+    'Yohooo!'
+  ];
+  var lastGrabMsg = '';
+  var grabMessageTime = 0;   // when the last "grab" message was shown
+
+  function showGrabMessage() {
+    var pick = grabMessages[Math.floor(Math.random() * grabMessages.length)];
+    while (pick === lastGrabMsg && grabMessages.length > 1) {
+      pick = grabMessages[Math.floor(Math.random() * grabMessages.length)];
+    }
+    lastGrabMsg = pick;
+    currentMessage = pick;
+    grabMessageTime = performance.now();
+    showBubble(pick);
+  }
+
+  // random "yapping" messages shown while the astronaut just floats around
+  var yapMessages = [
+    'So... you come here often?',
+    'Is it just me, or is space really quiet?',
+    'I wonder if Mars has wifi...',
+    'Did I leave the oven on?',
+    'Houston, can you hear me?',
+    'I could really go for some halo-halo right now.',
+    'Gravity is just a suggestion, right?',
+    'Am I floating or is the world moving?',
+    'One small step... wait, already did that.',
+    'I think I saw a shooting star.',
+    'Do aliens get lonely too?',
+    'Should I wave at the satellites?',
+    'This helmet is getting a bit stuffy.',
+    'I miss the sound of rain.',
+    'Is anyone else out here?',
+    'Ang lamig dito, grabe...',
+    'Space pizza would be nice right now.',
+    'Note to self: don\'t float too far.',
+    'The stars are brighter than my future.',
+    'Parang biglang bumagal lahat...',
+    'Imagine if I had pockets up here.',
+    'I should have packed more snacks.',
+    'Zero gravity... zero problems.',
+    'Is that a UFO or am I dreaming?',
+    'Kumusta naman dito sa space?',
+    'I\'m basically a shooting star, right?',
+    'Somebody\'s gotta clean this debris.',
+    'Me, myself, and the void.'
+  ];
+  var lastYapMsg = '';
+  var yapMessageTime = 0;
+
+  function showYapMessage() {
+    var pick = yapMessages[Math.floor(Math.random() * yapMessages.length)];
+    while (pick === lastYapMsg && yapMessages.length > 1) {
+      pick = yapMessages[Math.floor(Math.random() * yapMessages.length)];
+    }
+    lastYapMsg = pick;
+    currentMessage = pick;
+    yapMessageTime = performance.now();
+    showBubble(pick);
+  }
+
+  function randomYapDelay() {
+    var secs = [5, 10, 15, 20, 30];
+    return secs[Math.floor(Math.random() * secs.length)] * 1000;
+  }
+
+  var pullMessages = [
+    'Whoa, easy there!',
+    'Careful! I\'m attached to that!',
+    'You\'re gonna snap it!',
+    'Hey, don\'t yank me!',
+    'Too hard! Slow down!',
+    'The string is stretching!',
+    'Aray! Stop pulling!',
+    'Gently, please!',
+    'Dahan-dahan lang!',
+    'My arm! My arm!',
+    'You\'re stretching me thin!',
+    'Ease up a bit!',
+    'Careful, it might break!',
+    'Sakto lang, pre!',
+    'Hala, mabibitawan ko na!',
+    'Baka maputol yan!',
+    'Kalmahan mo lang!',
+    'Wag biglaan, dahan-dahan!',
+    'Nako po!',
+    'Sobrang kapit na to!',
+  ];
+  var lastPullMsg = '';
+  var pullMessageTime = 0;
+
+  function showPullMessage() {
+    var pick = pullMessages[Math.floor(Math.random() * pullMessages.length)];
+    while (pick === lastPullMsg && pullMessages.length > 1) {
+      pick = pullMessages[Math.floor(Math.random() * pullMessages.length)];
+    }
+    lastPullMsg = pick;
+    currentMessage = pick;
+    pullMessageTime = performance.now();
+    showBubble(pick);
+  }
+
+  // happy/excited messages while the string is being pulled continuously
+  var pullHappyMessages = [
+    'Yohooo!',
+    'Hahaha this is fun!',
+    'Wheee!',
+    'Faster! Faster!',
+    'I love this!',
+    'Yey, weee!',
+    'Spin me around!',
+    'Hahaha again!',
+    'This is the best!',
+    'Yeyyy, let\'s go!',
+    'Sige pa! (more!)',
+    'Woooohooo!',
+    'Haha, masaya to!',
+    'Don\'t stop!',
+    'I\'m dizzy but happy!',
+    'Sobrang saya!',
+    'Tuloy mo lang!',
+    'Nakakahilo na pero go!',
+    'Grabeng saya neto!',
+    'Bilis pa! Bilis!',
+    'Wahahaha!',
+    'Isa pa!',
+    'Ang saya-saya!',
+    'Unli saya to!',
+    'Ang galing mo!',
+    'Hindi ako magsasawa!',
+    'Rampa na!',
+    'Buwis buhay pero worth it!'
+  ];
+  var lastPullHappyMsg = '';
+  var pullHappyMessageTime = 0;
+
+  function showPullHappyMessage() {
+    var pick = pullHappyMessages[Math.floor(Math.random() * pullHappyMessages.length)];
+    while (pick === lastPullHappyMsg && pullHappyMessages.length > 1) {
+      pick = pullHappyMessages[Math.floor(Math.random() * pullHappyMessages.length)];
+    }
+    lastPullHappyMsg = pick;
+    currentMessage = pick;
+    pullHappyMessageTime = performance.now();
+    showBubble(pick);
+  }
+
+  // random delay (ms) between continuous-pull happy messages
+  function randomPullHappyDelay() {
+    var secs = [2, 4, 5, 6, 7];
+    return secs[Math.floor(Math.random() * secs.length)] * 1000;
+  }
+
+  // Handles the header nav dwell: after 2s hovering a button, animate the hand
+  // toward it, then click/navigate.
+  function handleNavDwell() {
+    if (navClicked || !navDwellEl) return;
+    var elapsed = performance.now() - navDwellStart;
+    var DWELL_MS = 2000;
+    var ANIM_MS = 500;
+
+    if (elapsed >= DWELL_MS) {
+      // animate hand toward the button during ANIM_MS, then click
+      navHandAnim = Math.min(1, (elapsed - DWELL_MS) / ANIM_MS);
+      aimArmAtTarget(navDwellEl, navHandAnim);
+      if (navHandAnim >= 1) {
+        navClicked = true;
+        // programmatically trigger the link (redirect)
+        var href = navDwellEl.getAttribute('href');
+        if (href) {
+          if (href.charAt(0) === '#') {
+            // smooth scroll to anchored section
+            var target = document.querySelector(href);
+            if (target) target.scrollIntoView({ behavior: 'smooth' });
+          } else {
+            window.location.href = href;
+          }
+        } else {
+          navDwellEl.click();
+        }
+      }
+    }
+  }
+
+  // Aim the right arm (in body-local space) toward a DOM element's center.
+  function aimArmAtTarget(targetEl, progress) {
+    if (!rightArm || !targetEl) return;
+    var tr = targetEl.getBoundingClientRect();
+    var tX = tr.left + tr.width / 2;
+    var tY = tr.top + tr.height / 2;
+    var rCx = tX - state.x;
+    var rCy = tY - state.y;
+    var bAng = -state.angle * Math.PI / 180;
+    var bcos = Math.cos(bAng), bsin = Math.sin(bAng);
+    var lx = rCx * bcos - rCy * bsin;
+    var ly = rCx * bsin + rCy * bcos;
+    var sc = size / 120;
+    var shX = (87 - 60) * sc;
+    var shY = (52 - 70) * sc;
+    var dirX = lx - shX;
+    var dirY = ly - shY;
+    var aimDeg = Math.atan2(dirX, dirY) * 180 / Math.PI;
+    setLimbTransform(rightArm, clamp(-aimDeg * progress, -130, 130), 87, 52);
+  }
+
+  // After 2s dwelling on a minimize button, click it to minimize the window.
+  function handleMinDwell() {
+    if (minDone || !minDwellBtn) return;
+    var elapsed = performance.now() - minDwellStart;
+    if (elapsed >= 2000) {
+      minDone = true;
+      minDwellBtn.click();
+      // show a reaction after the window minimizes
+      setTimeout(function () {
+        currentMessage = 'Oops!';
+        showBubble('Oops!');
+      }, 350);
+    }
+  }
+
+  function updateBubble() {
+    if (!bubble || !bubbleText) return;
+
+    // find which section the astronaut's center is inside. The astronaut is
+    // fixed (viewport coords) and getBoundingClientRect() is also viewport
+    // coords, so compare directly.
+    var ax = state.x;
+    var ay = state.y;
+    var msg = '';
+
+    // always determine if the astronaut is inside any section (for hide logic)
+    var isInAnySection = false;
+    for (var si0 = 0; si0 < sections.length; si0++) {
+      var sec0 = document.getElementById(sections[si0].id);
+      if (!sec0) continue;
+      var r0 = sec0.getBoundingClientRect();
+      if (ax >= r0.left && ax <= r0.right && ay >= r0.top && ay <= r0.bottom) {
+        isInAnySection = true;
+        break;
+      }
+    }
+
+    // special-case: astronaut near the visitor-info panel (top-left) shows IP msg
+    var infoEl = document.getElementById('visitor-info');
+    if (infoEl) {
+      var infoRect = infoEl.getBoundingClientRect();
+      var infoCX = infoRect.left + infoRect.width / 2;
+      var infoCY = infoRect.top + infoRect.height / 2;
+      var dInfo = Math.hypot(ax - infoCX, ay - infoCY);
+      if (dInfo < 180) {
+        if (infoDwellStart === 0) infoDwellStart = performance.now();
+        var infoElapsed = performance.now() - infoDwellStart;
+        if (infoElapsed >= 6000) {
+          msg = 'then zoom in on the page';
+        } else if (infoElapsed >= 3000) {
+          msg = 'you want to see?';
+        } else {
+          msg = 'Wow, I see your IP here';
+        }
+      } else {
+        infoDwellStart = 0;
+      }
+    }
+
+    // special-case: astronaut near a GitHub icon
+    if (!msg) {
+      var ghEls = document.querySelectorAll('.gh-icon, .icon-one');
+      for (var gi = 0; gi < ghEls.length; gi++) {
+        var ghRect = ghEls[gi].getBoundingClientRect();
+        if (ghRect.width === 0 && ghRect.height === 0) continue;
+        var ghCX = ghRect.left + ghRect.width / 2;
+        var ghCY = ghRect.top + ghRect.height / 2;
+        if (Math.hypot(ax - ghCX, ay - ghCY) < 120) {
+          msg = 'By the way, here is my blog';
+          break;
+        }
+      }
+    }
+
+    // special-case: astronaut near the about photo
+    if (!msg) {
+      var aboutPhoto = document.getElementById('about-photo');
+      if (aboutPhoto) {
+        var apRect = aboutPhoto.getBoundingClientRect();
+        var apCX = apRect.left + apRect.width / 2;
+        var apCY = apRect.top + apRect.height / 2;
+        if (Math.hypot(ax - apCX, ay - apCY) < 160) {
+          msg = 'I miss this girl';
+        }
+      }
+    }
+
+    // special-case: astronaut near one of the "What I do" service cards
+    if (!msg) {
+      var serviceMsgs = [
+        'Yup, I do hardware hacking too.',
+        'Yes, I make malware but I\'m not a criminal!',
+        'I have TikTok at 0xbit.'
+      ];
+      var svcCards = document.querySelectorAll('#services .service-link article');
+      for (var sv = 0; sv < svcCards.length; sv++) {
+        var svRect = svcCards[sv].getBoundingClientRect();
+        if (svRect.width === 0 && svRect.height === 0) continue;
+        var svCX = svRect.left + svRect.width / 2;
+        var svCY = svRect.top + svRect.height / 2;
+        if (Math.hypot(ax - svCX, ay - svCY) < 160) {
+          msg = serviceMsgs[sv] || 'Interesting!';
+          break;
+        }
+      }
+    }
+
+    // special-case: astronaut near the header nav buttons
+    if (!msg) {
+      var navLinks = document.querySelectorAll('header .nav-list li a');
+      var foundBtn = null;
+      var bestD = 130;
+      for (var ni = 0; ni < navLinks.length; ni++) {
+        var nRect = navLinks[ni].getBoundingClientRect();
+        if (nRect.width === 0 && nRect.height === 0) continue;
+        var nCX = nRect.left + nRect.width / 2;
+        var nCY = nRect.top + nRect.height / 2;
+        var dN = Math.hypot(ax - nCX, ay - nCY);
+        if (dN < bestD) {
+          bestD = dN;
+          foundBtn = navLinks[ni];
+        }
+      }
+
+      if (foundBtn) {
+        if (!navClicked) {
+          var btnName = (foundBtn.textContent || '').trim() || 'menu';
+          msg = 'Don\'t let me click that ' + btnName + ' button';
+        }
+        // track dwell time for the same button
+        if (navDwellEl !== foundBtn) {
+          navDwellEl = foundBtn;
+          navDwellStart = performance.now();
+          navDwellMsgShown = false;
+        }
+      } else {
+        // left the nav area — reset so it can trigger again next time
+        navDwellEl = null;
+        navDwellStart = 0;
+        navClicked = false;
+        navHandAnim = 0;
+      }
+    }
+
+    // special-case: astronaut near a window's minimize button
+    if (!msg) {
+      var minBtns = document.querySelectorAll('.term-dot-min');
+      var foundMin = null;
+      var minBestD = 60;
+      for (var mi = 0; mi < minBtns.length; mi++) {
+        var mRect = minBtns[mi].getBoundingClientRect();
+        if (mRect.width === 0 && mRect.height === 0) continue;
+        var mCX = mRect.left + mRect.width / 2;
+        var mCY = mRect.top + mRect.height / 2;
+        var dMin = Math.hypot(ax - mCX, ay - mCY);
+        if (dMin < minBestD) {
+          minBestD = dMin;
+          foundMin = minBtns[mi];
+        }
+      }
+
+      if (foundMin) {
+        if (!minDone) {
+          msg = 'Don\'t let me minimize this window';
+        }
+        if (minDwellBtn !== foundMin) {
+          minDwellBtn = foundMin;
+          minDwellStart = performance.now();
+          minDone = false;
+        }
+      } else {
+        minDwellBtn = null;
+        minDwellStart = 0;
+        minDone = false;
+      }
+    }
+
+    if (!msg) {
+      var inSection = null;
+      for (var si = 0; si < sections.length; si++) {
+        var sec = document.getElementById(sections[si].id);
+        if (!sec) continue;
+        var r = sec.getBoundingClientRect();
+        if (ax >= r.left && ax <= r.right && ay >= r.top && ay <= r.bottom) {
+          inSection = sections[si];
+          break;
+        }
+      }
+
+      if (inSection) {
+        // track section entry time and whether its message already fired
+        if (inSection.id !== currentSectionId) {
+          currentSectionId = inSection.id;
+          sectionEnterTime = performance.now();
+          sectionMsgShown = false;
+        }
+
+        // show the section message only after a 1s delay, and only once per entry
+        var sectionElapsed = performance.now() - sectionEnterTime;
+        if (sectionElapsed >= 1000 && !sectionMsgShown) {
+          // the welcome (home) message only shows once per page load
+          if (inSection.id === 's-home' && welcomeShown) {
+            msg = '';
+          } else {
+            msg = inSection.msg;
+            if (inSection.id === 's-home') welcomeShown = true;
+          }
+          sectionMsgShown = true;
+        }
+      } else {
+        currentSectionId = '';
+        sectionEnterTime = 0;
+        sectionMsgShown = false;
+      }
+    }
+
+    // position the bubble so its tail tip points exactly at the astronaut's
+    // helmet. The helmet center sits above the body center (state.x/y), at
+    // ~-(38 viewBox units * scale) in y. The tail tip is at SVG (22, 62).
+    var scale = size / 120;               // viewBox width 120 -> px
+    var helmetX = state.x;                // helmet is horizontally centered
+    var helmetY = state.y - 38 * scale;   // helmet center (viewBox 32 vs body 70)
+    var upOffset = -10;                  // lift the bubble a bit higher
+    var tailX = 22;
+    var tailY = 68;
+    bubble.style.transform = 'translate(' + (helmetX - tailX) + 'px, ' + (helmetY - tailY + upOffset) + 'px)';
+
+    // If a transient (grab / let go / yap / pull) message was just shown, let it
+    // stay visible for a moment before any section/nav message overrides it.
+    if ((grabMessageTime && (performance.now() - grabMessageTime) < 1500) ||
+        (letGoMessageTime && (performance.now() - letGoMessageTime) < 1500) ||
+        (yapMessageTime && (performance.now() - yapMessageTime) < 2500) ||
+        (pullMessageTime && (performance.now() - pullMessageTime) < 2500) ||
+        (pullHappyMessageTime && (performance.now() - pullHappyMessageTime) < 1500)) {
+      return;
+    }
+
+    if (msg && msg !== currentMessage) {
+      currentMessage = msg;
+      showBubble(msg);
+    } else if (!msg && !isInAnySection) {
+      // only hide when actually leaving all sections (not just after a
+      // once-shown section message has already fired)
+      currentMessage = '';
+      if (bubbleTimer) clearTimeout(bubbleTimer);
+      hideBubble();
+    }
+  }
+
+  // Real hand position in *viewport* coords, read from the actual rendered
+  // glove element (accounts for arm rotation and the astronaut's transform).
+  function handPosition() {
+    if (rightHand) {
+      var hb = rightHand.getBoundingClientRect();
+      return {
+        x: hb.left + hb.width / 2,
+        y: hb.top + hb.height / 2
+      };
+    }
+    return { x: state.x, y: state.y };
+  }
+
+  function leftHandPosition() {
+    if (leftHand) {
+      var hb = leftHand.getBoundingClientRect();
+      return {
+        x: hb.left + hb.width / 2,
+        y: hb.top + hb.height / 2
+      };
+    }
+    return handPosition();
+  }
+
+  // The physics hand attachment point (string anchor on the body), computed
+  // from the rigid-body state, in *viewport* coords. This is the source of
+  // truth for the string so rotation/position are consistent.
+  function physicsHandPosition() {
+    var angRad = state.angle * Math.PI / 180;
+    var cosA = Math.cos(angRad), sinA = Math.sin(angRad);
+    var baseOX = holdSide === 'left' ? -size * 0.3 : size * 0.3;
+    var baseOY = -size * 0.55;
+    var hx = state.x + baseOX * cosA - baseOY * sinA;
+    var hy = state.y + baseOX * sinA + baseOY * cosA;
+    return { x: hx, y: hy };
+  }
+
+  // The visual hand/glove position (viewport coords) for the *string* endpoint,
+  // read from the real rendered glove element so the string is always attached
+  // to the visible hand.
+  function activeHandPosition() {
+    if (holdSide === 'left') {
+      return leftHandPosition();
+    }
+    return handPosition();
+  }
+
+  function drawRing(nowSec) {
+    if (!ctx) return;
+    ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+
+    // ---- single tether (string) from the holding hand to the circle ----
+    if (grip > 0.05) {
+      var hnd = activeHandPosition();
+      var alpha = (grip * 0.9).toFixed(2);
+      var tt = nowSec || 0;
+
+      var ddx = ring.x - hnd.x;
+      var ddy = ring.y - hnd.y;
+      var dlen = Math.sqrt(ddx * ddx + ddy * ddy) || 1;
+      // unit vector along the chord, and its perpendicular
+      var ux = ddx / dlen;
+      var uy = ddy / dlen;
+      var px = -uy;
+      var py = ux;
+
+      // gravity direction (always downward on screen) -> sag downward
+      var gvx = 0, gvy = 1;
+      var gperp = px * gvx + py * gvy;
+      if (gperp < 0) { px = -px; py = -py; gperp = -gperp; }
+
+      // draw a loose, wobbly string: a catenary sag + a traveling sine wave
+      var N = 60;
+      ctx.lineCap = 'round';
+      ctx.lineJoin = 'round';
+
+      function stringPoint(s) {
+        // base catenary sag (strongest mid-span)
+        var sag = gperp * dlen * 0.16 * Math.sin(Math.PI * s);
+        // traveling wave: makes it look loose and wavy; decays near the ends
+        var wave = Math.sin(s * Math.PI * 3 - tt * 4) * (dlen * 0.05) * Math.sin(Math.PI * s);
+        var x = hnd.x + ddx * s + px * (sag + wave);
+        var y = hnd.y + ddy * s + py * (sag + wave);
+        return { x: x, y: y };
+      }
+
+      // ROPE rendering: a thick white base with two braided sinusoidal strands
+      // twisting around it, plus darker strand lines for a fibrous look.
+      var ropeBase = 'rgba(255, 255, 255, ' + alpha + ')';
+      var ropeDark = 'rgba(200, 205, 215, ' + alpha + ')';
+      var ropeLit  = 'rgba(255, 255, 255, ' + alpha + ')';
+
+      // base rope core (thick)
+      ctx.beginPath();
+      for (var i = 0; i <= N; i++) {
+        var p = stringPoint(i / N);
+        if (i === 0) ctx.moveTo(p.x, p.y);
+        else ctx.lineTo(p.x, p.y);
+      }
+      ctx.strokeStyle = ropeBase;
+      ctx.lineWidth = 2;
+      ctx.stroke();
+
+      // braid strand 1 (lighter) — sin offset in the perpendicular direction
+      ctx.beginPath();
+      for (var k = 0; k <= N; k++) {
+        var sk = k / N;
+        var pk = stringPoint(sk);
+        var twist = Math.sin(sk * Math.PI * 10 - tt * 6) * 1.6;
+        var bx = pk.x + px * twist;
+        var by = pk.y + py * twist;
+        if (k === 0) ctx.moveTo(bx, by);
+        else ctx.lineTo(bx, by);
+      }
+      ctx.strokeStyle = ropeLit;
+      ctx.lineWidth = 0.7;
+      ctx.stroke();
+
+      // braid strand 2 (darker) — opposite phase
+      ctx.beginPath();
+      for (var m = 0; m <= N; m++) {
+        var sm = m / N;
+        var pm = stringPoint(sm);
+        var twist2 = Math.sin(sm * Math.PI * 10 - tt * 6 + Math.PI) * 1.6;
+        var cx2 = pm.x + px * twist2;
+        var cy2 = pm.y + py * twist2;
+        if (m === 0) ctx.moveTo(cx2, cy2);
+        else ctx.lineTo(cx2, cy2);
+      }
+      ctx.strokeStyle = ropeDark;
+      ctx.lineWidth = 0.6;
+      ctx.stroke();
+    }
+
+    // position the cartoon alien ship (DOM SVG) at the ring
+    if (ship) {
+      var shipScale = 1 + grip * 0.4;
+      ship.style.transform =
+        'translate(' + ring.x + 'px, ' + ring.y + 'px) ' +
+        'translate(-50%, -50%) ' +
+        'scale(' + shipScale.toFixed(3) + ')';
+    }
+  }
+
+  function tick(now) {
+    var dt = clamp((now - prev) / 1000, 0, 0.05); // cap dt to avoid jumps
+    prev = now;
+    var t = now / 1000;
+
+    // decay cursorSpeed when the mouse has been idle (no recent mousemove)
+    var idleMs = now - (mouse.lastT || now);
+    if (idleMs > 60) cursorSpeed *= 0.92;
+
+    // ---- cursor circle: springy trailing toward the mouse ----
+    ring.ax = (mouse.x - ring.x) * 0.18;
+    ring.ay = (mouse.y - ring.y) * 0.18;
+    ring.vx = ring.ax;
+    ring.vy = ring.ay;
+    ring.x += ring.vx;
+    ring.y += ring.vy;
+    ring.x = clamp(ring.x, 0, window.innerWidth);
+    ring.y = clamp(ring.y, 0, window.innerHeight);
+
+    // ---- grab detection: is the ring near the active hand? ----
+    // choose hold side based on cursor position relative to the astronaut
+    holdSide = mouse.x < state.x ? 'left' : 'right';
+    var hnd = activeHandPosition();
+    var gdist = Math.hypot(hnd.x - ring.x, hnd.y - ring.y);
+    var nearHand = gdist < TOUCH_RADIUS;
+
+    // grab when near; let go only when moving fast
+    var targetGrip;
+    if (cursorSpeed > FAST_SPEED) {
+      targetGrip = 0;
+    } else if (nearHand) {
+      targetGrip = 1;
+    } else if (grip > 0.5) {
+      targetGrip = 1; // stay holding once acquired (until fast)
+    } else {
+      targetGrip = 0;
+    }
+    grip += (targetGrip - grip) * clamp(dt * 10, 0, 1);
+
+    // detect "grab": grip was released, now holding
+    if (!wasHolding && grip >= 0.5) {
+      showGrabMessage();
+    }
+
+    // detect "let go": grip was holding, now released
+    if (wasHolding && grip < 0.5) {
+      showLetGoMessage();
+    }
+    wasHolding = grip >= 0.5;
+
+    // idle yapping: while floating freely, occasionally talk to yourself
+    if (!wasHolding && grip <= 0.02) {
+      if (nextYapTime === 0) {
+        nextYapTime = now + randomYapDelay();
+      } else if (now >= nextYapTime) {
+        showYapMessage();
+        nextYapTime = now + randomYapDelay();
+      }
+    } else {
+      nextYapTime = 0;
+    }
+
+    // low-frequency, very gentle acceleration shaped by slow sine waves.
+    var ax = Math.sin(t * 0.23 + phases.x) * 0.12
+           + Math.sin(t * 0.11 + phases.x * 1.7) * 0.05;
+    var ay = Math.cos(t * 0.19 + phases.y) * 0.10
+           + Math.sin(t * 0.13 + phases.y * 1.3) * 0.04;
+
+    // (ASCII field attraction removed: the field only exists in the hero
+    // section, and the astronaut now roams the whole page independently.)
+
+    // ---- idle: follow the cursor closely so the astronaut hovers right by it ----
+    if (grip <= 0.02) {
+      // soft target: just beside the cursor (avoid sitting directly on top)
+      var mx = mouse.x;
+      var my = mouse.y;
+      var followDx = mx - state.x;
+      var followDy = my - state.y;
+      var followDist = Math.sqrt(followDx * followDx + followDy * followDy) || 1;
+      // strong spring-like pull (higher = tracks the cursor more tightly)
+      var followK = 0.12;
+      ax += followDx * followK;
+      ay += followDy * followK;
+      // extra damping so it doesn't oscillate around the cursor
+      state.vx *= (1 - 2.5 * dt);
+      state.vy *= (1 - 2.5 * dt);
+      // counter the wander force when close, so it stays near the cursor
+      if (followDist < 40) {
+        ax *= 0.2;
+        ay *= 0.2;
+      }
+    }
+
+    // ---- while holding: rigid-body pendulum on the string ----
+    // Model: the ring is a fixed anchor in space (moves with the cursor). The
+    // astronaut is a rigid body with center-of-mass at (state.x, state.y) and
+    // orientation state.angle. The string attaches to the body at a hand
+    // offset (rotated by orientation). The string is a hard distance constraint
+    // (length STRING_LEN) that applies tension along the string; because the
+    // hand is off-center, tension produces both linear motion and torque.
+    if (grip > 0.02) {
+      var ringLocalX = ring.x;
+      var ringLocalY = ring.y;
+
+      // hand attachment offset from center-of-mass, rotated by body angle
+      var angRad = state.angle * Math.PI / 180;
+      var cosA = Math.cos(angRad), sinA = Math.sin(angRad);
+      var baseOX = holdSide === 'left' ? -size * 0.3 : size * 0.3;
+      var baseOY = -size * 0.55;
+      var handX = state.x + baseOX * cosA - baseOY * sinA;
+      var handY = state.y + baseOX * sinA + baseOY * cosA;
+
+      // vector from hand to ring (the string) and its current length
+      var sx = ringLocalX - handX;
+      var sy = ringLocalY - handY;
+      var slen = Math.sqrt(sx * sx + sy * sy) || 0.0001;
+      var nx = sx / slen; // unit vector along string (hand -> ring)
+      var ny = sy / slen;
+
+      // string behaves like a stiff spring beyond its rest length
+      var restLen = STRING_LEN;
+      var excess = slen - restLen;
+      var tension = grip * excess * 0.6;   // stiffer for a short string (holds tight)
+      if (tension < 0) tension = 0;
+
+      // detect a hard pull: string stretched well beyond its rest length
+      var isPulled = excess > STRING_LEN * 1.6;
+      if (isPulled && !wasPulled &&
+          (!pullMessageTime || (performance.now() - pullMessageTime) > 2500)) {
+        showPullMessage();
+      }
+      wasPulled = isPulled;
+
+      // continuous-pull happy messages while the string stays stretched
+      if (isPulled) {
+        if (nextPullHappyTime === 0) {
+          nextPullHappyTime = performance.now() + randomPullHappyDelay();
+        } else if (performance.now() >= nextPullHappyTime) {
+          showPullHappyMessage();
+          nextPullHappyTime = performance.now() + randomPullHappyDelay();
+        }
+      } else {
+        nextPullHappyTime = 0;
+      }
+
+      // apply tension force at the hand, along the string, pulling the body
+      var fx = nx * tension;
+      var fy = ny * tension;
+      state.vx += fx * dt;
+      state.vy += fy * dt;
+
+      // torque = r_hand (from COM) x force  (perpendicular lever arm)
+      var rx = handX - state.x;
+      var ry = handY - state.y;
+      var torque = (rx * fy - ry * fx); // cross product (z)
+      state.va += torque * 0.004 * dt;
+
+      // gravity-like drift so it dangles (pulls straight down relative to page)
+      state.vy += 12 * dt;
+
+      // damping
+      state.vx *= (1 - 1.8 * dt);
+      state.vy *= (1 - 1.8 * dt);
+    }
+
+    // hover: a soft, resistive nudge (not a sudden jump)
+    if (hover) {
+      hoverT = Math.min(1, hoverT + dt * 3);
+      var away = hoverT;
+      ax += Math.sin(t * 2.2) * 0.6 * away;
+      ay += Math.cos(t * 1.9) * 0.5 * away;
+    } else {
+      hoverT = Math.max(0, hoverT - dt * 2);
+    }
+
+    // integrate velocity, apply gentle drag
+    state.vx += ax * dt;
+    state.vy += ay * dt;
+    state.vx *= (1 - 0.06 * dt);
+    state.vy *= (1 - 0.06 * dt);
+
+    // safety cap on speed (much higher while holding or tracking the cursor)
+    var maxSpeed = grip > 0.3 ? 900 : (hover ? 400 : 400);
+    var sp = Math.sqrt(state.vx * state.vx + state.vy * state.vy);
+    if (sp > maxSpeed) {
+      state.vx *= maxSpeed / sp;
+      state.vy *= maxSpeed / sp;
+    }
+
+    state.x += state.vx * dt;
+    state.y += state.vy * dt;
+
+    // soft bounce within the home section
+    var pad = size * 0.9;
+    if (state.x < pad) { state.x = pad; state.vx = Math.abs(state.vx) * 0.4; }
+    if (state.x > w - pad) { state.x = w - pad; state.vx = -Math.abs(state.vx) * 0.4; }
+    if (state.y < pad) { state.y = pad; state.vy = Math.abs(state.vy) * 0.4; }
+    if (state.y > h - pad) { state.y = h - pad; state.vy = -Math.abs(state.vy) * 0.4; }
+
+    // rotation:
+    //   - while holding: the pendulum physics above drives rotation; just
+    //     apply angular damping and integrate.
+    //   - while free: bank into velocity + tiny listless sway.
+    if (grip > 0.02) {
+      state.va *= (1 - 1.5 * dt); // light angular damping so swing settles
+      state.angle += state.va * dt;
+      state.angle = clamp(state.angle, -140, 140);
+      state.va = clamp(state.va, -40, 40);
+    } else {
+      var angAccel = state.vx * 0.0016 + Math.sin(t * 0.18 + phases.a) * 0.4;
+      state.va += angAccel * dt;
+      state.va *= (1 - 0.15 * dt);
+      state.angle += state.va * dt;
+      state.angle = clamp(state.angle, -28, 28);
+      state.va = clamp(state.va, -12, 12);
+    }
+
+    // ---- limb animation: slow, lazy drift ----
+    var speedRatio = clamp(sp / 28, 0, 2.5);
+    limbPhase.a1 = limbPhase.a1 || Math.random() * Math.PI * 2;
+    limbPhase.a2 = limbPhase.a2 || Math.random() * Math.PI * 2;
+    limbPhase.l1 = limbPhase.l1 || Math.random() * Math.PI * 2;
+    limbPhase.l2 = limbPhase.l2 || Math.random() * Math.PI * 2;
+
+    var amp = 1 + hoverT * 0.5 + speedRatio * 0.3 + grip * 0.15;
+    var la = (Math.sin(t * 0.9  + limbPhase.a1) * 0.6 + Math.sin(t * 0.23 + limbPhase.a1 * 1.7) * 0.4) * amp;
+    var ra = (Math.sin(t * 1.1  + limbPhase.a2) * 0.6 + Math.sin(t * 0.27 + limbPhase.a2 * 1.3) * 0.4) * amp;
+    var ll = (Math.sin(t * 0.7  + limbPhase.l1) * 0.45 + Math.sin(t * 0.19 + limbPhase.l1 * 2.1) * 0.35) * amp;
+    var rl = (Math.sin(t * 0.85 + limbPhase.l2) * 0.45 + Math.sin(t * 0.22 + limbPhase.l2 * 1.9) * 0.35) * amp;
+
+    if (leftArm)  setLimbTransform(leftArm,  la * 34, 33, 52);
+    if (rightArm) setLimbTransform(rightArm, ra * 34, 87, 52);
+    if (leftLeg)  setLimbTransform(leftLeg,  ll * 22, 52, 84);
+    if (rightLeg) setLimbTransform(rightLeg, rl * 22, 68, 84);
+
+    // reach the active hand toward the ring so it visually follows the string.
+    // Compute the arm rotation from the *shoulder* to the ring in body-local
+    // space (un-rotating by the body angle), so the glove points along the
+    // string's pull direction.
+    if (grip > 0.02) {
+      var ringCx = ring.x - state.x;
+      var ringCy = ring.y - state.y;
+
+      // un-rotate into body-local space
+      var bAng = -state.angle * Math.PI / 180;
+      var bcos = Math.cos(bAng), bsin = Math.sin(bAng);
+      var lx = ringCx * bcos - ringCy * bsin;
+      var ly = ringCx * bsin + ringCy * bcos;
+
+      // scale factor viewBox -> px
+      var sc = size / 120;
+
+      // shoulder position in body-local px (relative to element center at 0,0)
+      var shX, shY;
+      if (holdSide === 'left') {
+        shX = (33 - 60) * sc; // -27*sc
+        shY = (52 - 70) * sc; // -18*sc
+      } else {
+        shX = (87 - 60) * sc; // +27*sc
+        shY = (52 - 70) * sc; // -18*sc
+      }
+
+      // direction from shoulder to ring, in body-local px
+      var dirX = lx - shX;
+      var dirY = ly - shY;
+
+      // arm rest direction is "down" (+y). Compute angle from down to this dir,
+      // measured so positive rotates the arm outward (right arm -> clockwise wrap).
+      var aimDeg = Math.atan2(dirX, dirY) * 180 / Math.PI;
+
+      if (holdSide === 'left') {
+        // left arm: mirror the rotation sign so it reaches outward correctly
+        setLimbTransform(leftArm, clamp(-aimDeg * grip, -120, 120), 33, 52);
+      } else {
+        setLimbTransform(rightArm, clamp(-aimDeg * grip, -120, 120), 87, 52);
+      }
+    }
+
+    if (reduced.matches) {
+      el.style.transform = 'translate(' + state.x + 'px, ' + state.y + 'px)';
+    } else {
+      el.style.transform =
+        'translate(' + state.x + 'px, ' + state.y + 'px) ' +
+        'translate(-50%, -50%) ' +
+        'rotate(' + state.angle.toFixed(2) + 'deg)';
+    }
+
+    // ---- nav button dwell: after 2s, make the hand reach for it, then click ----
+    handleNavDwell();
+
+    // ---- minimize button dwell: after 2s, minimize the window ----
+    handleMinDwell();
+
+    drawRing(t);
+    updateBubble();
+
+    requestAnimationFrame(tick);
+  }
+
+  requestAnimationFrame(tick);
 })();
 </script>
 
