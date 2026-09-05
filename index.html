@@ -332,12 +332,7 @@
               if (!cursorEffect) {
                 cursorEffect = new characterCursor({
                    characters: ["🤍", "🩷", "💜", "🌸"],
-                  //characters: ["🤍", "🩷", "🌸"],
-                  // characters: ["🩷", "🌸"],
-                  // characters: ["♥️", "🌸"],
-                  // characters: ["🌸"],
                   font: "30px serif",
-                  
                 });
               }
             });
@@ -1313,6 +1308,74 @@
   var ship = document.getElementById('cursor-ship');
   var dpr = 1;
 
+  // ---- floating space rocks (unique cartoon SVG asteroids) ----
+  var rocks = [];
+  var rockContainer = document.createElement('div');
+  rockContainer.id = 'space-rocks';
+  document.body.appendChild(rockContainer);
+
+  // A palette of distinct cartoon asteroid SVGs (unique shape + color each)
+  var asteroidSVGs = [
+    // 1: grey lumpy rock with big crater
+    '<svg viewBox="0 0 100 100"><path d="M22 74 L10 42 Q12 18 48 12 Q82 14 88 44 L78 74 Q52 86 24 78 Z" fill="#9aa0b2" stroke="#4f5468" stroke-width="3"/><ellipse cx="48" cy="38" rx="14" ry="10" fill="#6b7186"/><ellipse cx="48" cy="38" rx="11" ry="7" fill="#575c70"/><circle cx="70" cy="60" r="7" fill="#6b7186"/><circle cx="34" cy="62" r="5" fill="#b7bcc9"/></svg>',
+    // 2: brown/tan angular rock
+    '<svg viewBox="0 0 100 100"><path d="M18 66 L8 40 L22 16 Q48 6 74 20 L88 48 L70 80 Q40 88 20 70 Z" fill="#b08d5e" stroke="#6b5236" stroke-width="3"/><path d="M30 56 L26 34 Q50 24 74 40 L70 60 Q50 70 32 62 Z" fill="#4a3a28" opacity="0.5"/><circle cx="44" cy="34" r="6" fill="#cfae82"/><circle cx="66" cy="54" r="5" fill="#5d4630"/></svg>',
+    // 3: reddish rust asteroid
+    '<svg viewBox="0 0 100 100"><path d="M24 72 L12 44 Q16 20 50 14 Q82 18 86 46 L72 76 Q48 86 26 78 Z" fill="#c98a63" stroke="#7a4a30" stroke-width="3"/><ellipse cx="40" cy="42" rx="12" ry="9" fill="#8a5638"/><circle cx="66" cy="58" r="6" fill="#a4673f"/><circle cx="28" cy="60" r="4" fill="#e0ad86"/></svg>',
+    // 4: teal/grey smooth rock
+    '<svg viewBox="0 0 100 100"><path d="M20 70 L10 44 Q16 20 50 14 Q82 18 86 46 L74 72 Q50 84 24 76 Z" fill="#7fa0a6" stroke="#456068" stroke-width="3"/><ellipse cx="52" cy="36" rx="13" ry="9" fill="#566f75"/><circle cx="70" cy="60" r="6" fill="#5f7a80"/><circle cx="32" cy="58" r="4" fill="#a9c2c6"/></svg>',
+    // 5: dark charcoal rock with dots
+    '<svg viewBox="0 0 100 100"><path d="M24 76 L8 40 L20 14 Q50 4 80 18 L90 48 L72 80 Q46 90 24 78 Z" fill="#6b7078" stroke="#3a3e46" stroke-width="3"/><ellipse cx="44" cy="38" rx="12" ry="8" fill="#3f434b"/><circle cx="66" cy="56" r="7" fill="#4b5058"/><circle cx="34" cy="62" r="5" fill="#8b9098"/><circle cx="60" cy="72" r="4" fill="#2e3238"/></svg>',
+    // 6: purple-ish cratered rock
+    '<svg viewBox="0 0 100 100"><path d="M20 68 L10 40 Q14 16 48 10 Q82 14 88 42 L76 72 Q50 84 22 74 Z" fill="#9d8bb5" stroke="#5b4a72" stroke-width="3"/><ellipse cx="42" cy="40" rx="13" ry="9" fill="#6f5c8b"/><circle cx="68" cy="58" r="6" fill="#705f8c"/><circle cx="30" cy="58" r="4" fill="#bcabc9"/><circle cx="56" cy="22" r="4" fill="#7c6a99"/></svg>'
+  ];
+
+  var usedShapes = [];
+
+  function makeRock() {
+    var el = document.createElement('div');
+    el.className = 'space-rock';
+    var sizes = [80, 110, 140, 180];
+    var s = sizes[Math.floor(Math.random() * sizes.length)];
+
+    // pick a unique shape (avoid repeats until all used)
+    if (usedShapes.length >= asteroidSVGs.length) usedShapes = [];
+    var shapeIdx;
+    do {
+      shapeIdx = Math.floor(Math.random() * asteroidSVGs.length);
+    } while (usedShapes.indexOf(shapeIdx) !== -1);
+    usedShapes.push(shapeIdx);
+
+    el.innerHTML =
+      '<span class="rock-inner" style="width:' + s + 'px;height:' + s + 'px;">' + asteroidSVGs[shapeIdx] + '</span>';
+    rockContainer.appendChild(el);
+
+    var docHeight = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight, window.innerHeight);
+    // size-based physics: bigger rocks drift and spin slower (more inertia),
+    // smaller rocks are quicker. Normalize against the largest size (180).
+    var sizeFactor = 180 / s;
+    var rock = {
+      el: el,
+      size: s,
+      x: Math.random() * window.innerWidth,
+      y: Math.random() * docHeight,
+      vx: (Math.random() - 0.5) * 50 * sizeFactor,
+      vy: (Math.random() - 0.5) * 50 * sizeFactor,
+      angle: Math.random() * 360,
+      va: (Math.random() - 0.5) * 90 * sizeFactor
+    };
+    el.style.transform =
+      'translate(' + rock.x + 'px, ' + (rock.y - window.scrollY) + 'px) ' +
+      'translate(-50%, -50%) ' +
+      'rotate(' + rock.angle + 'deg)';
+    return rock;
+  }
+
+  var ROCK_COUNT = 12;
+  for (var rk = 0; rk < ROCK_COUNT; rk++) {
+    rocks.push(makeRock());
+  }
+
   function resizeCanvas() {
     if (!canvas) return;
     dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -1658,6 +1721,99 @@
     showBubble(pick);
   }
 
+  // hurt messages shown when the astronaut bumps into an asteroid, tiered by size
+  var hurtSmall = [
+    'Ow! Stubbed a toe on that.',
+    'Tink! A pebble.',
+    'That little one tickled.',
+    'Barely felt it.',
+    'Ow, my pinky!'
+  ];
+  var hurtMedium = [
+    'Ouch! That rock hurt!',
+    'Aray! Ang sakit!',
+    'Ow ow ow!',
+    'Watch out!',
+    'That asteroid got me!',
+    'Nako!',
+    'My helmet!',
+    'Aray ko po!',
+    'Ba\'t may bato dito?!'
+  ];
+  var hurtLarge = [
+    'OUCH!!! THAT WAS HUGE!!',
+    'GRAVE! ANG LAKI NG TAMA!!',
+    'I\'M SEEING STARS!!',
+    'That BODY-SLAMMED me!!',
+    'Totaled!!! I\'m done!',
+    'HEEEELP! Big rock!!',
+    'YARI TALAGA AKO!!',
+    'LAKAS NG TAMA!!!'
+  ];
+  var lastHurtMsg = '';
+  var hurtMessageTime = 0;
+
+  function showHurtMessage(rockSize) {
+    var pool;
+    if (rockSize >= 160) pool = hurtLarge;
+    else if (rockSize >= 120) pool = hurtMedium;
+    else pool = hurtSmall;
+
+    var pick = pool[Math.floor(Math.random() * pool.length)];
+    while (pick === lastHurtMsg && pool.length > 1) {
+      pick = pool[Math.floor(Math.random() * pool.length)];
+    }
+    lastHurtMsg = pick;
+    currentMessage = pick;
+    hurtMessageTime = performance.now();
+    showBubble(pick);
+  }
+
+  // near-asteroid warning messages, tiered by size (small / medium / large)
+  var nearAsteroidSmall = [
+    'Oh, a tiny rock.',
+    'Just a pebble, no biggie.',
+    'That little one can\'t hurt.',
+    'Small rock spotted.',
+    'Meh, just a speck.'
+  ];
+  var nearAsteroidMedium = [
+    'Whoa, that asteroid is close!',
+    'Incoming asteroid!',
+    'Better dodge this one...',
+    'Rock spotted!',
+    'Watch out for that asteroid!',
+    'Don\'t hit that!'
+  ];
+  var nearAsteroidLarge = [
+    'OH NO, HUGE ASTEROID!!',
+    'DODGE! DODGE! DODGE!',
+    'ANG LAKI NITO! (IT\'S HUGE!)',
+    'That thing is MASSIVE!',
+    'We\'re doomed!!!',
+    'Grab something!!',
+    'LORD HAVE MERCY!',
+    'RUN! I mean FLOAT AWAY!'
+  ];
+  var lastNearAsteroidMsg = '';
+  var nearAsteroidMessageTime = 0;
+
+  function showNearAsteroidMessage(rockSize) {
+    var pool;
+    if (rockSize >= 160) pool = nearAsteroidLarge;
+    else if (rockSize >= 120) pool = nearAsteroidMedium;
+    else pool = nearAsteroidSmall;
+
+    var pick = pool[Math.floor(Math.random() * pool.length)];
+    while (pick === lastNearAsteroidMsg && pool.length > 1) {
+      pick = pool[Math.floor(Math.random() * pool.length)];
+    }
+    lastNearAsteroidMsg = pick;
+    currentMessage = pick;
+    nearAsteroidMessageTime = performance.now();
+    showBubble(pick);
+  }
+
   // random delay (ms) between continuous-pull happy messages
   function randomPullHappyDelay() {
     var secs = [2, 4, 5, 6, 7];
@@ -1949,7 +2105,9 @@
         (letGoMessageTime && (performance.now() - letGoMessageTime) < 1500) ||
         (yapMessageTime && (performance.now() - yapMessageTime) < 2500) ||
         (pullMessageTime && (performance.now() - pullMessageTime) < 2500) ||
-        (pullHappyMessageTime && (performance.now() - pullHappyMessageTime) < 1500)) {
+        (pullHappyMessageTime && (performance.now() - pullHappyMessageTime) < 1500) ||
+        (hurtMessageTime && (performance.now() - hurtMessageTime) < 2000) ||
+        (nearAsteroidMessageTime && (performance.now() - nearAsteroidMessageTime) < 2500)) {
       return;
     }
 
@@ -2106,6 +2264,118 @@
         'translate(' + ring.x + 'px, ' + ring.y + 'px) ' +
         'translate(-50%, -50%) ' +
         'scale(' + shipScale.toFixed(3) + ')';
+    }
+  }
+
+  // Update floating rocks: drift, bounce, collide with ship/astronaut.
+  function updateRocks(dt) {
+    var docHeight = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight, window.innerHeight);
+    var scrollY = window.scrollY || 0;
+    for (var ri = 0; ri < rocks.length; ri++) {
+      var r = rocks[ri];
+      r.x += r.vx * dt;
+      r.y += r.vy * dt;
+      var pad = r.size / 2;
+      if (r.x < pad) { r.x = pad; r.vx = Math.abs(r.vx) * 0.6; }
+      if (r.x > window.innerWidth - pad) { r.x = window.innerWidth - pad; r.vx = -Math.abs(r.vx) * 0.6; }
+      if (r.y < pad) { r.y = pad; r.vy = Math.abs(r.vy) * 0.6; }
+      if (r.y > docHeight - pad) { r.y = docHeight - pad; r.vy = -Math.abs(r.vy) * 0.6; }
+
+      // bump with the alien ship (cursor) → push the rock away
+      var shipR = 30 + grip * 8;
+      var dShip = Math.hypot(r.x - ring.x, (r.y - scrollY) - ring.y);
+      if (dShip < shipR + r.size / 2) {
+        var nx = (r.x - ring.x) / (dShip || 1);
+        var ny = ((r.y - scrollY) - ring.y) / (dShip || 1);
+        // smaller rocks are pushed more easily (inverse of size)
+        var pushForce = 70 * (90 / r.size);
+        r.vx += nx * pushForce;
+        r.vy += ny * pushForce;
+        r.x = ring.x + nx * (shipR + r.size / 2);
+        r.y = (ring.y + scrollY) + ny * (shipR + r.size / 2);
+      }
+
+      // bump against other page elements (header, github icons, windows)
+      var bumpSel = 'header, .gh-icon, .icon-one, .term-titlebar, .term-dock, .about-figure';
+      var bumpEls = document.querySelectorAll(bumpSel);
+      for (var bi = 0; bi < bumpEls.length; bi++) {
+        var be = bumpEls[bi];
+        if (be === r.el || be.closest('.space-rock')) continue;
+        var br = be.getBoundingClientRect();
+        if (br.width === 0 || br.height === 0) continue;
+        // convert element rect (viewport) to document coords
+        var elLeft = br.left;
+        var elRight = br.right;
+        var elTop = br.top + scrollY;
+        var elBottom = br.bottom + scrollY;
+        // nearest point on the element rect to the rock center
+        var cx2 = Math.max(elLeft, Math.min(r.x, elRight));
+        var cy2 = Math.max(elTop, Math.min(r.y, elBottom));
+        var dx2 = r.x - cx2;
+        var dy2 = r.y - cy2;
+        var d2 = Math.hypot(dx2, dy2);
+        if (d2 < r.size / 2) {
+          var nx2 = dx2 / (d2 || 1);
+          var ny2 = dy2 / (d2 || 1);
+          // smaller rocks bounce more (inverse of size)
+          var bounceForce = 60 * (90 / r.size);
+          r.x += nx2 * (r.size / 2 - d2 + 1);
+          r.y += ny2 * (r.size / 2 - d2 + 1);
+          r.vx += nx2 * bounceForce;
+          r.vy += ny2 * bounceForce;
+        }
+      }
+
+      // near-but-not-hit the astronaut → show a warning message
+      var astroR = size * 0.5;
+      var nearR = astroR + r.size * 1.6;
+      var dAstro = Math.hypot(r.x - state.x, (r.y - scrollY) - state.y);
+      if (dAstro < nearR && dAstro >= astroR + r.size / 2) {
+        if (!nearAsteroidMessageTime || (performance.now() - nearAsteroidMessageTime) > 3500) {
+          showNearAsteroidMessage(r.size);
+        }
+      }
+
+      // collide with the astronaut → realistic knockback + spin + hurt msg
+      if (dAstro < astroR + r.size / 2) {
+        var ax2 = (state.x - r.x) / (dAstro || 1);
+        var ay2 = (state.y - (r.y - scrollY)) / (dAstro || 1);
+
+        // rock "mass" ~ its area; bigger rock = heavier impact
+        var mass = r.size * r.size;
+        // rock speed (how hard it's moving)
+        var rockSpeed = Math.hypot(r.vx, r.vy);
+        // impact force scaled by mass and speed
+        var impact = clamp(0.00002 * mass * (2 + rockSpeed), 0, 3);
+
+        // apply linear knockback to the astronaut (opposite the impact)
+        state.vx += ax2 * impact * 60;
+        state.vy += ay2 * impact * 60;
+
+        // spin from the impact: depends on vertical offset (hit height)
+        // higher hit (rock above center) spins one way, lower hit spins the other
+        var hitHeight = state.y - (r.y - scrollY);
+        var lever = (r.x - state.x);
+        var spinTorque = -lever * impact * 0.5
+                       + hitHeight * impact * 0.2;
+        state.va += clamp(spinTorque, -60, 60);
+
+        // bounce the rock back (equal and opposite reaction). Heavier rocks
+        // (bigger) are barely affected; lighter rocks bounce away harder.
+        var rockReaction = (90 / r.size) * (impact * 40 + 30);
+        r.vx -= ax2 * rockReaction;
+        r.vy -= ay2 * rockReaction;
+
+        if (!hurtMessageTime || (performance.now() - hurtMessageTime) > 1500) {
+          showHurtMessage(r.size);
+        }
+      }
+
+      r.angle += r.va * dt;
+      r.el.style.transform =
+        'translate(' + r.x + 'px, ' + (r.y - scrollY) + 'px) ' +
+        'translate(-50%, -50%) ' +
+        'rotate(' + r.angle.toFixed(2) + 'deg)';
     }
   }
 
@@ -2396,14 +2666,13 @@
         'rotate(' + state.angle.toFixed(2) + 'deg)';
     }
 
-    // ---- nav button dwell: after 2s, make the hand reach for it, then click ----
     handleNavDwell();
 
-    // ---- minimize button dwell: after 2s, minimize the window ----
     handleMinDwell();
 
     drawRing(t);
     updateBubble();
+    updateRocks(dt);
 
     requestAnimationFrame(tick);
   }
