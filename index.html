@@ -51,14 +51,13 @@
       }
       #s-home, #s-experience, #s-services {
         position: relative;
-        isolation: isolate;
       }
       .ascii-bg {
-        position: absolute;
+        position: fixed;
         top: 0;
         left: 0;
-        width: 100%;
-        height: 100%;
+        width: 100vw;
+        height: 100vh;
         z-index: -1;
         background: transparent;
         pointer-events: none;
@@ -79,7 +78,7 @@
         left: 0;
         width: 70px;
         height: auto;
-        z-index: 9997;
+        z-index: 0;
         pointer-events: none;
         will-change: transform;
         filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.4));
@@ -88,6 +87,10 @@
         display: block;
         width: 100%;
         height: auto;
+      }
+      .sat-bubble {
+        z-index: 10000;
+        transition: opacity 0.25s ease;
       }
       html {
         background: #000;
@@ -104,6 +107,8 @@
   <body>
 
   <canvas id="starfield" aria-hidden="true"></canvas>
+
+  <canvas class="ascii-bg" aria-hidden="true"></canvas>
 
   <canvas id="cursor-circle" aria-hidden="true"></canvas>
 
@@ -194,6 +199,14 @@
     </svg>
   </div>
 
+  <div class="astro-bubble sat-bubble" id="satellite-bubble" aria-hidden="true">
+    <svg class="astro-bubble-svg" viewBox="0 0 220 70" xmlns="http://www.w3.org/2000/svg">
+      <rect class="astro-bubble-body" x="14" y="2" width="192" height="52" rx="21" ry="21" fill="#8778c1"/>
+      <path class="astro-bubble-tail" d="M96 52 L110 70 L124 52 Z" fill="#8778c1"/>
+      <text class="astro-bubble-text sat-bubble-text" x="110" y="29" text-anchor="middle" dominant-baseline="central" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', 'Archivo', sans-serif" font-size="18" font-weight="600">What's up from orbit?</text>
+    </svg>
+  </div>
+
   <script>
     document.addEventListener('contextmenu', function (e) {
       e.preventDefault();
@@ -265,7 +278,6 @@
     </header>
     <main>
       <section id="s-home">
-        <canvas class="ascii-bg"></canvas>
         <div class="grid-layout">
           <div id="visitor-info">
             <p id="visitor-ip"></p>
@@ -429,10 +441,70 @@
           </svg>
         </div>
       <script>
+      // Extract client-side device/browser/OS info immediately (no network needed).
+      (function () {
+        var ua = navigator.userAgent;
+        var plat = navigator.platform || '';
+        var out = {
+          userAgent: ua,
+          platform: plat,
+          lang: navigator.language || navigator.userLanguage || 'unknown',
+          languages: (navigator.languages || []).join(', '),
+          screen: (screen.width || '?') + '×' + (screen.height || '?'),
+          availScreen: (screen.availWidth || '?') + '×' + (screen.availHeight || '?'),
+          colorDepth: screen.colorDepth ? screen.colorDepth + '-bit' : '?',
+          pixelRatio: window.devicePixelRatio || 1,
+          cores: navigator.hardwareConcurrency || '?',
+          memory: navigator.deviceMemory ? navigator.deviceMemory + ' GB' : '?',
+          touch: (('ontouchstart' in window) || navigator.maxTouchPoints > 0) ? 'yes' : 'no',
+          cookieEnabled: navigator.cookieEnabled,
+          doNotTrack: navigator.doNotTrack || 'unspecified',
+          online: navigator.onLine,
+          referrer: document.referrer || 'none',
+          timezoneOffset: new Date().getTimezoneOffset(),
+          browser: '?', os: '?', device: '?'
+        };
+
+        // Browser detection
+        var m = ua;
+        if (/edg/i.test(m)) out.browser = 'Microsoft Edge';
+        else if (/opr/i.test(m) || /opera/i.test(m)) out.browser = 'Opera';
+        else if (/chrome/i.test(m) && !/edg/i.test(m)) out.browser = 'Chrome';
+        else if (/firefox/i.test(m)) out.browser = 'Firefox';
+        else if (/safari/i.test(m) && !/chrome/i.test(m)) out.browser = 'Safari';
+        else if (/msie|trident/i.test(m)) out.browser = 'Internet Explorer';
+        else out.browser = 'Unknown';
+
+        // OS detection
+        if (/windows nt 10/i.test(m)) out.os = 'Windows 10/11';
+        else if (/windows nt 6.3/i.test(m)) out.os = 'Windows 8.1';
+        else if (/windows nt 6.1/i.test(m)) out.os = 'Windows 7';
+        else if (/windows/i.test(m)) out.os = 'Windows';
+        else if (/android/i.test(m)) out.os = 'Android';
+        else if (/iphone|ipad|ipod/i.test(m)) out.os = 'iOS';
+        else if (/mac os x|macintosh/i.test(m)) out.os = 'macOS';
+        else if (/linux/i.test(m)) out.os = 'Linux';
+        else if (/cros/i.test(m)) out.os = 'Chrome OS';
+        else out.os = 'Unknown';
+
+        // Device type
+        if (/android/i.test(m)) out.device = 'Android phone';
+        else if (/iphone/i.test(m)) out.device = 'iPhone';
+        else if (/ipad/i.test(m)) out.device = 'iPad';
+        else if (/mobile/i.test(m)) out.device = 'Mobile';
+        else out.device = 'Desktop';
+
+        window.__clientInfo = out;
+        window.__visitorData = window.__visitorData || {};
+        Object.keys(out).forEach(function (k) { window.__visitorData['c_' + k] = out[k]; });
+      })();
+
       document.addEventListener("DOMContentLoaded", function () {
         fetch('https://ipapi.co/json/')
           .then(response => response.json())
           .then(data => {
+            window.__visitorData = window.__visitorData || {};
+            Object.keys(data).forEach(function (k) { window.__visitorData[k] = data[k]; });
             document.getElementById('visitor-ip').textContent = 'IP: ' + data.ip;
             document.getElementById('visitor-isp').textContent = 'Isp: ' + data.org || 'Unknown';
             document.getElementById('visitor-location').textContent = 'Address: ' +`${data.city}, ${data.region}, ${data.country_name}`;
@@ -540,7 +612,6 @@
         </div>
       </section>
       <section id="s-experience">
-        <canvas class="ascii-bg"></canvas>
         <div class="grid-layout">
           <h2 class="delaySmallReveal" style="color: #8778c1 'LiveOverfont', sans-serif;"><span>#</span>Experience</h2>
           <div id="experience">
@@ -644,7 +715,6 @@
         </div>
       </section>
       <section id="s-services">
-        <canvas class="ascii-bg"></canvas>
         <div class="grid-layout">
           <h2 class="delaySmallReveal" style="color: rgb(97, 53, 243) 'LiveOverfont', sans-serif; font-size: 40px;">What I do<span>.</span></h2>
           <div id="services">
@@ -840,11 +910,21 @@
           services:  'root@0xbit:~$ ps aux | grep skills',
           skills:    'root@0xbit:~$ cat /proc/skills'
         };
-        var labels = { about: 'abt', experience: 'exp', projects: 'prj', services: 'svc', skills: 'skl' };
 
         var dock = document.createElement('div');
         dock.className = 'term-dock';
         document.body.appendChild(dock);
+
+        // Show the dock's glass background only when at least one window is
+        // minimized (so it's invisible when empty).
+        function updateDockVisibility() {
+          var hasIcons = false;
+          var icons = dock.querySelectorAll('.term-dock-icon');
+          for (var i = 0; i < icons.length; i++) {
+            if (icons[i].style.display === 'flex') { hasIcons = true; break; }
+          }
+          dock.classList.toggle('has-icons', hasIcons);
+        }
 
         var activeDrag = null, startX, startY, offsetX, offsetY;
 
@@ -874,6 +954,16 @@
         Object.keys(titles).forEach(function (id) {
           var container = document.getElementById(id);
           if (!container) return;
+
+          // The section heading (e.g. "What I do") sits right before the window;
+          // hide it when the window is minimized so only the dock icon remains.
+          var heading = container.previousElementSibling;
+          if (heading && heading.tagName !== 'H2') heading = null;
+
+          // Some sections have an extra link after the window (e.g. the
+          // "Security Blog" link), which should also hide when minimized.
+          var extraAfter = container.nextElementSibling;
+          if (extraAfter && extraAfter.tagName !== 'A') extraAfter = null;
 
           var bar = document.createElement('div');
           bar.className = 'term-titlebar';
@@ -918,8 +1008,8 @@
             var action = dot.getAttribute('data-action');
 
             if (action === 'close') {
-              container.style.display = 'none';
-              if (dockIcon) dockIcon.style.display = 'none';
+              // Close now behaves like minimize (same as the minimize dot).
+              action = 'minimize';
             }
 
             if (action === 'minimize') {
@@ -941,11 +1031,13 @@
                 c._minTimer = setTimeout(function () {
                   c.style.display = 'none';
                 }, 420);
+                if (heading) heading.style.display = 'none';
+                if (extraAfter) extraAfter.style.display = 'none';
                 if (!dockIcon) {
                   dockIcon = document.createElement('div');
                   dockIcon.className = 'term-dock-icon';
-                  dockIcon.textContent = labels[id];
-                  dockIcon.title = titles[id];
+                  dockIcon.textContent = titles[id];
+                  dockIcon.title = 'Restore ' + titles[id];
                   dockIcon.addEventListener('click', function () {
                     container.style.display = '';
                     container.offsetHeight;
@@ -957,12 +1049,16 @@
                         container.style.width = saved.width || '';
                         container.style.overflow = saved.overflow || '';
                         dockIcon.style.display = 'none';
+                        if (heading) heading.style.display = '';
+                        if (extraAfter) extraAfter.style.display = '';
+                        updateDockVisibility();
                       });
                     });
                   });
                   dock.appendChild(dockIcon);
                 }
                 dockIcon.style.display = 'flex';
+                updateDockVisibility();
               } else {
                 container.style.display = '';
                 container.offsetHeight;
@@ -974,6 +1070,9 @@
                     container.style.width = saved.width || '';
                     container.style.overflow = saved.overflow || '';
                     if (dockIcon) dockIcon.style.display = 'none';
+                    if (heading) heading.style.display = '';
+                    if (extraAfter) extraAfter.style.display = '';
+                    updateDockVisibility();
                   });
                 });
               }
@@ -1125,6 +1224,12 @@
     '    p.y -= u_time * 0.03;',
     '    n = warp(p, u_time * 0.4);',
     '    n = n * n;',
+    '  } else if (u_style == 3) {',
+    // nebula: soft drifting wisps
+    '    p += vec2(u_time * 0.04, -u_time * 0.02);',
+    '    n = warp(p, u_time * 0.2);',
+    '    n = pow(n, 1.3);',
+    '    n = n * (0.6 + 0.4 * sin(p.x * 0.6 + u_time * 0.1));',
     '  } else {',
     '    n = warp(p, u_time * 1.0);',
     '  }',
@@ -1160,10 +1265,10 @@
   var FRAME_INTERVAL = 1000 / 30;
 
   // 'none' | 'ripple' | 'glow' | 'reveal' | 'alien' | 'gravity' | 'suck' | 'electric' | 'magnet'.
-  var ACTIVE_INTERACTION = 'ripple';
+  var ACTIVE_INTERACTION = 'alien';
 
-  // 'fire' | 'cloud' | 'gray'.
-  var ACTIVE_STYLE = 'cloud';
+  // 'fire' | 'cloud' | 'gray' | 'nebula'.
+  var ACTIVE_STYLE = 'nebula';
   var SPEED = 0.5;
   var MOBILE_BREAKPOINT = 768;
   var CELL_MOBILE = 16;
@@ -1184,6 +1289,14 @@
     [1.00, 235, 240, 250]
   ];
 
+  var NEBULA_STOPS = [
+    [0.00,  16,  10,  34],
+    [0.30,  60,  34,  96],
+    [0.60, 108,  72, 160],
+    [0.85, 100, 150, 190],
+    [1.00, 180, 210, 240]
+  ];
+
   function gradientColor(t, stops) {
     if (t <= 0) return [0, 0, 0];
     if (t >= 1) return stops[stops.length - 1].slice(1);
@@ -1200,22 +1313,24 @@
 
   function fireColor(t) { return gradientColor(t, FIRE_STOPS); }
   function cloudColor(t) { return gradientColor(t, CLOUD_STOPS); }
+  function nebulaColor(t) { return gradientColor(t, NEBULA_STOPS); }
 
   function createAsciiBackground(canvas) {
     var offscreen = document.createElement('canvas');
     var gl = offscreen.getContext('webgl', { preserveDrawingBuffer: true });
     if (!gl) return;
 
-    // Style: fire(0), cloud(1), gray(2).
+    // Style: fire(0), cloud(1), gray(2), nebula(3).
     // Interaction: none(0), ripple(1), glow(2), reveal(3), alien(4).
     var style = ACTIVE_STYLE;
     var styleIndex = 0;
     var colorFn = fireColor;
     var charSet = CHAR_SET;
     switch (style) {
-      case 'cloud': styleIndex = 1; colorFn = cloudColor; break;
-      case 'gray':  styleIndex = 2; colorFn = null;       break;
-      default:      styleIndex = 0; colorFn = fireColor;  break;
+      case 'cloud':  styleIndex = 1; colorFn = cloudColor; break;
+      case 'gray':   styleIndex = 2; colorFn = null;       break;
+      case 'nebula': styleIndex = 3; colorFn = nebulaColor; break;
+      default:       styleIndex = 0; colorFn = fireColor;  break;
     }
     var interact = ACTIVE_INTERACTION;
     var interactIndex = 0;
@@ -3089,6 +3204,97 @@
   // fixed orientation (solar panel stays Sun-pointed), no tumble
   var fixedAngle = -0.12; // slight constant tilt so it doesn't look stiff
 
+  // Satellite speech bubble (shows funny visitor info occasionally)
+  var bubbleEl = document.getElementById('satellite-bubble');
+  var bubbleText = bubbleEl ? bubbleEl.querySelector('.sat-bubble-text') : null;
+  var satMessages = [
+    'Send kaya ako Lion sa IP mo: {ip}... eh di masaya!',
+    'Oy {isp}! malakas ba internet mo?',
+    'Nasa {city}, {country} ka pala. May signal ba diyan?',
+    '{country} ka galing! Pinatay mo ba router nyo?',
+    'Postal {postal}... wag mo ko padalhan ng sulat, signal lang!',
+    'Uy {city}! Ayos internet niyo, kita ka dito sa taas.',
+    'I see you, {ip}... charot.',
+    'Mahina ba internet mo?, Dito ka mag reklamo {lat},{lon}.',
+    'OS mo {os}, browser {browser}? Solid combo ah.',
+    'Naka-{device} ka pala... edi maganda, wala lang, nakita ko lang.',
+    'Screen {screen} pixels na naman. Mas malinaw pa sa mata ko.',
+    '{cores} cores, Pwede na mag-mine ng barya HAHA.',
+    'Language mo {lang}. Sana pinoy ka rin, sarap ka-bonding.',
+    'Pixel ratio {ratio}x, ang crisp. Mukhang pro ka talaga, PROBLEMA.'
+  ];
+  var nextSatMsg = performance.now() + 6000;
+  var satMsgShown = false;
+  var satHideTimer = null;
+
+  function showSatBubble(msg) {
+    if (!bubbleEl || !bubbleText) return;
+    bubbleText.textContent = msg;
+    try {
+      var svg = bubbleEl.querySelector('.astro-bubble-svg');
+      var body = svg.querySelector('.astro-bubble-body');
+      var tail = svg.querySelector('.astro-bubble-tail');
+      // Tight sizing like the astronaut bubble: measure the actual text width.
+      var textW;
+      try { textW = bubbleText.getComputedTextLength(); } catch (e) { textW = 0; }
+      if (!textW || textW <= 0) textW = msg.length * 10;
+      var pad = 38;
+      var bodyW = Math.max(135, textW + pad);
+      var svgW = bodyW + 28;
+      body.setAttribute('width', bodyW);
+      svg.setAttribute('viewBox', '0 0 ' + svgW + ' 70');
+      svg.style.width = svgW + 'px';
+      bubbleEl.style.width = svgW + 'px';
+      bubbleText.setAttribute('x', 14 + bodyW / 2);
+      bubbleText.setAttribute('y', 29);
+      // keep the tail centered under the (possibly resized) bubble body
+      var cx2 = 14 + bodyW / 2;
+      if (tail) tail.setAttribute('d', 'M' + (cx2 - 14) + ' 52 L' + cx2 + ' 70 L' + (cx2 + 14) + ' 52 Z');
+    } catch (e) {}
+    bubbleEl.classList.add('show');
+    if (satHideTimer) clearTimeout(satHideTimer);
+    satHideTimer = setTimeout(function () { bubbleEl.classList.remove('show'); }, 4600);
+  }
+
+  function pickSatMessage() {
+    var d = window.__visitorData;
+    // Prefer client info if geolocation (ipapi) hasn't loaded yet.
+    var hasGeo = d && d.ip;
+    var pool = satMessages;
+    if (!d) {
+      // Nothing at all yet — keep a generic line rather than the stale fallback.
+      return 'Uy, from orbit ako! Sandali, sine-scan pa kita...';
+    }
+    if (!hasGeo) {
+      // Only client info available: use the device/OS/browser templates.
+      pool = satMessages.filter(function (t) {
+        return /{(os|browser|device|screen|cores|memory|lang|colorDepth|touch|ratio)}/.test(t);
+      });
+      if (!pool.length) pool = satMessages;
+    }
+    var tpl = pool[Math.floor(Math.random() * pool.length)];
+    return tpl
+      .replace(/{ip}/g, d.ip || '?')
+      .replace(/{isp}/g, d.org || '?')
+      .replace(/{city}/g, d.city || '?')
+      .replace(/{country}/g, d.country_name || '?')
+      .replace(/{region}/g, d.region || '?')
+      .replace(/{postal}/g, d.postal || '?')
+      .replace(/{tz}/g, d.timezone || '?')
+      .replace(/{lat}/g, d.latitude || '?')
+      .replace(/{lon}/g, d.longitude || '?')
+      .replace(/{os}/g, d.c_os || '?')
+      .replace(/{browser}/g, d.c_browser || '?')
+      .replace(/{device}/g, d.c_device || '?')
+      .replace(/{screen}/g, d.c_screen || '?')
+      .replace(/{cores}/g, d.c_cores || '?')
+      .replace(/{memory}/g, d.c_memory || '?')
+      .replace(/{lang}/g, d.c_lang || '?')
+      .replace(/{colorDepth}/g, d.c_colorDepth || '?')
+      .replace(/{touch}/g, d.c_touch || '?')
+      .replace(/{ratio}/g, d.c_pixelRatio || '?');
+  }
+
   var prev = performance.now();
 
   function tick(now) {
@@ -3115,6 +3321,26 @@
       'translate(-50%, -50%) ' +
       'rotate(' + (fixedAngle * 180 / Math.PI).toFixed(2) + 'deg) ' +
       'scale(' + depth.toFixed(3) + ')';
+
+    // position + trigger the bubble to follow the satellite
+    if (bubbleEl) {
+      // Tail points down at the satellite: anchor the bubble's bottom (tail tip)
+      // just above the satellite center.
+      bubbleEl.style.transform =
+        'translate(' + x.toFixed(1) + 'px, ' + (y - 20).toFixed(1) + 'px) ' +
+        'translate(-50%, -100%)';
+
+      // Only speak when the satellite is near the center of the screen so the
+      // message is actually readable (not off in a corner).
+      var nearCenter = Math.hypot(x - cx, y - cy) < Math.min(w, h) * 0.45;
+      if (nearCenter && now >= nextSatMsg) {
+        nextSatMsg = now + 9000 + Math.random() * 8000;
+        showSatBubble(pickSatMessage());
+      } else if (!nearCenter && satHideTimer) {
+        // hide if it drifts far from center while talking
+        bubbleEl.classList.remove('show');
+      }
+    }
 
     requestAnimationFrame(tick);
   }
