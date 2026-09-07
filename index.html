@@ -60,26 +60,55 @@
         width: 100%;
         height: 100%;
         z-index: -1;
-        background: #000;
+        background: transparent;
         pointer-events: none;
+      }
+      #starfield {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: -1;
+        pointer-events: none;
+        background: transparent;
+      }
+      .satellite {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 70px;
+        height: auto;
+        z-index: 9997;
+        pointer-events: none;
+        will-change: transform;
+        filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.4));
+      }
+      .satellite svg {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+      html {
+        background: #000;
+      }
+      body {
+        background: transparent;
+      }
+      #s-about, #s-experience, #s-projects, #s-services, #s-skills {
+        background: transparent;
       }
   </style>
     <title>0xbit</title>
   </head>
   <body>
 
+  <canvas id="starfield" aria-hidden="true"></canvas>
+
   <canvas id="cursor-circle" aria-hidden="true"></canvas>
 
   <div id="cursor-ship" aria-hidden="true">
     <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
-      <!-- tractor beam cone (under the saucer) -->
-      <path class="ship-beam" d="M40 78 L80 78 L104 116 Q60 122 16 116 Z" fill="url(#beamGrad)"/>
-      <defs>
-        <linearGradient id="beamGrad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#3aff51" stop-opacity="0.55"/>
-          <stop offset="100%" stop-color="#3aff51" stop-opacity="0"/>
-        </linearGradient>
-      </defs>
       <!-- domed glass canopy -->
       <path d="M38 52 Q38 28 60 28 Q82 28 82 52 Z" fill="rgba(180,230,255,0.55)" stroke="rgba(255,255,255,0.8)" stroke-width="2"/>
       <!-- alien inside dome -->
@@ -87,9 +116,6 @@
       <circle cx="57" cy="45" r="3" fill="#14141c"/>
       <circle cx="63" cy="45" r="3" fill="#14141c"/>
       <path d="M58 52 Q60 55 62 52" fill="none" stroke="#14141c" stroke-width="1.5" stroke-linecap="round"/>
-      <!-- antenna -->
-      <line x1="60" y1="28" x2="60" y2="16" stroke="#e8e8ee" stroke-width="2"/>
-      <circle class="ship-beacon" cx="60" cy="14" r="4" fill="#3aff51"/>
       <!-- saucer upper dome body (metallic) -->
       <ellipse cx="60" cy="54" rx="42" ry="20" fill="#c9ccd6"/>
       <!-- saucer lower rim -->
@@ -104,6 +130,67 @@
       <circle class="ship-light" style="animation-delay:0.6s" cx="94" cy="58" r="3.5" fill="#3aff51"/>
       <!-- highlight shine -->
       <ellipse cx="44" cy="44" rx="16" ry="7" fill="rgba(255,255,255,0.28)"/>
+    </svg>
+  </div>
+
+  <div class="satellite" aria-hidden="true">
+    <svg viewBox="0 0 200 72" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Floating satellite">
+      <defs>
+        <linearGradient id="satBody" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#2b2b31"/>
+          <stop offset="55%" stop-color="#1c1c21"/>
+          <stop offset="100%" stop-color="#0f0f13"/>
+        </linearGradient>
+        <linearGradient id="satPanel" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#121b3d"/>
+          <stop offset="45%" stop-color="#1e3173"/>
+          <stop offset="100%" stop-color="#0f1533"/>
+        </linearGradient>
+        <linearGradient id="satFoil" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#d6b25a"/>
+          <stop offset="50%" stop-color="#9c7c38"/>
+          <stop offset="100%" stop-color="#6f5726"/>
+        </linearGradient>
+        <radialGradient id="satBeacon" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#66ff7a" stop-opacity="0.9"/>
+          <stop offset="100%" stop-color="#66ff7a" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+
+      <!-- long thin solar panel (single folded array, extending left) -->
+      <rect x="2" y="18" width="150" height="36" rx="2" fill="url(#satPanel)"/>
+      <rect x="2" y="18" width="150" height="36" rx="2" fill="none" stroke="#0b0f29" stroke-width="1"/>
+      <!-- panel cell grid (Sun-pointing blue cells) -->
+      <g stroke="#3d55c4" stroke-width="0.6" opacity="0.65">
+        <line x1="2" y1="27" x2="152" y2="27"/>
+        <line x1="2" y1="36" x2="152" y2="36"/>
+        <line x1="2" y1="45" x2="152" y2="45"/>
+        <line x1="22" y1="18" x2="22" y2="54"/>
+        <line x1="42" y1="18" x2="42" y2="54"/>
+        <line x1="62" y1="18" x2="62" y2="54"/>
+        <line x1="82" y1="18" x2="82" y2="54"/>
+        <line x1="102" y1="18" x2="102" y2="54"/>
+        <line x1="122" y1="18" x2="122" y2="54"/>
+        <line x1="142" y1="18" x2="142" y2="54"/>
+      </g>
+
+      <!-- flat rectangular bus (compact body, right side) -->
+      <rect x="154" y="12" width="44" height="48" rx="3" fill="url(#satBody)"/>
+      <rect x="154" y="12" width="44" height="48" rx="3" fill="none" stroke="#3a3f4a" stroke-width="1"/>
+
+      <!-- gold foil thermal wrap on the bus front -->
+      <path d="M157 16 L195 16 L195 56 L157 56 Z" fill="url(#satFoil)" opacity="0.8"/>
+
+      <!-- attitude / thruster bars on the sides -->
+      <rect x="152" y="20" width="4" height="32" rx="2" fill="#4a4f5a"/>
+      <rect x="196" y="20" width="4" height="32" rx="2" fill="#4a4f5a"/>
+      <rect x="160" y="58" width="3" height="6" rx="1" fill="#4a4f5a"/>
+      <rect x="190" y="58" width="3" height="6" rx="1" fill="#4a4f5a"/>
+
+      <!-- antenna stub + green beacon (top) -->
+      <line x1="176" y1="12" x2="176" y2="6" stroke="#8a8f9c" stroke-width="1.2"/>
+      <circle cx="176" cy="5" r="1.6" fill="#3aff51"/>
+      <circle cx="176" cy="5" r="4.5" fill="url(#satBeacon)"/>
     </svg>
   </div>
 
@@ -178,31 +265,6 @@
     <main>
       <section id="s-home">
         <canvas class="ascii-bg"></canvas>
-      <script>
-        const images = [];
-        for (let i = 1; i <= 99; i++) {
-          images.push(`assets/image/octocat-${i}.png`);
-        }
-
-        const preloaded = [];
-        images.forEach(src => {
-          const img = new Image();
-          img.src = src;
-          preloaded.push(img);
-        });
-
-        const section = document.getElementById("s-home");
-        let current = 0;
-
-        section.style.backgroundImage = `url("${images[0]}")`;
-
-        section.addEventListener("mouseleave", () => {
-          current = (current + 1) % images.length;
-          requestAnimationFrame(() => {
-            section.style.backgroundImage = `url("${images[current]}")`;
-          });
-        });
-      </script>
         <div class="grid-layout">
           <div id="visitor-info">
             <p id="visitor-ip"></p>
@@ -234,7 +296,7 @@
         </div>
       </section>
 
-      <div class="astronaut" aria-hidden="true">
+      <div class="astronaut" data-bubble="boy-bubble" aria-hidden="true">
           <svg viewBox="0 0 120 140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Floating astronaut">
             <!-- left leg (pivot at hip ~52,84) -->
             <g class="limb leg left-leg">
@@ -277,10 +339,6 @@
             <!-- face reflection -->
             <ellipse cx="55" cy="27" rx="4" ry="3" fill="#ffffff" opacity="0.35"/>
 
-            <!-- antenna -->
-            <line x1="60" y1="12" x2="60" y2="4" stroke="#8778c1" stroke-width="2"/>
-            <circle cx="60" cy="3" r="3" fill="#3aff51"/>
-
             <defs>
               <radialGradient id="visorGrad" cx="45%" cy="40%" r="70%">
                 <stop offset="0%" stop-color="#434356"/>
@@ -294,7 +352,75 @@
           </svg>
         </div>
 
-        <div class="astro-bubble" aria-hidden="true">
+        <div class="astronaut astronaut-girl" data-bubble="girl-bubble" aria-hidden="true">
+          <svg viewBox="0 0 120 140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Floating girl astronaut">
+            <!-- left leg -->
+            <g class="limb leg left-leg">
+              <rect x="47" y="82" width="10" height="22" rx="5"/>
+              <ellipse cx="52" cy="107" rx="7" ry="4" fill="#ff7ab0"/>
+            </g>
+
+            <!-- right leg -->
+            <g class="limb leg right-leg">
+              <rect x="63" y="82" width="10" height="22" rx="5"/>
+              <ellipse cx="68" cy="107" rx="7" ry="4" fill="#ff7ab0"/>
+            </g>
+
+            <!-- body / backpack -->
+            <rect x="44" y="46" width="32" height="40" rx="10"/>
+            <rect x="40" y="44" width="12" height="36" rx="6"/>
+
+            <!-- backpack details -->
+            <line x1="46" y1="52" x2="46" y2="72" stroke-width="2"/>
+            <circle cx="46" cy="58" r="2" fill="#ffb3d1"/>
+
+            <!-- left arm -->
+            <g class="limb arm left-arm">
+              <rect x="32" y="50" width="12" height="24" rx="5"/>
+              <circle id="girl-left-hand" cx="34" cy="77" r="5" fill="#ff7ab0"/>
+            </g>
+
+            <!-- right arm -->
+            <g class="limb arm right-arm">
+              <rect x="76" y="50" width="12" height="24" rx="5"/>
+              <circle id="girl-right-hand" cx="86" cy="77" r="5" fill="#ff7ab0"/>
+            </g>
+
+            <!-- helmet -->
+            <circle cx="60" cy="32" r="20" fill="#fff1f7"/>
+            <circle cx="60" cy="32" r="20" fill="url(#girlVisorGrad)"/>
+            <circle cx="60" cy="32" r="14" fill="#3d1527"/>
+            <circle cx="60" cy="32" r="14" fill="url(#girlVisorShine)"/>
+
+            <!-- face reflection -->
+            <ellipse cx="55" cy="27" rx="4" ry="3" fill="#ffffff" opacity="0.35"/>
+
+            <!-- hair bow on top of helmet -->
+            <path d="M48 22 q2 -10 12 -6 q-4 10 -8 6 q-2 -4 -2 0 z" fill="#ff5fa2"/>
+            <circle cx="60" cy="16" r="2.4" fill="#ff5fa2"/>
+
+            <defs>
+              <radialGradient id="girlVisorGrad" cx="45%" cy="40%" r="70%">
+                <stop offset="0%" stop-color="#7a2b4d"/>
+                <stop offset="100%" stop-color="#fff1f7"/>
+              </radialGradient>
+              <radialGradient id="girlVisorShine" cx="40%" cy="35%" r="70%">
+                <stop offset="0%" stop-color="#ff7ab0" stop-opacity="0.7"/>
+                <stop offset="100%" stop-color="#3d1527"/>
+              </radialGradient>
+            </defs>
+          </svg>
+        </div>
+
+        <div class="astro-bubble astro-bubble-girl" id="girl-bubble" aria-hidden="true">
+          <svg class="astro-bubble-svg" viewBox="0 0 220 60" xmlns="http://www.w3.org/2000/svg">
+            <rect class="astro-bubble-body" x="14" y="2" width="192" height="52" rx="21" ry="21" fill="#ff5fa2"/>
+            <path class="astro-bubble-tail" d="M34 52 L22 68 L51 54 Z" fill="#ff5fa2"/>
+            <text class="astro-bubble-text" x="110" y="29" text-anchor="middle" dominant-baseline="central" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', 'Archivo', sans-serif" font-size="20" font-weight="600">Hi bestie~</text>
+          </svg>
+        </div>
+
+        <div class="astro-bubble" id="boy-bubble" aria-hidden="true">
           <svg class="astro-bubble-svg" viewBox="0 0 220 60" xmlns="http://www.w3.org/2000/svg">
             <rect class="astro-bubble-body" x="14" y="2" width="192" height="52" rx="21" ry="21" fill="#8778c1"/>
             <path class="astro-bubble-tail" d="M34 52 L22 68 L51 54 Z" fill="#8778c1"/>
@@ -413,7 +539,7 @@
         </div>
       </section>
       <section id="s-experience">
-              <canvas class="ascii-bg"></canvas>
+        <canvas class="ascii-bg"></canvas>
         <div class="grid-layout">
           <h2 class="delaySmallReveal" style="color: #8778c1 'LiveOverfont', sans-serif;"><span>#</span>Experience</h2>
           <div id="experience">
@@ -517,7 +643,7 @@
         </div>
       </section>
       <section id="s-services">
-              <canvas class="ascii-bg"></canvas>
+        <canvas class="ascii-bg"></canvas>
         <div class="grid-layout">
           <h2 class="delaySmallReveal" style="color: rgb(97, 53, 243) 'LiveOverfont', sans-serif; font-size: 40px;">What I do<span>.</span></h2>
           <div id="services">
@@ -1267,10 +1393,10 @@
   }
 })();
 </script>
-
-<script>
-(function () {
-  var el = document.querySelector('.astronaut');
+  <script>
+  (function () {
+  // Superseded by assets/js/astronaut.js (shared multi-astronaut engine).
+  var el = document.querySelector('.astronaut-DISABLED');
   if (!el) return;
 
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -2676,6 +2802,299 @@
 
     requestAnimationFrame(tick);
   }
+
+  requestAnimationFrame(tick);
+})();
+</script>
+
+<script>
+(function () {
+  // Superseded by assets/js/astronaut.js (shared multi-astronaut engine).
+  var el = document.querySelector('.astronaut-girl-DISABLED');
+  if (!el) return;
+
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+  if (reduced.matches) return;
+
+  var size = el.getBoundingClientRect().width || 90;
+  var leftArm = el.querySelector('.left-arm');
+  var rightArm = el.querySelector('.right-arm');
+  var leftLeg = el.querySelector('.left-leg');
+  var rightLeg = el.querySelector('.right-leg');
+
+  // girl floats independently with her own soft wander path
+  var state = {
+    x: window.innerWidth * 0.22,
+    y: window.innerHeight * 0.6,
+    vx: 40,
+    vy: 30,
+    angle: 0,
+    va: 0
+  };
+  var phases = {
+    x: Math.random() * Math.PI * 2,
+    y: Math.random() * Math.PI * 2,
+    a: Math.random() * Math.PI * 2
+  };
+  var prev = performance.now();
+
+  function setLimb(node, deg, px, py) {
+    if (!node) return;
+    node.setAttribute('transform', 'rotate(' + deg.toFixed(2) + ' ' + px + ' ' + py + ')');
+  }
+
+  function tick(now) {
+    var dt = Math.min((now - prev) / 1000, 0.05);
+    prev = now;
+    var t = now / 1000;
+
+    var sp = Math.sqrt(state.vx * state.vx + state.vy * state.vy);
+    var speedRatio = Math.min(sp / 28, 2.5);
+
+    // gentle sinusoidal acceleration
+    var ax = Math.sin(t * 0.23 + phases.x) * 0.14
+           + Math.sin(t * 0.11 + phases.x * 1.7) * 0.05;
+    var ay = Math.cos(t * 0.19 + phases.y) * 0.12
+           + Math.sin(t * 0.13 + phases.y * 1.3) * 0.04;
+    state.vx += ax * dt;
+    state.vy += ay * dt;
+    state.vx *= (1 - 0.5 * dt);
+    state.vy *= (1 - 0.5 * dt);
+
+    state.x += state.vx * dt;
+    state.y += state.vy * dt;
+
+    var pad = size * 0.9;
+    if (state.x < pad) { state.x = pad; state.vx = Math.abs(state.vx) * 0.5; }
+    if (state.x > window.innerWidth - pad) { state.x = window.innerWidth - pad; state.vx = -Math.abs(state.vx) * 0.5; }
+    if (state.y < pad) { state.y = pad; state.vy = Math.abs(state.vy) * 0.5; }
+    if (state.y > window.innerHeight - pad) { state.y = window.innerHeight - pad; state.vy = -Math.abs(state.vy) * 0.5; }
+
+    // bank into velocity + listless sway
+    var angAccel = state.vx * 0.0016 + Math.sin(t * 0.18 + phases.a) * 0.4;
+    state.va += angAccel * dt;
+    state.va *= (1 - 0.15 * dt);
+    state.angle += state.va * dt;
+    state.angle = Math.max(-28, Math.min(28, state.angle));
+
+    // lazy limb drift
+    var la = (Math.sin(t * 0.9 + phases.a) * 0.6 + Math.sin(t * 0.23 + phases.a * 1.7) * 0.4) * (1 + speedRatio * 0.3);
+    var ra = (Math.sin(t * 1.1 + phases.a * 1.3) * 0.6 + Math.sin(t * 0.27 + phases.a) * 0.4) * (1 + speedRatio * 0.3);
+    var ll = (Math.sin(t * 0.7 + phases.y) * 0.45 + Math.sin(t * 0.19 + phases.y * 2.1) * 0.35);
+    var rl = (Math.sin(t * 0.85 + phases.y * 1.7) * 0.45 + Math.sin(t * 0.22 + phases.y) * 0.35);
+    setLimb(leftArm, la * 34, 33, 52);
+    setLimb(rightArm, ra * 34, 87, 52);
+    setLimb(leftLeg, ll * 22, 52, 84);
+    setLimb(rightLeg, rl * 22, 68, 84);
+
+    el.style.transform =
+      'translate(' + state.x + 'px, ' + state.y + 'px) ' +
+      'translate(-50%, -50%) ' +
+      'rotate(' + state.angle.toFixed(2) + 'deg)';
+
+    requestAnimationFrame(tick);
+  }
+
+  requestAnimationFrame(tick);
+})();
+</script>
+
+<script src="assets/js/astronaut.js"></script>
+
+<script>
+(function () {
+  var canvas = document.getElementById('starfield');
+  if (!canvas) return;
+  var ctx = canvas.getContext('2d');
+
+  var stars = [];
+  var count = 220;
+
+  // Shooting stars: a bright head + fading trail moving diagonally.
+  var shootingStars = [];
+  var nextShoot = 0;
+
+  function resize() {
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    canvas.width = window.innerWidth * dpr;
+    canvas.height = window.innerHeight * dpr;
+    canvas.style.width = window.innerWidth + 'px';
+    canvas.style.height = window.innerHeight + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+
+  function spawnShootingStar(t) {
+    var w = window.innerWidth;
+    var h = window.innerHeight;
+    // diagonal descent: 45°–90° measured from the +X axis (i.e. shallow-ish dive)
+    var ang = Math.PI * (0.25 + Math.random() * 0.25);
+    var speed = Math.random() * 500 + 600; // px/sec
+    // flip direction randomly so it streaks left or right
+    var dirX = (Math.random() < 0.5 ? 1 : -1) * Math.cos(ang);
+    var dirY = Math.sin(ang);
+
+    var startX = dirX >= 0 ? -40 : w + 40;
+    var startY = Math.random() * h * 0.5;
+
+    shootingStars.push({
+      x: startX,
+      y: startY,
+      vx: dirX * speed,
+      vy: dirY * speed,
+      life: 0,
+      maxLife: (Math.random() * 0.6 + 0.5) // seconds
+    });
+
+    // schedule the next one (random 3–8s)
+    nextShoot = t + Math.random() * 5 + 3;
+  }
+
+  function makeStars() {
+    stars = [];
+    for (var i = 0; i < count; i++) {
+      stars.push({
+        x: Math.random() * window.innerWidth,
+        y: Math.random() * window.innerHeight,
+        r: Math.random() * 1.3 + 0.3,
+        base: Math.random() * 0.5 + 0.3,
+        tw: Math.random() * Math.PI * 2,
+        speed: Math.random() * 1.5 + 0.4
+      });
+    }
+  }
+
+  function draw(t) {
+    var w = window.innerWidth;
+    var h = window.innerHeight;
+    ctx.clearRect(0, 0, w, h);
+
+    for (var i = 0; i < stars.length; i++) {
+      var s = stars[i];
+      var a = s.base + Math.sin(t * s.speed + s.tw) * 0.25;
+      if (a < 0) a = 0.05;
+      if (a > 1) a = 1;
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(255, 255, 255, ' + a.toFixed(3) + ')';
+      ctx.fill();
+    }
+
+    // spawn a new shooting star when its time arrives
+    if (t >= nextShoot) spawnShootingStar(t);
+    if (nextShoot === 0) nextShoot = t + Math.random() * 3 + 1;
+
+    // update + render shooting stars
+    for (var j = shootingStars.length - 1; j >= 0; j--) {
+      var m = shootingStars[j];
+      var dt = 1 / 60;
+      m.x += m.vx * dt;
+      m.y += m.vy * dt;
+      m.life += dt;
+
+      if (m.life >= m.maxLife || m.x < -100 || m.x > w + 100 || m.y > h + 100) {
+        shootingStars.splice(j, 1);
+        continue;
+      }
+
+      var fade = 1 - m.life / m.maxLife; // 1 -> 0
+
+      // trail: draw a few fading segments behind the head
+      var trailLen = 18;
+      var vx = m.vx;
+      var vy = m.vy;
+      var mag = Math.sqrt(vx * vx + vy * vy) || 1;
+      var ux = vx / mag;
+      var uy = vy / mag;
+
+      var grad = ctx.createLinearGradient(m.x, m.y, m.x - ux * trailLen, m.y - uy * trailLen);
+      grad.addColorStop(0, 'rgba(255, 255, 255, ' + fade.toFixed(3) + ')');
+      grad.addColorStop(1, 'rgba(255, 255, 255, 0)');
+      ctx.strokeStyle = grad;
+      ctx.lineWidth = 1.6;
+      ctx.lineCap = 'round';
+      ctx.beginPath();
+      ctx.moveTo(m.x, m.y);
+      ctx.lineTo(m.x - ux * trailLen, m.y - uy * trailLen);
+      ctx.stroke();
+
+      // bright head
+      ctx.beginPath();
+      ctx.arc(m.x, m.y, 1.6, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(255, 255, 255, ' + Math.min(1, fade * 1.4).toFixed(3) + ')';
+      ctx.fill();
+    }
+
+    requestAnimationFrame(function (now) { draw(now / 1000); });
+  }
+
+  resize();
+  makeStars();
+  window.addEventListener('resize', function () { resize(); makeStars(); });
+  requestAnimationFrame(function (now) { draw(now / 1000); });
+})();
+</script>
+
+<script>
+(function () {
+  var el = document.querySelector('.satellite');
+  if (!el) return;
+
+  var w = window.innerWidth;
+  var h = window.innerHeight;
+  var cx = w / 2;
+  var cy = h / 2;
+
+  // Elliptical orbit parameters (in px), like a satellite crossing the sky.
+  var orbit = {
+    a: Math.max(w, h) * 0.55,        // semi-major axis
+    b: Math.max(w, h) * 0.28,        // semi-minor axis
+    tilt: -0.35,                     // orbit inclination (radians)
+    omega: 0.05,                     // angular speed (rad/s)
+    theta: Math.random() * Math.PI * 2
+  };
+
+  // fixed orientation (solar panel stays Sun-pointed), no tumble
+  var fixedAngle = -0.12; // slight constant tilt so it doesn't look stiff
+
+  var prev = performance.now();
+
+  function tick(now) {
+    var dt = Math.min((now - prev) / 1000, 0.05);
+    prev = now;
+
+    // advance along the elliptical orbit
+    orbit.theta += orbit.omega * dt;
+
+    // orbital position in local (un-rotated) space
+    var lx = orbit.a * Math.cos(orbit.theta);
+    var ly = orbit.b * Math.sin(orbit.theta);
+
+    // apply inclination
+    var cosT = Math.cos(orbit.tilt), sinT = Math.sin(orbit.tilt);
+    var x = cx + lx * cosT - ly * sinT;
+    var y = cy + lx * sinT + ly * cosT;
+
+    // depth cue from the orbit position (front/back): slight scale change
+    var depth = 0.9 + 0.2 * (ly / orbit.b + 1) / 2;
+
+    el.style.transform =
+      'translate(' + x.toFixed(1) + 'px, ' + y.toFixed(1) + 'px) ' +
+      'translate(-50%, -50%) ' +
+      'rotate(' + (fixedAngle * 180 / Math.PI).toFixed(2) + 'deg) ' +
+      'scale(' + depth.toFixed(3) + ')';
+
+    requestAnimationFrame(tick);
+  }
+
+  function resize() {
+    w = window.innerWidth;
+    h = window.innerHeight;
+    cx = w / 2;
+    cy = h / 2;
+    orbit.a = Math.max(w, h) * 0.55;
+    orbit.b = Math.max(w, h) * 0.28;
+  }
+  window.addEventListener('resize', resize);
 
   requestAnimationFrame(tick);
 })();
