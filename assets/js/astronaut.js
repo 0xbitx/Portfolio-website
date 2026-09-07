@@ -37,29 +37,34 @@
     'Whoa, I slipped!', 'I lost my grip!', 'Come back here!', 'Weeeeee!',
     'Ano ba yan!', 'Sige na nga', 'Haysss.', 'Wait, I still need you!',
     'Ugh, not again...', 'Hanep na yan!', 'Ayoko na!', 'Ow, my string!',
-    'Come baaack!', 'Taray mo naman!', 'Bakit mo ko binitawan?', 'Aray ko!',
+    'Come baaack!', 'Taray mo naman!', 'Bakit mo ko binitawan?', 'Aray ko!', 'Aray Mo!',
     'Di ako makahinga dito!', 'Sige na nga mauna kana!', 'Nagmamadali???'
   ];
   var grabMessages = [
     'Gotcha!', 'Holding on tight!', 'This is my ride!', 'Nice, I caught it!',
     'Now we\'re connected.', 'Alright, let\'s go!', 'Got it!', 'Beam me up!',
-    'Here we go!', 'Secured!', 'I\'m not letting go.', 'Yey!', 'Yohooo!'
+    'Here we go!', 'Secured!', 'I\'m not letting go.', 'Yey!', 'Yohooo!',
+    'Nahuli kita!', 'Kapit lang!', 'Dito na tayo!', 'Ayos, nakahawak na\'ko!',
+    'Konektado na tayo.', 'Tara na!', 'Sakto, hawak ko na!', 'Kapit na kapit to!',
+    'Di ako bibitaw!', 'Yehey!', 'Yahoo!'
   ];
   var yapMessages = [
     'So... you come here often?', 'Is it just me, or is space really quiet?',
     'I wonder if Mars has wifi...', 'Did I leave the oven on?',
-    'Houston, can you hear me?', 'I could really go for some halo-halo right now.',
+    'Boss, can you hear me?', 'I could really go for some halo-halo right now.',
     'Gravity is just a suggestion, right?', 'Am I floating or is the world moving?',
     'One small step... wait, already did that.', 'I think I saw a shooting star.',
     'Do aliens get lonely too?', 'Should I wave at the satellites?',
     'This helmet is getting a bit stuffy.', 'I miss the sound of rain.',
     'Is anyone else out here?', 'Ang lamig dito, grabe...',
     'Space pizza would be nice right now.', 'Note to self: don\'t float too far.',
-    'The stars are brighter than my future.', 'Parang biglang bumagal lahat...',
-    'Imagine if I had pockets up here.', 'I should have packed more snacks.',
+    'The stars are brighter than my future.', 'Parang biglang bumagal lahat...', 'I should have packed more snacks.',
     'Zero gravity... zero problems.', 'Is that a UFO or am I dreaming?',
-    'Kumusta naman dito sa space?', 'I\'m basically a shooting star, right?',
-    'Somebody\'s gotta clean this debris.', 'Me, myself, and the void.'
+    'Kumusta naman dito sa space?', 'I\'m basically a shooting star, right?', 'Me, myself, and the void.',
+    'B-bakit parang ang bilis ng tibok ko pag andiyan siya…', 'S-shy ako pero… gusto ko lagi siyang kasama.',
+    'Pinapansin kaya niya ako…?', 'A-ano kayang sasabihin ko sa kanya…',
+    'Ang ganda/gwapo niya… wag siyang lumingon…', 'Kini-kilig ako pero wag nya sana malalaman…',
+    'Sana laging magkahawak kami…'
   ];
   var pullMessages = [
     'Whoa, easy there!', 'Careful! I\'m attached to that!', 'You\'re gonna snap it!',
@@ -72,7 +77,7 @@
   var pullHappyMessages = [
     'Yohooo!', 'Hahaha this is fun!', 'Wheee!', 'Faster! Faster!', 'I love this!',
     'Yey, weee!', 'Spin me around!', 'Hahaha again!', 'This is the best!',
-    'Yeyyy, let\'s go!', 'Sige pa! (more!)', 'Woooohooo!', 'Haha, masaya to!',
+    'Yeyyy, let\'s go!', 'Sige pa!', 'Woooohooo!', 'Haha, masaya to!',
     'Don\'t stop!', 'I\'m dizzy but happy!', 'Sobrang saya!', 'Tuloy mo lang!',
     'Nakakahilo na pero go!', 'Grabeng saya neto!', 'Bilis pa! Bilis!', 'Wahahaha!',
     'Isa pa!', 'Ang saya-saya!', 'Unli saya to!', 'Ang galing mo!',
@@ -80,16 +85,16 @@
   ];
   var hurtSmall = [
     'Ow! Stubbed a toe on that.', 'Tink! A pebble.', 'That little one tickled.',
-    'Barely felt it.', 'Ow, my pinky!'
+    'Barely felt it.', 'Ow, my pinky!', 'Maliit pero masakit'
   ];
   var hurtMedium = [
     'Ouch! That rock hurt!', 'Aray! Ang sakit!', 'Ow ow ow!', 'Watch out!',
     'That asteroid got me!', 'Nako!', 'My helmet!', 'Aray ko po!', 'Ba\'t may bato dito?!'
   ];
   var hurtLarge = [
-    'OUCH!!! THAT WAS HUGE!!', 'GRAVE! ANG LAKI NG TAMA!!', 'I\'M SEEING STARS!!',
+    'OUCH!!! THAT WAS HUGE!!', 'GRAVE! ANG LAKI!!', 'I\'M SEEING STARS!!',
     'That BODY-SLAMMED me!!', 'Totaled!!! I\'m done!', 'HEEEELP! Big rock!!',
-    'YARI TALAGA AKO!!', 'LAKAS NG TAMA!!!'
+    'ARAY MO!!', 'LAKAS NG TAMA!!!'
   ];
   var nearAsteroidSmall = [
     'Oh, a tiny rock.', 'Just a pebble, no biggie.', 'That little one can\'t hurt.',
@@ -100,23 +105,30 @@
     'Rock spotted!', 'Watch out for that asteroid!', 'Don\'t hit that!'
   ];
   var nearAsteroidLarge = [
-    'OH NO, HUGE ASTEROID!!', 'DODGE! DODGE! DODGE!', 'ANG LAKI NITO! (IT\'S HUGE!)',
+    'OH NO, HUGE ASTEROID!!', 'DODGE! DODGE! DODGE!', 'ANG LAKI NITO!',
     'That thing is MASSIVE!', 'We\'re doomed!!!', 'Grab something!!',
     'LORD HAVE MERCY!', 'RUN! I mean FLOAT AWAY!'
   ];
   var chainGrabMessages = [
-    'Grab my hand!', 'Hold on tight!', 'Don\'t let go!', 'We\'re a chain now!',
-    'I got you!', 'Together we float!', 'No one drifts alone!'
+    'O-oh… you grabbed my hand…', 'Akin na kamay mo… j-joke lang!', 'W-wait, your hand is soft…',
+    'H-halo-halo kami niyan? I mean, hi…', 'N-naka-hawak na tayo… bakit ang bilis ng tibok ko?',
+    'Don\'t let go… wala lang, ang init lang dito.', 'Uy… ayan na tayong dalawa…',
+    'S-shy ako pero… payag ako humawak.', 'Ang lapit mo… kinikilig ako, wag kang tumawa!',
+    'T-tayo na… magkahawak kamay…'
   ];
   var chainReleaseMessages = [
-    'You slipped away!', 'My hand!', 'We broke apart!', 'Come back!',
-    'I lost you!', 'The chain snapped!'
+    'B-bitaw ka na pala…', 'H-hoy, wag kang lalayo… wala lang…',
+    'Ayan, nasan na kamay mo… namiss ko agad.', 'H-hindi, ok lang… kahit masakit lang… kukunti…',
+    'Uy… balik ka dito, magkahawak tayo…', 'K-kaya ko naman mag-isa… chos.'
   ];
   var handHoldMessages = [
-    'Hold my hand tighter!', 'Your hand feels warm.', 'Don\'t let go, ok?',
-    'This is nice.', 'We\'re holding hands!', 'Floating together is better.',
-    'I\'ve got you.', 'Hand in hand!', 'Let\'s drift together.',
-    'You\'re not alone up here.', 'Kalabit! (holding hands)', 'Ang cute natin magkahawak kamay!'
+    'P-pwede bang mas humawak ng mahigpit…?', 'Ang warm ng kamay mo… nakakalig ka eh.',
+    'W-wag mo kong titigan, nahihiya ako… pero sige lang.', 'Kinikilig ako… wag mong sabihin sa iba!',
+    'S-shy ako pero ayoko na bumitaw…', 'Ang bilis ng heartbeat ko… grabe ka…',
+    'H-hawak kamay na tayo… parang panaginip…', 'A-ang kulit mo… pero ayoko ring bumitaw.',
+    'Uy… ngumiti ka, napapangiti rin ako…', 'I-I like this… wala lang, huwag kang assuming!',
+    'B-bakit parang mas maliwanag ang space ngayon…', 'S-shhh… wag kang magsalita, masaya ako ngayon…',
+    'K-kailan kaya ako aamin…', 'A-amin na sana ako pero… torpe ako…'
   ];
 
   // ===========================================================================
@@ -166,6 +178,73 @@
     }
     mouse.x = e.clientX;
     mouse.y = e.clientY;
+  });
+
+  // Track left-button held state so we can pull rocks toward the alien.
+  // We skip starting this when the press is on a draggable window titlebar so
+  // dragging a window doesn't accidentally trigger the consume effect.
+  var mouseDown = false;
+  window.__asciiConsume = false;
+  window.addEventListener('mousedown', function (e) {
+    if (e.button !== 0) return;
+    if (e.target && e.target.closest && e.target.closest('.term-titlebar')) return;
+    mouseDown = true;
+    window.__asciiConsume = true;
+  });
+  window.addEventListener('mouseup', function (e) {
+    if (e.button === 0) { mouseDown = false; window.__asciiConsume = false; }
+  });
+  window.addEventListener('blur', function () { mouseDown = false; window.__asciiConsume = false; });
+
+  // ---- Right-click laser: zap the nearest rock and bump it away ----
+  var lasers = [];      // active laser beams (fade out over a short time)
+  var rockHits = [];    // brief impact flashes on rocks
+
+  function fireLaserAtRock() {
+    // find the nearest rock that is visible on screen (not below the fold)
+    var nearest = null;
+    var bestD = Infinity;
+    var scrollY = window.scrollY || 0;
+    var vw = window.innerWidth;
+    var vh = window.innerHeight;
+    for (var ri = 0; ri < rocks.length; ri++) {
+      var r = rocks[ri];
+      var sx = r.x;
+      var sy = r.y - scrollY;
+      // skip rocks that are off-screen (outside the current viewport)
+      if (sx < -r.size / 2 || sx > vw + r.size / 2 ||
+          sy < -r.size / 2 || sy > vh + r.size / 2) {
+        continue;
+      }
+      var d = Math.hypot(sy - ring.y, sx - ring.x);
+      if (d < bestD) { bestD = d; nearest = r; }
+    }
+    if (!nearest) return;
+
+    var startX = ring.x;
+    var startY = ring.y;
+    var endX = nearest.x;
+    var endY = nearest.y - scrollY;
+    var dx = endX - startX;
+    var dy = endY - startY;
+    var len = Math.sqrt(dx * dx + dy * dy) || 1;
+    var ux = dx / len;
+    var uy = dy / len;
+
+    // push the rock away from the alien
+    var force = 520 * (90 / nearest.size);
+    nearest.vx += ux * force;
+    nearest.vy += uy * force;
+    nearest.bumpTime = performance.now();
+
+    // register laser + hit flash (visual)
+    lasers.push({ x1: startX, y1: startY, x2: endX, y2: endY, t0: performance.now() });
+    rockHits.push({ rock: nearest, t0: performance.now() });
+    nearest.el.classList.add('hit-flash');
+  }
+
+  window.addEventListener('contextmenu', function (e) {
+    fireLaserAtRock();
   });
 
   // Floating space rocks
@@ -228,6 +307,34 @@
   // All active astronaut instances (for shared render + collision loops)
   var astronauts = [];
 
+  // Shared speaking coordinator: only one astronaut's bubble shows at a time,
+  // so the user can actually read each message. Callers request the floor via
+  // `requestTalk(cb)`; if someone else is mid-message, `cb` is queued until the
+  // current speaker releases.
+  var talkCoordinator = {
+    busy: false,
+    queue: [],
+    releaseTimer: null,
+    request: function (cb) {
+      if (!this.busy) {
+        this.busy = true;
+        cb();
+      } else {
+        this.queue.push(cb);
+      }
+    },
+    // call when the current speaker's bubble is done (or wants to yield)
+    release: function () {
+      if (this.releaseTimer) { clearTimeout(this.releaseTimer); this.releaseTimer = null; }
+      this.busy = false;
+      var next = this.queue.shift();
+      if (next) {
+        this.busy = true;
+        next();
+      }
+    }
+  };
+
   // ===========================================================================
   //  Shared render: rope(s) from gripping hands -> cursor, and the alien ship
   // ===========================================================================
@@ -245,7 +352,8 @@
     ctx.lineJoin = 'round';
 
     // Draw a braided rope from point A to point B (with sag + traveling wave).
-    function drawRope(aX, aY, bX, bY, alpha) {
+    // If `glow` is truthy, the rope also gets a soft green glow underneath.
+    function drawRope(aX, aY, bX, bY, alpha, glow) {
       var ddx = bX - aX;
       var ddy = bY - aY;
       var dlen = Math.sqrt(ddx * ddx + ddy * ddy) || 1;
@@ -265,6 +373,23 @@
         var x = aX + ddx * s + px * (sag + wave);
         var y = aY + ddy * s + py * (sag + wave);
         return { x: x, y: y };
+      }
+
+      // Optional glow halo behind the rope (used for the window string).
+      if (glow) {
+        ctx.save();
+        ctx.shadowColor = 'rgba(90, 255, 110, 1)';
+        ctx.shadowBlur = 14;
+        ctx.strokeStyle = 'rgba(90, 255, 110, 0.35)';
+        ctx.lineWidth = 5;
+        ctx.beginPath();
+        for (var gl = 0; gl <= N; gl++) {
+          var gp = stringPoint(gl / N);
+          if (gl === 0) ctx.moveTo(gp.x, gp.y);
+          else ctx.lineTo(gp.x, gp.y);
+        }
+        ctx.stroke();
+        ctx.restore();
       }
 
       var ropeBase = 'rgba(255, 255, 255, ' + alpha + ')';
@@ -325,9 +450,76 @@
     // the pin constraint in each linked astronaut's step() keeps the hands
     // physically joined, so there is nothing to draw here.
 
+    // If the user is dragging a window, draw a string from the alien (ring) to
+    // that window's header/titlebar, so it looks like the alien is holding it.
+    if (window.__termDrag && window.__termDrag.active) {
+      drawRope(ring.x, ring.y, window.__termDrag.x, window.__termDrag.y, 0.9, true);
+    }
+
+    // Draw right-click laser beams (fade out quickly) with a layered glow so it
+    // reads like a real energy beam.
+    var nowMs = performance.now();
+    ctx.save();
+    for (var li = 0; li < lasers.length; li++) {
+      var L = lasers[li];
+      var age = (nowMs - L.t0) / 1000;
+      if (age > 0.22) continue;
+      var la = 1 - age / 0.22;
+      ctx.lineCap = 'round';
+      ctx.lineJoin = 'round';
+
+      // unit direction + perpendicular for building a tapered tip
+      var ldx = L.x2 - L.x1;
+      var ldy = L.y2 - L.y1;
+      var llen = Math.sqrt(ldx * ldx + ldy * ldy) || 1;
+      var lux = ldx / llen;
+      var luy = ldy / llen;
+      var lpx = -luy;   // perpendicular
+      var lpy = lux;
+
+      // A tapered beam fades + narrows toward the tip (the rock). The gradient
+      // runs from the alien (opaque) to the tip (transparent) for a smooth end.
+      function laserTipLine(w, color, shadow) {
+        var grad = ctx.createLinearGradient(L.x1, L.y1, L.x2, L.y2);
+        grad.addColorStop(0, color);
+        grad.addColorStop(1, 'rgba(90, 255, 110, 0)');
+        ctx.strokeStyle = grad;
+        ctx.lineWidth = w;
+        ctx.shadowBlur = shadow || 0;
+        ctx.shadowColor = 'rgba(90, 255, 110, 1)';
+        ctx.beginPath();
+        // taper: stop slightly short of the tip at full width, then converge
+        var tipBack = 0.12;
+        var ex = L.x1 + ldx * (1 - tipBack);
+        var ey = L.y1 + ldy * (1 - tipBack);
+        ctx.moveTo(L.x1, L.y1);
+        ctx.lineTo(ex, ey);
+        // narrow taper to a point at the tip
+        ctx.lineTo(L.x2 - lpx * w * 0.35, L.y2 - lpy * w * 0.35);
+        ctx.stroke();
+      }
+
+      // outer soft halo
+      laserTipLine(14, 'rgba(90, 255, 110, ' + (la * 0.18).toFixed(3) + ')', 18 * la);
+      // mid glow
+      laserTipLine(6, 'rgba(90, 255, 110, ' + (la * 0.45).toFixed(3) + ')', 10 * la);
+      // solid beam
+      laserTipLine(2.5, 'rgba(140, 255, 160, ' + la.toFixed(3) + ')', 0);
+      // white-hot core
+      laserTipLine(0.9, 'rgba(255, 255, 255, ' + (la * 0.9).toFixed(3) + ')', 0);
+    }
+    ctx.restore();
+
     // position the cartoon alien ship at the ring
     if (ship) {
       var shipScale = 1 + maxGrip * 0.4;
+      // while consuming (holding left click), the alien brightens + swells
+      if (mouseDown) {
+        ship.classList.add('consuming');
+        shipScale += 0.12;
+      } else {
+        ship.classList.remove('consuming');
+      }
       ship.style.transform =
         'translate(' + ring.x + 'px, ' + ring.y + 'px) ' +
         'translate(-50%, -50%) ' +
@@ -356,6 +548,20 @@
       if (r.x > window.innerWidth - pad) { r.x = window.innerWidth - pad; r.vx = -Math.abs(r.vx) * 0.6; }
       if (r.y < pad) { r.y = pad; r.vy = Math.abs(r.vy) * 0.6; }
       if (r.y > docHeight - pad) { r.y = docHeight - pad; r.vy = -Math.abs(r.vy) * 0.6; }
+
+      // Hold left-click: pull every rock toward the alien (consume effect).
+      if (mouseDown) {
+        var pullX = ring.x - r.x;
+        var pullY = (ring.y + scrollY) - r.y;
+        var pullD = Math.sqrt(pullX * pullX + pullY * pullY) || 1;
+        var ux = pullX / pullD;
+        var uy = pullY / pullD;
+        // stronger pull when close, gentle when far
+        var pull = 1400 * (90 / r.size);
+        r.vx += ux * pull * dt;
+        r.vy += uy * pull * dt;
+        r.consuming = true;
+      }
 
       // bump with the alien ship (cursor)
       var shipR = 30 + maxGrip * 8;
@@ -436,15 +642,50 @@
           r.vx -= ax2 * rockReaction;
           r.vy -= ay2 * rockReaction;
 
-          astro.maybeHurt(r.size);
+          astro.maybeHurt(r.size, rockSpeed);
         }
       }
 
       r.angle += r.va * dt;
+
+      // Bump shake effect when the rock was just hit by a laser.
+      var bumpScale = 1;
+      var bumpJitter = 0;
+      if (r.bumpTime) {
+        var bumpAge = (performance.now() - r.bumpTime) / 1000;
+        if (bumpAge < 0.4) {
+          var k = 1 - bumpAge / 0.4;
+          bumpScale = 1 + Math.sin(bumpAge * 45) * 0.14 * k;
+          bumpJitter = Math.sin(bumpAge * 60) * 5 * k;
+        } else {
+          r.bumpTime = 0;
+        }
+      }
+
+      // Consume effect: while sucking rocks in, shrink + fade them as they get
+      // close to the alien so they look like they're being consumed.
+      var consumeScale = 1;
+      var consumeOpacity = 1;
+      if (mouseDown || r.consuming) {
+        var cdx = ring.x - r.x;
+        var cdy = (ring.y + scrollY) - r.y;
+        var cd = Math.sqrt(cdx * cdx + cdy * cdy);
+        if (cd < 160) {
+          var cf = 1 - cd / 160;         // 0 far .. 1 swallowed
+          consumeScale = 1 - cf * 0.7;
+          consumeOpacity = 1 - cf * 0.85;
+        } else {
+          r.consuming = false;
+        }
+      }
+
+      var totalScale = bumpScale * consumeScale;
+      r.el.style.opacity = consumeOpacity.toFixed(3);
       r.el.style.transform =
         'translate(' + r.x + 'px, ' + (r.y - scrollY) + 'px) ' +
         'translate(-50%, -50%) ' +
-        'rotate(' + r.angle.toFixed(2) + 'deg)';
+        'rotate(' + (r.angle + bumpJitter).toFixed(2) + 'deg) ' +
+        'scale(' + totalScale.toFixed(3) + ')';
     }
   }
 
@@ -454,6 +695,8 @@
   function createAstronaut(cfg) {
     var el = cfg.el;
     if (!el) return null;
+
+    var isGirl = el.classList.contains('astronaut-girl');
 
     var size = el.getBoundingClientRect().width || 90;
 
@@ -528,15 +771,14 @@
     ];
     var currentMessage = '';
     var bubbleTimer = null;
+    var bubbleOffsetY = 0;   // extra vertical nudge applied to avoid overlap
 
-    // Track the last actually-shown bubble so (a) two different triggers never
-    // repeat the exact same line back-to-back, and (b) reactions that happen at
-    // nearly the same moment are staggered by a split-second instead of firing
-    // together.
+    // Track the last shown bubble so two different triggers never repeat the
+    // exact same line back-to-back.
     var lastShownText = '';
     var lastShownAt = 0;
-    var pendingShowMsg = null;
-    var pendingShowTimer = null;
+    var hasPendingTalk = false;    // this astronaut already queued a message
+    var ownsFloor = false;         // this astronaut currently holds the talk floor
 
     var navDwellEl = null;
     var navDwellStart = 0;
@@ -581,15 +823,23 @@
       if (bubble) bubble.classList.remove('show');
     }
 
-    function showBubble(msg) {
-      if (!bubble || !bubbleText) return;
-      renderBubble(msg);
+    // Hide this astronaut's bubble and, if it held the coordinator's floor,
+    // yield to the next queued speaker (prevents a deadlocked "talk" lock).
+    function endTalk() {
+      if (bubbleTimer) { clearTimeout(bubbleTimer); bubbleTimer = null; }
+      hideBubble();
+      if (ownsFloor) {
+        ownsFloor = false;
+        talkCoordinator.release();
+      }
     }
 
-    // Actually renders the text into the bubble (no stagger logic here).
-    function renderBubble(msg) {
+    // Actually renders the text into the bubble. `immediate` renders don't touch
+    // the talk coordinator (used for high-priority messages like being hit).
+    function renderBubble(msg, immediate) {
       lastShownText = msg;
       lastShownAt = performance.now();
+      hasPendingTalk = false;
       bubbleText.textContent = msg;
 
       try {
@@ -613,22 +863,19 @@
 
       bubble.classList.add('show');
       if (bubbleTimer) clearTimeout(bubbleTimer);
-      bubbleTimer = setTimeout(hideBubble, 2600);
+      bubbleTimer = setTimeout(endTalk, 2600);
     }
 
-    // Queue a bubble with a tiny random stagger (~80–350ms) so two reactions
-    // that would otherwise land on the same frame don't fire simultaneously.
+    // Request the floor from the shared coordinator so only one astronaut talks
+    // at a time. If this astronaut already has a message queued, skip to avoid
+    // piling up duplicates while it waits its turn.
     function queueShowBubble(msg) {
-      var delay = 80 + Math.random() * 270;
-      if (pendingShowTimer) clearTimeout(pendingShowTimer);
-      pendingShowMsg = msg;
-      pendingShowTimer = setTimeout(function () {
-        pendingShowTimer = null;
-        if (pendingShowMsg === msg) {
-          renderBubble(msg);
-          pendingShowMsg = null;
-        }
-      }, delay);
+      if (hasPendingTalk) return;
+      hasPendingTalk = true;
+      talkCoordinator.request(function () {
+        ownsFloor = true;
+        renderBubble(msg, false);
+      });
     }
 
     function pickNoRepeat(pool, last) {
@@ -676,13 +923,19 @@
       pullHappyMessageTime = performance.now();
       queueShowBubble(pick);
     }
-    function showHurtMessage(rockSize) {
-      var pool = rockSize >= 160 ? hurtLarge : (rockSize >= 120 ? hurtMedium : hurtSmall);
+    function showHurtMessage(rockSize, rockSpeed) {
+      // tier by BOTH size and speed: a big or fast rock reads as a harder hit.
+      var sizeTier = rockSize >= 160 ? 2 : (rockSize >= 120 ? 1 : 0);
+      var speedTier = rockSpeed > 220 ? 2 : (rockSpeed > 110 ? 1 : 0);
+      var tier = Math.max(sizeTier, speedTier);
+      var pool = tier >= 2 ? hurtLarge : (tier === 1 ? hurtMedium : hurtSmall);
       var pick = pickNoRepeat(pool, lastHurtMsg);
       lastHurtMsg = pick;
       currentMessage = pick;
       hurtMessageTime = performance.now();
-      queueShowBubble(pick);
+      // show immediately (don't queue behind the talk coordinator) so a hit is
+      // never delayed.
+      renderBubble(pick, true);
     }
     function showNearAsteroidMessage(rockSize) {
       var pool = rockSize >= 160 ? nearAsteroidLarge : (rockSize >= 120 ? nearAsteroidMedium : nearAsteroidSmall);
@@ -845,6 +1098,9 @@
         }
       }
 
+      // The girl astronaut ignores page UI (info, buttons, windows, sections);
+      // she only reacts to physical things like rocks and holding hands.
+      if (!isGirl) {
       var infoEl = document.getElementById('visitor-info');
       if (infoEl) {
         var infoRect = infoEl.getBoundingClientRect();
@@ -996,6 +1252,7 @@
           sectionMsgShown = false;
         }
       }
+      }
 
       var scale = SC;
       var helmetX = state.x;
@@ -1004,7 +1261,7 @@
       var tailX = 22;
       var tailY = 68;
       if (bubble) {
-        bubble.style.transform = 'translate(' + (helmetX - tailX) + 'px, ' + (helmetY - tailY + upOffset) + 'px)';
+        bubble.style.transform = 'translate(' + (helmetX - tailX) + 'px, ' + (helmetY - tailY + upOffset + bubbleOffsetY) + 'px)';
       }
 
       if ((grabMessageTime && (performance.now() - grabMessageTime) < 1500) ||
@@ -1029,8 +1286,7 @@
         }
       } else if (!msg && !isInAnySection) {
         currentMessage = '';
-        if (bubbleTimer) clearTimeout(bubbleTimer);
-        hideBubble();
+        endTalk();
       }
     }
 
@@ -1405,16 +1661,16 @@
         linkSide = side;
         freeSide = (side === 'right') ? 1 : -1;
       },
-      maybeHurt: function (rockSize) {
-        if (!hurtMessageTime || (performance.now() - hurtMessageTime) > 1500) {
-          showHurtMessage(rockSize);
-        }
+      maybeHurt: function (rockSize, rockSpeed) {
+        showHurtMessage(rockSize, rockSpeed);
       },
       maybeNearAsteroid: function (rockSize) {
         if (!nearAsteroidMessageTime || (performance.now() - nearAsteroidMessageTime) > 3500) {
           showNearAsteroidMessage(rockSize);
         }
       },
+      getBubbleEl: function () { return bubble || null; },
+      setBubbleOffsetY: function (v) { bubbleOffsetY = v; },
       step: step,
       syncTransform: syncTransform
     };
@@ -1539,6 +1795,48 @@
     return null;
   }
 
+  // Nudge bubbles that overlap each other so the actual message stays readable.
+  // Works from each astronaut's helmet position + bubble size (deterministic,
+  // no read-render feedback) rather than the live (already-nudged) rect.
+  function resolveBubbleOverlap() {
+    if (astronauts.length < 2) return;
+
+    var i;
+    for (i = 0; i < astronauts.length; i++) astronauts[i].setBubbleOffsetY(0);
+
+    var bubbles = [];
+    for (i = 0; i < astronauts.length; i++) {
+      var el = astronauts[i].getBubbleEl();
+      if (!el || !el.classList.contains('show')) continue;
+      var rect = el.getBoundingClientRect();
+      var h = rect.height || 60;
+      var w = rect.width || 140;
+      // deterministic base top-left: matches updateBubble's placement
+      //   helmetY = state.y - 38*SC ; base top = helmetY - tailY + upOffset
+      //   SC = size * 0.70 / 120, tailY = 68, upOffset = -10
+      var s = astronauts[i].state;
+      var sc = astronauts[i].size * 0.70 / 120;
+      var top = s.y - 38 * sc - 78;
+      var left = s.x - 22;
+      bubbles.push({ astro: astronauts[i], top: top, bottom: top + h, left: left, right: left + w });
+    }
+    if (bubbles.length < 2) return;
+
+    for (var a = 0; a < bubbles.length; a++) {
+      for (var b = a + 1; b < bubbles.length; b++) {
+        var A = bubbles[a], B = bubbles[b];
+        var ox = Math.min(A.right, B.right) - Math.max(A.left, B.left);
+        var oy = Math.min(A.bottom, B.bottom) - Math.max(A.top, B.top);
+        if (ox <= 0 || oy <= 0) continue;
+        var aIsHigher = A.top <= B.top;
+        var lower = aIsHigher ? B : A;
+        var upper = aIsHigher ? A : B;
+        var needed = upper.bottom - lower.top;
+        if (needed > 0) lower.astro.setBubbleOffsetY(needed + 6);
+      }
+    }
+  }
+
   function masterTick(now) {
     var dt = clamp((now - prev) / 1000, 0, 0.05);
     prev = now;
@@ -1566,8 +1864,22 @@
       astronauts[i].step(now, t, dt);
     }
 
+    resolveBubbleOverlap();
+
     drawRing(t);
     updateRocks(dt);
+
+    // expire old lasers + rock hit flashes
+    var cNow = performance.now();
+    for (var ci = lasers.length - 1; ci >= 0; ci--) {
+      if ((cNow - lasers[ci].t0) > 220) lasers.splice(ci, 1);
+    }
+    for (var hj = rockHits.length - 1; hj >= 0; hj--) {
+      if ((cNow - rockHits[hj].t0) > 400) {
+        rockHits[hj].rock.el.classList.remove('hit-flash');
+        rockHits.splice(hj, 1);
+      }
+    }
 
     requestAnimationFrame(masterTick);
   }

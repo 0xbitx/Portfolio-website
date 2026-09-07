@@ -197,7 +197,8 @@
   <script>
     document.addEventListener('contextmenu', function (e) {
       e.preventDefault();
-      alert('Kupal kaba boss.');
+      // Right-click now fires the alien's laser at the nearest rock
+      // (handled in assets/js/astronaut.js).
     });
     document.addEventListener('keydown', function (e) {
       if (
@@ -847,11 +848,19 @@
 
         var activeDrag = null, startX, startY, offsetX, offsetY;
 
+        // Expose drag state so the astronaut engine can draw a "string"
+        // from an astronaut's hand to the window while the user holds/drags it.
+        window.__termDrag = { active: false, x: 0, y: 0 };
+
         document.addEventListener('mousemove', function (e) {
           if (!activeDrag) return;
           offsetX = e.clientX - startX;
           offsetY = e.clientY - startY;
           activeDrag.el.style.transform = 'translate(' + offsetX + 'px, ' + offsetY + 'px)';
+          var r = activeDrag.el.getBoundingClientRect();
+          window.__termDrag.active = true;
+          window.__termDrag.x = r.left + r.width / 2;
+          window.__termDrag.y = r.top + 17;
         });
 
         document.addEventListener('mouseup', function () {
@@ -859,6 +868,7 @@
           activeDrag.el.classList.remove('term-dragging');
           activeDrag.el.style.transition = '';
           activeDrag = null;
+          window.__termDrag.active = false;
         });
 
         Object.keys(titles).forEach(function (id) {
@@ -893,6 +903,9 @@
             startX = e.clientX;
             startY = e.clientY;
             activeDrag = { el: container };
+            window.__termDrag.active = true;
+            window.__termDrag.x = rect.left + rect.width / 2;
+            window.__termDrag.y = rect.top + 17;
             container.classList.add('term-dragging');
             container.style.transition = 'none';
             e.preventDefault();
@@ -1034,6 +1047,7 @@
     'uniform int   u_style;',
     'uniform vec2  u_mouse;',
     'uniform int   u_interact;',
+    'uniform float u_consume;',
     'float hash(vec2 p) {',
     '  p = fract(p * vec2(123.34, 456.21));',
     '  p += dot(p, p + 45.32);',
@@ -1093,6 +1107,13 @@
     // magnet: strong attraction and clamp the core
     '    p -= dir * exp(-md * 3.5) * 0.75;',
     '  }',
+    '  if (u_consume > 0.001) {',
+    // consume: smoothly-blended inward whirlpool toward the cursor
+    '    vec2 perpC = vec2(-dir.y, dir.x);',
+    '    float vortexC = exp(-md * 3.0);',
+    '    p += perpC * vortexC * 0.6 * u_consume;',
+    '    p -= dir * vortexC * 0.3 * u_consume;',
+    '  }',
     '  float n;',
     '  if (u_style == 0) {',
     '    p.y += u_time * 0.6;',
@@ -1126,6 +1147,10 @@
     '  } else if (u_interact == 8) {',
     // magnet: bright hot core
     '    n = clamp(n + exp(-md * 6.0) * 1.0, 0.0, 1.0);',
+    '  }',
+    '  if (u_consume > 0.001) {',
+    // consume: darken the rim for a hollow whirlpool look
+    '    n = clamp(n - exp(-md * 6.0) * 0.4 * u_consume, 0.0, 1.0);',
     '  }',
     '  gl_FragColor = vec4(n, n, n, 1.0);',
     '}'
@@ -1235,6 +1260,7 @@
     var uStyle = gl.getUniformLocation(program, 'u_style');
     var uMouse = gl.getUniformLocation(program, 'u_mouse');
     var uInteract = gl.getUniformLocation(program, 'u_interact');
+    var uConsume = gl.getUniformLocation(program, 'u_consume');
 
     var ctx = canvas.getContext('2d');
     if (!ctx) return;
@@ -1245,6 +1271,8 @@
     var isVisible = true;
     var isIntersecting = true;
     var state = { w: 400, h: 400, dpr: 1 };
+    var consume = 0;           // smooth 0..1 consume amount
+    var consumeTarget = 0;     // 1 while holding left-click, 0 otherwise
 
     var mouse = { x: 0.5, y: 0.5, tx: 0.5, ty: 0.5 };
 
@@ -1289,6 +1317,11 @@
       gl.uniform1f(uTime, (Date.now() - startTime) / 1000 * SPEED);
       gl.uniform1i(uStyle, styleIndex);
       gl.uniform1i(uInteract, interactIndex);
+      // Smoothly ease the consume amount toward its target (1 while holding
+      // left-click) so the suck effect fades in/out instead of snapping.
+      consumeTarget = window.__asciiConsume ? 1 : 0;
+      consume += (consumeTarget - consume) * 0.08;
+      gl.uniform1f(uConsume, consume);
       mouse.x += (mouse.tx - mouse.x) * 0.35;
       mouse.y += (mouse.ty - mouse.y) * 0.35;
       gl.uniform2f(uMouse, mouse.x, mouse.y);

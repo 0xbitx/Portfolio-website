@@ -70,6 +70,23 @@ body {
 	animation: shipBob 3s ease-in-out infinite;
 }
 
+/* Alien "consuming" state: while holding left-click, it glows green and
+   pulses slightly (tractor/absorption effect). */
+#cursor-ship.consuming {
+	filter: drop-shadow(0 0 10px rgba(90, 255, 110, 0.9))
+	        drop-shadow(0 0 22px rgba(90, 255, 110, 0.6))
+	        drop-shadow(0 0 40px rgba(90, 255, 110, 0.35));
+}
+
+#cursor-ship.consuming svg {
+	animation: shipConsumePulse 0.6s ease-in-out infinite;
+}
+
+@keyframes shipConsumePulse {
+	0%, 100% { filter: brightness(1); }
+	50% { filter: brightness(1.6) saturate(1.4); }
+}
+
 /* rim lights: chase/blink */
 .ship-light {
 	animation: lightBlink 0.9s linear infinite;
@@ -113,6 +130,10 @@ body {
 	height: 100%;
 	overflow: visible;
 	filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.4));
+}
+
+.space-rock.hit-flash .rock-inner svg {
+	filter: drop-shadow(0 0 10px rgba(90, 255, 110, 0.9)) drop-shadow(0 0 22px rgba(90, 255, 110, 0.6));
 }
 
 html {
