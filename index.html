@@ -529,10 +529,18 @@
           if (aboutPhoto) {
             aboutPhoto.addEventListener('mouseenter', () => {
               if (!cursorEffect) {
+                var before = document.querySelectorAll('body > canvas');
                 cursorEffect = new characterCursor({
-                   characters: ["🤍", "🩷", "💜", "🌸"],
-                  font: "30px serif",
+                   characters: [ "🩷", "💜", "🌸"],
+                  font: "25px serif",
                 });
+                var after = document.querySelectorAll('body > canvas');
+                for (var idx = 0; idx < after.length; idx++) {
+                  if (!before || !contains(before, after[idx])) {
+                    after[idx].style.zIndex = '10002';
+                    after[idx].style.pointerEvents = 'none';
+                  }
+                }
               }
             });
             aboutPhoto.addEventListener('mouseleave', () => {
@@ -541,6 +549,11 @@
                 cursorEffect = null;
               }
             });
+          }
+          function contains(list, el) {
+            if (!list) return false;
+            for (var k = 0; k < list.length; k++) { if (list[k] === el) return true; }
+            return false;
           }
         </script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
@@ -3192,7 +3205,6 @@
   var cx = w / 2;
   var cy = h / 2;
 
-  // Elliptical orbit parameters (in px), like a satellite crossing the sky.
   var orbit = {
     a: Math.max(w, h) * 0.55,        // semi-major axis
     b: Math.max(w, h) * 0.28,        // semi-minor axis
@@ -3201,17 +3213,15 @@
     theta: Math.random() * Math.PI * 2
   };
 
-  // fixed orientation (solar panel stays Sun-pointed), no tumble
-  var fixedAngle = -0.12; // slight constant tilt so it doesn't look stiff
+  var fixedAngle = -0.12; 
 
-  // Satellite speech bubble (shows funny visitor info occasionally)
   var bubbleEl = document.getElementById('satellite-bubble');
   var bubbleText = bubbleEl ? bubbleEl.querySelector('.sat-bubble-text') : null;
   var satMessages = [
     'Send kaya ako Lion sa IP mo: {ip}... eh di masaya!',
     'Oy {isp}! malakas ba internet mo?',
     'Nasa {city}, {country} ka pala. May signal ba diyan?',
-    '{country} ka galing! Pinatay mo ba router nyo?',
+    'Oyy {country}!!',
     'Postal {postal}... wag mo ko padalhan ng sulat, signal lang!',
     'Uy {city}! Ayos internet niyo, kita ka dito sa taas.',
     'I see you, {ip}... charot.',
