@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="author" content="0xbit" />
@@ -17,7 +17,7 @@
     </script>
     <meta name="theme-color" content="#ff3a5e" />
     <meta name="copyright" content="dedsec" />
-    <meta http-equiv="content-language" content="pt-br" />
+    <meta http-equiv="content-language" content="en" />
     <meta property="og:title" content="dedsec" />
     <meta property="og:description" content="0xbit is a computer enthusiast from the Philippines." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -45,10 +45,115 @@
       img {
         pointer-events: none;
       }
+
       @font-face {
-          font-family: 'LiveOverfont';
-          src: url('LiveOverfont.woff') format('woff');
+        font-family: 'SpaceMono';
+        src: url('assets/fonts/SpaceMono-Regular.ttf') format('truetype');
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
       }
+
+      @font-face {
+        font-family: 'LiveOverfont';
+        src: url('assets/fonts/LiveOverfont.woff') format('woff');
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+      }
+      
+      body, body * {
+        font-family: 'SpaceMono', monospace !important;
+      }
+
+      #s-home #home-container-text h1,
+      #s-home #home-container-text h1 span,
+      #s-about #about-text h2,
+      #s-experience > .grid-layout > h2,
+      #s-experience > .grid-layout > h2 *,
+      #s-projects > .grid-layout > h2,
+      #s-projects > .grid-layout > h2 *,
+      #s-services > .grid-layout > h2,
+      #s-services > .grid-layout > h2 * {
+        font-family: 'LiveOverfont', sans-serif !important;
+      }
+
+      #s-services #services article h3,
+      #s-services #services article h3 * {
+        font-family: 'LiveOverfont', sans-serif !important;
+        font-size: 30px !important;
+        color: #8778c1 !important;
+      }
+
+      #s-experience, #s-experience *,
+      #s-projects, #s-projects *,
+      #s-services, #s-services *,
+      #s-skills, #s-skills * {
+        font-size: 20px !important;
+      }
+
+      #s-projects, #s-projects * {
+        font-size: 18px !important;
+      }
+
+      #s-experience .term-titlebar .term-title,
+      #s-projects .term-titlebar .term-title,
+      #s-services .term-titlebar .term-title,
+      #s-skills .term-titlebar .term-title {
+        font-size: 12px !important;
+      }
+
+      #s-experience > .grid-layout > h2,
+      #s-experience > .grid-layout > h2 *,
+      #s-projects > .grid-layout > h2,
+      #s-projects > .grid-layout > h2 *,
+      #s-services > .grid-layout > h2,
+      #s-services > .grid-layout > h2 * {
+        font-size: 40px !important;
+      }
+
+      #s-experience .dateExperience {
+        font-size: 14px !important;
+      }
+
+      #s-skills .skills-cards-name,
+      #s-skills .skills-cards-name-low,
+      #s-skills .skills-cards-name-high {
+        font-size: 12px !important;
+      }
+
+      #s-skills .grid-layout #skills #skills-cards article {
+        opacity: 1 !important;
+        transform: none !important;
+        visibility: visible !important;
+      }
+
+      /* The skills section is the last one and sits at the very bottom of the
+         page; under the 80% page zoom ScrollReveal's scroll-position maths never
+         crosses its trigger threshold, so its .delay*Reveal targets stay stuck at
+         opacity:0 (text "missing"). Pin them to their revealed state, matching
+         the cards fix above. */
+      #s-skills .grid-layout #skills #skills-text h2,
+      #s-skills .grid-layout #skills #skills-text p {
+        opacity: 1 !important;
+        transform: none !important;
+        visibility: visible !important;
+      }
+
+      #s-home #home-container-text,
+      #s-home #home-container-text * {
+        font-size: 20px !important;
+      }
+
+      #s-home #home-container-text h1,
+      #s-home #home-container-text h1 span {
+        font-size: 40px !important;
+      }
+
+      #s-about #about-text h2 {
+        font-size: 40px !important;
+      }
+      
       #s-home, #s-experience, #s-services {
         position: relative;
       }
@@ -100,6 +205,34 @@
       }
       #s-about, #s-experience, #s-projects, #s-services, #s-skills {
         background: transparent;
+      }
+
+      /* ---- default page zoom: 80% ---- */
+      html {
+        zoom: 0.8;
+      }
+      /* Full-viewport, mouse-anchored and gBCR-anchored fixed layers are kept
+         at 1:1 scale (0.8 x 1.25 = 1) so their JS viewport maths and their
+         screen coverage stay exact under the page zoom. */
+      #starfield,
+      .ascii-bg,
+      #cursor-circle,
+      #cursor-ship,
+      .space-rock,
+      .astronaut,
+      .satellite,
+      .astro-bubble {
+        zoom: 1.25;
+      }
+      /* hero must still fill the viewport at 80% page zoom */
+      #s-home {
+        height: calc(100vh / 0.8);
+      }
+      @media screen and (max-width: 992px) {
+        .nav-list {
+          width: calc(100vw / 0.8);
+          height: calc(100vh / 0.8);
+        }
       }
   </style>
     <title>0xbit</title>
@@ -200,10 +333,10 @@
   </div>
 
   <div class="astro-bubble sat-bubble" id="satellite-bubble" aria-hidden="true">
-    <svg class="astro-bubble-svg" viewBox="0 0 220 70" xmlns="http://www.w3.org/2000/svg">
-      <rect class="astro-bubble-body" x="14" y="2" width="192" height="52" rx="21" ry="21" fill="#8778c1"/>
-      <path class="astro-bubble-tail" d="M96 52 L110 70 L124 52 Z" fill="#8778c1"/>
-      <text class="astro-bubble-text sat-bubble-text" x="110" y="29" text-anchor="middle" dominant-baseline="central" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', 'Archivo', sans-serif" font-size="18" font-weight="600">What's up from orbit?</text>
+    <svg class="astro-bubble-svg" viewBox="0 0 220 56" xmlns="http://www.w3.org/2000/svg">
+      <rect class="astro-bubble-body" x="14" y="2" width="192" height="40" rx="20" ry="20" fill="#8778c1"/>
+      <path class="astro-bubble-tail" d="M96 40 L110 56 L124 40 Z" fill="#8778c1"/>
+      <text class="astro-bubble-text sat-bubble-text" x="110" y="22" text-anchor="middle" dominant-baseline="central" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', 'Archivo', sans-serif" font-size="11" font-weight="600">What's up from orbit?</text>
     </svg>
   </div>
 
@@ -240,7 +373,7 @@
             console.clear();
             console.log('%cStop!', 'font-size:60px;color:red;');
             console.log('%cThis is a restricted area.', 'font-size:20px;');
-            document.body.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100vh;background:#000;color:#8778c1;font-family:LiveOverfont,sans-serif;font-size:3rem;text-align:center;">DevTools detected.<br>Please close it and reload.</div>';
+            document.body.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100vh;background:#000;color:#8778c1;font-family:SpaceMono,sans-serif;font-size:3rem;text-align:center;">DevTools detected.<br>Please close it and reload.</div>';
           }
         } else {
           devtoolsOpen = false;
@@ -293,17 +426,17 @@
           <div id="home">
             <div id="home-container-text">
               <h1 class="delayMediumReveal">
-                <span style="color: white; font-family: 'LiveOverfont', sans-serif;
-                ">root@</span><span style="color: #8778c1; font-family: 'LiveOverfont', sans-serif;"
-                >0xbit</span><span style="color: white; font-family: 'LiveOverfont', sans-serif;"
-                >></span><span style="color: #8778c1; animation: blink 1s infinite; font-family: 'LiveOverfont', sans-serif;"
+                <span style="color: white; font-family: 'SpaceMono', sans-serif;
+                ">root@</span><span style="color: #8778c1; font-family: 'SpaceMono', sans-serif;"
+                >0xbit</span><span style="color: white; font-family: 'SpaceMono', sans-serif;"
+                >></span><span style="color: #8778c1; animation: blink 1s infinite; font-family: 'SpaceMono', sans-serif;"
                 >_</span>
-                <div class="gg" title="404" style="color: white; font-family: 'LiveOverfont', sans-serif;">I build offensive security tools for Linux.</div>
+                <div class="gg" title="404" style="color: white; font-family: 'SpaceMono', sans-serif;">I build offensive security tools for Linux.</div>
               </h1>
-              <p class="typewriter" style="color: white; font-family: 'LiveOverfont', sans-serif; font-size: 23px;">
+              <p class="typewriter" style="color: white; font-family: 'SpaceMono', sans-serif; font-size: 23px;">
                 I'm a cybersecurity enthusiast from the Philippines. I make hacking tools and exploits. Check out the Project section to see what I've built.
               </p>
-              <a href="/sec_blog.html" rel="noopener" target="_blank" class="github-btn delayExtraBigReveal"><img class="gh-icon" src="assets/icons/github_button.png" alt="GitHub" /><span class="gh-text">Blog</span></a>
+              <a href="https://github.com/0xbitx" rel="noopener" target="_blank" class="github-btn delayExtraBigReveal"><img class="gh-icon" src="assets/icons/github_button.png" alt="GitHub" /><span class="gh-text">Blog</span></a>
             </div>
           </div>
         </div>
@@ -426,18 +559,18 @@
         </div>
 
         <div class="astro-bubble astro-bubble-girl" id="girl-bubble" aria-hidden="true">
-          <svg class="astro-bubble-svg" viewBox="0 0 220 60" xmlns="http://www.w3.org/2000/svg">
-            <rect class="astro-bubble-body" x="14" y="2" width="192" height="52" rx="21" ry="21" fill="#ff5fa2"/>
-            <path class="astro-bubble-tail" d="M34 52 L22 68 L51 54 Z" fill="#ff5fa2"/>
-            <text class="astro-bubble-text" x="110" y="29" text-anchor="middle" dominant-baseline="central" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', 'Archivo', sans-serif" font-size="20" font-weight="600">Hi bestie~</text>
+          <svg class="astro-bubble-svg" viewBox="0 0 220 56" xmlns="http://www.w3.org/2000/svg">
+            <rect class="astro-bubble-body" x="14" y="2" width="192" height="40" rx="20" ry="20" fill="#ff5fa2"/>
+            <path class="astro-bubble-tail" d="M34 40 L22 56 L51 42 Z" fill="#ff5fa2"/>
+            <text class="astro-bubble-text" x="110" y="22" text-anchor="middle" dominant-baseline="central" fill="#ffffff" font-family="SpaceMono" font-size="11" font-weight="600">Hi bestie~</text>
           </svg>
         </div>
 
         <div class="astro-bubble" id="boy-bubble" aria-hidden="true">
-          <svg class="astro-bubble-svg" viewBox="0 0 220 60" xmlns="http://www.w3.org/2000/svg">
-            <rect class="astro-bubble-body" x="14" y="2" width="192" height="52" rx="21" ry="21" fill="#8778c1"/>
-            <path class="astro-bubble-tail" d="M34 52 L22 68 L51 54 Z" fill="#8778c1"/>
-            <text class="astro-bubble-text" x="110" y="29" text-anchor="middle" dominant-baseline="central" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', 'Archivo', sans-serif" font-size="20" font-weight="600">Lost in space...</text>
+          <svg class="astro-bubble-svg" viewBox="0 0 220 56" xmlns="http://www.w3.org/2000/svg">
+            <rect class="astro-bubble-body" x="14" y="2" width="192" height="40" rx="20" ry="20" fill="#8778c1"/>
+            <path class="astro-bubble-tail" d="M34 40 L22 56 L51 42 Z" fill="#8778c1"/>
+            <text class="astro-bubble-text" x="110" y="22" text-anchor="middle" dominant-baseline="central" fill="#ffffff" font-family="SpaceMono" font-size="11" font-weight="600">Lost in space...</text>
           </svg>
         </div>
       <script>
@@ -539,6 +672,13 @@
                   if (!before || !contains(before, after[idx])) {
                     after[idx].style.zIndex = '10002';
                     after[idx].style.pointerEvents = 'none';
+                    // the page is zoomed to 80%; this effect's canvas is
+                    // position:fixed, so root zoom scales it down while its
+                    // backing store still uses full-viewport coords -> the emoji
+                    // would draw ~80% of the way toward the top-left instead of
+                    // under the cursor. Counter-zoom it back to 1:1.
+                    var pz = parseFloat(getComputedStyle(document.documentElement).zoom) || 1;
+                    after[idx].style.zoom = (1 / pz) + '';
                   }
                 }
               }
@@ -561,6 +701,7 @@
           <div id="about">
             <div id="about-photo">
               <script>
+                /* BGM disabled for now
                 const sound = new Howl({
                   src: ['https://0xbitx.github.io/Portfolio-website/assets/bgm.mp3'],
                   autoplay: false,
@@ -579,6 +720,7 @@
                     sound.fade(1, 0, 1000);
                   });
                 }
+                */
               </script>
               <img
                 src="https://media3.giphy.com/media/PjNpxOcZzkZwjC6RsL/200.webp?cid=ecf05e47s57uau5llp66msfjczzsor072aaik6mg05nwoz6o&ep=v1_gifs_related&rid=200.webp&ct=s"
@@ -614,10 +756,10 @@
               </div>
             </div>
             <article id="about-text">
-              <h2 class="delaySmallReveal" style="color: #8778c1; font-family: 'LiveOverfont', sans-serif; font-size: 40px;">
+              <h2 class="delaySmallReveal" style="color: #8778c1; font-family: 'SpaceMono', sans-serif; font-size: 20px;">
                 0xbit
               </h2>
-              <p class="delayMediumReveal" style="color: white; font-family: 'LiveOverfont', sans-serif; font-size: 27px;">
+              <p class="delayMediumReveal" style="color: white; font-family: 'SpaceMono', sans-serif; font-size: 20px;">
                   Offensive security dev building red team tools for Linux. Malware, RATs, rootkits, phishing. I build the stuff real attackers use so you know what to defend against. Always tinkering, never done.
               </p>
             </article>
@@ -626,7 +768,7 @@
       </section>
       <section id="s-experience">
         <div class="grid-layout">
-          <h2 class="delaySmallReveal" style="color: #8778c1 'LiveOverfont', sans-serif;"><span>#</span>Experience</h2>
+          <h2 class="delaySmallReveal" style="color: #8778c1; font-family: 'SpaceMono', sans-serif; font-size: 20px;"><span>#</span>Experience</h2>
           <div id="experience">
             <div
               class="option-experience intervalCardReveal"
@@ -659,7 +801,7 @@
       </section>
       <section id="s-projects">
         <div class="grid-layout">
-          <h2 class="delaySmallReveal" style="color: rgb(97, 53, 243) 'LiveOverfont', sans-serif; font-size: 40px;">Project<span>$</span></h2>
+          <h2 class="delaySmallReveal" style="color: #8778c1; font-family: 'SpaceMono', sans-serif; font-size: 20px;">Project<span>$</span></h2>
           <div id="projects">
             <div class="term-dir">
               <div class="term-dir-header">
@@ -729,7 +871,7 @@
       </section>
       <section id="s-services">
         <div class="grid-layout">
-          <h2 class="delaySmallReveal" style="color: rgb(97, 53, 243) 'LiveOverfont', sans-serif; font-size: 40px;">What I do<span>.</span></h2>
+          <h2 class="delaySmallReveal" style="color: #8778c1; font-family: 'SpaceMono', sans-serif; font-size: 20px;">What I do<span>.</span></h2>
           <div id="services">
             <a href="https://github.com/0xbitx" rel="noopener" target="_blank" class="service-link">
               <article class="intervalCardReveal">
@@ -742,7 +884,7 @@
                     class="skills-icons"
                   />
                 </div>
-                <h3 style="color: rgb(199, 199, 199); font-family: 'LiveOverfont', sans-serif; font-size: 30px;"><span><</span>Building hacking tool<span>></span></h3>
+                <h3 style="color: rgb(199, 199, 199); font-family: 'SpaceMono', sans-serif; font-size: 30px;"><span><</span>Building hacking tool<span>></span></h3>
                 <p>
                   Esp32 deauther, Esp32 Jammer, Botnet, DDoS tool, Info-stealer, Phishing tool, IPCamera Exploit, Rat.
                 </p>
@@ -759,7 +901,7 @@
                     class="skills-icons"
                   />
                 </div>
-                <h3 style="color: rgb(199, 199, 199); font-family: 'LiveOverfont', sans-serif; font-size: 30px;"><span><</span>Building Malware<span>></span> </h3>
+                <h3 style="color: rgb(199, 199, 199); font-family: 'SpaceMono', sans-serif; font-size: 30px;"><span><</span>Building Malware<span>></span> </h3>
                 <p>
                   Building all types of malware, Ransomware, Backdoor, Keylogger, Rat, Rootkit, etc.
                 </p>
@@ -776,7 +918,7 @@
                     class="skills-icons"
                   />
                 </div>
-                <h3 style="color: rgb(199, 199, 199); font-family: 'LiveOverfont', sans-serif; font-size: 30px;"><span><</span>Making Content<span>></span></h3>
+                <h3 style="color: rgb(199, 199, 199); font-family: 'SpaceMono', sans-serif; font-size: 30px;"><span><</span>Making Content<span>></span></h3>
                 <p>
                   Creating cybersecurity-related videos, blogs, etc..
                 </p>
@@ -789,7 +931,7 @@
         <div class="grid-layout">
           <div id="skills">
             <article id="skills-text">
-              <h2 class="delaySmallReveal" style="color: rgb(97, 53, 243) 'LiveOverfont', sans-serif; font-size: 38px;"><span>#</span>language and tool | skill<span>$</span></h2>
+              <h2 class="delaySmallReveal" style="color: #8778c1; font-family: 'SpaceMono', sans-serif; font-size: 20px;"><span>#</span>language and tool | skill<span>$</span></h2>
               <p class="delayMediumReveal changeDescription"><span>//</span>languages | tools<span>></span></p>
             </article>
             <div id="skills-cards">
@@ -941,14 +1083,19 @@
 
         var activeDrag = null, startX, startY, offsetX, offsetY;
 
+        // The app is rendered at 80% page zoom (html { zoom: .8 }). Mouse
+        // deltas arrive in viewport pixels, so divide by the zoom to move a
+        // dragged window by the same visual distance as the cursor.
+        var PAGE_ZOOM = parseFloat(getComputedStyle(document.documentElement).zoom) || 1;
+
         // Expose drag state so the astronaut engine can draw a "string"
         // from an astronaut's hand to the window while the user holds/drags it.
         window.__termDrag = { active: false, x: 0, y: 0 };
 
         document.addEventListener('mousemove', function (e) {
           if (!activeDrag) return;
-          offsetX = e.clientX - startX;
-          offsetY = e.clientY - startY;
+          offsetX = (e.clientX - startX) / PAGE_ZOOM;
+          offsetY = (e.clientY - startY) / PAGE_ZOOM;
           activeDrag.el.style.transform = 'translate(' + offsetX + 'px, ' + offsetY + 'px)';
           var r = activeDrag.el.getBoundingClientRect();
           window.__termDrag.active = true;
@@ -1797,11 +1944,11 @@
       var bodyW = Math.max(135, textW + pad);
       var svgW = bodyW + 28;     // room for tail on the left + right edge
       body.setAttribute('width', bodyW);
-      svg.setAttribute('viewBox', '0 0 ' + svgW + ' 70');
+      svg.setAttribute('viewBox', '0 0 ' + svgW + ' 56');
       svg.style.width = svgW + 'px';
       bubble.style.width = svgW + 'px';
       text.setAttribute('x', 14 + bodyW / 2);
-      text.setAttribute('y', 29);
+      text.setAttribute('y', 22);
     } catch (e) {}
 
     bubble.classList.add('show');
@@ -2383,7 +2530,7 @@
     var helmetY = state.y - 38 * scale;   // helmet center (viewBox 32 vs body 70)
     var upOffset = -10;                  // lift the bubble a bit higher
     var tailX = 22;
-    var tailY = 68;
+    var tailY = 56;
     bubble.style.transform = 'translate(' + (helmetX - tailX) + 'px, ' + (helmetY - tailY + upOffset) + 'px)';
 
     // If a transient (grab / let go / yap / pull) message was just shown, let it
@@ -3252,14 +3399,14 @@
       var bodyW = Math.max(135, textW + pad);
       var svgW = bodyW + 28;
       body.setAttribute('width', bodyW);
-      svg.setAttribute('viewBox', '0 0 ' + svgW + ' 70');
+      svg.setAttribute('viewBox', '0 0 ' + svgW + ' 56');
       svg.style.width = svgW + 'px';
       bubbleEl.style.width = svgW + 'px';
       bubbleText.setAttribute('x', 14 + bodyW / 2);
-      bubbleText.setAttribute('y', 29);
+      bubbleText.setAttribute('y', 22);
       // keep the tail centered under the (possibly resized) bubble body
       var cx2 = 14 + bodyW / 2;
-      if (tail) tail.setAttribute('d', 'M' + (cx2 - 14) + ' 52 L' + cx2 + ' 70 L' + (cx2 + 14) + ' 52 Z');
+      if (tail) tail.setAttribute('d', 'M' + (cx2 - 14) + ' 40 L' + cx2 + ' 56 L' + (cx2 + 14) + ' 40 Z');
     } catch (e) {}
     bubbleEl.classList.add('show');
     if (satHideTimer) clearTimeout(satHideTimer);

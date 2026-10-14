@@ -7,12 +7,13 @@
 <link rel="icon" href="https://github.com/0xbitx.png" type="image/png">
 <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800&family=Inconsolata:wght@700&display=swap" rel="stylesheet">
 <style>
+@font-face{font-family:'SpaceMono';src:url('assets/fonts/SpaceMono-Regular.ttf') format('truetype');font-weight:400;font-style:normal;font-display:swap}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
   --bg:#000;--text:#e0e0e0;--muted:#777;
   --accent:#8778c1;--accent2:#6a5a9e;--accent-dim:rgba(135,120,193,0.15);
   --card-bg:#0d0d0d;--card-border:rgba(60,60,60,0.5);
-  --radius:6px;--font-mono:'Fira Code',monospace;--font-sans:'Inter',sans-serif;
+  --radius:6px;--font-mono:'SpaceMono',monospace;--font-sans:'SpaceMono',monospace;
 }
 html{scroll-behavior:smooth;font-size:115%;background:#0a0a0a}
 body{
@@ -71,7 +72,7 @@ body::before{
 .stat .num{font-family:var(--font-mono);font-size:.95rem;font-weight:700;color:var(--accent)}
 .stat .label{font-size:.55rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px}
 
-.ctrl{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:12px;padding:0 20px 10px}
+.ctrl{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px;padding:0 20px 10px}
 .btn{font-family:var(--font-mono);font-size:.7rem;font-weight:600;padding:7px 14px;border:1px solid rgba(255,255,255,0.28);border-radius:4px;cursor:pointer;transition:.2s;text-transform:uppercase;letter-spacing:.5px;display:inline-flex;align-items:center;gap:4px}
 .btn-fill{background:var(--accent);color:#000}
 .btn-fill:hover{background:var(--accent2)}
@@ -79,7 +80,9 @@ body::before{
 .btn-out:hover{background:rgba(135,120,193,0.08)}
 .count-label{font-size:.75rem;color:var(--muted);font-family:var(--font-mono)}
 .count-label strong{color:var(--accent)}
-.last-updated{font-size:.68rem;color:#555}
+.last-updated{font-size:.68rem;color:#555;justify-self:start}
+.ctrl-actions{display:flex;gap:10px;justify-self:end}
+.search-wrap{justify-self:center}
 
 .tree{max-width:1100px;margin:0 auto;padding:0 20px 80px}
 
@@ -150,10 +153,10 @@ body::before{
 .tag-cat{background:rgba(120,120,120,0.1);color:#555;border:1px solid rgba(60,60,60,0.5)}
 .tag-tech{background:rgba(255,255,255,0.03);color:#666;border:1px solid rgba(255,255,255,0.05)}
 
-.tool-actions{display:flex;gap:6px;margin-top:10px;opacity:0;max-height:0;overflow:hidden;transition:all .3s}
+.tool-actions{display:flex;gap:6px;margin-top:10px;opacity:1;max-height:60px;overflow:hidden;transition:all .3s}
 .tool-card.active .tool-actions{opacity:1;max-height:60px;margin-top:12px}
 
-.btn-xs{font-size:.6rem;padding:3px 10px;border-radius:3px;cursor:pointer;transition:.2s;font-family:var(--font-mono);text-decoration:none;display:inline-flex;align-items:center;gap:3px;border:1px solid rgba(255,255,255,0.1);color:var(--muted);background:transparent}
+.btn-xs{font-size:.612rem;padding:3px 10px;border-radius:3px;cursor:pointer;transition:.2s;font-family:var(--font-mono);text-decoration:none;display:inline-flex;align-items:center;gap:3px;border:1px solid rgba(255,255,255,0.1);color:var(--muted);background:transparent}
 .btn-xs:hover{border-color:var(--accent);color:var(--accent)}
 
 @keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
@@ -192,6 +195,8 @@ body::before{
   .nav-links.open{display:flex;flex-direction:column;position:absolute;top:56px;left:0;right:0;background:#000;padding:10px 20px;border-bottom:1px solid rgba(60,60,60,0.5);gap:2px;z-index:999}
   .hamburger{display:flex}
   .search-wrap input{width:110px}.search-wrap input:focus{width:140px}
+  .ctrl{grid-template-columns:1fr;justify-items:center}
+  .last-updated,.ctrl-actions,.search-wrap{justify-self:center}
   .tools-wrap{grid-template-columns:1fr;padding:2px 8px 10px 16px}
   .hero{padding:100px 16px 40px;min-height:70vh}
 }
@@ -221,10 +226,10 @@ body::before{
     <img src="https://github.com/0xbitx.png" alt="Profile" style="width:180px;height:180px;border-radius:50%;border:2px solid rgba(255,255,255,0.18);margin-bottom:16px;object-fit:cover;box-shadow:0 0 40px rgba(0,0,0,0.6)">
     <h1>0x<span style="font-weight:400;color:#a3a3a3">bit</span></h1>
     <p>
-      Every tool in this blog was built through years of hands-on cybersecurity exploration, from phishing simulations to kernel-level rootkits, from detection engineering to exploit development. I don't just study security; I <em style="color:var(--accent);font-style:normal">build</em> it. Red team, blue team, I operate across the full spectrum, understanding both how to break systems and how to defend them.
+      Every project in this blog was built through years of hands-on cybersecurity exploration, from phishing simulations to kernel-level rootkits, from detection engineering to exploit development. I don't just study security; I <em style="color:var(--accent);font-style:normal">build</em> it. Red team, blue team, I operate across the full spectrum, understanding both how to break systems and how to defend them.
     </p>
     <div class="stats-row">
-      <div class="stat"><div class="num" id="totalProjects">--</div><div class="label">Tools</div></div>
+      <div class="stat"><div class="num" id="totalProjects">--</div><div class="label">Projects</div></div>
       <div class="stat"><div class="num" id="totalCategories">--</div><div class="label">Categories</div></div>
     </div>
   </div>
@@ -236,22 +241,24 @@ body::before{
     <span class="sicon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="2.5" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>
     <input type="text" id="searchInput" placeholder="Search..." aria-label="Search">
   </div>
-  <button class="btn btn-out" id="expandAllBtn" style="font-size:.65rem;padding:5px 10px">&#8628; Expand All</button>
-  <button class="btn btn-out" id="collapseAllCtrl" style="font-size:.65rem;padding:5px 10px">&#8743; Collapse All</button>
+  <div class="ctrl-actions">
+    <button class="btn btn-out" id="expandAllBtn" style="font-size:.65rem;padding:5px 10px">&#8628; Expand All</button>
+    <button class="btn btn-out" id="collapseAllCtrl" style="font-size:.65rem;padding:5px 10px">&#8743; Collapse All</button>
+  </div>
 </div>
 
 <div class="skills-section" id="skillsSection"></div>
 
 <div class="tree" id="treeRoot"></div>
 <div id="emptyState" class="empty-state hidden">
-  <h3>No tools found</h3>
+  <h3>No projects found</h3>
   <p>Try a different search or expand a category.</p>
 </div>
 
 <button class="scroll-top" id="scrollTop" title="Back to top"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg></button>
 
 <footer class="footer">
-  <p>Built by <a href="https://github.com/0xbitx" target="_blank" rel="noopener">0xbit</a> &mdash; 168 cybersecurity projects &middot; Red Team &amp; Blue Team</p>
+  <p>Built by <a href="https://github.com/0xbitx" target="_blank" rel="noopener">0xbit</a> &mdash; <span id="footerCount">0</span> cybersecurity projects &middot; Red Team &amp; Blue Team</p>
 </footer>
 
 
@@ -3043,7 +3050,93 @@ window.__DEDSEC_EMBEDDED_DATA__ = [
     "githubUrl": "https://github.com/0xbitx/DEDSEC_DOCKER_ESCAPE",
     "owner": "0xbitx",
     "repo": "DEDSEC_DOCKER_ESCAPE"
-  }
+  },
+  {
+    "title": "Macro-Based Document Dropper Delivering Metasploit Reverse Shell",
+    "description": "This report documents the static analysis of a malicious Microsoft Word document (file_1.doc) that was delivered to me via email by an unknown sender. The email was casual, the filename was generic, and the whole thing was designed to make me curious enough to open it. The document contains an obfuscated VBA macro that extracts, decodes, and executes a Base64-encoded Windows PE executable hidden inside the document's metadata.",
+    "category": "Reverse Engineering",
+    "technologies": [
+      "Python",
+      "Ghidra",
+      "C",
+      "Linux",
+      "VirusTotal",
+      "Yara rule"
+    ],
+    "threatActors": [],
+    "githubUrl": "https://github.com/0xbitx/0x1_malware_analysis",
+    "owner": "0xbitx",
+    "repo": "0x1_malware_analysis"
+  },
+  {
+    "title": "Linux ELF Payload Delivering Metasploit Reverse Shell",
+    "description": "This report covers a Linux ELF binary I pulled off a friend's Ubuntu laptop. It was hiding behind a systemd service called timerctl, running from /usr/bin/timerctl, which isn't owned by any package. My friend found it while scrolling through his service list, noticed the name didn't match anything he remembered installing, and sent it my way. The binary turned out to be a Metasploit reverse shell. Statically linked, stripped, and talking to a C2 over a raw syscall. Standard Linux post-exploitation stuff. I kept the original filename timerctl throughout the analysis since that's what was actually on disk. I used the same 0002 search trick that works on Windows Metasploit payloads to find the C2, and it worked here too. That's one of the more useful takeaways from this analysis. After I pulled the C2 out of the binary (192.168.1.22), something clicked. That IP is on the same subnet as my friend's machine. Real attackers don't usually park their C2 on the same network. I asked him directly and he laughed. He'd built the thing himself while testing systemd persistence for a side project, set up a listener on his other box, and never cleaned it up. The binary wasn't connected to anything. It was just sitting there, running, trying to reach a listener that no longer existed. A leftover from an old test. But the analysis is still worth writing up, because every step would be identical if the C2 had been external. This is exactly what a real Linux persistence implant looks like",
+    "category": "Reverse Engineering",
+    "technologies": [
+      "Python",
+      "Bash",
+      "Linux",
+      "Ghidra",
+      "Virustotal",
+      "Yara rule"
+    ],
+    "threatActors": [],
+    "githubUrl": "https://github.com/0xbitx/0x2_malware_analysis",
+    "owner": "0xbitx",
+    "repo": "0x2_malware_analysis"
+  },
+  {
+    "title": "Mirai Botnet ELF Binary (ARM 32-bit)",
+    "description": "This report documents the static analysis of a Mirai botnet ELF binary (mirai.elf) targeting ARM 32-bit Linux systems. The sample was retrieved from MalwareBazaar (abuse.ch) and confirmed to be a Mirai variant based on its C2 architecture, DDoS attack functions, and Telnet scanning behavior. Mirai is a well known IoT botnet that recruits vulnerable devices (routers, IP cameras, DVRs) into a botnet for large scale DDoS attacks. This sample contains the full Mirai attack toolkit, including 16 distinct DDoS methods and a Telnet scanner with a hardcoded credential list.",
+    "category": "Reverse Engineering",
+    "technologies": [
+      "Python",
+      "Bash",
+      "Linux",
+      "Ghidra",
+      "objdump",
+      "Virustotal",
+      "Yara rule"
+    ],
+    "threatActors": [],
+    "githubUrl": "https://github.com/0xbitx/0x3_malware_analysis",
+    "owner": "0xbitx",
+    "repo": "0x3_malware_analysis"
+  },
+  {
+    "title": "Salat InfoStealer Delivered via Batch File",
+    "description": "This report documents the static analysis of a malware sample delivered as a Windows batch file (.bat) that drops and executes a UPX-packed Windows executable. The dropped payload was extracted and identified as Salat InfoStealer, a Go-based infostealer that targets browser credentials, crypto wallets, and system information. The analysis was performed entirely statically, using file identification, string extraction, and signature matching. No disassembly, no Ghidra, no execution.",
+    "category": "Reverse Engineering",
+    "technologies": [
+      "Python",
+      "Bash",
+      "UPX",
+      "Linux",
+      "Virustotal",
+      "Powershell",
+      "Yara rule"
+    ],
+    "threatActors": [],
+    "githubUrl": "https://github.com/0xbitx/0x4_malware_analysis",
+    "owner": "0xbitx",
+    "repo": "0x4_malware_analysis"
+  },
+  {
+    "title": "PowerShell Dropper Multi-Stage Fileless Loader",
+    "description": "This report documents the static analysis of a malicious PowerShell script (8bde885f98625269209a801cb24be5b1a53209e4a4856ca30f37442d42f04602.ps1) retrieved from MalwareBazaar. The script masquerades as a legitimate Microsoft Windows Management Framework component, but underneath the fake branding is a multi-stage dropper that uses a bitness guard, fileless self-re-execution, and encrypted embedded payloads to deliver malware without touching disk",
+    "category": "Reverse Engineering",
+    "technologies": [
+      "Python",
+      "Bash",
+      "Binwalk",
+      "Linux",
+      "Powershell",
+    ],
+    "threatActors": [],
+    "githubUrl": "https://github.com/0xbitx/0x5_malware_analysis",
+    "owner": "0xbitx",
+    "repo": "0x5_malware_analysis"
+  },
 ];
 window.__DEDSEC_EMBEDDED_TS__ = 1787038823212;
 </script>
@@ -3054,6 +3147,7 @@ const COLORS = {
   'Red Team & Initial Access':'#ff5555','Command & Control':'#ff8800',
   'Malware Development':'#ff4444','Detection & Blue Team':'#4488ff',
   'Kernel & Low-Level':'#aa44ff','Exploitation & PoC':'#ff44aa',
+  'Reverse Engineering':'#00d4ff',
   'OSINT & Recon':'#44cc88','Wireless & Network':'#44cccc',
   'Cloud & Infrastructure':'#ffaa00','Utility & Miscellaneous':'#666688',
 };
@@ -3088,6 +3182,8 @@ function renderTree(){
   document.getElementById('totalProjects').textContent=allProjects.length;
   const allCats=new Set(allProjects.map(p=>p.category));
   document.getElementById('totalCategories').textContent=allCats.size;
+  const footerCount=document.getElementById('footerCount');
+  if(footerCount)footerCount.textContent=allProjects.length;
 
   if(filtered.length===0){
     root.innerHTML='';empty.classList.remove('hidden');return;
@@ -3100,6 +3196,13 @@ function renderTree(){
     if(b==='Utility & Miscellaneous')return -1;
     return grouped[b].length-grouped[a].length;
   });
+  // Keep "Reverse Engineering" right next to "Exploitation & PoC".
+  const reIdx=catOrder.indexOf('Reverse Engineering');
+  const epIdx=catOrder.indexOf('Exploitation & PoC');
+  if(reIdx>-1&&epIdx>-1){
+    catOrder.splice(reIdx,1);
+    catOrder.splice(catOrder.indexOf('Exploitation & PoC')+1,0,'Reverse Engineering');
+  }
 
   let html='';
   catOrder.forEach((cat,i)=>{
@@ -3109,7 +3212,7 @@ function renderTree(){
       <div class="branch-header" onclick="toggleBranch(this.parentElement)">
         <span class="branch-icon">&#9654;</span>
         <span class="branch-name">${esc(cat)}</span>
-        <span class="branch-count">${tools.length} tool${tools.length>1?'s':''}</span>
+        <span class="branch-count">${tools.length} project${tools.length>1?'s':''}</span>
       </div>
       <div class="tools-wrap">`;
     tools.forEach((tool,j)=>{
@@ -3119,7 +3222,7 @@ function renderTree(){
         <div class="tool-desc">${esc(tool.description||'No description.')}</div>
         <div class="tool-meta"><span class="tag tag-cat">${esc(tool.category)}</span>${techTags}</div>
         <div class="tool-actions">
-          <a href="${esc(tool.githubUrl)}" target="_blank" rel="noopener" class="btn-xs" onclick="event.stopPropagation()"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.385-1.335-1.755-1.335-1.755-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.605-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12z"/></svg> GitHub</a>
+          <a href="${esc(tool.githubUrl)}" target="_blank" rel="noopener" class="btn-xs" onclick="event.stopPropagation()"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.385-1.335-1.755-1.335-1.755-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.605-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12z"/></svg> Full Content</a>
         </div>
       </div>`;
     });

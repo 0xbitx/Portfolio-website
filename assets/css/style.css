@@ -70,8 +70,6 @@ body {
 	animation: shipBob 3s ease-in-out infinite;
 }
 
-/* Alien "consuming" state: while holding left-click, it glows green and
-   pulses slightly (tractor/absorption effect). */
 #cursor-ship.consuming {
 	filter: drop-shadow(0 0 10px rgba(90, 255, 110, 0.9))
 	        drop-shadow(0 0 22px rgba(90, 255, 110, 0.6))
@@ -87,7 +85,6 @@ body {
 	50% { filter: brightness(1.6) saturate(1.4); }
 }
 
-/* rim lights: chase/blink */
 .ship-light {
 	animation: lightBlink 0.9s linear infinite;
 }
@@ -1648,7 +1645,7 @@ header .grid-layout nav .nav-list li a:hover {
 
 #s-projects .grid-layout #projects>article h3 {
 	color: #ffffff;
-	font-size: 2.4rem;
+	font-size: 2.1rem;
 	font-weight: 500;
 }
 
@@ -2024,7 +2021,7 @@ footer .grid-layout #direitos-autorais {
 footer .grid-layout p {
 	color: #d8d8d8;
 	text-align: center;
-	font-size: 1.8rem;
+	font-size: 1.2rem;
 }
 
 footer .grid-layout div {
@@ -2034,7 +2031,7 @@ footer .grid-layout div {
 }
 
 footer .grid-layout div img {
-	width: 24px;
+	width: 16px;
 	margin-left: 8px;
 }
 
@@ -2064,9 +2061,6 @@ footer .grid-layout div img {
 	margin: 0 auto;
 }
 
-/* ============================================
-   Terminal Window Chrome (draggable)
-   ============================================ */
 #s-about .grid-layout #about {
   position: relative;
   background: rgba(10, 10, 10, 0.8);
@@ -2177,7 +2171,7 @@ footer .grid-layout div img {
   transform: translateX(-50%);
   color: lightgray !important;
   font-family: 'Courier New', 'Consolas', monospace;
-  font-size: 1.1rem;
+  font-size: 12px;
   letter-spacing: 0.3px;
   white-space: nowrap;
   line-height: 34px;
@@ -2412,7 +2406,7 @@ footer .grid-layout div img {
 }
 
 .term-dir {
-  font-family: 'Courier New', Consolas, monospace;
+    font-family: 'SpaceMono';
   font-size: 1.4rem;
   color: #666;
   width: 100%;

@@ -1,12 +1,6 @@
 (function () {
   'use strict';
 
-  // ===========================================================================
-  //  Floating astronaut engine (supports N astronauts sharing one cursor/rocks)
-  //  Refactored from the original single-astronaut inline script so the pink
-  //  "girl" astronaut interacts exactly like the boy one.
-  // ===========================================================================
-
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
 
   function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
@@ -29,10 +23,6 @@
     return secs[Math.floor(Math.random() * secs.length)] * 1000;
   }
 
-  // -------------------------------------------------------------------------
-  // Message pools (shared across instances — each instance tracks its own
-  // "last message" so two astronauts never repeat each other's tail)
-  // -------------------------------------------------------------------------
   var letGoMessages = [
     'Whoa, I slipped!', 'I lost my grip!', 'Come back here!', 'Weeeeee!',
     'Ano ba yan!', 'Sige na nga', 'Haysss.', 'Wait, I still need you!',
@@ -131,9 +121,6 @@
     'K-kailan kaya ako aamin…', 'A-amin na sana ako pero… torpe ako…'
   ];
 
-  // ===========================================================================
-  //  Shared resources: cursor circle canvas + alien ship + floating rocks
-  // ===========================================================================
   var canvas = document.getElementById('cursor-circle');
   var ctx = canvas ? canvas.getContext('2d') : null;
   var ship = document.getElementById('cursor-ship');
@@ -153,7 +140,6 @@
     window.addEventListener('resize', resizeCanvas, { passive: true });
   }
 
-  // The cursor circle position + velocity, in viewport coords (trails the mouse)
   var ring = {
     x: window.innerWidth / 2,
     y: window.innerHeight / 2,
@@ -854,11 +840,11 @@
         var bodyW = Math.max(135, textW + pad);
         var svgW = bodyW + 28;
         body.setAttribute('width', bodyW);
-        svg.setAttribute('viewBox', '0 0 ' + svgW + ' 70');
+        svg.setAttribute('viewBox', '0 0 ' + svgW + ' 56');
         svg.style.width = svgW + 'px';
         bubble.style.width = svgW + 'px';
         text.setAttribute('x', 14 + bodyW / 2);
-        text.setAttribute('y', 29);
+        text.setAttribute('y', 22);
       } catch (e) {}
 
       bubble.classList.add('show');
@@ -1163,6 +1149,7 @@
         }
       }
 
+      /* disabled: astronaut no longer clicks header nav buttons or minimizes windows
       if (!msg) {
         var navLinks = document.querySelectorAll('header .nav-list li a');
         var foundBtn = null;
@@ -1218,6 +1205,7 @@
           minDone = false;
         }
       }
+      */
 
       if (!msg) {
         var inSection = null;
@@ -1259,7 +1247,7 @@
       var helmetY = state.y - 38 * scale;
       var upOffset = -10;
       var tailX = 22;
-      var tailY = 68;
+      var tailY = 56;
       if (bubble) {
         bubble.style.transform = 'translate(' + (helmetX - tailX) + 'px, ' + (helmetY - tailY + upOffset + bubbleOffsetY) + 'px)';
       }
@@ -1608,8 +1596,8 @@
 
       syncTransform();
 
-      handleNavDwell();
-      handleMinDwell();
+      // handleNavDwell();   // disabled: astronaut no longer clicks header nav buttons
+      // handleMinDwell();   // disabled: astronaut no longer minimizes windows
       updateBubble();
     }
 
@@ -1813,10 +1801,10 @@
       var w = rect.width || 140;
       // deterministic base top-left: matches updateBubble's placement
       //   helmetY = state.y - 38*SC ; base top = helmetY - tailY + upOffset
-      //   SC = size * 0.70 / 120, tailY = 68, upOffset = -10
+      //   SC = size * 0.70 / 120, tailY = 56, upOffset = -10
       var s = astronauts[i].state;
       var sc = astronauts[i].size * 0.70 / 120;
-      var top = s.y - 38 * sc - 78;
+      var top = s.y - 38 * sc - 66;
       var left = s.x - 22;
       bubbles.push({ astro: astronauts[i], top: top, bottom: top + h, left: left, right: left + w });
     }
