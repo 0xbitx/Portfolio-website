@@ -122,22 +122,108 @@
         font-size: 12px !important;
       }
 
-      #s-skills .grid-layout #skills #skills-cards article {
-        opacity: 1 !important;
-        transform: none !important;
-        visibility: visible !important;
+      #s-skills .skills-reveal {
+        opacity: 0;
+        translate: 0 30px;
+        transition: opacity 0.8s cubic-bezier(0.25, 0.1, 0.25, 1), translate 0.8s cubic-bezier(0.25, 0.1, 0.25, 1);
+        will-change: opacity, translate;
+      }
+      #s-skills .skills-reveal.is-visible {
+        opacity: 1;
+        translate: 0 0;
+      }
+      #s-skills .grid-layout #skills #skills-cards article.skills-reveal {
+        transition: opacity 0.8s cubic-bezier(0.25, 0.1, 0.25, 1), translate 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), rotate 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), scale 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), transform 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
       }
 
-      /* The skills section is the last one and sits at the very bottom of the
-         page; under the 80% page zoom ScrollReveal's scroll-position maths never
-         crosses its trigger threshold, so its .delay*Reveal targets stay stuck at
-         opacity:0 (text "missing"). Pin them to their revealed state, matching
-         the cards fix above. */
-      #s-skills .grid-layout #skills #skills-text h2,
-      #s-skills .grid-layout #skills #skills-text p {
-        opacity: 1 !important;
-        transform: none !important;
-        visibility: visible !important;
+      /* each skill icon gets its own entrance animation */
+      #s-skills #skills-cards article.icon1  { translate: 0 45px; }
+      #s-skills #skills-cards article.icon2  { translate: -45px 0; }
+      #s-skills #skills-cards article.icon3  { translate: 45px 0; }
+      #s-skills #skills-cards article.icon4  { scale: 0.3; }
+      #s-skills #skills-cards article.icon5  { rotate: -55deg; scale: 0.4; }
+      #s-skills #skills-cards article.icon6  { rotate: 55deg; scale: 0.4; }
+      #s-skills #skills-cards article.icon7  { translate: 0 -45px; }
+      #s-skills #skills-cards article.icon8  { rotate: 180deg; scale: 0.5; }
+      #s-skills #skills-cards article.icon9  { scale: 1.7; }
+      #s-skills #skills-cards article.icon10 { translate: 30px 30px; scale: 0.5; }
+
+      #s-skills #skills-cards article.icon1.is-visible,
+      #s-skills #skills-cards article.icon2.is-visible,
+      #s-skills #skills-cards article.icon3.is-visible,
+      #s-skills #skills-cards article.icon4.is-visible,
+      #s-skills #skills-cards article.icon5.is-visible,
+      #s-skills #skills-cards article.icon6.is-visible,
+      #s-skills #skills-cards article.icon7.is-visible,
+      #s-skills #skills-cards article.icon8.is-visible,
+      #s-skills #skills-cards article.icon9.is-visible,
+      #s-skills #skills-cards article.icon10.is-visible {
+        opacity: 1;
+        translate: 0 0;
+        rotate: 0deg;
+        scale: 1;
+      }
+
+      /* each "What I do" icon gets its own entrance animation */
+      #s-services #services article.service-reveal .skills-icons {
+        opacity: 0;
+        transition: opacity 0.8s cubic-bezier(0.25, 0.1, 0.25, 1), translate 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), rotate 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), scale 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+        will-change: opacity, translate, rotate, scale;
+      }
+      #s-services #services article.svc1 .skills-icons { translate: 0 45px; }
+      #s-services #services article.svc2 .skills-icons { rotate: -50deg; scale: 0.4; }
+      #s-services #services article.svc3 .skills-icons { translate: 0 -45px; }
+
+      #s-services #services article.service-reveal.is-visible .skills-icons {
+        opacity: 1;
+        translate: 0 0;
+        rotate: 0deg;
+        scale: 1;
+      }
+
+      /* the text in each "What I do" card rises in after its icon */
+      #s-services #services article.service-reveal h3,
+      #s-services #services article.service-reveal p {
+        opacity: 0;
+        translate: 0 26px;
+        transition: opacity 0.8s cubic-bezier(0.25, 0.1, 0.25, 1), translate 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+        will-change: opacity, translate;
+      }
+      #s-services #services article.service-reveal.is-visible h3,
+      #s-services #services article.service-reveal.is-visible p {
+        opacity: 1;
+        translate: 0 0;
+      }
+
+      #s-projects .project-reveal {
+        opacity: 0;
+        translate: 0 50px;
+        transition: opacity 2.6s cubic-bezier(0.16, 1, 0.3, 1), translate 2.6s cubic-bezier(0.16, 1, 0.3, 1);
+        will-change: opacity, translate;
+      }
+      #s-projects .project-reveal.is-visible {
+        opacity: 1;
+        translate: 0 0;
+      }
+
+      /* home / about / experience / services-heading reveals (reset + replay) */
+      .delaySmallReveal,
+      .delayMediumReveal,
+      .delayLargeReveal,
+      .delayExtraBigReveal,
+      .intervalCardReveal {
+        opacity: 0;
+        translate: 0 50px;
+        transition: opacity 0.9s cubic-bezier(0.22, 0.61, 0.36, 1), translate 0.9s cubic-bezier(0.22, 0.61, 0.36, 1);
+        will-change: opacity, translate;
+      }
+      .delaySmallReveal.is-visible,
+      .delayMediumReveal.is-visible,
+      .delayLargeReveal.is-visible,
+      .delayExtraBigReveal.is-visible,
+      .intervalCardReveal.is-visible {
+        opacity: 1;
+        translate: 0 0;
       }
 
       #s-home #home-container-text,
@@ -433,10 +519,10 @@
                 >_</span>
                 <div class="gg" title="404" style="color: white; font-family: 'SpaceMono', sans-serif;">I build offensive security tools for Linux.</div>
               </h1>
-              <p class="typewriter" style="color: white; font-family: 'SpaceMono', sans-serif; font-size: 23px;">
+              <p class="typewriter delayLargeReveal" style="color: white; font-family: 'SpaceMono', sans-serif; font-size: 23px;">
                 I'm a cybersecurity enthusiast from the Philippines. I make hacking tools and exploits. Check out the Project section to see what I've built.
               </p>
-              <a href="https://github.com/0xbitx" rel="noopener" target="_blank" class="github-btn delayExtraBigReveal"><img class="gh-icon" src="assets/icons/github_button.png" alt="GitHub" /><span class="gh-text">Blog</span></a>
+              <a href="https://github.com/0xbitx" rel="noopener" target="_blank" class="github-btn delayExtraBigReveal"><img class="gh-icon" src="assets/icons/github_button.png" alt="GitHub" /><span class="gh-text">My Github</span></a>
             </div>
           </div>
         </div>
@@ -801,72 +887,72 @@
       </section>
       <section id="s-projects">
         <div class="grid-layout">
-          <h2 class="delaySmallReveal" style="color: #8778c1; font-family: 'SpaceMono', sans-serif; font-size: 20px;">Project<span>$</span></h2>
+          <h2 class="project-reveal" style="color: #8778c1; font-family: 'SpaceMono', sans-serif; font-size: 20px;">Project<span>$</span></h2>
           <div id="projects">
             <div class="term-dir">
               <div class="term-dir-header">
                 <span class="td-name">Name</span>
                 <span class="td-desc-header">Description</span>
               </div>
-              <a href="https://github.com/0xbitx/DEDSEC_ZER0CAL" rel="noopener" target="_blank" class="term-dir-row">
+              <a href="https://github.com/0xbitx/DEDSEC_ZER0CAL" rel="noopener" target="_blank" class="term-dir-row project-reveal">
                 <span class="td-name">dedsec_zer0cal</span>
                 <span class="td-desc">A Linux backdoor uses Google Calendar as (C2) to manage compromised machines.</span>
               </a>
-              <a href="https://github.com/0xbitx/DEDSEC_XUAN" rel="noopener" target="_blank" class="term-dir-row">
+              <a href="https://github.com/0xbitx/DEDSEC_XUAN" rel="noopener" target="_blank" class="term-dir-row project-reveal">
                 <span class="td-name">dedsec_xuan</span>
                 <span class="td-desc">Kernel-level rootkit for modern Linux. Uses Google Calendar as the C2.</span>
               </a>
-              <a href="https://github.com/0xbitx/DEDSEC_NEPHILM" rel="noopener" target="_blank" class="term-dir-row">
+              <a href="https://github.com/0xbitx/DEDSEC_NEPHILM" rel="noopener" target="_blank" class="term-dir-row project-reveal">
                 <span class="td-name">dedsec_nephilm</span>
                 <span class="td-desc">Kernel-level rootkit for modern Linux. DNS-based C2 over DoH (DNS-over-HTTPS).</span>
               </a>
-              <a href="https://github.com/0xbitx/DEDSEC_BLACKHAT" rel="noopener" target="_blank" class="term-dir-row">
+              <a href="https://github.com/0xbitx/DEDSEC_BLACKHAT" rel="noopener" target="_blank" class="term-dir-row project-reveal">
                 <span class="td-name">dedsec_blackhat</span>
                 <span class="td-desc">privacy-hardened browser that launches browser through an obfs4 Tor proxy</span>
               </a>
-              <a href="https://github.com/0xbitx/DEDSEC_WEEPING_ANGLE" rel="noopener" target="_blank" class="term-dir-row">
+              <a href="https://github.com/0xbitx/DEDSEC_WEEPING_ANGLE" rel="noopener" target="_blank" class="term-dir-row project-reveal">
                 <span class="td-name">weeping_angle</span>
                 <span class="td-desc">Initial Access & Post-Exploitation Framework for Linux Systems</span>
               </a>
-              <a href="https://github.com/0xbitx/DEDSEC_GSTRIKE" rel="noopener" target="_blank" class="term-dir-row">
+              <a href="https://github.com/0xbitx/DEDSEC_GSTRIKE" rel="noopener" target="_blank" class="term-dir-row project-reveal">
                 <span class="td-name">dedsec_gstrike</span>
                 <span class="td-desc">Spear Phishing Toolkit Designed to Simulate Real-Life Attacks</span>
               </a>
-              <a href="https://github.com/0xbitx/DEDSEC_GEOHEX" rel="noopener" target="_blank" class="term-dir-row">
+              <a href="https://github.com/0xbitx/DEDSEC_GEOHEX" rel="noopener" target="_blank" class="term-dir-row project-reveal">
                 <span class="td-name">dedsec_geohex</span>
                 <span class="td-desc">Geolocation intelligence for tracking, fingerprinting, and forensics.</span>
               </a>
-              <a href="https://github.com/0xbitx/DEDSEC-KEYLOGGER" rel="noopener" target="_blank" class="term-dir-row">
+              <a href="https://github.com/0xbitx/DEDSEC-KEYLOGGER" rel="noopener" target="_blank" class="term-dir-row project-reveal">
                 <span class="td-name">dedsec_dak</span>
                 <span class="td-desc">Linux-based polymorphic keylogger builder with Google Calendar C2 infrastructure.</span>
               </a>
-              <a href="https://github.com/0xbitx/DEDSEC_PROC-HACKER" rel="noopener" target="_blank" class="term-dir-row">
+              <a href="https://github.com/0xbitx/DEDSEC_PROC-HACKER" rel="noopener" target="_blank" class="term-dir-row project-reveal">
                 <span class="td-name">dedsec_prochacker</span>
                 <span class="td-desc">Linux based process analyzer for hackers.</span>
               </a>
-              <a href="https://github.com/0xbitx/DEDSEC_K0RA" rel="noopener" target="_blank" class="term-dir-row">
+              <a href="https://github.com/0xbitx/DEDSEC_K0RA" rel="noopener" target="_blank" class="term-dir-row project-reveal">
                 <span class="td-name">dedsec_k0ra</span>
                 <span class="td-desc">Linux-based botnet builder designed for creating advanced botnet payloads.</span>
               </a>
-              <a href="https://github.com/0xbitx/DEDSEC_WIREMON" rel="noopener" target="_blank" class="term-dir-row">
+              <a href="https://github.com/0xbitx/DEDSEC_WIREMON" rel="noopener" target="_blank" class="term-dir-row project-reveal">
                 <span class="td-name">dedsec_wiremon</span>
                 <span class="td-desc">Linux-based Wi-Fi attack tool for networks you don't have access to.</span>
               </a>
-              <a href="https://github.com/0xbitx/DEDSEC_PTZ_EXPLOIT" rel="noopener" target="_blank" class="term-dir-row">
+              <a href="https://github.com/0xbitx/DEDSEC_PTZ_EXPLOIT" rel="noopener" target="_blank" class="term-dir-row project-reveal">
                 <span class="td-name">dedsec_ptz</span>
                 <span class="td-desc">IP Camera exploit to control camera movement (PTZ) without credentials.</span>
               </a>
-              <a href="https://github.com/0xbitx/DEDSEC_BOTNET" rel="noopener" target="_blank" class="term-dir-row">
+              <a href="https://github.com/0xbitx/DEDSEC_BOTNET" rel="noopener" target="_blank" class="term-dir-row project-reveal">
                 <span class="td-name">dedsec_botnet</span>
                 <span class="td-desc">Linux-based botnet builder for creating advanced botnet payloads.</span>
               </a>
-              <a href="https://github.com/0xbitx/DEDSEC_WEBTRACE" rel="noopener" target="_blank" class="term-dir-row">
+              <a href="https://github.com/0xbitx/DEDSEC_WEBTRACE" rel="noopener" target="_blank" class="term-dir-row project-reveal">
                 <span class="td-name">dedsec_webtrace</span>
                 <span class="td-desc">All-in-one website tracking toolkit to help expose and track scammers.</span>
               </a>
             </div>
           </div>
-          <a href="/sec_blog.html" rel="noopener" target="_blank" class="delaySmallReveal" style="color: rgb(97, 53, 243) 'Rajdhani'; font-size: 30px;"><span><</span> Security Blog <span>></span></a>
+          <a href="/sec_blog.html" rel="noopener" target="_blank" class="project-reveal" style="color: rgb(97, 53, 243) 'Rajdhani'; font-size: 30px;"><span><</span> Security Blog <span>></span></a>
         </div>
       </section>
       <section id="s-services">
@@ -874,7 +960,7 @@
           <h2 class="delaySmallReveal" style="color: #8778c1; font-family: 'SpaceMono', sans-serif; font-size: 20px;">What I do<span>.</span></h2>
           <div id="services">
             <a href="https://github.com/0xbitx" rel="noopener" target="_blank" class="service-link">
-              <article class="intervalCardReveal">
+              <article class="service-reveal svc1">
                 <div>
                   <img
                     src="assets/icons/hdd.png"
@@ -891,7 +977,7 @@
               </article>
             </a>
             <a href="https://github.com/0xbitx" rel="noopener" target="_blank" class="service-link">
-              <article class="intervalCardReveal">
+              <article class="service-reveal svc2">
                 <div>
                   <img
                     src="assets/icons/usb.png"
@@ -908,7 +994,7 @@
               </article>
             </a>
             <a href="/sec_blog.html" rel="noopener" target="_blank" class="service-link">
-              <article class="intervalCardReveal">
+              <article class="service-reveal svc3">
                 <div>
                   <img
                     src="assets/icons/server.png"
@@ -931,11 +1017,11 @@
         <div class="grid-layout">
           <div id="skills">
             <article id="skills-text">
-              <h2 class="delaySmallReveal" style="color: #8778c1; font-family: 'SpaceMono', sans-serif; font-size: 20px;"><span>#</span>language and tool | skill<span>$</span></h2>
-              <p class="delayMediumReveal changeDescription"><span>//</span>languages | tools<span>></span></p>
+              <h2 class="skills-reveal" style="color: #8778c1; font-family: 'SpaceMono', sans-serif; font-size: 20px;"><span>#</span>language and tool | skill<span>$</span></h2>
+              <p class="skills-reveal changeDescription"><span>//</span>languages | tools<span>></span></p>
             </article>
             <div id="skills-cards">
-              <article class="icon1 intervalCardReveal">
+              <article class="icon1 skills-reveal">
                 <span class="skills-cards-name-high">Bash</span>
                 <img
                   src="assets/icons/bash.png"
@@ -945,7 +1031,7 @@
                   class="skills-icons"
                 />
               </article>
-              <article class="icon2 intervalCardReveal">
+              <article class="icon2 skills-reveal">
                 <span class="skills-cards-name-high">Burpsuite</span>
                 <img
                   src="assets/icons/burpsuite.png"
@@ -955,7 +1041,7 @@
                   class="skills-icons"
                 />
               </article>
-              <article class="icon3 intervalCardReveal">
+              <article class="icon3 skills-reveal">
                 <span class="skills-cards-name-high">Wireshark</span>
                 <img
                   src="assets/icons/wireshark.png"
@@ -965,7 +1051,7 @@
                   class="skills-icons"
                 />
               </article>
-              <article class="icon4 intervalCardReveal">
+              <article class="icon4 skills-reveal">
                 <span class="skills-cards-name-high">Maltego</span>
                 <img
                   src="assets/icons/maltego.png"
@@ -975,7 +1061,7 @@
                   class="skills-icons"
                 />
               </article>
-              <article class="icon5 intervalCardReveal">
+              <article class="icon5 skills-reveal">
                 <span class="skills-cards-name-low">Arduino</span>
                 <img
                   src="assets/icons/arduino.png"
@@ -985,7 +1071,7 @@
                   class="skills-icons"
                 />
               </article>
-              <article class="icon6 intervalCardReveal">
+              <article class="icon6 skills-reveal">
                 <span class="skills-cards-name-low">C++</span>
                 <img
                   src="assets/icons/c++.png"
@@ -995,7 +1081,7 @@
                   class="skills-icons"
                 />
               </article>
-              <article class="icon7 intervalCardReveal">
+              <article class="icon7 skills-reveal">
                 <span class="skills-cards-name-low">Ghidra</span>
                 <img
                   src="assets/icons/ghidra.png"
@@ -1005,7 +1091,7 @@
                   class="skills-icons"
                 />
               </article>
-              <article class="icon8 intervalCardReveal">
+              <article class="icon8 skills-reveal">
                 <span class="skills-cards-name-low">Python</span>
                 <img
                   src="assets/icons/python.png"
@@ -1015,7 +1101,7 @@
                   class="skills-icons"
                 />
               </article>
-              <article class="icon9 intervalCardReveal">
+              <article class="icon9 skills-reveal">
                 <span class="skills-cards-name-low">Zed</span>
                 <img
                   src="assets/icons/zed.png"
@@ -1025,7 +1111,7 @@
                   class="skills-icons"
                 />
               </article>
-              <article class="icon10 intervalCardReveal">
+              <article class="icon10 skills-reveal">
                 <span class="skills-cards-name-low">PowerShell</span>
                 <img
                   src="assets/icons/powershell.png"

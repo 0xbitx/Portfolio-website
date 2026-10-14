@@ -1,7 +1,10 @@
-import { initScrollReveal } from "./scrollReveal.js";
 import { hoverChangeExperience } from "./hoverChangeExperience.js";
 import { hoverChangeDescription } from "./hoverChangeDescription.js";
 import { menu } from "./menu.js";
+import { initSkillsReveal } from "./skillsReveal.js";
+import { initProjectsReveal } from "./projectsReveal.js";
+import { initServicesReveal } from "./servicesReveal.js";
+import { initSectionsReveal } from "./sectionsReveal.js";
 
 // Force the page to the very top before first paint, with no animation, so a
 // refresh always shows the home page instantly (no smooth auto-scroll).
@@ -24,7 +27,10 @@ window.addEventListener('pageshow', function (e) {
 });
 
 menu();
-initScrollReveal();
+initSkillsReveal();
+initProjectsReveal();
+initServicesReveal();
+initSectionsReveal();
 
 hoverChangeExperience(
   ".iot",
@@ -56,4 +62,45 @@ hoverChangeExperience(
   "Network hacking",
   "Exploiting network vulnerabilities",
   "Jan 2013 - Jan 2025"
+);
+
+hoverChangeDescription(
+  ".icon1",
+  "Bash scripting, automation, and command-line workflows for Linux environments."
+);
+hoverChangeDescription(
+  ".icon2",
+  "Web application security testing and vulnerability assessment with Burp Suite."
+);
+hoverChangeDescription(
+  ".icon3",
+  "Network traffic analysis, packet inspection, and protocol-level troubleshooting."
+);
+hoverChangeDescription(
+  ".icon4",
+  "OSINT and link analysis for mapping relationships and gathering intelligence."
+);
+hoverChangeDescription(
+  ".icon5",
+  "Embedded systems programming and hardware prototyping with Arduino microcontrollers."
+);
+hoverChangeDescription(
+  ".icon6",
+  "Systems programming, reverse engineering, and performance-critical applications."
+);
+hoverChangeDescription(
+  ".icon7",
+  "Reverse engineering binaries and analyzing malware with Ghidra SRE framework."
+);
+hoverChangeDescription(
+  ".icon8",
+  "Rapid prototyping, automation, tooling, and offensive security scripting."
+);
+hoverChangeDescription(
+  ".icon9",
+  "High-performance, modern code editor for efficient development workflows."
+);
+hoverChangeDescription(
+  ".icon10",
+  "Windows automation, post-exploitation, and administrative task scripting."
 );
