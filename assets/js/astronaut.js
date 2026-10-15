@@ -285,10 +285,11 @@
     return rock;
   }
 
-  var ROCK_COUNT = 12;
-  for (var rk = 0; rk < ROCK_COUNT; rk++) {
-    rocks.push(makeRock());
-  }
+  // asteroids disabled for now
+  // var ROCK_COUNT = 12;
+  // for (var rk = 0; rk < ROCK_COUNT; rk++) {
+  //   rocks.push(makeRock());
+  // }
 
   // All active astronaut instances (for shared render + collision loops)
   var astronauts = [];
@@ -1673,8 +1674,8 @@
   if (boyEl) astronauts.push(createAstronaut({ el: boyEl, x: window.innerWidth * 0.72, y: window.innerHeight * 0.38 }));
   if (girlEl) astronauts.push(createAstronaut({ el: girlEl, x: window.innerWidth * 0.22, y: window.innerHeight - 80 }));
 
-  if (astronauts.length === 0) return;
-
+  // The shared loop (cursor ring, alien UFO, rocks, lasers) must keep running
+  // even when there are no astronauts on the page, so don't bail out here.
   var prev = performance.now();
 
   // Tracks the identity of the current string-holder (anchor) across frames so

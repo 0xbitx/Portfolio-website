@@ -54,8 +54,8 @@ body {
 	position: fixed;
 	top: 0;
 	left: 0;
-	width: 56px;
-	height: auto;
+	width: 128px;
+	height: 128px;
 	pointer-events: none;
 	z-index: 10001;
 	will-change: transform;
@@ -63,11 +63,10 @@ body {
 	overflow: visible;
 }
 
-#cursor-ship svg {
+#cursor-ship canvas {
 	display: block;
 	width: 100%;
-	height: auto;
-	animation: shipBob 3s ease-in-out infinite;
+	height: 100%;
 }
 
 #cursor-ship.consuming {
@@ -76,7 +75,7 @@ body {
 	        drop-shadow(0 0 40px rgba(90, 255, 110, 0.35));
 }
 
-#cursor-ship.consuming svg {
+#cursor-ship.consuming canvas {
 	animation: shipConsumePulse 0.6s ease-in-out infinite;
 }
 
@@ -1329,6 +1328,7 @@ header .grid-layout nav .nav-list li a:hover {
 	justify-content: center;
 	align-items: center;
 	position: relative;
+	z-index: 101;
 	transition: 1.6s all ease;
 }
 
@@ -1403,6 +1403,24 @@ header .grid-layout nav .nav-list li a:hover {
 #s-about .grid-layout #about-photo img {
 	width: 60%;
 	max-width: 400px;
+}
+
+#s-about .grid-layout #about-photo #dedsec {
+	display: block;
+	width: 60%;
+	max-width: 400px;
+	aspect-ratio: 1 / 1;
+	cursor: grab;
+}
+
+#s-about .grid-layout #about-photo #dedsec:active {
+	cursor: grabbing;
+}
+
+#s-about .grid-layout #about-photo #dedsec canvas {
+	display: block;
+	width: 100%;
+	height: 100%;
 }
 
 @media screen and (max-width: 1200px) {
@@ -2510,7 +2528,6 @@ header .grid-layout nav .nav-list li {
   margin-left: 28px;
 }
 
-/* Apple-style glass link hover: frosted pill highlight, no underline */
 header .grid-layout nav .nav-list li a {
   padding: 6px 14px;
   border-radius: 999px;
