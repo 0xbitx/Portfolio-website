@@ -1,0 +1,11 @@
+Model Information:
+* title:	drifting Astronaut
+* source:	https://sketchfab.com/3d-models/drifting-astronaut-739af7000c0242d8b327d7fdf6062aaa
+* author:	Lukas Hahn Graphics (https://sketchfab.com/specter)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "drifting Astronaut" (https://sketchfab.com/3d-models/drifting-astronaut-739af7000c0242d8b327d7fdf6062aaa) by Lukas Hahn Graphics (https://sketchfab.com/specter) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

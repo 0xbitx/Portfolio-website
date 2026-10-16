@@ -1,6 +1,7 @@
 import { hoverChangeExperience } from "./hoverChangeExperience.js";
 import { hoverChangeDescription } from "./hoverChangeDescription.js";
 import { menu } from "./menu.js";
+import { initSmoothHeaderScroll } from "./smoothScroll.js";
 import { initSkillsReveal } from "./skillsReveal.js";
 import { initProjectsReveal } from "./projectsReveal.js";
 import { initServicesReveal } from "./servicesReveal.js";
@@ -27,6 +28,7 @@ window.addEventListener('pageshow', function (e) {
 });
 
 menu();
+initSmoothHeaderScroll();
 initSkillsReveal();
 initProjectsReveal();
 initServicesReveal();

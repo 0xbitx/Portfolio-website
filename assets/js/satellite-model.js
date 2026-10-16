@@ -1,5 +1,7 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { createSpin } from './dragInertia.js';
+import { attachDepth, beginModelDrag, endModelDrag } from './depth.js';
 
 const canvas = document.getElementById('satellite-canvas');
 if (canvas) {
@@ -13,6 +15,7 @@ if (canvas) {
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(40, 1, 0.01, 200);
   camera.position.set(0, 0, 5);
+  attachDepth(camera, 'satellite-canvas');
 
   scene.add(new THREE.AmbientLight(0xffffff, 0.4));
   const keyLight = new THREE.DirectionalLight(0xffffff, 0.9);
@@ -83,8 +86,7 @@ if (canvas) {
   const pointer = new THREE.Vector2();
   let hovering = false;
   let dragging = false;
-  let lastX = 0;
-  let lastY = 0;
+  const fling = createSpin({ damping: 0.05 });
 
   function projectPointer(e) {
     const rect = canvas.getBoundingClientRect();
@@ -98,10 +100,8 @@ if (canvas) {
     if (!model) return;
 
     if (dragging) {
-      spin.rotation.y += (e.clientX - lastX) * 0.01;
-      spin.rotation.x += (e.clientY - lastY) * 0.01;
-      lastX = e.clientX;
-      lastY = e.clientY;
+      // spin the satellite under the cursor (fling momentum on release)
+      fling.move(spin, e.clientX, e.clientY);
       return;
     }
 
@@ -110,6 +110,7 @@ if (canvas) {
     const over = raycaster.intersectObject(model, true).length > 0;
     if (over !== hovering) {
       hovering = over;
+      window.__satelliteHovering = over;
       document.body.style.cursor = over ? 'grab' : '';
     }
   });
@@ -118,8 +119,8 @@ if (canvas) {
     if (!hovering || !model) return;
     dragging = true;
     window.__satelliteDragging = true;
-    lastX = e.clientX;
-    lastY = e.clientY;
+    beginModelDrag();
+    fling.begin(e.clientX, e.clientY);
     document.body.style.cursor = 'grabbing';
     e.preventDefault();
   });
@@ -127,14 +128,20 @@ if (canvas) {
     if (!dragging) return;
     dragging = false;
     window.__satelliteDragging = false;
+    endModelDrag();
     document.body.style.cursor = hovering ? 'grab' : '';
   });
+
+  // scroll wheel zoom is handled on the .satellite element (see index.html) so
+  // the whole model scales without being clipped by this square canvas.
 
   const clock = new THREE.Clock();
   function animate() {
     requestAnimationFrame(animate);
     const dt = Math.min(clock.getDelta(), 0.05);
-    if (model && !dragging) {
+    if (model) {
+      // fling momentum after a drag, then the ambient spin
+      fling.update(spin, dt, dragging);
       spin.rotation.y += 0.25 * dt;
       spin.rotation.z += 0.05 * dt;
     }

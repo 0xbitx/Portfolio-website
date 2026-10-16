@@ -1,0 +1,11 @@
+Model Information:
+* title:	Starlink Spacex Satellite
+* source:	https://sketchfab.com/3d-models/starlink-spacex-satellite-0a60f6720c5141c9a1c6d71aac108b31
+* author:	Malacodart (https://sketchfab.com/malacodart)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Starlink Spacex Satellite" (https://sketchfab.com/3d-models/starlink-spacex-satellite-0a60f6720c5141c9a1c6d71aac108b31) by Malacodart (https://sketchfab.com/malacodart) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

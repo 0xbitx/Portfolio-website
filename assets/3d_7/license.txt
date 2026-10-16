@@ -1,0 +1,11 @@
+Model Information:
+* title:	International Space Station
+* source:	https://sketchfab.com/3d-models/international-space-station-6e289a99dfaa4de3852637696ddaea54
+* author:	BlendRuN (https://sketchfab.com/BlendRuN)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "International Space Station" (https://sketchfab.com/3d-models/international-space-station-6e289a99dfaa4de3852637696ddaea54) by BlendRuN (https://sketchfab.com/BlendRuN) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

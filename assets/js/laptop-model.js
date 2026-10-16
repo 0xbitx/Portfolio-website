@@ -1,5 +1,7 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { createSpin } from './dragInertia.js';
+import { attachDepth } from './depth.js';
 
 const canvas = document.getElementById('laptop-canvas');
 if (canvas) {
@@ -16,6 +18,7 @@ if (canvas) {
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(40, 1, 0.01, 200);
   camera.position.set(0, 0, 5);
+  attachDepth(camera, 'laptop-canvas');
 
   scene.add(new THREE.AmbientLight(0xffffff, 0.9));
   const keyLight = new THREE.DirectionalLight(0xffffff, 1.5);
@@ -91,21 +94,17 @@ if (canvas) {
   resize();
 
   let dragging = false;
-  let lastX = 0;
-  let lastY = 0;
+  const fling = createSpin({ damping: 0.05 });
   canvas.addEventListener('pointerdown', (e) => {
     dragging = true;
-    lastX = e.clientX;
-    lastY = e.clientY;
+    fling.begin(e.clientX, e.clientY);
     if (canvas.setPointerCapture) canvas.setPointerCapture(e.pointerId);
     e.preventDefault();
   });
   canvas.addEventListener('pointermove', (e) => {
     if (!dragging || !model) return;
-    spin.rotation.y += (e.clientX - lastX) * 0.01;
-    spin.rotation.x += (e.clientY - lastY) * 0.01;
-    lastX = e.clientX;
-    lastY = e.clientY;
+    // spin the laptop under the cursor (fling momentum on release)
+    fling.move(spin, e.clientX, e.clientY);
   });
   window.addEventListener('pointerup', () => {
     dragging = false;
@@ -115,8 +114,10 @@ if (canvas) {
   function animate() {
     requestAnimationFrame(animate);
     const dt = Math.min(clock.getDelta(), 0.05);
-    if (model && !dragging) {
-      // full 360 tumble on all three axes, but anchored in place
+    if (model) {
+      // fling momentum after a drag, then the full 360 tumble on all three
+      // axes, anchored in place (kept running even while the user drags)
+      fling.update(spin, dt, dragging);
       spin.rotation.y += 0.35 * dt;
       spin.rotation.x += 0.16 * dt;
       spin.rotation.z += 0.09 * dt;

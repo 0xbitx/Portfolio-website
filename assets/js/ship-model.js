@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
-
+import { attachDepth } from './depth.js';
 const canvas = document.getElementById('ship-canvas');
 if (canvas) {
   const TARGET_SIZE = 2.0;
@@ -15,6 +15,7 @@ if (canvas) {
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(40, 1, 0.01, 200);
   camera.position.set(0, 0, 5);
+  attachDepth(camera, 'ship-canvas');
 
   scene.add(new THREE.AmbientLight(0xffffff, 1.0));
   const keyLight = new THREE.DirectionalLight(0xffffff, 1.6);

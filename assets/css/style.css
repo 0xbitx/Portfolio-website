@@ -59,8 +59,15 @@ body {
 	pointer-events: none;
 	z-index: 10001;
 	will-change: transform;
-	filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.35));
-	overflow: visible;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.35));
+  overflow: visible;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+/* Hidden while every terminal window is closed (see syncSpaceSound). */
+#cursor-ship.is-hidden {
+  opacity: 0;
+  visibility: hidden;
 }
 
 #cursor-ship canvas {
@@ -2553,4 +2560,22 @@ header .grid-layout nav .nav-list li a:hover {
   header .grid-layout nav {
     gap: 0;
   }
+}
+
+/* ============================================
+   "In space" state — when every terminal window is closed, the site's first
+   page and the floating header clear away so only the space scene remains.
+   Toggled by syncSpaceSound() in index.html.
+   ============================================ */
+header,
+#s-home {
+  transition: opacity 0.4s ease, visibility 0.4s ease,
+              background 0.3s ease, border-color 0.3s ease;
+}
+
+header.is-hidden,
+#s-home.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
 }
